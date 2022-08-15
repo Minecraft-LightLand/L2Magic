@@ -1,0 +1,113 @@
+{
+  "l2rpgcommon": {
+	"argument.invalid_id": "Invalid Id",
+	"container.ritual": "仪式注魔",
+	"chat": {
+	  "action_success": "操作成功",
+	  "locked": "未解锁",
+	  "player_not_found": "未找到玩家/未指定玩家",
+	  "profession_already_exist": "职业已存在",
+	  "ritual.fail.element": "元素不足,请在施法界面确认",
+	  "ritual.fail.wrong": "法术错误",
+	  "ritual.fail.zero": "法术等级过低,请在施法界面确认",
+	  "show_arcane_mana": "奥术能量: %s / %s",
+	  "spell_slot": "咒术充能槽: %s",
+	  "unlocked": "已解锁",
+	  "wrong_item": "物品不合适"
+	},
+	"screen": {
+	  "ability": {
+		"ability": {
+		  "desc.cost": "升级消耗:%s/%s",
+		  "desc.lv": "能力等级:%s",
+		  "error.max_reached": "已达到最大值",
+		  "error.no_point": "对应点数不足",
+		  "error.no_prof": "需要先选定职业",
+		  "error.prof_max": "已达到当前职业等级上限",
+		  "health": "体力",
+		  "magic": "魔力",
+		  "speed": "速度",
+		  "spell": "咒术负载",
+		  "strength": "力量",
+		  "title": "能力点数分配"
+		},
+		"arcane": {
+		  "activate.critical": "使用方式:跳劈",
+		  "activate.light": "使用方式:左键",
+		  "activate.none": "使用方式:右键",
+		  "cost": "解锁消耗:%s/%s",
+		  "title": "奥术领悟"
+		},
+		"elemental": {
+		  "desc.cost": "消耗%s/%s精通点数",
+		  "desc.count": "持有元素:%s",
+		  "desc.lv": "精通等级:%s",
+		  "title": "元素精通"
+		},
+		"profession.desc.prof_already_exist": "已存在职业，无法更换",
+		"profession.title": "职业选择"
+	  },
+	  "arcane_inject.error": {
+		"clear_gold": "请清空副产品栏",
+		"elem": "元素不足",
+		"locked": "奥术未解锁",
+		"no_item": "缺少物品",
+		"no_spell": "法杖上没有可用奥术",
+		"not_enough_mana": "魔力介质不足:还需要%s个(魔力消耗:%s/%s)",
+		"pass": "魔力溢出:%s",
+		"repeat": "同种类奥术已存在",
+		"type_locked": "奥术类型未解锁",
+		"wrong_item.axe": "奥术武器类型不匹配,请使用奥术斧",
+		"wrong_item.sword": "奥术武器类型不匹配,请使用奥术剑"
+	  },
+	  "hex": {
+		"compile.complete": "魔力开始流动",
+		"compile.editing": "法阵绘制中",
+		"compile.error": "魔力堵塞",
+		"compile.failed": "魔力流动不均",
+		"cost": "复杂度:%s",
+		"direction.left": "从右到左:",
+		"direction.lower_left": "从右上到左下:",
+		"direction.lower_right": "从左上到右下:",
+		"direction.right": "从左到右:",
+		"direction.upper_left": "从右下到左上:",
+		"direction.upper_right": "从左下到右上:",
+		"save.no": "未保存",
+		"save.yes": "已保存"
+	  },
+	  "magic_tree": {
+		"cost": "法术复杂度:%s",
+		"elem.lv": "Lv.%s",
+		"elem.require": "需要元素精通:",
+		"repeat": "法术编码重复",
+		"short": "法术编码缺失",
+		"status.crafted": "可使用",
+		"status.locked": "未解锁",
+		"status.unlocked": "已解锁"
+	  },
+	  "spell_craft": {
+		"elem_cost": "消耗/拥有数量:%s/%s",
+		"error.clear_gold": "请清空副产品栏",
+		"error.elem": "元素不足",
+		"error.locked": "法术未解锁",
+		"error.no_item": "缺少物品",
+		"error.no_spell": "法杖上没有可用法术",
+		"error.not_enough_mana": "魔力介质不足:还需要%s个(魔力消耗:%s/%s)",
+		"error.pass": "魔力溢出:%s",
+		"error.wrong_scroll": "符文载体类型不对,请使用:"
+	  }
+	},
+	"tooltip": {
+	  "enchant": "附魔负载: %s",
+	  "enchantment_result.elements": "元素消耗:",
+	  "enchantment_result.level": "附魔等级: %s",
+	  "enchantment_result.next": "下一级所需复杂度: %s",
+	  "mana_cost": "魔力消耗: %s",
+	  "potion.radius": "范围: %s",
+	  "target.all": "全部",
+	  "target.ally": "队友",
+	  "target.enemy": "敌人",
+	  "weight": "重量: %s"
+	}
+  }
+}

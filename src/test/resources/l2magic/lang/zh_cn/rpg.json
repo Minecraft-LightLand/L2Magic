@@ -1,0 +1,71 @@
+{
+  "arcane.l2rpgcommon": {
+	"damage_axe": "奥术聚能",
+	"damage_sword": "奥术爆发",
+	"earth_axe": "地牢斧",
+	"marker": "指引剑",
+	"soul_fire_sword": "业火剑",
+	"thunder_axe": "引雷之斧",
+	"thunder_sword": "引雷之剑",
+	"water_trap_sword": "水牢剑",
+	"wind_blade": "风刃剑"
+  },
+  "arcane_type.l2rpgcommon": {
+	"alioth": "玉衡",
+	"alkaid": "摇光",
+	"dubhe": "天枢",
+	"megrez": "天权",
+	"merak": "天璇",
+	"mizar": "开阳",
+	"phecda": "天玑"
+  },
+  "magic_element.l2rpgcommon": {
+	"air": "风",
+	"earth": "地",
+	"fire": "火",
+	"quint": "奥秘",
+	"water": "水"
+  },
+  "magic_product_type.l2rpgcommon": {
+	"arcane": "奥术",
+	"craft": "合成",
+	"effect": "药水",
+	"enchantment": "附魔",
+	"spell": "法术"
+  },
+  "profession.l2rpgcommon": {
+	"alchemist": "炼金术士",
+	"arcane": "奥术师",
+	"archer": "弓箭手",
+	"assassin": "暗杀者",
+	"berserker": "狂战士",
+	"chemist": "爆破专家",
+	"hunter": "猎人",
+	"knight": "骑士",
+	"magician": "法师",
+	"shielder": "重盾",
+	"spell_caster": "咒术师",
+	"tidecaller": "唤潮者"
+  },
+  "skill.l2rpgcommon": {
+	"armor_breaker": "护甲破坏",
+	"blood_thirst": "嗜血",
+	"impact_attract": "吸引",
+	"impact_repel": "排斥",
+	"no_knockback": "霸体",
+	"quick_move": "位移",
+	"quick_pull": "游击",
+	"target_attract": "嘲讽",
+	"target_hide": "隐身"
+  },
+  "spell.l2rpgcommon": {
+	"blade_front": "狙击风刃",
+	"blade_side": "连击风刃",
+	"explosion_rain": "火球雨",
+	"fang_round": "鲨鱼召唤",
+	"fire_explosion": "大火球术",
+	"fire_rain": "火雨",
+	"water_trap_0": "水牢",
+	"water_trap_1": "水狱"
+  }
+}

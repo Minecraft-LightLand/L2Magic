@@ -1,0 +1,34 @@
+{
+    "side": [
+        "arrow_1",
+        "arrow_2"
+    ],
+    "comp": {
+        "main_slot": {
+            "sprite": "slot",
+            "x": 16,
+            "y": 0
+        },
+        "gold_slot": {
+            "sprite": "slot",
+            "x": 16,
+            "y": 18
+        },
+        "arrow": {
+            "sprite": "arrow_0",
+            "x": 43,
+            "y": 9
+        },
+        "ench_slot": {
+            "sprite": "slot",
+            "x": 70,
+            "y": 18
+        },
+        "elements": {
+            "sprite": "elem_slot",
+            "x": 70,
+            "y": 0,
+            "rx": 5
+        }
+    }
+}

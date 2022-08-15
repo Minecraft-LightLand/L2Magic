@@ -1,0 +1,51 @@
+{
+    "side": [
+        "arrow_1",
+        "arrow_2",
+        "arrow_3"
+    ],
+    "comp": {
+        "wand_slot": {
+            "sprite": "slot",
+            "x": 16,
+            "y": 0
+        },
+        "input_slot": {
+            "sprite": "slot",
+            "x": 34,
+            "y": 0
+        },
+        "ench_slot": {
+            "sprite": "slot",
+            "x": 34,
+            "y": 18
+        },
+        "arrow": {
+            "sprite": "arrow_0",
+            "x": 61,
+            "y": 9
+        },
+        "output_slot": {
+            "sprite": "slot",
+            "x": 88,
+            "y": 0
+        },
+        "gold_slot": {
+            "sprite": "slot",
+            "x": 88,
+            "y": 18
+        },
+        "elements_0": {
+            "sprite": "elem_slot",
+            "x": 106,
+            "y": 0,
+            "rx": 3
+        },
+        "elements_1": {
+            "sprite": "elem_slot",
+            "x": 106,
+            "y": 18,
+            "rx": 2
+        }
+    }
+}
