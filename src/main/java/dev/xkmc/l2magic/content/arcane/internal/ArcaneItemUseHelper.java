@@ -7,7 +7,7 @@ import dev.xkmc.l2library.util.annotation.ServerOnly;
 import dev.xkmc.l2magic.content.arcane.item.ArcaneAxe;
 import dev.xkmc.l2magic.content.arcane.item.ArcaneSword;
 import dev.xkmc.l2magic.content.common.capability.MagicData;
-import dev.xkmc.l2magic.init.special.LightLandRegistry;
+import dev.xkmc.l2magic.init.special.MagicRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
@@ -44,7 +44,7 @@ public class ArcaneItemUseHelper implements ItemUseEventHandler.ItemClickHandler
 			return false;
 		String str = tag.getString(type.getID());
 		ResourceLocation rl = new ResourceLocation(str);
-		Arcane arcane = LightLandRegistry.ARCANE.get().getValue(rl);
+		Arcane arcane = MagicRegistry.ARCANE.get().getValue(rl);
 		if (arcane == null || arcane.cost > tag.getInt("mana"))
 			return false;
 		if (arcane.activate(player, magic, stack, target)) {

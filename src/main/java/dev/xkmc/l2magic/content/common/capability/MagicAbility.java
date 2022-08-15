@@ -7,7 +7,7 @@ import dev.xkmc.l2library.util.nbt.NBTObj;
 import dev.xkmc.l2magic.content.arcane.internal.ArcaneType;
 import dev.xkmc.l2magic.content.magic.item.MagicScroll;
 import dev.xkmc.l2magic.content.magic.spell.internal.Spell;
-import dev.xkmc.l2magic.init.special.LightLandRegistry;
+import dev.xkmc.l2magic.init.special.MagicRegistry;
 import dev.xkmc.l2magic.network.packets.CapToClient;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -125,11 +125,11 @@ public class MagicAbility {
 	}
 
 	public int getMaxMana() {
-		return (int) parent.player.getAttributeValue(LightLandRegistry.MAX_MANA.get());
+		return (int) parent.player.getAttributeValue(MagicRegistry.MAX_MANA.get());
 	}
 
 	public int getManaRestoration() {
-		return (int) (getMana() * parent.player.getAttributeValue(LightLandRegistry.MANA_RESTORE.get()));
+		return (int) (getMana() * parent.player.getAttributeValue(MagicRegistry.MANA_RESTORE.get()));
 	}
 
 	public int getMaxSpellSlot() {
@@ -137,11 +137,11 @@ public class MagicAbility {
 	}
 
 	public int getMaxSpellEndurance() {
-		return (int) parent.player.getAttributeValue(LightLandRegistry.MAX_SPELL_LOAD.get());
+		return (int) parent.player.getAttributeValue(MagicRegistry.MAX_SPELL_LOAD.get());
 	}
 
 	public int getSpellLoad() {
-		return (int) (getMana() * parent.player.getAttributeValue(LightLandRegistry.MANA_RESTORE.get()));
+		return (int) (getMana() * parent.player.getAttributeValue(MagicRegistry.MANA_RESTORE.get()));
 	}
 
 	public int getSpellReduction() {

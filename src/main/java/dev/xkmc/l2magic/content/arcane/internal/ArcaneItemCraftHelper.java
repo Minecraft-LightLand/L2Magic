@@ -1,6 +1,6 @@
 package dev.xkmc.l2magic.content.arcane.internal;
 
-import dev.xkmc.l2magic.init.special.LightLandRegistry;
+import dev.xkmc.l2magic.init.special.MagicRegistry;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -19,7 +19,7 @@ public class ArcaneItemCraftHelper {
 			return null;
 		String str = tag.getString(s);
 		ResourceLocation rl = new ResourceLocation(str);
-		return LightLandRegistry.ARCANE.get().getValue(rl);
+		return MagicRegistry.ARCANE.get().getValue(rl);
 	}
 
 	public static List<Arcane> getAllArcanesOnItem(ItemStack stack) {
@@ -28,7 +28,7 @@ public class ArcaneItemCraftHelper {
 		for (String str : tag.getAllKeys()) {
 			if (str.equals("charged") || str.equals("mana"))
 				continue;
-			list.add(LightLandRegistry.ARCANE.get().getValue(new ResourceLocation(tag.getString(str))));
+			list.add(MagicRegistry.ARCANE.get().getValue(new ResourceLocation(tag.getString(str))));
 		}
 		return list;
 	}

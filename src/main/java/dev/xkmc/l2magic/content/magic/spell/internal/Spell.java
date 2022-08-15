@@ -3,7 +3,7 @@ package dev.xkmc.l2magic.content.magic.spell.internal;
 import dev.xkmc.l2library.base.NamedEntry;
 import dev.xkmc.l2library.util.annotation.ServerOnly;
 import dev.xkmc.l2magic.content.common.capability.MagicData;
-import dev.xkmc.l2magic.init.special.LightLandRegistry;
+import dev.xkmc.l2magic.init.special.MagicRegistry;
 import dev.xkmc.l2magic.network.packets.CapToClient;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
@@ -14,7 +14,7 @@ import javax.annotation.Nullable;
 public abstract class Spell<C extends SpellConfig, A extends ActivationConfig> extends NamedEntry<Spell<?, ?>> {
 
 	public Spell() {
-		super(LightLandRegistry.SPELL);
+		super(MagicRegistry.SPELL);
 	}
 
 	@Nullable

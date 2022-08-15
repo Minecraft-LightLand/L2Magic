@@ -21,7 +21,7 @@ public class SpellRegistry {
 	public static final RegistryEntry<FireArrowSpell> FIRE_EXPLOSION = reg("fire_explosion", FireArrowSpell::new);
 
 	public static <T extends Spell<?, ?>> RegistryEntry<T> reg(String id, NonNullSupplier<T> sup) {
-		return L2Magic.REGISTRATE.generic(LightLandRegistry.SPELL, id, sup).defaultLang().register();
+		return L2Magic.REGISTRATE.generic(MagicRegistry.SPELL, id, sup).defaultLang().register();
 	}
 
 	public static void register() {

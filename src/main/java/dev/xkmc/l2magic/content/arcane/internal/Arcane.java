@@ -7,7 +7,7 @@ import dev.xkmc.l2library.util.annotation.DoubleSidedCall;
 import dev.xkmc.l2library.util.annotation.ServerOnly;
 import dev.xkmc.l2magic.content.common.capability.MagicData;
 import dev.xkmc.l2magic.init.registrate.LMEffects;
-import dev.xkmc.l2magic.init.special.LightLandRegistry;
+import dev.xkmc.l2magic.init.special.MagicRegistry;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -25,7 +25,7 @@ public abstract class Arcane extends NamedEntry<Arcane> {
 	public final int cost;
 
 	public Arcane(RegistryEntry<ArcaneType> type, int cost) {
-		super(LightLandRegistry.ARCANE);
+		super(MagicRegistry.ARCANE);
 		this.type = type;
 		this.cost = cost;
 	}

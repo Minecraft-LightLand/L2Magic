@@ -7,7 +7,7 @@ import dev.xkmc.l2magic.content.arcane.item.ArcaneAxe;
 import dev.xkmc.l2magic.content.arcane.item.ArcaneSword;
 import dev.xkmc.l2magic.content.common.capability.MagicData;
 import dev.xkmc.l2magic.init.data.LangData;
-import dev.xkmc.l2magic.init.special.LightLandRegistry;
+import dev.xkmc.l2magic.init.special.MagicRegistry;
 import dev.xkmc.l2magic.network.packets.CapToClient;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
@@ -37,7 +37,7 @@ public class ArcaneCommand extends BaseCommand {
 				.executes(withPlayer((context, e) -> {
 					MagicData magic = MagicData.get(e);
 					MutableComponent comps = Component.literal("[");
-					for (ArcaneType type : LightLandRegistry.ARCANE_TYPE.get().getValues()) {
+					for (ArcaneType type : MagicRegistry.ARCANE_TYPE.get().getValues()) {
 						boolean bool = magic.magicAbility.isArcaneTypeUnlocked(type);
 						MutableComponent lock = (bool ? LangData.IDS.UNLOCKED : LangData.IDS.LOCKED).get();
 						comps.append(type.getDesc().append(": ").append(lock).append(",\n"));

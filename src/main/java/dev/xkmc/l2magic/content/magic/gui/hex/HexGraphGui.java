@@ -8,7 +8,7 @@ import dev.xkmc.l2library.util.math.Frac;
 import dev.xkmc.l2magic.content.magic.gui.AbstractHexGui;
 import dev.xkmc.l2magic.content.magic.products.MagicElement;
 import dev.xkmc.l2magic.init.data.LangData;
-import dev.xkmc.l2magic.init.special.LightLandRegistry;
+import dev.xkmc.l2magic.init.special.MagicRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
@@ -68,7 +68,7 @@ public class HexGraphGui extends AbstractHexGui {
 		if (graph == null) {
 			graph = new HexHandler(3);
 		}
-		LightLandRegistry.ELEMENT.get().forEach((a) -> ELEM_2_ID.put(a, ELEM_2_ID.size()));
+		MagicRegistry.ELEMENT.get().forEach((a) -> ELEM_2_ID.put(a, ELEM_2_ID.size()));
 	}
 
 	public void render(PoseStack matrix, double mx, double my, float partial) {

@@ -5,7 +5,7 @@ import dev.xkmc.l2library.util.nbt.NBTObj;
 import dev.xkmc.l2magic.content.common.capability.MagicHolder;
 import dev.xkmc.l2magic.content.magic.products.info.TypeConfig;
 import dev.xkmc.l2magic.content.magic.products.recipe.IMagicRecipe;
-import dev.xkmc.l2magic.init.special.LightLandRegistry;
+import dev.xkmc.l2magic.init.special.MagicRegistry;
 import dev.xkmc.l2magic.network.config.ProductTypeConfig;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.registries.IForgeRegistry;
@@ -25,7 +25,7 @@ public class MagicProductType<I, P extends MagicProduct<I, P>> extends NamedEntr
 
 	public MagicProductType(Class<P> cls, MagicFactory<I, P> fac, Supplier<IForgeRegistry<I>> registry,
 							Function<I, String> namer, MagicElement elem) {
-		super(LightLandRegistry.PRODUCT_TYPE);
+		super(MagicRegistry.PRODUCT_TYPE);
 		this.cls = cls;
 		this.fac = fac;
 		this.getter = (s) -> registry.get().getValue(s);

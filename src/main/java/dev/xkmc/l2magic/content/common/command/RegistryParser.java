@@ -14,7 +14,7 @@ import dev.xkmc.l2magic.content.arcane.internal.ArcaneType;
 import dev.xkmc.l2magic.content.magic.products.MagicElement;
 import dev.xkmc.l2magic.content.magic.spell.internal.Spell;
 import dev.xkmc.l2magic.init.data.LangData;
-import dev.xkmc.l2magic.init.special.LightLandRegistry;
+import dev.xkmc.l2magic.init.special.MagicRegistry;
 import net.minecraft.commands.CommandBuildContext;
 import net.minecraft.commands.SharedSuggestionProvider;
 import net.minecraft.commands.synchronization.ArgumentTypeInfo;
@@ -34,10 +34,10 @@ public record RegistryParser<T>(Class<T> cls, Supplier<IForgeRegistry<T>> regist
 		implements ArgumentType<T>, ArgumentTypeInfo.Template<RegistryParser<?>> {
 
 	public static final Set<RegistryParser<?>> SET = new HashSet<>();
-	public static final RegistryParser<MagicElement> ELEMENT = new RegistryParser<>(MagicElement.class, LightLandRegistry.ELEMENT);
-	public static final RegistryParser<ArcaneType> ARCANE_TYPE = new RegistryParser<>(ArcaneType.class, LightLandRegistry.ARCANE_TYPE);
-	public static final RegistryParser<Arcane> ARCANE = new RegistryParser<>(Arcane.class, LightLandRegistry.ARCANE);
-	public static final RegistryParser<Spell<?, ?>> SPELL = new RegistryParser(Spell.class, LightLandRegistry.SPELL);
+	public static final RegistryParser<MagicElement> ELEMENT = new RegistryParser<>(MagicElement.class, MagicRegistry.ELEMENT);
+	public static final RegistryParser<ArcaneType> ARCANE_TYPE = new RegistryParser<>(ArcaneType.class, MagicRegistry.ARCANE_TYPE);
+	public static final RegistryParser<Arcane> ARCANE = new RegistryParser<>(Arcane.class, MagicRegistry.ARCANE);
+	public static final RegistryParser<Spell<?, ?>> SPELL = new RegistryParser(Spell.class, MagicRegistry.SPELL);
 
 	private static final RegistryInfo INFO = new RegistryInfo();
 

@@ -7,7 +7,7 @@ import dev.xkmc.l2magic.content.magic.products.MagicProduct;
 import dev.xkmc.l2magic.content.magic.products.MagicProductType;
 import dev.xkmc.l2magic.content.magic.products.recipe.IMagicRecipe;
 import dev.xkmc.l2magic.init.L2Magic;
-import dev.xkmc.l2magic.init.special.LightLandRegistry;
+import dev.xkmc.l2magic.init.special.MagicRegistry;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 
@@ -113,7 +113,7 @@ public class MagicHolder {
 			return null;
 		}
 		MagicElement type = elem.get(0);
-		MagicProductType<?, ?> res = LightLandRegistry.PRODUCT_TYPE.get().getValues().stream()
+		MagicProductType<?, ?> res = MagicRegistry.PRODUCT_TYPE.get().getValues().stream()
 				.filter(e -> e.elem == type)
 				.findFirst().orElseThrow(() -> new NoSuchElementException("no matching type"));
 		if (!product_cache.containsKey(res))

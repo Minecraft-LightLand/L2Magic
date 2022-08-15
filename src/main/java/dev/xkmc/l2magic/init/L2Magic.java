@@ -19,7 +19,6 @@ import dev.xkmc.l2magic.init.data.configs.ConfigGenDispatcher;
 import dev.xkmc.l2magic.init.data.recipe.RecipeGen;
 import dev.xkmc.l2magic.init.registrate.*;
 import dev.xkmc.l2magic.init.special.ArcaneRegistry;
-import dev.xkmc.l2magic.init.special.LightLandRegistry;
 import dev.xkmc.l2magic.init.special.MagicRegistry;
 import dev.xkmc.l2magic.init.special.SpellRegistry;
 import dev.xkmc.l2magic.network.NetworkManager;
@@ -56,7 +55,6 @@ public class L2Magic {
 		LMMenu.register();
 		LMRecipes.register(bus);
 		LMEffects.register();
-		LightLandRegistry.register();
 		MagicRegistry.register();
 		ArcaneType.register();
 		ArcaneRegistry.register();
@@ -103,16 +101,16 @@ public class L2Magic {
 		event.enqueueWork(() -> {
 			EffectSyncEvents.TRACKED.add(LMEffects.ARCANE.get());
 			LMEffects.registerBrewingRecipe();
-			AttributeEntry.add(LightLandRegistry.MAX_MANA, true, 20000);
-			AttributeEntry.add(LightLandRegistry.MAX_SPELL_LOAD, true, 21000);
-			AttributeEntry.add(LightLandRegistry.MANA_RESTORE, true, 22000);
+			AttributeEntry.add(MagicRegistry.MAX_MANA, true, 20000);
+			AttributeEntry.add(MagicRegistry.MAX_SPELL_LOAD, true, 21000);
+			AttributeEntry.add(MagicRegistry.MANA_RESTORE, true, 22000);
 		});
 	}
 
 	private static void modifyAttributes(EntityAttributeModificationEvent event) {
-		event.add(EntityType.PLAYER, LightLandRegistry.MAX_MANA.get());
-		event.add(EntityType.PLAYER, LightLandRegistry.MAX_SPELL_LOAD.get());
-		event.add(EntityType.PLAYER, LightLandRegistry.MANA_RESTORE.get());
+		event.add(EntityType.PLAYER, MagicRegistry.MAX_MANA.get());
+		event.add(EntityType.PLAYER, MagicRegistry.MAX_SPELL_LOAD.get());
+		event.add(EntityType.PLAYER, MagicRegistry.MANA_RESTORE.get());
 	}
 
 	public static void gatherData(GatherDataEvent event) {

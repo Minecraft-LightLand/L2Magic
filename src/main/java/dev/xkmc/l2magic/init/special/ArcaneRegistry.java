@@ -27,7 +27,7 @@ public class ArcaneRegistry {
 	public static final RegistryEntry<MarkerSword> ALKAID_MARKER = reg("marker", () -> new MarkerSword(30, 32));
 
 	private static <T extends Arcane> RegistryEntry<T> reg(String str, NonNullSupplier<T> a) {
-		return L2Magic.REGISTRATE.generic(LightLandRegistry.ARCANE, str, a).defaultLang().register();
+		return L2Magic.REGISTRATE.generic(MagicRegistry.ARCANE, str, a).defaultLang().register();
 	}
 
 	public static void register() {

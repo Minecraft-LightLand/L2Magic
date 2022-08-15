@@ -9,7 +9,6 @@ import dev.xkmc.l2magic.content.magic.products.MagicElement;
 import dev.xkmc.l2magic.content.magic.products.recipe.IMagicRecipe;
 import dev.xkmc.l2magic.init.L2Magic;
 import dev.xkmc.l2magic.init.registrate.LMItems;
-import dev.xkmc.l2magic.init.special.LightLandRegistry;
 import dev.xkmc.l2magic.init.special.MagicRegistry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
@@ -48,7 +47,7 @@ public class DisEnchanterContainer extends BaseContainerMenu<DisEnchanterContain
 				int seed = rl.toString().hashCode();
 				Random r = new Random(seed);
 				MagicElement[] elems = new MagicElement[3];
-				List<MagicElement> list = new ArrayList<>(LightLandRegistry.ELEMENT.get().getValues());
+				List<MagicElement> list = new ArrayList<>(MagicRegistry.ELEMENT.get().getValues());
 				for (int i = 0; i < 3; i++) {
 					elems[i] = list.get(r.nextInt(list.size()));
 				}

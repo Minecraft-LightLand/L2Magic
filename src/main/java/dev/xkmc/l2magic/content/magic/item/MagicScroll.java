@@ -8,7 +8,7 @@ import dev.xkmc.l2magic.content.common.capability.MagicData;
 import dev.xkmc.l2magic.content.magic.spell.internal.Spell;
 import dev.xkmc.l2magic.init.data.LangData;
 import dev.xkmc.l2magic.init.registrate.LMItems;
-import dev.xkmc.l2magic.init.special.LightLandRegistry;
+import dev.xkmc.l2magic.init.special.MagicRegistry;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -83,7 +83,7 @@ public class MagicScroll extends Item implements IGlowingTarget {
 		String id = stack.getOrCreateTagElement("spell").getString("spell");
 		if (id.length() == 0) return null;
 		ResourceLocation rl = new ResourceLocation(id);
-		return LightLandRegistry.SPELL.get().getValue(rl);
+		return MagicRegistry.SPELL.get().getValue(rl);
 	}
 
 	public void appendHoverText(ItemStack stack, @Nullable Level world, List<Component> list, TooltipFlag flag) {
