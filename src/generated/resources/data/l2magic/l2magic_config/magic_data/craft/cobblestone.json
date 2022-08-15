@@ -1,0 +1,21 @@
+{
+  "_class": "dev.xkmc.l2magic.content.magic.products.recipe.DefMagicRecipe",
+  "elemental_mastery": [],
+  "elements": {
+    "A": "l2magic:earth",
+    "B": "l2magic:earth",
+    "C": "l2magic:air"
+  },
+  "flows": [
+    "AB->C"
+  ],
+  "predecessor": [],
+  "product_id": "minecraft:cobblestone",
+  "product_type": "l2magic:craft",
+  "screen": {
+    "type": "TASK",
+    "icon": "minecraft:paper",
+    "x": 0,
+    "y": -2
+  }
+}

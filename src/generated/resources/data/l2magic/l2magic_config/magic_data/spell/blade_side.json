@@ -1,0 +1,31 @@
+{
+  "_class": "dev.xkmc.l2magic.content.magic.products.recipe.DefMagicRecipe",
+  "elemental_mastery": [
+    {
+      "element": "l2magic:air",
+      "level": 1
+    }
+  ],
+  "elements": {
+    "A": "l2magic:fire",
+    "B": "l2magic:fire",
+    "C": "l2magic:earth",
+    "D": "l2magic:earth",
+    "E": "l2magic:air",
+    "F": "l2magic:air"
+  },
+  "flows": [
+    "AB->CD",
+    "CD->EF",
+    "EF->AB"
+  ],
+  "predecessor": [],
+  "product_id": "l2magic:blade_side",
+  "product_type": "l2magic:spell",
+  "screen": {
+    "type": "TASK",
+    "icon": "minecraft:paper",
+    "x": -1,
+    "y": -2
+  }
+}

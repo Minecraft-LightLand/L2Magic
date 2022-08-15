@@ -7,7 +7,7 @@ import dev.xkmc.l2magic.content.magic.spell.FireArrowSpell;
 import dev.xkmc.l2magic.content.magic.spell.WaterTrapSpell;
 import dev.xkmc.l2magic.content.magic.spell.WindBladeSpell;
 import dev.xkmc.l2magic.content.magic.spell.internal.Spell;
-import dev.xkmc.l2magic.init.LightLand;
+import dev.xkmc.l2magic.init.L2Magic;
 
 public class SpellRegistry {
 
@@ -21,7 +21,7 @@ public class SpellRegistry {
 	public static final RegistryEntry<FireArrowSpell> FIRE_EXPLOSION = reg("fire_explosion", FireArrowSpell::new);
 
 	public static <T extends Spell<?, ?>> RegistryEntry<T> reg(String id, NonNullSupplier<T> sup) {
-		return LightLand.REGISTRATE.generic(LightLandRegistry.SPELL, id, sup).defaultLang().register();
+		return L2Magic.REGISTRATE.generic(LightLandRegistry.SPELL, id, sup).defaultLang().register();
 	}
 
 	public static void register() {

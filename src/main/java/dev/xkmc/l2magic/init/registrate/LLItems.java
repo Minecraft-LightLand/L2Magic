@@ -14,7 +14,7 @@ import dev.xkmc.l2magic.content.magic.item.MagicScroll;
 import dev.xkmc.l2magic.content.magic.item.MagicWand;
 import dev.xkmc.l2magic.content.magic.item.ManaStorage;
 import dev.xkmc.l2magic.content.magic.item.PotionCore;
-import dev.xkmc.l2magic.init.LightLand;
+import dev.xkmc.l2magic.init.L2Magic;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.food.Foods;
@@ -25,7 +25,7 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-import static dev.xkmc.l2magic.init.LightLand.REGISTRATE;
+import static dev.xkmc.l2magic.init.L2Magic.REGISTRATE;
 
 @SuppressWarnings({"rawtypes", "unchecked", "unsafe"})
 @MethodsReturnNonnullByDefault
@@ -36,7 +36,7 @@ public class LLItems {
 		private final Supplier<ItemEntry> icon;
 
 		public Tab(String id, Supplier<ItemEntry> icon) {
-			super(LightLand.MODID + "." + id);
+			super(L2Magic.MODID + "." + id);
 			this.icon = icon;
 		}
 

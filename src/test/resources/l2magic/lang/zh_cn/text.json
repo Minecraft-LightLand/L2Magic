@@ -1,12 +1,11 @@
 {
-  "l2rpgcommon": {
+  "l2magic": {
 	"argument.invalid_id": "Invalid Id",
 	"container.ritual": "仪式注魔",
 	"chat": {
 	  "action_success": "操作成功",
 	  "locked": "未解锁",
 	  "player_not_found": "未找到玩家/未指定玩家",
-	  "profession_already_exist": "职业已存在",
 	  "ritual.fail.element": "元素不足,请在施法界面确认",
 	  "ritual.fail.wrong": "法术错误",
 	  "ritual.fail.zero": "法术等级过低,请在施法界面确认",
@@ -16,37 +15,6 @@
 	  "wrong_item": "物品不合适"
 	},
 	"screen": {
-	  "ability": {
-		"ability": {
-		  "desc.cost": "升级消耗:%s/%s",
-		  "desc.lv": "能力等级:%s",
-		  "error.max_reached": "已达到最大值",
-		  "error.no_point": "对应点数不足",
-		  "error.no_prof": "需要先选定职业",
-		  "error.prof_max": "已达到当前职业等级上限",
-		  "health": "体力",
-		  "magic": "魔力",
-		  "speed": "速度",
-		  "spell": "咒术负载",
-		  "strength": "力量",
-		  "title": "能力点数分配"
-		},
-		"arcane": {
-		  "activate.critical": "使用方式:跳劈",
-		  "activate.light": "使用方式:左键",
-		  "activate.none": "使用方式:右键",
-		  "cost": "解锁消耗:%s/%s",
-		  "title": "奥术领悟"
-		},
-		"elemental": {
-		  "desc.cost": "消耗%s/%s精通点数",
-		  "desc.count": "持有元素:%s",
-		  "desc.lv": "精通等级:%s",
-		  "title": "元素精通"
-		},
-		"profession.desc.prof_already_exist": "已存在职业，无法更换",
-		"profession.title": "职业选择"
-	  },
 	  "arcane_inject.error": {
 		"clear_gold": "请清空副产品栏",
 		"elem": "元素不足",

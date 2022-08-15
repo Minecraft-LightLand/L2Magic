@@ -1,10 +1,10 @@
 {
-  "container.l2rpgcommon": {
+  "container.l2magic": {
 	"arcane_inject": "奥术注魔台",
 	"disenchanter": "附魔分解台",
 	"spell_craft": "符文合成台"
   },
-  "effect.l2rpgcommon": {
+  "effect.l2magic": {
 	"arcane": "奥术标记",
 	"armor_breaker": "护甲破坏",
 	"armor_reduce": "护甲薄弱",
@@ -24,37 +24,14 @@
 	"cleanse": "净化",
 	"dispell": "破魔"
   },
-  "entity.l2rpgcommon": {
+  "entity.l2magic": {
 	"fire_arrow": "魔法火箭",
 	"fire_ball": "魔法火球",
 	"generic_arrow": "箭",
 	"spell": "法阵",
-	"wind_blade": "风刃",
-	"layline_skeleton": "地脉侵蚀的骸骨",
-	"layline_zombie": "地脉侵蚀的躯壳",
-	"cursed_knight": "被诅咒的骑士",
-	"cursed_archer": "被诅咒的射手",
-	"cursed_shield": "被诅咒的重盾",
-	"potion_slime": "被药水污染的史莱姆",
-	"stone_slime": "石莱姆",
-	"vine_slime": "藤蔓史莱姆",
-	"carpet_slime": "不稳定史莱姆",
-	"boss_slime": "史莱姆王",
-	"slime_tentacle": "史莱姆触手"
+	"wind_blade": "风刃"
   },
-  "itemGroup.l2rpgcommon": {
-	"material": "道具材料",
-	"profession": "职业装备",
-	"generated": "通用装备"
-  },
-  "key": {
-	"categories.l2rpgcommon": "Light Land 按键",
-	"l2rpgcommon.skill_1": "技能 1",
-	"l2rpgcommon.skill_2": "技能 2",
-	"l2rpgcommon.skill_3": "技能 3"
-  },
-  "fluid.l2rpgcommon": {
-	"cleanse_water": "净化水",
-	"holy_water": "圣水"
+  "itemGroup.l2magic": {
+	"magic": "L2魔法"
   }
 }

@@ -7,7 +7,7 @@ import dev.xkmc.l2library.repack.registrate.util.entry.BlockEntry;
 import dev.xkmc.l2library.repack.registrate.util.entry.ItemEntry;
 import dev.xkmc.l2library.repack.registrate.util.nullness.NonNullSupplier;
 import dev.xkmc.l2magic.content.magic.item.MagicScroll;
-import dev.xkmc.l2magic.init.LightLand;
+import dev.xkmc.l2magic.init.L2Magic;
 import dev.xkmc.l2magic.init.data.recipe.ritual.*;
 import dev.xkmc.l2magic.init.registrate.LLBlocks;
 import dev.xkmc.l2magic.init.registrate.LLItems;
@@ -207,15 +207,15 @@ public class RecipeGen {
 	}
 
 	private static ResourceLocation getID(Item item) {
-		return new ResourceLocation(LightLand.MODID, currentFolder + ForgeRegistries.ITEMS.getKey(item).getPath());
+		return new ResourceLocation(L2Magic.MODID, currentFolder + ForgeRegistries.ITEMS.getKey(item).getPath());
 	}
 
 	private static ResourceLocation getID(Item item, String suffix) {
-		return new ResourceLocation(LightLand.MODID, currentFolder + ForgeRegistries.ITEMS.getKey(item).getPath() + suffix);
+		return new ResourceLocation(L2Magic.MODID, currentFolder + ForgeRegistries.ITEMS.getKey(item).getPath() + suffix);
 	}
 
 	private static ResourceLocation getID(String suffix) {
-		return new ResourceLocation(LightLand.MODID, currentFolder + suffix);
+		return new ResourceLocation(L2Magic.MODID, currentFolder + suffix);
 	}
 
 	private static void cross(RegistrateRecipeProvider pvd, Item core, Item side, Item out, int count) {
@@ -265,7 +265,7 @@ public class RecipeGen {
 
 	private static void potionUp(RegistrateRecipeProvider pvd, MobEffect eff, Item a, Item b, int... levels) {
 		String path = ForgeRegistries.MOB_EFFECTS.getKey(eff).getPath();
-		ResourceLocation rl = new ResourceLocation(LightLand.MODID, "magic_data/effect/" + path);
+		ResourceLocation rl = new ResourceLocation(L2Magic.MODID, "magic_data/effect/" + path);
 		unlock(pvd, new PotionBoostBuilder(eff, 1, rl, levels)::unlockedBy, LLItems.POTION_CORE.get())
 				.setCore(new MobEffectIngredient(LLItems.POTION_CORE.get(), eff, 0, 1),
 						PotionUtils.setCustomEffects(LLItems.POTION_CORE.asStack(),
@@ -277,7 +277,7 @@ public class RecipeGen {
 
 	private static void potionDown(RegistrateRecipeProvider pvd, MobEffect eff, Item a, Item b, int... levels) {
 		String path = ForgeRegistries.MOB_EFFECTS.getKey(eff).getPath();
-		ResourceLocation rl = new ResourceLocation(LightLand.MODID, "magic_data/effect/" + path);
+		ResourceLocation rl = new ResourceLocation(L2Magic.MODID, "magic_data/effect/" + path);
 		unlock(pvd, new PotionBoostBuilder(eff, -1, rl, levels)::unlockedBy, LLItems.POTION_CORE.get())
 				.setCore(new MobEffectIngredient(LLItems.POTION_CORE.get(), eff, 0, 1),
 						LLItems.POTION_CORE.asStack())

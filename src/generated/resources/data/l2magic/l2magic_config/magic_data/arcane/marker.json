@@ -1,0 +1,29 @@
+{
+  "_class": "dev.xkmc.l2magic.content.magic.products.recipe.DefMagicRecipe",
+  "elemental_mastery": [
+    {
+      "element": "l2magic:quint",
+      "level": 1
+    }
+  ],
+  "elements": {
+    "A": "l2magic:fire",
+    "B": "l2magic:water",
+    "C": "l2magic:quint",
+    "D": "l2magic:air",
+    "E": "l2magic:earth",
+    "F": "l2magic:quint"
+  },
+  "flows": [
+    "ABCDEF|"
+  ],
+  "predecessor": [],
+  "product_id": "l2magic:marker",
+  "product_type": "l2magic:arcane",
+  "screen": {
+    "type": "TASK",
+    "icon": "minecraft:paper",
+    "x": 3,
+    "y": 0
+  }
+}

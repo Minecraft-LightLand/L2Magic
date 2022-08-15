@@ -1,0 +1,33 @@
+{
+  "_class": "dev.xkmc.l2magic.content.magic.products.recipe.DefMagicRecipe",
+  "elemental_mastery": [
+    {
+      "element": "l2magic:fire",
+      "level": 1
+    }
+  ],
+  "elements": {
+    "A": "l2magic:earth",
+    "B": "l2magic:fire",
+    "C": "l2magic:fire",
+    "D": "l2magic:fire",
+    "E": "l2magic:earth",
+    "F": "l2magic:earth"
+  },
+  "flows": [
+    "A->BCD",
+    "BCD->EF",
+    "EF->A"
+  ],
+  "predecessor": [
+    "l2magic:magic_data/spell/explosion_rain"
+  ],
+  "product_id": "l2magic:fire_explosion",
+  "product_type": "l2magic:spell",
+  "screen": {
+    "type": "TASK",
+    "icon": "minecraft:paper",
+    "x": 1,
+    "y": -1
+  }
+}

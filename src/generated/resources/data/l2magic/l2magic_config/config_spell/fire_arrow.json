@@ -1,0 +1,71 @@
+{
+  "_class": "dev.xkmc.l2magic.network.config.SpellDataConfig",
+  "map": {
+    "l2magic:explosion_rain": {
+      "type": "SCROLL",
+      "_class": "dev.xkmc.l2magic.content.magic.spell.FireArrowSpell$Config",
+      "damage": 0.0,
+      "distance": 16.0,
+      "duration": 30,
+      "explosion": 3,
+      "factor": 5.0,
+      "mana_cost": 100,
+      "period": 4,
+      "radius": 6.0,
+      "repeat": 1,
+      "size": 0.0,
+      "spell_load": 150,
+      "spell_time": {
+        "close": 30,
+        "duration": 100,
+        "id": "l2magic:test_spell",
+        "setup": 30
+      },
+      "velocity": 3.0
+    },
+    "l2magic:fire_explosion": {
+      "type": "SCROLL",
+      "_class": "dev.xkmc.l2magic.content.magic.spell.FireArrowSpell$Config",
+      "damage": 0.0,
+      "distance": 16.0,
+      "duration": 30,
+      "explosion": 8,
+      "factor": 5.0,
+      "mana_cost": 100,
+      "period": 100,
+      "radius": 0.0,
+      "repeat": 1,
+      "size": 2.0,
+      "spell_load": 150,
+      "spell_time": {
+        "close": 30,
+        "duration": 100,
+        "id": "l2magic:test_spell",
+        "setup": 30
+      },
+      "velocity": 3.0
+    },
+    "l2magic:fire_rain": {
+      "type": "SCROLL",
+      "_class": "dev.xkmc.l2magic.content.magic.spell.FireArrowSpell$Config",
+      "damage": 5.0,
+      "distance": 16.0,
+      "duration": 30,
+      "explosion": 0,
+      "factor": 4.0,
+      "mana_cost": 30,
+      "period": 1,
+      "radius": 6.0,
+      "repeat": 2,
+      "size": 0.0,
+      "spell_load": 50,
+      "spell_time": {
+        "close": 30,
+        "duration": 100,
+        "id": "l2magic:test_spell",
+        "setup": 30
+      },
+      "velocity": 3.0
+    }
+  }
+}

@@ -3,7 +3,7 @@ package dev.xkmc.l2magic.network;
 import dev.xkmc.l2library.serial.config.ConfigMerger;
 import dev.xkmc.l2library.serial.network.BaseConfig;
 import dev.xkmc.l2library.serial.network.PacketHandlerWithConfig;
-import dev.xkmc.l2magic.init.LightLand;
+import dev.xkmc.l2magic.init.L2Magic;
 import dev.xkmc.l2magic.network.config.ProductTypeConfig;
 import dev.xkmc.l2magic.network.config.SpellDataConfig;
 import dev.xkmc.l2magic.network.config.SpellEntityConfig;
@@ -21,7 +21,7 @@ import static net.minecraftforge.network.NetworkDirection.PLAY_TO_SERVER;
 public class NetworkManager {
 
 	static final PacketHandlerWithConfig HANDLER = new PacketHandlerWithConfig(
-			new ResourceLocation(LightLand.MODID, "main"), 1, "l2magic_config",
+			new ResourceLocation(L2Magic.MODID, "main"), 1, "l2magic_config",
 			e -> e.create(CapToClient.class, PLAY_TO_CLIENT),
 			e -> e.create(CapToServer.class, PLAY_TO_SERVER),
 			e -> e.create(EmptyRightClickToServer.class, PLAY_TO_SERVER)

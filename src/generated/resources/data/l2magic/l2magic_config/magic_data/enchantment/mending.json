@@ -1,0 +1,28 @@
+{
+  "_class": "dev.xkmc.l2magic.content.magic.products.recipe.DefMagicRecipe",
+  "elemental_mastery": [
+    {
+      "element": "l2magic:quint",
+      "level": 1
+    }
+  ],
+  "elements": {
+    "A": "l2magic:quint",
+    "B": "l2magic:earth",
+    "C": "l2magic:water",
+    "D": "l2magic:air",
+    "E": "l2magic:fire"
+  },
+  "flows": [
+    "ABCDE|"
+  ],
+  "predecessor": [],
+  "product_id": "minecraft:mending",
+  "product_type": "l2magic:enchantment",
+  "screen": {
+    "type": "TASK",
+    "icon": "minecraft:paper",
+    "x": 0,
+    "y": 0
+  }
+}

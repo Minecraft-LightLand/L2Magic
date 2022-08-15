@@ -1,0 +1,32 @@
+{
+  "_class": "dev.xkmc.l2magic.content.magic.products.recipe.DefMagicRecipe",
+  "elemental_mastery": [
+    {
+      "element": "l2magic:earth",
+      "level": 1
+    }
+  ],
+  "elements": {
+    "A": "l2magic:earth",
+    "B": "l2magic:earth",
+    "C": "l2magic:water",
+    "D": "l2magic:water",
+    "E": "l2magic:fire"
+  },
+  "flows": [
+    "A->C",
+    "C->E",
+    "E->B",
+    "B->D",
+    "D->A"
+  ],
+  "predecessor": [],
+  "product_id": "minecraft:slowness",
+  "product_type": "l2magic:effect",
+  "screen": {
+    "type": "TASK",
+    "icon": "minecraft:paper",
+    "x": 0,
+    "y": -1
+  }
+}

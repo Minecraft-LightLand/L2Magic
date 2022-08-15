@@ -1,0 +1,22 @@
+{
+  "_class": "dev.xkmc.l2magic.content.magic.products.recipe.DefMagicRecipe",
+  "elemental_mastery": [],
+  "elements": {
+    "A": "l2magic:earth",
+    "B": "l2magic:earth",
+    "C": "l2magic:earth",
+    "D": "l2magic:water"
+  },
+  "flows": [
+    "D->ABC"
+  ],
+  "predecessor": [],
+  "product_id": "minecraft:granite",
+  "product_type": "l2magic:craft",
+  "screen": {
+    "type": "TASK",
+    "icon": "minecraft:paper",
+    "x": 4,
+    "y": -2
+  }
+}

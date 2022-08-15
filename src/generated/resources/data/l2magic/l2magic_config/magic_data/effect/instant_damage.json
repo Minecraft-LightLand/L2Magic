@@ -1,0 +1,32 @@
+{
+  "_class": "dev.xkmc.l2magic.content.magic.products.recipe.DefMagicRecipe",
+  "elemental_mastery": [
+    {
+      "element": "l2magic:fire",
+      "level": 1
+    }
+  ],
+  "elements": {
+    "A": "l2magic:water",
+    "B": "l2magic:fire",
+    "C": "l2magic:fire",
+    "D": "l2magic:water",
+    "E": "l2magic:quint",
+    "F": "l2magic:quint"
+  },
+  "flows": [
+    "A->BC",
+    "BC->D",
+    "D->EF",
+    "EF->A"
+  ],
+  "predecessor": [],
+  "product_id": "minecraft:instant_damage",
+  "product_type": "l2magic:effect",
+  "screen": {
+    "type": "TASK",
+    "icon": "minecraft:paper",
+    "x": -1,
+    "y": -2
+  }
+}

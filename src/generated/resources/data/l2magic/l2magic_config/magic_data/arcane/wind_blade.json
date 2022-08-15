@@ -1,0 +1,32 @@
+{
+  "_class": "dev.xkmc.l2magic.content.magic.products.recipe.DefMagicRecipe",
+  "elemental_mastery": [
+    {
+      "element": "l2magic:quint",
+      "level": 1
+    }
+  ],
+  "elements": {
+    "A": "l2magic:water",
+    "B": "l2magic:earth",
+    "C": "l2magic:quint",
+    "D": "l2magic:quint",
+    "E": "l2magic:fire",
+    "F": "l2magic:fire"
+  },
+  "flows": [
+    "A->B",
+    "B->CD",
+    "CD->EF",
+    "EF->A"
+  ],
+  "predecessor": [],
+  "product_id": "l2magic:wind_blade",
+  "product_type": "l2magic:arcane",
+  "screen": {
+    "type": "TASK",
+    "icon": "minecraft:paper",
+    "x": 0,
+    "y": 0
+  }
+}

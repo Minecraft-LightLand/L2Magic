@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "A": {
+      "item": "minecraft:wheat"
+    },
+    "B": {
+      "item": "minecraft:cocoa_beans"
+    },
+    "G": {
+      "item": "l2magic:enchant_gold_nugget"
+    }
+  },
+  "pattern": [
+    " G ",
+    "ABA"
+  ],
+  "result": {
+    "count": 8,
+    "item": "l2magic:enchant_cookie"
+  }
+}

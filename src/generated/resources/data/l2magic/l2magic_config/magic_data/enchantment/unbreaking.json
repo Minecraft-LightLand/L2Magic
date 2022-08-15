@@ -1,0 +1,27 @@
+{
+  "_class": "dev.xkmc.l2magic.content.magic.products.recipe.DefMagicRecipe",
+  "elemental_mastery": [
+    {
+      "element": "l2magic:earth",
+      "level": 1
+    }
+  ],
+  "elements": {
+    "A": "l2magic:earth",
+    "B": "l2magic:earth",
+    "C": "l2magic:earth",
+    "D": "l2magic:earth"
+  },
+  "flows": [
+    "ABCD|"
+  ],
+  "predecessor": [],
+  "product_id": "minecraft:unbreaking",
+  "product_type": "l2magic:enchantment",
+  "screen": {
+    "type": "TASK",
+    "icon": "minecraft:paper",
+    "x": 1,
+    "y": 0
+  }
+}

@@ -4,7 +4,7 @@ import dev.xkmc.l2library.repack.registrate.util.entry.RegistryEntry;
 import dev.xkmc.l2library.repack.registrate.util.nullness.NonNullSupplier;
 import dev.xkmc.l2magic.content.arcane.internal.Arcane;
 import dev.xkmc.l2magic.content.arcane.magic.*;
-import dev.xkmc.l2magic.init.LightLand;
+import dev.xkmc.l2magic.init.L2Magic;
 
 @SuppressWarnings("unused")
 public class ArcaneRegistry {
@@ -27,7 +27,7 @@ public class ArcaneRegistry {
 	public static final RegistryEntry<MarkerSword> ALKAID_MARKER = reg("marker", () -> new MarkerSword(30, 32));
 
 	private static <T extends Arcane> RegistryEntry<T> reg(String str, NonNullSupplier<T> a) {
-		return LightLand.REGISTRATE.generic(LightLandRegistry.ARCANE, str, a).defaultLang().register();
+		return L2Magic.REGISTRATE.generic(LightLandRegistry.ARCANE, str, a).defaultLang().register();
 	}
 
 	public static void register() {

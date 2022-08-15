@@ -1,0 +1,31 @@
+{
+  "_class": "dev.xkmc.l2magic.content.magic.products.recipe.DefMagicRecipe",
+  "elemental_mastery": [
+    {
+      "element": "l2magic:fire",
+      "level": 1
+    }
+  ],
+  "elements": {
+    "A": "l2magic:quint",
+    "B": "l2magic:earth",
+    "C": "l2magic:earth",
+    "D": "l2magic:fire",
+    "E": "l2magic:fire",
+    "F": "l2magic:fire"
+  },
+  "flows": [
+    "A->BC",
+    "BC->DEF",
+    "DEF->A"
+  ],
+  "predecessor": [],
+  "product_id": "minecraft:thorns",
+  "product_type": "l2magic:enchantment",
+  "screen": {
+    "type": "TASK",
+    "icon": "minecraft:paper",
+    "x": 3,
+    "y": 1
+  }
+}

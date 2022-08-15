@@ -11,7 +11,7 @@ import dev.xkmc.l2magic.content.magic.products.MagicElement;
 import dev.xkmc.l2magic.content.magic.products.MagicProduct;
 import dev.xkmc.l2magic.content.magic.spell.internal.Spell;
 import dev.xkmc.l2magic.content.magic.spell.internal.SpellConfig;
-import dev.xkmc.l2magic.init.LightLand;
+import dev.xkmc.l2magic.init.L2Magic;
 import dev.xkmc.l2magic.init.data.LangData;
 import dev.xkmc.l2magic.init.special.MagicRegistry;
 import net.minecraft.network.chat.Component;
@@ -25,7 +25,7 @@ import java.util.Map;
 
 public class SpellCraftContainer extends BaseContainerMenu<SpellCraftContainer> {
 
-	public static final SpriteManager MANAGER = new SpriteManager(LightLand.MODID, "spell_craft");
+	public static final SpriteManager MANAGER = new SpriteManager(L2Magic.MODID, "spell_craft");
 
 	protected Error err = Error.NO_ITEM;
 	protected Spell<?, ?> spell = null;

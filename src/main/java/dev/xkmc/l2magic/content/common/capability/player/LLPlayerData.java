@@ -4,7 +4,7 @@ import dev.xkmc.l2library.capability.player.PlayerCapabilityHolder;
 import dev.xkmc.l2library.capability.player.PlayerCapabilityNetworkHandler;
 import dev.xkmc.l2library.capability.player.PlayerCapabilityTemplate;
 import dev.xkmc.l2library.serial.SerialClass;
-import dev.xkmc.l2magic.init.LightLand;
+import dev.xkmc.l2magic.init.L2Magic;
 import dev.xkmc.l2magic.network.packets.CapToClient;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -22,7 +22,7 @@ public class LLPlayerData extends PlayerCapabilityTemplate<LLPlayerData> {
 	});
 
 	public static final PlayerCapabilityHolder<LLPlayerData> HOLDER = new PlayerCapabilityHolder<>(
-			new ResourceLocation(LightLand.MODID, "player_data"), CAPABILITY,
+			new ResourceLocation(L2Magic.MODID, "player_data"), CAPABILITY,
 			LLPlayerData.class, LLPlayerData::new, holder -> new PlayerCapabilityNetworkHandler<>(holder) {
 
 		@Override

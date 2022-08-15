@@ -6,7 +6,7 @@ import dev.xkmc.l2magic.content.magic.products.MagicElement;
 import dev.xkmc.l2magic.content.magic.products.MagicProduct;
 import dev.xkmc.l2magic.content.magic.products.MagicProductType;
 import dev.xkmc.l2magic.content.magic.products.recipe.IMagicRecipe;
-import dev.xkmc.l2magic.init.LightLand;
+import dev.xkmc.l2magic.init.L2Magic;
 import dev.xkmc.l2magic.init.special.LightLandRegistry;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
@@ -66,7 +66,7 @@ public class MagicHolder {
 		for (ResourceLocation rl : r.predecessor) {
 			IMagicRecipe recipe = recipe_cache.get(rl);
 			if (recipe == null) {
-				LightLand.LOGGER.error("Predecessor of " + r.getID() + " is not present: " + rl);
+				L2Magic.LOGGER.error("Predecessor of " + r.getID() + " is not present: " + rl);
 				return false;
 			}
 			MagicProduct<?, ?> prod = getProduct(recipe);

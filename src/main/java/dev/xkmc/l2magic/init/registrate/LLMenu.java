@@ -2,7 +2,7 @@ package dev.xkmc.l2magic.init.registrate;
 
 import dev.xkmc.l2library.repack.registrate.util.entry.MenuEntry;
 import dev.xkmc.l2magic.content.magic.gui.craft.*;
-import dev.xkmc.l2magic.init.LightLand;
+import dev.xkmc.l2magic.init.L2Magic;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.MenuType;
@@ -16,11 +16,11 @@ import java.util.Objects;
 @MethodsReturnNonnullByDefault
 public class LLMenu {
 
-	public static final MenuEntry<ArcaneInjectContainer> MT_ARCANE = LightLand.REGISTRATE.menu("arcane_inject",
+	public static final MenuEntry<ArcaneInjectContainer> MT_ARCANE = L2Magic.REGISTRATE.menu("arcane_inject",
 			ArcaneInjectContainer::new, () -> ArcaneInjectScreen::new).lang(LLMenu::getLangKey).register();
-	public static final MenuEntry<DisEnchanterContainer> MT_DISENC = LightLand.REGISTRATE.menu("disenchanter",
+	public static final MenuEntry<DisEnchanterContainer> MT_DISENC = L2Magic.REGISTRATE.menu("disenchanter",
 			DisEnchanterContainer::new, () -> DisEnchanterScreen::new).lang(LLMenu::getLangKey).register();
-	public static final MenuEntry<SpellCraftContainer> MT_SPCRAFT = LightLand.REGISTRATE.menu("spell_craft",
+	public static final MenuEntry<SpellCraftContainer> MT_SPCRAFT = L2Magic.REGISTRATE.menu("spell_craft",
 			SpellCraftContainer::new, () -> SpellCraftScreen::new).lang(LLMenu::getLangKey).register();
 
 	public static void register() {

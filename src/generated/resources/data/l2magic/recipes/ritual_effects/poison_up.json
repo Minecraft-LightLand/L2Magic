@@ -1,0 +1,67 @@
+{
+  "type": "l2magic:ritual_potion_boost",
+  "core": {
+    "input": {
+      "type": "l2library:mob_effect",
+      "effect": "minecraft:poison",
+      "item": "l2magic:potion_core",
+      "min_level": 0,
+      "min_time": 1
+    },
+    "output": {
+      "item": "l2magic:potion_core",
+      "nbt": "{CustomPotionEffects:[{Ambient:0b,Amplifier:1b,CurativeItems:[{Count:1b,id:\"minecraft:milk_bucket\"}],Duration:1,Id:19,ShowIcon:1b,ShowParticles:1b,\"forge:id\":\"minecraft:poison\"}]}"
+    }
+  },
+  "effect": "minecraft:poison",
+  "levels": [
+    100,
+    50,
+    35,
+    24
+  ],
+  "magic_recipe": "l2magic:magic_data/effect/poison",
+  "modify_level": 1,
+  "side": [
+    {
+      "input": {
+        "item": "minecraft:glowstone_dust"
+      }
+    },
+    {
+      "input": {
+        "item": "minecraft:spider_eye"
+      }
+    },
+    {
+      "input": {
+        "item": "minecraft:glowstone_dust"
+      }
+    },
+    {
+      "input": {
+        "item": "minecraft:nether_wart"
+      }
+    },
+    {
+      "input": {
+        "item": "minecraft:nether_wart"
+      }
+    },
+    {
+      "input": {
+        "item": "minecraft:glowstone_dust"
+      }
+    },
+    {
+      "input": {
+        "item": "minecraft:spider_eye"
+      }
+    },
+    {
+      "input": {
+        "item": "minecraft:glowstone_dust"
+      }
+    }
+  ]
+}

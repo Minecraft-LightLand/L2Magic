@@ -1,11 +1,11 @@
 package dev.xkmc.l2magic.compat.jei.recipes;
 
 import dev.xkmc.l2library.base.recipe.BaseRecipeCategory;
-import dev.xkmc.l2magic.compat.jei.LightLandJeiPlugin;
+import dev.xkmc.l2magic.compat.jei.L2MagicJeiPlugin;
 import dev.xkmc.l2magic.compat.jei.ingredients.ElementIngredient;
 import dev.xkmc.l2magic.content.magic.products.MagicElement;
 import dev.xkmc.l2magic.content.magic.products.recipe.IMagicRecipe;
-import dev.xkmc.l2magic.init.LightLand;
+import dev.xkmc.l2magic.init.L2Magic;
 import dev.xkmc.l2magic.init.data.LangData;
 import dev.xkmc.l2magic.init.registrate.LLItems;
 import dev.xkmc.l2magic.init.registrate.LLMenu;
@@ -30,10 +30,10 @@ import java.util.Map;
 
 public class DisEnchanterRecipeCategory extends BaseRecipeCategory<IMagicRecipe, DisEnchanterRecipeCategory> {
 
-	protected static final ResourceLocation BG = new ResourceLocation(LightLand.MODID, "textures/jei/background.png");
+	protected static final ResourceLocation BG = new ResourceLocation(L2Magic.MODID, "textures/jei/background.png");
 
 	public DisEnchanterRecipeCategory() {
-		super(new ResourceLocation(LightLand.MODID, "disenchant"), cast(IMagicRecipe.class));
+		super(new ResourceLocation(L2Magic.MODID, "disenchant"), cast(IMagicRecipe.class));
 	}
 
 	public DisEnchanterRecipeCategory init(IGuiHelper guiHelper) {
@@ -61,7 +61,7 @@ public class DisEnchanterRecipeCategory extends BaseRecipeCategory<IMagicRecipe,
 		builder.addSlot(RecipeIngredientRole.INPUT, 1, 1).addIngredients(VanillaTypes.ITEM_STACK, l0);
 		builder.addSlot(RecipeIngredientRole.INPUT, 19, 1).addIngredients(VanillaTypes.ITEM_STACK, l1);
 		builder.addSlot(RecipeIngredientRole.OUTPUT, 69, 1).addIngredients(VanillaTypes.ITEM_STACK, l2);
-		IIngredientType<ElementIngredient> type = LightLandJeiPlugin.INSTANCE.ELEM_TYPE;
+		IIngredientType<ElementIngredient> type = L2MagicJeiPlugin.INSTANCE.ELEM_TYPE;
 
 		int ind = 1;
 		Map<MagicElement, Integer> map = new HashMap<>();

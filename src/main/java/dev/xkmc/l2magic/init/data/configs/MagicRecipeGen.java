@@ -8,7 +8,7 @@ import dev.xkmc.l2magic.content.magic.products.info.DisplayInfo;
 import dev.xkmc.l2magic.content.magic.products.recipe.DefMagicRecipe;
 import dev.xkmc.l2magic.content.magic.products.recipe.IMagicRecipe;
 import dev.xkmc.l2magic.content.magic.spell.internal.Spell;
-import dev.xkmc.l2magic.init.LightLand;
+import dev.xkmc.l2magic.init.L2Magic;
 import dev.xkmc.l2magic.init.special.ArcaneRegistry;
 import dev.xkmc.l2magic.init.special.MagicRegistry;
 import dev.xkmc.l2magic.init.special.SpellRegistry;
@@ -43,7 +43,7 @@ public class MagicRecipeGen {
 										Function<DefMagicRecipe, IMagicRecipe> func) {
 		assert rl != null;
 		String path = prefix + "/" + rl.getPath();
-		ResourceLocation id = new ResourceLocation(LightLand.MODID, "magic_data/" + path);
+		ResourceLocation id = new ResourceLocation(L2Magic.MODID, "magic_data/" + path);
 		DefMagicRecipe config = new DefMagicRecipe(type, rl, screen);
 		adder.accept(path, func.apply(config));
 		return id;

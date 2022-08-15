@@ -11,7 +11,7 @@ import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.RangedAttribute;
 import net.minecraftforge.registries.ForgeRegistries;
 
-import static dev.xkmc.l2magic.init.LightLand.REGISTRATE;
+import static dev.xkmc.l2magic.init.L2Magic.REGISTRATE;
 
 public class LightLandRegistry {
 

@@ -1,6 +1,6 @@
 package dev.xkmc.l2magic.compat.jei.ingredients;
 
-import dev.xkmc.l2magic.compat.jei.LightLandJeiPlugin;
+import dev.xkmc.l2magic.compat.jei.L2MagicJeiPlugin;
 import mezz.jei.api.ingredients.IIngredientHelper;
 import mezz.jei.api.ingredients.IIngredientType;
 import mezz.jei.api.ingredients.subtypes.UidContext;
@@ -12,7 +12,7 @@ public class ElemIngredientHelper implements IIngredientHelper<ElementIngredient
 
 	@Override
 	public IIngredientType<ElementIngredient> getIngredientType() {
-		return LightLandJeiPlugin.INSTANCE.ELEM_TYPE;
+		return L2MagicJeiPlugin.INSTANCE.ELEM_TYPE;
 	}
 
 	@Override

@@ -1,0 +1,34 @@
+{
+  "_class": "dev.xkmc.l2magic.content.magic.products.recipe.DefMagicRecipe",
+  "elemental_mastery": [
+    {
+      "element": "l2magic:air",
+      "level": 1
+    }
+  ],
+  "elements": {
+    "A": "l2magic:earth",
+    "B": "l2magic:fire",
+    "C": "l2magic:air",
+    "D": "l2magic:air",
+    "E": "l2magic:air",
+    "F": "l2magic:air"
+  },
+  "flows": [
+    "A->CD",
+    "CD->B",
+    "B->EF",
+    "EF->A"
+  ],
+  "predecessor": [
+    "l2magic:magic_data/spell/water_trap_0"
+  ],
+  "product_id": "l2magic:water_trap_1",
+  "product_type": "l2magic:spell",
+  "screen": {
+    "type": "TASK",
+    "icon": "minecraft:paper",
+    "x": 1,
+    "y": 0
+  }
+}

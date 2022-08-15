@@ -2,7 +2,7 @@ package dev.xkmc.l2magic.init.registrate;
 
 import dev.xkmc.l2library.repack.registrate.util.entry.EntityEntry;
 import dev.xkmc.l2magic.content.common.entity.*;
-import dev.xkmc.l2magic.init.LightLand;
+import dev.xkmc.l2magic.init.L2Magic;
 import net.minecraft.client.renderer.entity.TippableArrowRenderer;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
@@ -16,7 +16,7 @@ public class LLEntities {
 
 	static {
 
-		ET_WIND_BLADE = LightLand.REGISTRATE
+		ET_WIND_BLADE = L2Magic.REGISTRATE
 				.<WindBladeEntity>entity("wind_blade", WindBladeEntity::new, MobCategory.MISC)
 				.properties(e -> e.sized(0.5f, 0.5f)
 						.clientTrackingRange(4)
@@ -25,7 +25,7 @@ public class LLEntities {
 				.renderer(() -> WindBladeEntityRenderer::new)
 				.defaultLang().register();
 
-		ET_SPELL = LightLand.REGISTRATE
+		ET_SPELL = L2Magic.REGISTRATE
 				.<SpellEntity>entity("spell", SpellEntity::new, MobCategory.MISC)
 				.properties(e -> e.sized(3f, 3f)
 						.setShouldReceiveVelocityUpdates(true)
@@ -33,13 +33,13 @@ public class LLEntities {
 				.renderer(() -> SpellEntityRenderer::new)
 				.defaultLang().register();
 
-		ET_FIRE_ARROW = LightLand.REGISTRATE
+		ET_FIRE_ARROW = L2Magic.REGISTRATE
 				.<FireArrowEntity>entity("fire_arrow", FireArrowEntity::new, MobCategory.MISC)
 				.properties(e -> e.sized(1f, 1f).clientTrackingRange(4).updateInterval(20))
 				.renderer(() -> TippableArrowRenderer::new)
 				.defaultLang().register();
 
-		ET_FIRE_BALL = LightLand.REGISTRATE
+		ET_FIRE_BALL = L2Magic.REGISTRATE
 				.<MagicFireBallEntity>entity("fire_ball", MagicFireBallEntity::new, MobCategory.MISC)
 				.properties(e -> e.sized(1f, 1f).clientTrackingRange(4).updateInterval(10))
 				.renderer(() -> ctx -> new SpecialSpriteRenderer<>(ctx, ctx.getItemRenderer(), true))

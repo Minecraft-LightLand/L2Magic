@@ -7,7 +7,7 @@ import dev.xkmc.l2magic.content.magic.products.MagicElement;
 import dev.xkmc.l2magic.content.magic.products.MagicProductType;
 import dev.xkmc.l2magic.content.magic.products.instance.*;
 import dev.xkmc.l2magic.content.magic.spell.internal.Spell;
-import dev.xkmc.l2magic.init.LightLand;
+import dev.xkmc.l2magic.init.L2Magic;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.item.Item;
@@ -39,15 +39,15 @@ public class MagicRegistry {
 					() -> ForgeRegistries.ITEMS, Item::getDescriptionId, ELEM_EARTH.get()));
 
 	public static <T extends MagicProductType<?, ?>> RegistryEntry<T> regProd(String id, NonNullSupplier<T> sup) {
-		return LightLand.REGISTRATE.generic(LightLandRegistry.PRODUCT_TYPE, id, sup).defaultLang().register();
+		return L2Magic.REGISTRATE.generic(LightLandRegistry.PRODUCT_TYPE, id, sup).defaultLang().register();
 	}
 
 	public static <T extends MagicElement> RegistryEntry<T> regElem(String id, NonNullSupplier<T> sup) {
-		return LightLand.REGISTRATE.generic(LightLandRegistry.ELEMENT, id, sup).defaultLang().register();
+		return L2Magic.REGISTRATE.generic(LightLandRegistry.ELEMENT, id, sup).defaultLang().register();
 	}
 
 	public static RegistryEntry<Attribute> regAttribute(String name, NonNullSupplier<Attribute> sup) {
-		return LightLand.REGISTRATE.simple(name, ForgeRegistries.Keys.ATTRIBUTES, sup);
+		return L2Magic.REGISTRATE.simple(name, ForgeRegistries.Keys.ATTRIBUTES, sup);
 	}
 
 	public static void register() {

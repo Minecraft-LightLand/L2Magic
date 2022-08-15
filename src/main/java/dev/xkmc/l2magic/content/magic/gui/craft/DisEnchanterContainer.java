@@ -7,7 +7,7 @@ import dev.xkmc.l2magic.content.common.capability.player.LLPlayerData;
 import dev.xkmc.l2magic.content.common.capability.player.MagicHolder;
 import dev.xkmc.l2magic.content.magic.products.MagicElement;
 import dev.xkmc.l2magic.content.magic.products.recipe.IMagicRecipe;
-import dev.xkmc.l2magic.init.LightLand;
+import dev.xkmc.l2magic.init.L2Magic;
 import dev.xkmc.l2magic.init.registrate.LLItems;
 import dev.xkmc.l2magic.init.special.LightLandRegistry;
 import dev.xkmc.l2magic.init.special.MagicRegistry;
@@ -29,7 +29,7 @@ import java.util.Random;
 
 public class DisEnchanterContainer extends BaseContainerMenu<DisEnchanterContainer> {
 
-	public static final SpriteManager MANAGER = new SpriteManager(LightLand.MODID, "disenchanter");
+	public static final SpriteManager MANAGER = new SpriteManager(L2Magic.MODID, "disenchanter");
 
 	protected final Map<MagicElement, Integer> map = Maps.newLinkedHashMap();
 	protected final Map<Enchantment, IMagicRecipe> ench_map;

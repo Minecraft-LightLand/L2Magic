@@ -7,7 +7,7 @@ import dev.xkmc.l2magic.content.magic.products.recipe.IMagicRecipe;
 import dev.xkmc.l2magic.content.magic.ritual.AbstractRitualRecipe;
 import dev.xkmc.l2magic.content.magic.ritual.PotionBoostRecipe;
 import dev.xkmc.l2magic.content.magic.ritual.PotionSpellRecipe;
-import dev.xkmc.l2magic.init.LightLand;
+import dev.xkmc.l2magic.init.L2Magic;
 import dev.xkmc.l2magic.init.data.LangData;
 import dev.xkmc.l2magic.init.registrate.LLBlocks;
 import dev.xkmc.l2magic.init.registrate.LLItems;
@@ -32,10 +32,10 @@ import java.util.stream.Collectors;
 
 public class MagicCraftRecipeCategory extends BaseRecipeCategory<AbstractRitualRecipe<?>, MagicCraftRecipeCategory> {
 
-	protected static final ResourceLocation BG = new ResourceLocation(LightLand.MODID, "textures/jei/background.png");
+	protected static final ResourceLocation BG = new ResourceLocation(L2Magic.MODID, "textures/jei/background.png");
 
 	public MagicCraftRecipeCategory() {
-		super(new ResourceLocation(LightLand.MODID, "ritual"), cast(AbstractRitualRecipe.class));
+		super(new ResourceLocation(L2Magic.MODID, "ritual"), cast(AbstractRitualRecipe.class));
 	}
 
 	public MagicCraftRecipeCategory init(IGuiHelper guiHelper) {

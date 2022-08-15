@@ -1,0 +1,69 @@
+{
+  "type": "l2magic:ritual_potion_boost",
+  "core": {
+    "input": {
+      "type": "l2library:mob_effect",
+      "effect": "minecraft:slowness",
+      "item": "l2magic:potion_core",
+      "min_level": 0,
+      "min_time": 1
+    },
+    "output": {
+      "item": "l2magic:potion_core",
+      "nbt": "{CustomPotionEffects:[{Ambient:0b,Amplifier:1b,CurativeItems:[{Count:1b,id:\"minecraft:milk_bucket\"}],Duration:1,Id:2,ShowIcon:1b,ShowParticles:1b,\"forge:id\":\"minecraft:slowness\"}]}"
+    }
+  },
+  "effect": "minecraft:slowness",
+  "levels": [
+    100,
+    36,
+    31,
+    26,
+    21,
+    16
+  ],
+  "magic_recipe": "l2magic:magic_data/effect/slowness",
+  "modify_level": 1,
+  "side": [
+    {
+      "input": {
+        "item": "minecraft:glowstone_dust"
+      }
+    },
+    {
+      "input": {
+        "item": "minecraft:sugar"
+      }
+    },
+    {
+      "input": {
+        "item": "minecraft:glowstone_dust"
+      }
+    },
+    {
+      "input": {
+        "item": "minecraft:fermented_spider_eye"
+      }
+    },
+    {
+      "input": {
+        "item": "minecraft:fermented_spider_eye"
+      }
+    },
+    {
+      "input": {
+        "item": "minecraft:glowstone_dust"
+      }
+    },
+    {
+      "input": {
+        "item": "minecraft:sugar"
+      }
+    },
+    {
+      "input": {
+        "item": "minecraft:glowstone_dust"
+      }
+    }
+  ]
+}

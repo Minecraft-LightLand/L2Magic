@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "l2magic:block/enchant_gold_block"
+    }
+  }
+}

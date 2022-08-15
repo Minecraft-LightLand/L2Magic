@@ -1,6 +1,6 @@
 package dev.xkmc.l2magic.content.magic.products;
 
-import dev.xkmc.l2magic.init.LightLand;
+import dev.xkmc.l2magic.init.L2Magic;
 import net.minecraft.resources.ResourceLocation;
 
 public class IMagicProduct<I, P extends MagicProduct<I, P>> {
@@ -14,7 +14,7 @@ public class IMagicProduct<I, P extends MagicProduct<I, P>> {
 		this.rl = rl;
 		this.item = type.getter.apply(rl);
 		if (item == null) {
-			LightLand.LOGGER.error("magic product " + type.getRegistryName() + " does not have " + rl);
+			L2Magic.LOGGER.error("magic product " + type.getRegistryName() + " does not have " + rl);
 		}
 	}
 

@@ -1,0 +1,30 @@
+{
+  "_class": "dev.xkmc.l2magic.content.magic.products.recipe.DefMagicRecipe",
+  "elemental_mastery": [
+    {
+      "element": "l2magic:quint",
+      "level": 1
+    }
+  ],
+  "elements": {
+    "A": "l2magic:earth",
+    "B": "l2magic:earth",
+    "C": "l2magic:fire",
+    "D": "l2magic:fire",
+    "E": "l2magic:quint"
+  },
+  "flows": [
+    "AB->CD",
+    "CD->E",
+    "E->AB"
+  ],
+  "predecessor": [],
+  "product_id": "minecraft:smite",
+  "product_type": "l2magic:enchantment",
+  "screen": {
+    "type": "TASK",
+    "icon": "minecraft:paper",
+    "x": 0,
+    "y": -1
+  }
+}

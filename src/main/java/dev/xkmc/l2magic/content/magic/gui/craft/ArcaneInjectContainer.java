@@ -12,7 +12,7 @@ import dev.xkmc.l2magic.content.magic.item.MagicWand;
 import dev.xkmc.l2magic.content.magic.item.ManaStorage;
 import dev.xkmc.l2magic.content.magic.products.MagicElement;
 import dev.xkmc.l2magic.content.magic.products.MagicProduct;
-import dev.xkmc.l2magic.init.LightLand;
+import dev.xkmc.l2magic.init.L2Magic;
 import dev.xkmc.l2magic.init.data.LangData;
 import dev.xkmc.l2magic.init.special.MagicRegistry;
 import net.minecraft.network.chat.Component;
@@ -26,7 +26,7 @@ import java.util.Map;
 
 public class ArcaneInjectContainer extends BaseContainerMenu<ArcaneInjectContainer> {
 
-	public static final SpriteManager MANAGER = new SpriteManager(LightLand.MODID, "arcane_inject");
+	public static final SpriteManager MANAGER = new SpriteManager(L2Magic.MODID, "arcane_inject");
 	protected Error err = Error.NO_ITEM;
 	protected Arcane spell = null;
 	protected Map<MagicElement, Integer> map = Maps.newLinkedHashMap();

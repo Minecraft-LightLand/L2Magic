@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "A": {
+      "item": "l2magic:enchant_gold_nugget"
+    },
+    "S": {
+      "item": "minecraft:cookie"
+    }
+  },
+  "pattern": [
+    "SSS",
+    "SAS",
+    "SSS"
+  ],
+  "result": {
+    "count": 8,
+    "item": "l2magic:enchant_cookie"
+  }
+}

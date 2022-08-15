@@ -1,0 +1,27 @@
+{
+  "_class": "dev.xkmc.l2magic.content.magic.products.recipe.DefMagicRecipe",
+  "elemental_mastery": [
+    {
+      "element": "l2magic:air",
+      "level": 1
+    }
+  ],
+  "elements": {
+    "A": "l2magic:water",
+    "B": "l2magic:air",
+    "C": "l2magic:air",
+    "D": "l2magic:air"
+  },
+  "flows": [
+    "A<->BCD"
+  ],
+  "predecessor": [],
+  "product_id": "l2magic:fang_round",
+  "product_type": "l2magic:spell",
+  "screen": {
+    "type": "TASK",
+    "icon": "minecraft:paper",
+    "x": -1,
+    "y": 0
+  }
+}

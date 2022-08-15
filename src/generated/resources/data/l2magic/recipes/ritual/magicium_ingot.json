@@ -1,0 +1,61 @@
+{
+  "type": "l2magic:ritual_default",
+  "core": {
+    "input": {
+      "item": "minecraft:iron_ingot"
+    },
+    "output": {
+      "item": "l2magic:magicium_ingot"
+    }
+  },
+  "side": [
+    {
+      "input": {
+        "item": "l2magic:enchant_gold_ingot"
+      },
+      "output": {
+        "item": "minecraft:gold_ingot"
+      }
+    },
+    {},
+    {
+      "input": {
+        "item": "l2magic:enchant_gold_ingot"
+      },
+      "output": {
+        "item": "minecraft:gold_ingot"
+      }
+    },
+    {
+      "input": {
+        "type": "l2library:enchantment",
+        "enchantment": "minecraft:protection",
+        "min_level": 4
+      }
+    },
+    {
+      "input": {
+        "type": "l2library:enchantment",
+        "enchantment": "minecraft:unbreaking",
+        "min_level": 3
+      }
+    },
+    {
+      "input": {
+        "item": "l2magic:enchant_gold_ingot"
+      },
+      "output": {
+        "item": "minecraft:gold_ingot"
+      }
+    },
+    {},
+    {
+      "input": {
+        "item": "l2magic:enchant_gold_ingot"
+      },
+      "output": {
+        "item": "minecraft:gold_ingot"
+      }
+    }
+  ]
+}

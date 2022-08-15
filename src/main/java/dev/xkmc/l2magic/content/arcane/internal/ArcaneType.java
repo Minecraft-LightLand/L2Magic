@@ -4,7 +4,7 @@ import dev.xkmc.l2library.base.NamedEntry;
 import dev.xkmc.l2library.repack.registrate.util.entry.RegistryEntry;
 import dev.xkmc.l2magic.content.arcane.item.ArcaneAxe;
 import dev.xkmc.l2magic.content.arcane.item.ArcaneSword;
-import dev.xkmc.l2magic.init.LightLand;
+import dev.xkmc.l2magic.init.L2Magic;
 import dev.xkmc.l2magic.init.registrate.LLItems;
 import dev.xkmc.l2magic.init.special.LightLandRegistry;
 import net.minecraft.world.item.ItemStack;
@@ -42,7 +42,7 @@ public class ArcaneType extends NamedEntry<ArcaneType> {
 	}
 
 	private static RegistryEntry<ArcaneType> reg(String str, Weapon w, Hit h, Mana m) {
-		return LightLand.REGISTRATE.generic(LightLandRegistry.ARCANE_TYPE, str, () -> new ArcaneType(w, h, m)).defaultLang().register();
+		return L2Magic.REGISTRATE.generic(LightLandRegistry.ARCANE_TYPE, str, () -> new ArcaneType(w, h, m)).defaultLang().register();
 	}
 
 	@OnlyIn(Dist.CLIENT)

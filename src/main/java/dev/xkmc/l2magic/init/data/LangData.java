@@ -8,7 +8,7 @@ import dev.xkmc.l2magic.content.magic.gui.craft.ArcaneInjectContainer;
 import dev.xkmc.l2magic.content.magic.gui.craft.SpellCraftContainer;
 import dev.xkmc.l2magic.content.magic.gui.hex.HexStatus;
 import dev.xkmc.l2magic.content.magic.products.info.ProductState;
-import dev.xkmc.l2magic.init.LightLand;
+import dev.xkmc.l2magic.init.L2Magic;
 import dev.xkmc.l2magic.init.registrate.LLEffects;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.contents.TranslatableContents;
@@ -74,7 +74,7 @@ public class LangData {
 		public MutableComponent get(Object... objs) {
 			if (objs.length != count)
 				throw new IllegalArgumentException("for " + name() + ": expect " + count + " parameters, got " + objs.length);
-			return translate(LightLand.MODID + "." + id, objs);
+			return translate(L2Magic.MODID + "." + id, objs);
 		}
 
 	}
@@ -111,15 +111,15 @@ public class LangData {
 
 	public static MutableComponent get(Enum<?> obj, Object... args) {
 		if (MAP.containsKey(obj.getClass()))
-			return translate(LightLand.MODID + "." + MAP.get(obj.getClass()) + obj.name().toLowerCase(Locale.ROOT), args);
+			return translate(L2Magic.MODID + "." + MAP.get(obj.getClass()) + obj.name().toLowerCase(Locale.ROOT), args);
 		if (LANG_MAP.containsKey(obj.getClass())) {
 			if (obj instanceof LangEnum<?> lang) {
 				if (lang.mux() != null) {
-					return translate(LightLand.MODID + "." + LANG_MAP.get(obj.getClass()) +
+					return translate(L2Magic.MODID + "." + LANG_MAP.get(obj.getClass()) +
 							obj.name().toLowerCase(Locale.ROOT) + ((Enum<?>) args[0]).name().toLowerCase(Locale.ROOT));
 				}
 			}
-			return translate(LightLand.MODID + "." + LANG_MAP.get(obj.getClass()) + obj.name().toLowerCase(Locale.ROOT), args);
+			return translate(L2Magic.MODID + "." + LANG_MAP.get(obj.getClass()) + obj.name().toLowerCase(Locale.ROOT), args);
 		}
 		return translate("unknown.enum." + obj.name().toLowerCase(Locale.ROOT));
 	}
@@ -128,14 +128,14 @@ public class LangData {
 		for (IDS id : IDS.values()) {
 			String[] strs = id.id.split("\\.");
 			String str = strs[strs.length - 1];
-			pvd.accept(LightLand.MODID + "." + id.id,
+			pvd.accept(L2Magic.MODID + "." + id.id,
 					RegistrateLangProvider.toEnglishName(str) + getParams(id.count));
 		}
 		pvd.accept("itemGroup.l2magic.material", "L2 Magic");
 		MAP.forEach((v, k) -> {
 			for (Enum<?> e : v.getEnumConstants()) {
 				String en = e.name().toLowerCase(Locale.ROOT);
-				pvd.accept(LightLand.MODID + "." + k + en,
+				pvd.accept(L2Magic.MODID + "." + k + en,
 						RegistrateLangProvider.toEnglishName(en));
 			}
 		});
@@ -146,11 +146,11 @@ public class LangData {
 				if (next != null) {
 					for (Enum<?> n : next.getEnumConstants()) {
 						String ne = n.name().toLowerCase(Locale.ROOT);
-						pvd.accept(LightLand.MODID + "." + k + en + "." + ne,
+						pvd.accept(L2Magic.MODID + "." + k + en + "." + ne,
 								RegistrateLangProvider.toEnglishName(en) + " " + RegistrateLangProvider.toEnglishName(ne));
 					}
 				} else
-					pvd.accept(LightLand.MODID + "." + k + en,
+					pvd.accept(L2Magic.MODID + "." + k + en,
 							RegistrateLangProvider.toEnglishName(en) + getParams(e.getCount()));
 			}
 		});
@@ -163,7 +163,7 @@ public class LangData {
 			}
 		}
 		for (Lore lore : Lore.values()) {
-			pvd.accept("lore." + LightLand.MODID + "." + lore.id, lore.lore);
+			pvd.accept("lore." + L2Magic.MODID + "." + lore.id, lore.lore);
 		}
 	}
 

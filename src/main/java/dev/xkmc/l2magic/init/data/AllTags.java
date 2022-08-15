@@ -4,7 +4,7 @@ import dev.xkmc.l2library.repack.registrate.builders.BlockBuilder;
 import dev.xkmc.l2library.repack.registrate.builders.ItemBuilder;
 import dev.xkmc.l2library.repack.registrate.providers.ProviderType;
 import dev.xkmc.l2library.repack.registrate.util.nullness.NonNullFunction;
-import dev.xkmc.l2magic.init.LightLand;
+import dev.xkmc.l2magic.init.L2Magic;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
@@ -70,7 +70,7 @@ public class AllTags {
 
 	public enum NameSpace {
 
-		MOD(LightLand.MODID, false, true),
+		MOD(L2Magic.MODID, false, true),
 		FORGE("forge", false, true),
 		TIC("tconstruct");
 
@@ -119,7 +119,7 @@ public class AllTags {
 				tag = BlockTags.create(id);
 			}
 			if (alwaysDatagen) {
-				LightLand.REGISTRATE.addDataGenerator(ProviderType.BLOCK_TAGS, prov -> prov.tag(tag));
+				L2Magic.REGISTRATE.addDataGenerator(ProviderType.BLOCK_TAGS, prov -> prov.tag(tag));
 			}
 		}
 
@@ -133,12 +133,12 @@ public class AllTags {
 		}
 
 		public void add(Block... values) {
-			LightLand.REGISTRATE.addDataGenerator(ProviderType.BLOCK_TAGS, prov -> prov.tag(tag)
+			L2Magic.REGISTRATE.addDataGenerator(ProviderType.BLOCK_TAGS, prov -> prov.tag(tag)
 					.add(values));
 		}
 
 		public void includeIn(TagKey<Block> parent) {
-			LightLand.REGISTRATE.addDataGenerator(ProviderType.BLOCK_TAGS, prov -> prov.tag(parent)
+			L2Magic.REGISTRATE.addDataGenerator(ProviderType.BLOCK_TAGS, prov -> prov.tag(parent)
 					.addTag(tag));
 		}
 
@@ -147,7 +147,7 @@ public class AllTags {
 		}
 
 		public void includeAll(TagKey<Block> child) {
-			LightLand.REGISTRATE.addDataGenerator(ProviderType.BLOCK_TAGS, prov -> prov.tag(tag)
+			L2Magic.REGISTRATE.addDataGenerator(ProviderType.BLOCK_TAGS, prov -> prov.tag(tag)
 					.addTag(child));
 		}
 
@@ -182,7 +182,7 @@ public class AllTags {
 				tag = ItemTags.create(id);
 			}
 			if (alwaysDatagen) {
-				LightLand.REGISTRATE.addDataGenerator(ProviderType.ITEM_TAGS, prov -> prov.tag(tag));
+				L2Magic.REGISTRATE.addDataGenerator(ProviderType.ITEM_TAGS, prov -> prov.tag(tag));
 			}
 		}
 
@@ -196,12 +196,12 @@ public class AllTags {
 		}
 
 		public void add(Item... values) {
-			LightLand.REGISTRATE.addDataGenerator(ProviderType.ITEM_TAGS, prov -> prov.tag(tag)
+			L2Magic.REGISTRATE.addDataGenerator(ProviderType.ITEM_TAGS, prov -> prov.tag(tag)
 					.add(values));
 		}
 
 		public void includeIn(TagKey<Item> parent) {
-			LightLand.REGISTRATE.addDataGenerator(ProviderType.ITEM_TAGS, prov -> prov.tag(parent)
+			L2Magic.REGISTRATE.addDataGenerator(ProviderType.ITEM_TAGS, prov -> prov.tag(parent)
 					.addTag(tag));
 		}
 
@@ -210,7 +210,7 @@ public class AllTags {
 		}
 
 		public void includeAll(TagKey<Item> child) {
-			LightLand.REGISTRATE.addDataGenerator(ProviderType.ITEM_TAGS, prov -> prov.tag(tag)
+			L2Magic.REGISTRATE.addDataGenerator(ProviderType.ITEM_TAGS, prov -> prov.tag(tag)
 					.addTag(child));
 		}
 
@@ -245,7 +245,7 @@ public class AllTags {
 				tag = FluidTags.create(id);
 			}
 			if (alwaysDatagen) {
-				LightLand.REGISTRATE.addDataGenerator(ProviderType.FLUID_TAGS, prov -> prov.tag(tag));
+				L2Magic.REGISTRATE.addDataGenerator(ProviderType.FLUID_TAGS, prov -> prov.tag(tag));
 			}
 		}
 
@@ -259,12 +259,12 @@ public class AllTags {
 		}
 
 		public void add(Fluid... values) {
-			LightLand.REGISTRATE.addDataGenerator(ProviderType.FLUID_TAGS, prov -> prov.tag(tag)
+			L2Magic.REGISTRATE.addDataGenerator(ProviderType.FLUID_TAGS, prov -> prov.tag(tag)
 					.add(values));
 		}
 
 		public void includeIn(TagKey<Fluid> parent) {
-			LightLand.REGISTRATE.addDataGenerator(ProviderType.FLUID_TAGS, prov -> prov.tag(parent)
+			L2Magic.REGISTRATE.addDataGenerator(ProviderType.FLUID_TAGS, prov -> prov.tag(parent)
 					.addTag(tag));
 		}
 
@@ -273,7 +273,7 @@ public class AllTags {
 		}
 
 		public void includeAll(TagKey<Fluid> child) {
-			LightLand.REGISTRATE.addDataGenerator(ProviderType.FLUID_TAGS, prov -> prov.tag(tag)
+			L2Magic.REGISTRATE.addDataGenerator(ProviderType.FLUID_TAGS, prov -> prov.tag(tag)
 					.addTag(child));
 		}
 

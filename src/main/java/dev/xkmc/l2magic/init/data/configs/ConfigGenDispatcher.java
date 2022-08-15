@@ -10,7 +10,7 @@ import java.util.Map;
 public class ConfigGenDispatcher extends ConfigDataProvider {
 
 	public ConfigGenDispatcher(DataGenerator generator) {
-		super(generator, "data/l2rpgcommon/lightland_config/", "Light Json Config Generator");
+		super(generator, "data/l2magic/l2magic_config/", "L2Magic Json Config Generator");
 	}
 
 	@Override

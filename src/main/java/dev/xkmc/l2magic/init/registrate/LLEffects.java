@@ -10,10 +10,9 @@ import dev.xkmc.l2magic.content.common.effect.DispellEffect;
 import dev.xkmc.l2magic.content.common.effect.EmeraldPopeEffect;
 import dev.xkmc.l2magic.content.common.effect.force.*;
 import dev.xkmc.l2magic.content.common.effect.skill.*;
-import dev.xkmc.l2magic.init.LightLand;
+import dev.xkmc.l2magic.init.L2Magic;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
-import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -48,12 +47,12 @@ public class LLEffects {
 	public static final List<RegistryEntry<? extends Potion>> POTION_LIST = new ArrayList<>();
 
 	public static <T extends MobEffect> RegistryEntry<T> genEffect(String name, NonNullSupplier<T> sup) {
-		return LightLand.REGISTRATE.entry(name, cb -> new NoConfigBuilder<>(LightLand.REGISTRATE, LightLand.REGISTRATE, name, cb, ForgeRegistries.Keys.MOB_EFFECTS, sup))
+		return L2Magic.REGISTRATE.entry(name, cb -> new NoConfigBuilder<>(L2Magic.REGISTRATE, L2Magic.REGISTRATE, name, cb, ForgeRegistries.Keys.MOB_EFFECTS, sup))
 				.lang(MobEffect::getDescriptionId).register();
 	}
 
 	public static <T extends Potion> RegistryEntry<T> genPotion(String name, NonNullSupplier<T> sup) {
-		RegistryEntry<T> ans = LightLand.REGISTRATE.entry(name, cb -> new NoConfigBuilder<>(LightLand.REGISTRATE, LightLand.REGISTRATE, name, cb, ForgeRegistries.Keys.POTIONS, sup)).register();
+		RegistryEntry<T> ans = L2Magic.REGISTRATE.entry(name, cb -> new NoConfigBuilder<>(L2Magic.REGISTRATE, L2Magic.REGISTRATE, name, cb, ForgeRegistries.Keys.POTIONS, sup)).register();
 		POTION_LIST.add(ans);
 		return ans;
 	}

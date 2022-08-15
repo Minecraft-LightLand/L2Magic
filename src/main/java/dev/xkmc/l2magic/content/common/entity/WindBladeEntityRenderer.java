@@ -5,7 +5,7 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Matrix3f;
 import com.mojang.math.Matrix4f;
 import com.mojang.math.Vector3f;
-import dev.xkmc.l2magic.init.LightLand;
+import dev.xkmc.l2magic.init.L2Magic;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderer;
@@ -19,7 +19,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 @OnlyIn(Dist.CLIENT)
 public class WindBladeEntityRenderer extends EntityRenderer<WindBladeEntity> {
 
-	private static final ResourceLocation TEXTURE = new ResourceLocation(LightLand.MODID, "textures/entity/wind_blade.png");
+	private static final ResourceLocation TEXTURE = new ResourceLocation(L2Magic.MODID, "textures/entity/wind_blade.png");
 
 	public WindBladeEntityRenderer(EntityRendererProvider.Context manager) {
 		super(manager);
