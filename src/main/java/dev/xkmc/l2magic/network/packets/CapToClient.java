@@ -4,9 +4,8 @@ import dev.xkmc.l2library.serial.SerialClass;
 import dev.xkmc.l2library.serial.codec.TagCodec;
 import dev.xkmc.l2library.util.Proxy;
 import dev.xkmc.l2library.util.code.Wrappers;
-import dev.xkmc.l2magic.content.common.capability.player.CapProxy;
-import dev.xkmc.l2magic.content.common.capability.player.LLPlayerData;
-import dev.xkmc.l2magic.content.common.capability.player.MagicAbility;
+import dev.xkmc.l2magic.content.common.capability.MagicData;
+import dev.xkmc.l2magic.content.common.capability.MagicAbility;
 import dev.xkmc.l2magic.network.LLSerialPacket;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
@@ -29,7 +28,7 @@ public class CapToClient extends LLSerialPacket {
 
 	}
 
-	public CapToClient(Action action, LLPlayerData handler) {
+	public CapToClient(Action action, MagicData handler) {
 		this.action = action;
 		this.tag = action.server.apply(handler);
 	}
@@ -40,7 +39,7 @@ public class CapToClient extends LLSerialPacket {
 		action.client.accept(tag);
 	}
 
-	public static void reset(ServerPlayer e, LLPlayerData.Reset reset) {
+	public static void reset(ServerPlayer e, MagicData.Reset reset) {
 		CapToClient msg = new CapToClient(Action.RESET, null);
 		msg.tag.putInt("ordinal", reset.ordinal());
 		msg.toClientPlayer(e);
@@ -48,39 +47,39 @@ public class CapToClient extends LLSerialPacket {
 
 	public enum Action {
 		DEBUG((m) -> TagCodec.toTag(new CompoundTag(), m), (tag) -> {
-			LLPlayerData m = CapProxy.getHandler();
-			CompoundTag comp = Wrappers.get(() -> TagCodec.toTag(new CompoundTag(), LLPlayerData.class, m, f -> true));
+			MagicData m = MagicData.getClientAccess();
+			CompoundTag comp = Wrappers.get(() -> TagCodec.toTag(new CompoundTag(), MagicData.class, m, f -> true));
 			CapToServer.sendDebugInfo(tag, comp);
 		}),
 		ALL((m) -> {
 			m.magicAbility.time_after_sync = 0;
 			return TagCodec.toTag(new CompoundTag(), m);
-		}, tag -> LLPlayerData.HOLDER.cacheSet(tag, false)),
+		}, tag -> MagicData.HOLDER.cacheSet(tag, false)),
 		CLONE((m) -> {
 			m.magicAbility.time_after_sync = 0;
 			return TagCodec.toTag(new CompoundTag(), m);
-		}, tag -> LLPlayerData.HOLDER.cacheSet(tag, true)),
+		}, tag -> MagicData.HOLDER.cacheSet(tag, true)),
 		ARCANE_TYPE((m) -> m.magicAbility.arcane_type, (tag) -> {
-			MagicAbility abi = CapProxy.getHandler().magicAbility;
+			MagicAbility abi = MagicData.getClientAccess().magicAbility;
 			abi.arcane_type = tag;
 		}), MAGIC_ABILITY((m) -> {
 			m.magicAbility.time_after_sync = 0;
 			return TagCodec.toTag(new CompoundTag(), m.magicAbility);
 		}, (tag) -> {
-			LLPlayerData h = CapProxy.getHandler();
+			MagicData h = MagicData.getClientAccess();
 			h.magicAbility = new MagicAbility(h);
 			Wrappers.run(() -> TagCodec.fromTag(tag, MagicAbility.class, h.magicAbility, f -> true));
 			h.reInit();
 		}), RESET(m -> new CompoundTag(), tag -> {
-			LLPlayerData h = CapProxy.getHandler();
-			h.reset(LLPlayerData.Reset.values()[tag.getInt("ordinal")]);
+			MagicData h = MagicData.getClientAccess();
+			h.reset(MagicData.Reset.values()[tag.getInt("ordinal")]);
 		});
 
-		public final Function<LLPlayerData, CompoundTag> server;
+		public final Function<MagicData, CompoundTag> server;
 		public final Consumer<CompoundTag> client;
 
 
-		Action(Function<LLPlayerData, CompoundTag> server, Consumer<CompoundTag> client) {
+		Action(Function<MagicData, CompoundTag> server, Consumer<CompoundTag> client) {
 			this.server = server;
 			this.client = client;
 		}

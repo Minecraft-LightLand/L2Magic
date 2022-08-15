@@ -1,7 +1,7 @@
 package dev.xkmc.l2magic.compat.jei.recipes;
 
 import dev.xkmc.l2library.base.recipe.BaseRecipeCategory;
-import dev.xkmc.l2magic.content.common.capability.player.CapProxy;
+import dev.xkmc.l2magic.content.common.capability.MagicData;
 import dev.xkmc.l2magic.content.magic.item.MagicWand;
 import dev.xkmc.l2magic.content.magic.products.recipe.IMagicRecipe;
 import dev.xkmc.l2magic.content.magic.ritual.AbstractRitualRecipe;
@@ -76,7 +76,7 @@ public class MagicCraftRecipeCategory extends BaseRecipeCategory<AbstractRitualR
 		}
 		MagicWand wand = LLItems.MAGIC_WAND.get();
 		ItemStack wand_stack = wand.getDefaultInstance();
-		IMagicRecipe magic = recipe.getMagic() == null ? null : CapProxy.getHandler().magicHolder.getRecipe(recipe.getMagic());
+		IMagicRecipe magic = recipe.getMagic() == null ? null : MagicData.getClientAccess().magicHolder.getRecipe(recipe.getMagic());
 		if (magic != null) {
 			wand.setMagic(magic, wand_stack);
 		}

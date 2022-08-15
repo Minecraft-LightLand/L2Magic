@@ -1,5 +1,6 @@
 package dev.xkmc.l2magic.init.registrate;
 
+import dev.xkmc.l2foundation.content.entity.SpecialSpriteRenderer;
 import dev.xkmc.l2library.repack.registrate.util.entry.EntityEntry;
 import dev.xkmc.l2magic.content.common.entity.*;
 import dev.xkmc.l2magic.init.L2Magic;

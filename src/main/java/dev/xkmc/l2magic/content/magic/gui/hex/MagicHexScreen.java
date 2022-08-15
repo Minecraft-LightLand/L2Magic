@@ -5,7 +5,7 @@ import dev.xkmc.l2library.base.menu.WindowBox;
 import dev.xkmc.l2library.idea.magic.HexCell;
 import dev.xkmc.l2library.idea.magic.HexDirection;
 import dev.xkmc.l2library.util.math.Frac;
-import dev.xkmc.l2magic.content.common.capability.player.LLPlayerData;
+import dev.xkmc.l2magic.content.common.capability.MagicData;
 import dev.xkmc.l2magic.content.magic.products.MagicElement;
 import dev.xkmc.l2magic.content.magic.products.MagicProduct;
 import dev.xkmc.l2magic.content.magic.products.info.ProductState;
@@ -26,7 +26,7 @@ public class MagicHexScreen extends Screen {
 	private static final Component TITLE = LangData.translate("gui.advancements");
 
 	public final Screen parent;
-	public final LLPlayerData handler;
+	public final MagicData handler;
 	public final MagicProduct<?, ?> product;
 	public final HexGraphGui graph;
 	public final HexResultGui result;
@@ -37,7 +37,7 @@ public class MagicHexScreen extends Screen {
 	private double accurate_mouse_x, accurate_mouse_y;
 	private boolean isScrolling = false;
 
-	public MagicHexScreen(LLPlayerData handler, MagicProduct<?, ?> product) {
+	public MagicHexScreen(MagicData handler, MagicProduct<?, ?> product) {
 		super(TITLE);
 		parent = Minecraft.getInstance().screen;
 		this.handler = handler;

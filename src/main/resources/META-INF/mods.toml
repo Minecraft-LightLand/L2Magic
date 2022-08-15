@@ -4,7 +4,7 @@ license="All rights reserved"
 [[mods]]
 modId="l2magic"
 version="${file.jarVersion}" #mandatory
-displayName="L2 Archery" #mandatory
+displayName="L2 Magic" #mandatory
 logoFile="l2magic.png" #optional
 credits="Thanks for this example mod goes to Java" #optional
 authors="Love, Cheese and small house plants" #optional
@@ -26,5 +26,11 @@ description='''
     modId="l2library"
     mandatory=true
     versionRange="[1.7.0,)"
+    ordering="AFTER"
+    side="BOTH"
+[[dependencies.l2magic]]
+    modId="l2foundation"
+    mandatory=true
+    versionRange="[0.0.1,)"
     ordering="AFTER"
     side="BOTH"

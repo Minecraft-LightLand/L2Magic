@@ -29,11 +29,6 @@ public class LLBlocks {
 	public static final BlockEntry<DelegateBlock> B_RITUAL_CORE, B_RITUAL_SIDE;
 	public static final BlockEntry<Block> ENCHANT_GOLD_BLOCK, MAGICIUM_BLOCK;
 
-	public static final BlockEntry<AnvilBlock> ETERNAL_ANVIL = L2Magic.REGISTRATE
-			.block("eternal_anvil", p -> new AnvilBlock(BlockBehaviour.Properties.copy(Blocks.ANVIL)))
-			.blockstate((ctx, pvd) -> pvd.simpleBlock(ctx.getEntry(), pvd.models().withExistingParent(ctx.getName(), "anvil")))
-			.register();
-
 	public static final BlockEntityEntry<RitualCore.TE> TE_RITUAL_CORE;
 	public static final BlockEntityEntry<RitualSide.TE> TE_RITUAL_SIDE;
 

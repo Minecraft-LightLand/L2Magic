@@ -1,5 +1,6 @@
-package dev.xkmc.l2magic.content.common.capability.player;
+package dev.xkmc.l2magic.content.common.capability;
 
+import dev.xkmc.l2foundation.init.registrate.LFEffects;
 import dev.xkmc.l2library.base.effects.EffectUtil;
 import dev.xkmc.l2library.serial.SerialClass;
 import dev.xkmc.l2library.util.nbt.NBTObj;
@@ -25,7 +26,7 @@ public class MagicAbility {
 	public static final int ACTIVATION = 600, SYNC_PERIOD = 100, ENCHANT_FACTOR = 4;
 	public static final DamageSource LOAD = new DamageSource("spell_load").bypassArmor().bypassMagic();
 
-	private final LLPlayerData parent;
+	private final MagicData parent;
 	@SerialClass.SerialField
 	public CompoundTag arcane_type = new CompoundTag();
 	@SerialClass.SerialField
@@ -37,7 +38,7 @@ public class MagicAbility {
 
 	public int time_after_sync = 0;
 
-	public MagicAbility(LLPlayerData parent) {
+	public MagicAbility(MagicData parent) {
 		this.parent = parent;
 	}
 
@@ -73,17 +74,17 @@ public class MagicAbility {
 				parent.player.hurt(LOAD, 1);
 			}
 			if (load == 2) {
-				add(LLEffects.HEAVY.get(), 4);
+				add(LFEffects.HEAVY.get(), 4);
 				add(MobEffects.BLINDNESS, 0);
 				parent.player.hurt(LOAD, 4);
 			}
 			if (load == 3) {
-				add(LLEffects.HEAVY.get(), 4);
+				add(LFEffects.HEAVY.get(), 4);
 				add(MobEffects.BLINDNESS, 0);
 				parent.player.hurt(LOAD, 16);
 			}
 			if (load >= 4) {
-				add(LLEffects.HEAVY.get(), 4);
+				add(LFEffects.HEAVY.get(), 4);
 				add(MobEffects.BLINDNESS, 0);
 				parent.player.hurt(LOAD, 64);
 			}

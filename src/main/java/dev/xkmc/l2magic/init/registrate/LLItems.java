@@ -1,5 +1,7 @@
 package dev.xkmc.l2magic.init.registrate;
 
+import dev.xkmc.l2foundation.content.item.misc.ContainerBook;
+import dev.xkmc.l2foundation.content.item.misc.ScreenBook;
 import dev.xkmc.l2library.base.L2Registrate;
 import dev.xkmc.l2library.repack.registrate.builders.ItemBuilder;
 import dev.xkmc.l2library.repack.registrate.providers.DataGenContext;
@@ -7,8 +9,6 @@ import dev.xkmc.l2library.repack.registrate.providers.RegistrateItemModelProvide
 import dev.xkmc.l2library.repack.registrate.util.entry.ItemEntry;
 import dev.xkmc.l2magic.content.arcane.item.ArcaneAxe;
 import dev.xkmc.l2magic.content.arcane.item.ArcaneSword;
-import dev.xkmc.l2magic.content.common.item.misc.ContainerBook;
-import dev.xkmc.l2magic.content.common.item.misc.ScreenBook;
 import dev.xkmc.l2magic.content.magic.gui.tree.MagicTreeScreen;
 import dev.xkmc.l2magic.content.magic.item.MagicScroll;
 import dev.xkmc.l2magic.content.magic.item.MagicWand;

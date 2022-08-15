@@ -1,17 +1,17 @@
 package dev.xkmc.l2magic.init;
 
+import dev.xkmc.l2foundation.events.ItemUseEventHandler;
 import dev.xkmc.l2library.base.L2Registrate;
+import dev.xkmc.l2library.base.effects.EffectSyncEvents;
 import dev.xkmc.l2library.base.tabs.contents.AttributeEntry;
 import dev.xkmc.l2library.repack.registrate.providers.ProviderType;
+import dev.xkmc.l2magic.content.arcane.internal.ArcaneItemUseHelper;
 import dev.xkmc.l2magic.content.arcane.internal.ArcaneType;
-import dev.xkmc.l2magic.content.common.capability.player.LLPlayerData;
+import dev.xkmc.l2magic.content.common.capability.MagicData;
 import dev.xkmc.l2magic.content.common.command.ArcaneCommand;
 import dev.xkmc.l2magic.content.common.command.BaseCommand;
 import dev.xkmc.l2magic.content.common.command.MagicCommand;
 import dev.xkmc.l2magic.content.common.command.RegistryParser;
-import dev.xkmc.l2magic.events.DamageEventHandler;
-import dev.xkmc.l2magic.events.GenericEventHandler;
-import dev.xkmc.l2magic.events.ItemUseEventHandler;
 import dev.xkmc.l2magic.events.MiscEventHandler;
 import dev.xkmc.l2magic.init.data.AllTags;
 import dev.xkmc.l2magic.init.data.LangData;
@@ -23,7 +23,6 @@ import dev.xkmc.l2magic.init.special.LightLandRegistry;
 import dev.xkmc.l2magic.init.special.MagicRegistry;
 import dev.xkmc.l2magic.init.special.SpellRegistry;
 import dev.xkmc.l2magic.network.NetworkManager;
-import dev.xkmc.l2magic.util.EffectAddUtil;
 import net.minecraft.world.entity.EntityType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
@@ -57,7 +56,6 @@ public class L2Magic {
 		LLMenu.register();
 		LLRecipes.register(bus);
 		LLEffects.register();
-		LLParticle.register();
 		LightLandRegistry.register();
 		MagicRegistry.register();
 		ArcaneType.register();
@@ -67,15 +65,12 @@ public class L2Magic {
 		NetworkManager.register();
 		REGISTRATE.addDataGenerator(ProviderType.RECIPE, RecipeGen::genRecipe);
 
-		LLPlayerData.register();
+		MagicData.register();
 	}
 
 	private static void registerForgeEvents() {
-		MinecraftForge.EVENT_BUS.register(ItemUseEventHandler.class);
-		MinecraftForge.EVENT_BUS.register(GenericEventHandler.class);
-		MinecraftForge.EVENT_BUS.register(DamageEventHandler.class);
+		ItemUseEventHandler.LIST.add(new ArcaneItemUseHelper());
 		MinecraftForge.EVENT_BUS.register(MiscEventHandler.class);
-
 	}
 
 	private static void registerModBusEvents(IEventBus bus) {
@@ -106,7 +101,7 @@ public class L2Magic {
 
 	private static void setup(final FMLCommonSetupEvent event) {
 		event.enqueueWork(() -> {
-			EffectAddUtil.init();
+			EffectSyncEvents.TRACKED.add(LLEffects.ARCANE.get());
 			LLEffects.registerBrewingRecipe();
 			AttributeEntry.add(LightLandRegistry.MAX_MANA, true, 20000);
 			AttributeEntry.add(LightLandRegistry.MAX_SPELL_LOAD, true, 21000);
@@ -126,7 +121,6 @@ public class L2Magic {
 	}
 
 	public static void onParticleRegistryEvent(RegisterParticleProvidersEvent event) {
-		LLParticle.registerClient();
 	}
 
 	public static void registerCaps(RegisterCapabilitiesEvent event) {

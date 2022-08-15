@@ -2,8 +2,8 @@ package dev.xkmc.l2magic.content.magic.item;
 
 import dev.xkmc.l2library.util.Proxy;
 import dev.xkmc.l2library.util.code.Wrappers;
-import dev.xkmc.l2magic.content.common.capability.player.LLPlayerData;
-import dev.xkmc.l2magic.content.common.item.api.IGlowingTarget;
+import dev.xkmc.l2library.util.raytrace.IGlowingTarget;
+import dev.xkmc.l2magic.content.common.capability.MagicData;
 import dev.xkmc.l2magic.content.magic.products.MagicProduct;
 import dev.xkmc.l2magic.content.magic.products.recipe.IMagicRecipe;
 import dev.xkmc.l2magic.content.magic.spell.internal.Spell;
@@ -42,7 +42,7 @@ public class MagicWand extends Item implements IGlowingTarget {
 		String str = stack.getOrCreateTag().getString("recipe");
 		if (str.length() == 0)
 			return null;
-		LLPlayerData h = LLPlayerData.get(player);
+		MagicData h = MagicData.get(player);
 		IMagicRecipe r = h.magicHolder.getRecipe(new ResourceLocation(str));
 		if (r == null) return null;
 		MagicProduct<?, ?> p = h.magicHolder.getProduct(r);

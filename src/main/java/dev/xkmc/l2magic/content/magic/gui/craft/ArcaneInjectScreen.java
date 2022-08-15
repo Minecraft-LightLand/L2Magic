@@ -4,7 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import dev.xkmc.l2library.base.menu.BaseContainerScreen;
 import dev.xkmc.l2library.base.menu.SpriteManager;
 import dev.xkmc.l2magic.compat.jei.screen.ExtraInfo;
-import dev.xkmc.l2magic.content.common.capability.player.CapProxy;
+import dev.xkmc.l2magic.content.common.capability.MagicData;
 import dev.xkmc.l2magic.content.magic.gui.AbstractHexGui;
 import dev.xkmc.l2magic.content.magic.products.MagicElement;
 import dev.xkmc.l2magic.init.data.LangData;
@@ -34,7 +34,7 @@ public class ArcaneInjectScreen extends BaseContainerScreen<ArcaneInjectContaine
 			sr.draw(matrix, "arrow", "arrow_3");
 		getInfo((ex, ey, w, h, ent) -> {
 			int count = ent.getValue();
-			int have = CapProxy.getHandler().magicHolder.getElement(ent.getKey());
+			int have = MagicData.getClientAccess().magicHolder.getElement(ent.getKey());
 			AbstractHexGui.drawElement(matrix, ex + getGuiLeft() + 9, ey + getGuiTop() + 9, ent.getKey(), "" + count, have >= count ? 0xFFFFFF : 0xFF0000);
 		});
 	}
@@ -47,7 +47,7 @@ public class ArcaneInjectScreen extends BaseContainerScreen<ArcaneInjectContaine
 			renderTooltip(matrix, menu.err.getDesc(menu), mx, my);
 		getInfoMouse(mx - getGuiLeft(), my - getGuiTop(), (ex, ey, w, h, ent) -> {
 			int count = ent.getValue();
-			int have = CapProxy.getHandler().magicHolder.getElement(ent.getKey());
+			int have = MagicData.getClientAccess().magicHolder.getElement(ent.getKey());
 			MutableComponent text = LangData.IDS.GUI_SPELL_CRAFT_ELEM_COST.get(count, have);
 			if (have < count) text.withStyle(ChatFormatting.RED);
 			renderTooltip(matrix, text, mx, my);

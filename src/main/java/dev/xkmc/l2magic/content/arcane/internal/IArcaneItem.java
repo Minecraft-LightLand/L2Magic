@@ -1,6 +1,6 @@
 package dev.xkmc.l2magic.content.arcane.internal;
 
-import dev.xkmc.l2magic.content.common.item.api.IGlowingTarget;
+import dev.xkmc.l2library.util.raytrace.IGlowingTarget;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;

@@ -1,9 +1,8 @@
 package dev.xkmc.l2magic.network.packets;
 
 import dev.xkmc.l2library.serial.SerialClass;
-import dev.xkmc.l2magic.content.common.capability.player.CapProxy;
-import dev.xkmc.l2magic.content.common.capability.player.LLPlayerData;
-import dev.xkmc.l2magic.content.common.capability.player.MagicHolder;
+import dev.xkmc.l2magic.content.common.capability.MagicData;
+import dev.xkmc.l2magic.content.common.capability.MagicHolder;
 import dev.xkmc.l2magic.content.magic.item.MagicWand;
 import dev.xkmc.l2magic.content.magic.products.MagicProduct;
 import dev.xkmc.l2magic.content.magic.products.recipe.IMagicRecipe;
@@ -62,9 +61,9 @@ public class CapToServer extends LLSerialPacket {
 			wand.setMagic(recipe, stack);
 		});
 
-		private final BiConsumer<LLPlayerData, CompoundTag> cons;
+		private final BiConsumer<MagicData, CompoundTag> cons;
 
-		Action(BiConsumer<LLPlayerData, CompoundTag> cons) {
+		Action(BiConsumer<MagicData, CompoundTag> cons) {
 			this.cons = cons;
 		}
 	}
@@ -75,7 +74,7 @@ public class CapToServer extends LLSerialPacket {
 		tag.putString("product", prod.recipe.getID().toString());
 		tag.put("data", prod.tag.tag);
 		new CapToServer(Action.HEX, tag).toServer();
-		CapProxy.getHandler().magicHolder.checkUnlocks();
+		MagicData.getClientAccess().magicHolder.checkUnlocks();
 	}
 
 	@OnlyIn(Dist.CLIENT)
@@ -90,7 +89,7 @@ public class CapToServer extends LLSerialPacket {
 	public static void activateWand(IMagicRecipe recipe) {
 		CompoundTag tag = new CompoundTag();
 		tag.putString("recipe", recipe.getID().toString());
-		Action.WAND.cons.accept(CapProxy.getHandler(), tag);
+		Action.WAND.cons.accept(MagicData.getClientAccess(), tag);
 		new CapToServer(Action.WAND, tag).toServer();
 	}
 
@@ -113,7 +112,7 @@ public class CapToServer extends LLSerialPacket {
 		ServerPlayer player = ctx.getSender();
 		if (player == null || !player.isAlive())
 			return;
-		LLPlayerData handler = LLPlayerData.get(player);
+		MagicData handler = MagicData.get(player);
 		action.cons.accept(handler, tag);
 	}
 

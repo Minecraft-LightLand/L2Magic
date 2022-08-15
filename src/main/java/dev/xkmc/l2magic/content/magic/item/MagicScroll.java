@@ -2,9 +2,9 @@ package dev.xkmc.l2magic.content.magic.item;
 
 import dev.xkmc.l2library.base.effects.EffectUtil;
 import dev.xkmc.l2library.util.Proxy;
-import dev.xkmc.l2magic.content.common.capability.player.LLPlayerData;
-import dev.xkmc.l2magic.content.common.capability.player.MagicAbility;
-import dev.xkmc.l2magic.content.common.item.api.IGlowingTarget;
+import dev.xkmc.l2library.util.raytrace.IGlowingTarget;
+import dev.xkmc.l2magic.content.common.capability.MagicAbility;
+import dev.xkmc.l2magic.content.common.capability.MagicData;
 import dev.xkmc.l2magic.content.magic.spell.internal.Spell;
 import dev.xkmc.l2magic.init.data.LangData;
 import dev.xkmc.l2magic.init.registrate.LLItems;
@@ -100,7 +100,7 @@ public class MagicScroll extends Item implements IGlowingTarget {
 	public boolean isBarVisible(ItemStack stack) {
 		Player pl = Proxy.getPlayer();
 		if (pl == null) return false;
-		MagicAbility ability = LLPlayerData.get(pl).magicAbility;
+		MagicAbility ability = MagicData.get(pl).magicAbility;
 		int id = -1;
 		for (int i = 0; i < 9; i++) {
 			if (pl.getInventory().getItem(i) == stack) {
@@ -117,7 +117,7 @@ public class MagicScroll extends Item implements IGlowingTarget {
 	public int getBarWidth(ItemStack stack) {
 		Player pl = Proxy.getPlayer();
 		if (pl == null) return 0;
-		MagicAbility ability = LLPlayerData.get(pl).magicAbility;
+		MagicAbility ability = MagicData.get(pl).magicAbility;
 		int id = -1;
 		for (int i = 0; i < ability.getMaxSpellSlot(); i++) {
 			if (pl.getInventory().getItem(i) == stack) {
@@ -138,7 +138,7 @@ public class MagicScroll extends Item implements IGlowingTarget {
 	public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
 		ItemStack stack = player.getItemInHand(hand);
 		int selected = player.getInventory().selected;
-		LLPlayerData handler = LLPlayerData.get(player);
+		MagicData handler = MagicData.get(player);
 		if (handler.magicAbility.getMaxSpellSlot() <= selected) return InteractionResultHolder.fail(stack);
 		if (player.getInventory().getItem(selected) != stack) return InteractionResultHolder.fail(stack);
 		if (handler.magicAbility.getSpellActivation(selected) != 0) return InteractionResultHolder.fail(stack);

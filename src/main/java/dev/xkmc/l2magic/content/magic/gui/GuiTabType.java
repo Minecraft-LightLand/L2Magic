@@ -1,4 +1,4 @@
-package dev.xkmc.l2magic.content.common.gui;
+package dev.xkmc.l2magic.content.magic.gui;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.gui.GuiComponent;

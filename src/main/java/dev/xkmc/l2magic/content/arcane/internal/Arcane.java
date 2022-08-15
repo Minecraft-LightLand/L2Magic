@@ -5,7 +5,7 @@ import dev.xkmc.l2library.repack.registrate.util.entry.RegistryEntry;
 import dev.xkmc.l2library.util.annotation.DoubleSidedCall;
 import dev.xkmc.l2library.util.annotation.ServerOnly;
 import dev.xkmc.l2magic.compat.TeamAccessor;
-import dev.xkmc.l2magic.content.common.capability.player.LLPlayerData;
+import dev.xkmc.l2magic.content.common.capability.MagicData;
 import dev.xkmc.l2magic.init.registrate.LLEffects;
 import dev.xkmc.l2magic.init.special.LightLandRegistry;
 import net.minecraft.server.level.ServerPlayer;
@@ -31,7 +31,7 @@ public abstract class Arcane extends NamedEntry<Arcane> {
 	}
 
 	@DoubleSidedCall
-	public abstract boolean activate(Player player, LLPlayerData magic, ItemStack stack, @Nullable LivingEntity target);
+	public abstract boolean activate(Player player, MagicData magic, ItemStack stack, @Nullable LivingEntity target);
 
 	@ServerOnly
 	public static void search(Level w, Player player, double radius, Vec3 center, LivingEntity target, boolean require_mark, Strike strike) {

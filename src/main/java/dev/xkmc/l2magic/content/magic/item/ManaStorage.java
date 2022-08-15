@@ -1,6 +1,6 @@
 package dev.xkmc.l2magic.content.magic.item;
 
-import dev.xkmc.l2magic.content.common.capability.player.LLPlayerData;
+import dev.xkmc.l2magic.content.common.capability.MagicData;
 import dev.xkmc.l2magic.network.packets.CapToClient;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
@@ -24,7 +24,7 @@ public class ManaStorage extends Item {
 	public ItemStack finishUsingItem(ItemStack stack, Level w, LivingEntity e) {
 		if (e instanceof ServerPlayer sp) {
 			if (stack.isEdible()) {
-				LLPlayerData data = LLPlayerData.get(sp);
+				MagicData data = MagicData.get(sp);
 				data.magicAbility.giveMana(mana);
 				data.magicAbility.addSpellLoad(-mana);
 				new CapToClient(CapToClient.Action.MAGIC_ABILITY, data).toClientPlayer(sp);

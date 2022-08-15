@@ -4,7 +4,7 @@ import com.google.common.collect.Maps;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import dev.xkmc.l2library.util.Proxy;
-import dev.xkmc.l2magic.content.common.capability.player.LLPlayerData;
+import dev.xkmc.l2magic.content.common.capability.MagicData;
 import dev.xkmc.l2magic.content.magic.products.MagicProductType;
 import dev.xkmc.l2magic.content.magic.products.recipe.IMagicRecipe;
 import dev.xkmc.l2magic.init.data.LangData;
@@ -29,7 +29,7 @@ public class MagicTreeScreen extends Screen {
 	private static final MagicProductType<?, ?>[] TABS = {MagicRegistry.MPT_CRAFT.get(), MagicRegistry.MPT_EFF.get(), MagicRegistry.MPT_ENCH.get(), MagicRegistry.MPT_SPELL.get(), MagicRegistry.MPT_ARCANE.get()};
 
 	public final AbstractClientPlayer player;
-	public final LLPlayerData handler;
+	public final MagicData handler;
 	public final Map<MagicProductType<?, ?>, MagicTreeGui<?, ?>> tabs = Maps.newLinkedHashMap();
 
 	private MagicTreeGui<?, ?> selected = null;
@@ -38,7 +38,7 @@ public class MagicTreeScreen extends Screen {
 	public MagicTreeScreen() {
 		super(TITLE);
 		this.player = Proxy.getClientPlayer();
-		handler = LLPlayerData.get(player);
+		handler = MagicData.get(player);
 	}
 
 	@SuppressWarnings({"unchecked", "rawtypes"})

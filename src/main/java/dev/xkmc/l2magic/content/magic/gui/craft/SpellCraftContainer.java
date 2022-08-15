@@ -3,7 +3,7 @@ package dev.xkmc.l2magic.content.magic.gui.craft;
 import com.google.common.collect.Maps;
 import dev.xkmc.l2library.base.menu.BaseContainerMenu;
 import dev.xkmc.l2library.base.menu.SpriteManager;
-import dev.xkmc.l2magic.content.common.capability.player.LLPlayerData;
+import dev.xkmc.l2magic.content.common.capability.MagicData;
 import dev.xkmc.l2magic.content.magic.item.MagicScroll;
 import dev.xkmc.l2magic.content.magic.item.MagicWand;
 import dev.xkmc.l2magic.content.magic.item.ManaStorage;
@@ -85,7 +85,7 @@ public class SpellCraftContainer extends BaseContainerMenu<SpellCraftContainer> 
 				map.put(elem, map.get(elem) + 1);
 			else map.put(elem, 1);
 		}
-		LLPlayerData handler = LLPlayerData.get(inventory.player);
+		MagicData handler = MagicData.get(inventory.player);
 		for (MagicElement elem : map.keySet()) {
 			if (map.get(elem) > handler.magicHolder.getElement(elem))
 				return Error.ELEM;
@@ -136,7 +136,7 @@ public class SpellCraftContainer extends BaseContainerMenu<SpellCraftContainer> 
 			if (!gold.isEmpty())
 				gold.grow(consume);
 			else container.setItem(4, new ItemStack(((ManaStorage) ench.getItem()).container, consume));
-			LLPlayerData handler = LLPlayerData.get(inventory.player);
+			MagicData handler = MagicData.get(inventory.player);
 			for (MagicElement elem : map.keySet()) {
 				handler.magicHolder.addElement(elem, -map.get(elem));
 			}

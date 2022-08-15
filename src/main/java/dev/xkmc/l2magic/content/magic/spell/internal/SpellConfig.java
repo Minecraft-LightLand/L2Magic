@@ -4,7 +4,7 @@ import dev.xkmc.l2library.serial.SerialClass;
 import dev.xkmc.l2library.serial.codec.TagCodec;
 import dev.xkmc.l2library.util.annotation.DataGenOnly;
 import dev.xkmc.l2library.util.code.Wrappers;
-import dev.xkmc.l2magic.content.common.capability.player.LLPlayerData;
+import dev.xkmc.l2magic.content.common.capability.MagicData;
 import dev.xkmc.l2magic.content.magic.item.MagicScroll;
 import dev.xkmc.l2magic.content.magic.products.MagicProduct;
 import dev.xkmc.l2magic.content.magic.products.recipe.IMagicRecipe;
@@ -32,7 +32,7 @@ public class SpellConfig {
 		IMagicRecipe r = IMagicRecipe.getMap(MagicRegistry.MPT_SPELL.get()).get(spell);
 		if (r == null)
 			return ans;
-		MagicProduct<?, ?> p = LLPlayerData.get(player).magicHolder.getProduct(r);
+		MagicProduct<?, ?> p = MagicData.get(player).magicHolder.getProduct(r);
 		if (!p.usable())
 			return ans;
 		ans = makeCopy(ans);

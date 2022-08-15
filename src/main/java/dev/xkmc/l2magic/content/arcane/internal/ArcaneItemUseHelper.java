@@ -1,12 +1,11 @@
 package dev.xkmc.l2magic.content.arcane.internal;
 
+import dev.xkmc.l2foundation.events.ItemUseEventHandler;
 import dev.xkmc.l2library.util.annotation.DoubleSidedCall;
 import dev.xkmc.l2library.util.annotation.ServerOnly;
 import dev.xkmc.l2magic.content.arcane.item.ArcaneAxe;
 import dev.xkmc.l2magic.content.arcane.item.ArcaneSword;
-import dev.xkmc.l2magic.content.common.capability.player.LLPlayerData;
-import dev.xkmc.l2magic.events.ItemUseEventHandler;
-import dev.xkmc.l2magic.init.registrate.LLBlocks;
+import dev.xkmc.l2magic.content.common.capability.MagicData;
 import dev.xkmc.l2magic.init.special.LightLandRegistry;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
@@ -23,17 +22,10 @@ import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.CriticalHitEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-import net.minecraftforge.eventbus.api.Event;
 
 import javax.annotation.Nullable;
 
 public class ArcaneItemUseHelper implements ItemUseEventHandler.ItemClickHandler {
-
-	public static final ArcaneItemUseHelper INSTANCE = new ArcaneItemUseHelper();
-
-	private ArcaneItemUseHelper() {
-		ItemUseEventHandler.LIST.add(this);
-	}
 
 	public static boolean isArcaneItem(ItemStack stack) {
 		Item item = stack.getItem();
@@ -41,7 +33,7 @@ public class ArcaneItemUseHelper implements ItemUseEventHandler.ItemClickHandler
 	}
 
 	@DoubleSidedCall
-	public static boolean executeArcane(Player player, LLPlayerData magic,
+	public static boolean executeArcane(Player player, MagicData magic,
 										ItemStack stack, ArcaneType type, @Nullable LivingEntity target) {
 		if (!magic.magicAbility.isArcaneTypeUnlocked(type))
 			return false;
@@ -89,7 +81,7 @@ public class ArcaneItemUseHelper implements ItemUseEventHandler.ItemClickHandler
 	@ServerOnly
 	private static void handleLeftClickEvent(ItemStack stack, PlayerInteractEvent event, @Nullable LivingEntity target) {
 		Player player = event.getEntity();
-		LLPlayerData magic = LLPlayerData.get(player);
+		MagicData magic = MagicData.get(player);
 		if (stack.getItem() instanceof ArcaneAxe) {
 			ArcaneType type = isAxeCharged(stack) ? ArcaneType.DUBHE.get() : ArcaneType.MEGREZ.get();
 			if (executeArcane(player, magic, stack, type, target)) {
@@ -118,7 +110,7 @@ public class ArcaneItemUseHelper implements ItemUseEventHandler.ItemClickHandler
 			event.setCancellationResult(InteractionResult.SUCCESS);
 		} else if (stack.getItem() instanceof ArcaneSword) {
 			if (executeArcane(event.getEntity(),
-					LLPlayerData.get(event.getEntity()),
+					MagicData.get(event.getEntity()),
 					stack, ArcaneType.ALKAID.get(), target)) {
 				if (cancellable) event.setCanceled(true);
 				event.setCancellationResult(InteractionResult.SUCCESS);
@@ -157,7 +149,7 @@ public class ArcaneItemUseHelper implements ItemUseEventHandler.ItemClickHandler
 		if (event.getEntity().level.isClientSide())
 			return;
 		Player player = event.getEntity();
-		LLPlayerData magic = LLPlayerData.get(player);
+		MagicData magic = MagicData.get(player);
 		LivingEntity le = toLiving(event.getTarget());
 		ArcaneType type = null;
 		boolean cr = event.isVanillaCritical();

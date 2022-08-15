@@ -5,7 +5,7 @@ import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import dev.xkmc.l2magic.content.arcane.internal.*;
 import dev.xkmc.l2magic.content.arcane.item.ArcaneAxe;
 import dev.xkmc.l2magic.content.arcane.item.ArcaneSword;
-import dev.xkmc.l2magic.content.common.capability.player.LLPlayerData;
+import dev.xkmc.l2magic.content.common.capability.MagicData;
 import dev.xkmc.l2magic.init.data.LangData;
 import dev.xkmc.l2magic.init.special.LightLandRegistry;
 import dev.xkmc.l2magic.network.packets.CapToClient;
@@ -26,7 +26,7 @@ public class ArcaneCommand extends BaseCommand {
 				.then(Commands.argument("type", RegistryParser.ARCANE_TYPE)
 						.executes(withPlayer((context, e) -> {
 							ArcaneType type = context.getArgument("type", ArcaneType.class);
-							LLPlayerData magic = LLPlayerData.get(e);
+							MagicData magic = MagicData.get(e);
 							magic.magicAbility.unlockArcaneType(type, true);
 							new CapToClient(CapToClient.Action.ARCANE_TYPE, magic).toClientPlayer(e);
 							send(context, LangData.IDS.ACTION_SUCCESS.get());
@@ -35,7 +35,7 @@ public class ArcaneCommand extends BaseCommand {
 
 		registerCommand("list", getPlayer()
 				.executes(withPlayer((context, e) -> {
-					LLPlayerData magic = LLPlayerData.get(e);
+					MagicData magic = MagicData.get(e);
 					MutableComponent comps = Component.literal("[");
 					for (ArcaneType type : LightLandRegistry.ARCANE_TYPE.get().getValues()) {
 						boolean bool = magic.magicAbility.isArcaneTypeUnlocked(type);

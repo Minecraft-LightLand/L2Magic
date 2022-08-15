@@ -3,8 +3,8 @@ package dev.xkmc.l2magic.content.magic.gui.craft;
 import com.google.common.collect.Maps;
 import dev.xkmc.l2library.base.menu.BaseContainerMenu;
 import dev.xkmc.l2library.base.menu.SpriteManager;
-import dev.xkmc.l2magic.content.common.capability.player.LLPlayerData;
-import dev.xkmc.l2magic.content.common.capability.player.MagicHolder;
+import dev.xkmc.l2magic.content.common.capability.MagicData;
+import dev.xkmc.l2magic.content.common.capability.MagicHolder;
 import dev.xkmc.l2magic.content.magic.products.MagicElement;
 import dev.xkmc.l2magic.content.magic.products.recipe.IMagicRecipe;
 import dev.xkmc.l2magic.init.L2Magic;
@@ -70,7 +70,7 @@ public class DisEnchanterContainer extends BaseContainerMenu<DisEnchanterContain
 				}
 				return false;
 			});
-			MagicHolder h = LLPlayerData.get(inventory.player).magicHolder;
+			MagicHolder h = MagicData.get(inventory.player).magicHolder;
 			map.forEach(h::addElement);
 			if (stack.getItem() == Items.ENCHANTED_BOOK) {
 				container.setItem(0, Items.BOOK.getDefaultInstance());

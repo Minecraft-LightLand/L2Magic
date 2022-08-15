@@ -9,7 +9,6 @@ import dev.xkmc.l2magic.network.config.SpellDataConfig;
 import dev.xkmc.l2magic.network.config.SpellEntityConfig;
 import dev.xkmc.l2magic.network.packets.CapToClient;
 import dev.xkmc.l2magic.network.packets.CapToServer;
-import dev.xkmc.l2magic.network.packets.EmptyRightClickToServer;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.Map;
@@ -23,8 +22,7 @@ public class NetworkManager {
 	static final PacketHandlerWithConfig HANDLER = new PacketHandlerWithConfig(
 			new ResourceLocation(L2Magic.MODID, "main"), 1, "l2magic_config",
 			e -> e.create(CapToClient.class, PLAY_TO_CLIENT),
-			e -> e.create(CapToServer.class, PLAY_TO_SERVER),
-			e -> e.create(EmptyRightClickToServer.class, PLAY_TO_SERVER)
+			e -> e.create(CapToServer.class, PLAY_TO_SERVER)
 	);
 
 	public static Stream<Map.Entry<String, BaseConfig>> getConfigs(ConfigType type) {

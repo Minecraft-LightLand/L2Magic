@@ -1,4 +1,4 @@
-package dev.xkmc.l2magic.content.common.capability.player;
+package dev.xkmc.l2magic.content.common.capability;
 
 import dev.xkmc.l2library.serial.SerialClass;
 import dev.xkmc.l2library.util.nbt.NBTObj;
@@ -21,7 +21,7 @@ public class MagicHolder {
 
 	private final Map<MagicProductType<?, ?>, Map<ResourceLocation, MagicProduct<?, ?>>> product_cache = new HashMap<>();
 	private final Map<ResourceLocation, IMagicRecipe> recipe_cache = new HashMap<>();
-	private final LLPlayerData parent;
+	private final MagicData parent;
 
 	@SerialClass.SerialField
 	public CompoundTag masteries = new CompoundTag();
@@ -30,7 +30,7 @@ public class MagicHolder {
 	@SerialClass.SerialField
 	public CompoundTag products = new CompoundTag();
 
-	MagicHolder(LLPlayerData parent) {
+	MagicHolder(MagicData parent) {
 		this.parent = parent;
 	}
 

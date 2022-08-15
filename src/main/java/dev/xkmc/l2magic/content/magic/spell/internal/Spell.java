@@ -2,7 +2,7 @@ package dev.xkmc.l2magic.content.magic.spell.internal;
 
 import dev.xkmc.l2library.base.NamedEntry;
 import dev.xkmc.l2library.util.annotation.ServerOnly;
-import dev.xkmc.l2magic.content.common.capability.player.LLPlayerData;
+import dev.xkmc.l2magic.content.common.capability.MagicData;
 import dev.xkmc.l2magic.init.special.LightLandRegistry;
 import dev.xkmc.l2magic.network.packets.CapToClient;
 import net.minecraft.server.level.ServerPlayer;
@@ -28,7 +28,7 @@ public abstract class Spell<C extends SpellConfig, A extends ActivationConfig> e
 	public boolean attempt(Type type, Level world, ServerPlayer player) {
 		boolean ans = inner_attempt(type, world, player);
 		if (ans)
-			new CapToClient(CapToClient.Action.MAGIC_ABILITY, LLPlayerData.get(player)).toClientPlayer(player);
+			new CapToClient(CapToClient.Action.MAGIC_ABILITY, MagicData.get(player)).toClientPlayer(player);
 		return ans;
 	}
 
@@ -38,7 +38,7 @@ public abstract class Spell<C extends SpellConfig, A extends ActivationConfig> e
 		if (a == null)
 			return false;
 		C c = getConfig(player.level, player);
-		LLPlayerData handler = LLPlayerData.get(player);
+		MagicData handler = MagicData.get(player);
 		if (type == Type.WAND) {
 			if (c.mana_cost > handler.magicAbility.getMana()) {
 				return false;

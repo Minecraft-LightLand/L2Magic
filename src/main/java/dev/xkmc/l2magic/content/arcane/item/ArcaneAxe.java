@@ -6,7 +6,7 @@ import dev.xkmc.l2magic.content.arcane.internal.Arcane;
 import dev.xkmc.l2magic.content.arcane.internal.ArcaneItemCraftHelper;
 import dev.xkmc.l2magic.content.arcane.internal.ArcaneItemUseHelper;
 import dev.xkmc.l2magic.content.arcane.internal.IArcaneItem;
-import dev.xkmc.l2magic.content.common.capability.player.LLPlayerData;
+import dev.xkmc.l2magic.content.common.capability.MagicData;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -39,7 +39,7 @@ public class ArcaneAxe extends AxeItem implements IArcaneItem {
 	public static void add(ItemStack stack, List<Component> list) {
 		List<Arcane> arcane = ArcaneItemCraftHelper.getAllArcanesOnItem(stack);
 		Player pl = Proxy.getPlayer();
-		LLPlayerData handler = pl == null ? null : LLPlayerData.get(pl);
+		MagicData handler = pl == null ? null : MagicData.get(pl);
 		for (Arcane a : arcane) {
 			boolean red = handler != null && !handler.magicAbility.isArcaneTypeUnlocked(a.type.get());
 			MutableComponent text = a.type.get().getDesc();

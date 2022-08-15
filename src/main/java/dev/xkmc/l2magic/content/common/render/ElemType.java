@@ -2,7 +2,7 @@ package dev.xkmc.l2magic.content.common.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import dev.xkmc.l2library.repack.registrate.util.entry.RegistryEntry;
-import dev.xkmc.l2magic.content.common.capability.player.LLPlayerData;
+import dev.xkmc.l2magic.content.common.capability.MagicData;
 import dev.xkmc.l2magic.content.magic.gui.AbstractHexGui;
 import dev.xkmc.l2magic.content.magic.products.MagicElement;
 import dev.xkmc.l2magic.init.special.MagicRegistry;
@@ -23,7 +23,7 @@ public enum ElemType {
 		this.elem = elem;
 	}
 
-	public void renderElem(LLPlayerData handler, PoseStack matrix, int mx, int my) {
+	public void renderElem(MagicData handler, PoseStack matrix, int mx, int my) {
 		int lv = handler.magicHolder.getElementalMastery(elem.get());
 		int count = handler.magicHolder.getElement(elem.get());
 		AbstractHexGui.drawElement(matrix, x, y, elem.get(), "" + lv);

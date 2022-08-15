@@ -2,7 +2,7 @@ package dev.xkmc.l2magic.content.arcane.magic;
 
 import dev.xkmc.l2magic.content.arcane.internal.Arcane;
 import dev.xkmc.l2magic.content.arcane.internal.ArcaneType;
-import dev.xkmc.l2magic.content.common.capability.player.LLPlayerData;
+import dev.xkmc.l2magic.content.common.capability.MagicData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
@@ -26,7 +26,7 @@ public class ThunderAxe extends Arcane {
 	}
 
 	@Override
-	public boolean activate(Player player, LLPlayerData magic, ItemStack stack, @Nullable LivingEntity target) {
+	public boolean activate(Player player, MagicData magic, ItemStack stack, @Nullable LivingEntity target) {
 		if (target == null)
 			return false;
 		Level w = player.level;

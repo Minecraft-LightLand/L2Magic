@@ -7,7 +7,7 @@ import dev.xkmc.l2magic.content.arcane.internal.Arcane;
 import dev.xkmc.l2magic.content.arcane.internal.ArcaneItemCraftHelper;
 import dev.xkmc.l2magic.content.arcane.internal.ArcaneItemUseHelper;
 import dev.xkmc.l2magic.content.arcane.internal.ArcaneType;
-import dev.xkmc.l2magic.content.common.capability.player.LLPlayerData;
+import dev.xkmc.l2magic.content.common.capability.MagicData;
 import dev.xkmc.l2magic.content.magic.item.MagicWand;
 import dev.xkmc.l2magic.content.magic.item.ManaStorage;
 import dev.xkmc.l2magic.content.magic.products.MagicElement;
@@ -82,7 +82,7 @@ public class ArcaneInjectContainer extends BaseContainerMenu<ArcaneInjectContain
 				map.put(elem, map.get(elem) + 1);
 			else map.put(elem, 1);
 		}
-		LLPlayerData handler = LLPlayerData.get(inventory.player);
+		MagicData handler = MagicData.get(inventory.player);
 		for (MagicElement elem : map.keySet()) {
 			if (map.get(elem) > handler.magicHolder.getElement(elem))
 				return Error.ELEM;
@@ -134,7 +134,7 @@ public class ArcaneInjectContainer extends BaseContainerMenu<ArcaneInjectContain
 			if (!gold.isEmpty())
 				gold.grow(consume);
 			else container.setItem(4, new ItemStack(mana.container, consume));
-			LLPlayerData handler = LLPlayerData.get(inventory.player);
+			MagicData handler = MagicData.get(inventory.player);
 			for (MagicElement elem : map.keySet()) {
 				handler.magicHolder.addElement(elem, -map.get(elem));
 			}

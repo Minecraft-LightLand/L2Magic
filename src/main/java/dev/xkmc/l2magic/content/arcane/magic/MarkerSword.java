@@ -1,9 +1,9 @@
 package dev.xkmc.l2magic.content.arcane.magic;
 
 import dev.xkmc.l2magic.content.arcane.internal.Arcane;
+import dev.xkmc.l2magic.content.arcane.internal.ArcaneEffect;
 import dev.xkmc.l2magic.content.arcane.internal.ArcaneType;
-import dev.xkmc.l2magic.content.common.capability.player.LLPlayerData;
-import dev.xkmc.l2magic.util.EffectAddUtil;
+import dev.xkmc.l2magic.content.common.capability.MagicData;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -21,12 +21,12 @@ public class MarkerSword extends Arcane {
 	}
 
 	@Override
-	public boolean activate(Player player, LLPlayerData magic, ItemStack stack, @Nullable LivingEntity target) {
+	public boolean activate(Player player, MagicData magic, ItemStack stack, @Nullable LivingEntity target) {
 		if (target == null)
 			return false;
 		Level w = player.level;
 		if (!w.isClientSide()) {
-			search(w, player, radius, player.getPosition(1), target, false, (l, p, e) -> EffectAddUtil.addArcane(e, player));
+			search(w, player, radius, player.getPosition(1), target, false, (l, p, e) -> ArcaneEffect.addArcane(e, player));
 		}
 		return true;
 	}

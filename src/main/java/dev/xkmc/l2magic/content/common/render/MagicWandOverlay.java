@@ -2,8 +2,7 @@ package dev.xkmc.l2magic.content.common.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import dev.xkmc.l2library.util.Proxy;
-import dev.xkmc.l2magic.content.common.capability.player.CapProxy;
-import dev.xkmc.l2magic.content.common.capability.player.LLPlayerData;
+import dev.xkmc.l2magic.content.common.capability.MagicData;
 import dev.xkmc.l2magic.content.magic.gui.AbstractHexGui;
 import dev.xkmc.l2magic.content.magic.item.MagicWand;
 import dev.xkmc.l2magic.content.magic.products.MagicElement;
@@ -60,7 +59,7 @@ public class MagicWandOverlay implements IGuiOverlay {
 		AbstractClientPlayer player = Proxy.getClientPlayer();
 		if (player == null || !player.isAlive())
 			return null;
-		LLPlayerData handler = LLPlayerData.get(player);
+		MagicData handler = MagicData.get(player);
 		IMagicRecipe r = handler.magicHolder.getTree(ELEM);
 		if (r == null) {
 			return null;
@@ -136,7 +135,7 @@ public class MagicWandOverlay implements IGuiOverlay {
 							map.put(e, map.getOrDefault(e, 0) + lv);
 						}
 						for (MagicElement e : map.keySet()) {
-							int has = CapProxy.getHandler().magicHolder.getElement(e);
+							int has = MagicData.getClientAccess().magicHolder.getElement(e);
 							int take = map.get(e);
 							AbstractHexGui.drawElement(mStack, x + 9, y + 50, e, "" + take, has >= take ? 0xFFFFFF : AbstractHexGui.RED);
 							x += 18;

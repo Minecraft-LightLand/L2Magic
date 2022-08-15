@@ -1,13 +1,11 @@
-// 1.19.2	2022-08-15T19:25:05.384519	Registrate Provider for l2magic [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+// 1.19.2	2022-08-15T22:16:26.458414	Registrate Provider for l2magic [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
 842d01123046ec0c0a67332c6f8f2d925e369216 assets/l2magic/blockstates/enchant_gold_block.json
-5e7e551800c47121409942daacd9534b1ef34a5b assets/l2magic/blockstates/eternal_anvil.json
 1f7cdb24c5252972676537940f93c31500a57d86 assets/l2magic/blockstates/magicium_block.json
 8a50017a51b20cc6bbfedd72be2d192814a86fbe assets/l2magic/blockstates/ritual_core.json
 2b09b903fe1cb7c96dbabe36bd643827f415a76a assets/l2magic/blockstates/ritual_side.json
-59f385f266e486009397946d6998c26f95b46fe7 assets/l2magic/lang/en_ud.json
-03a52f52cf037924a899952442bab664f3839abe assets/l2magic/lang/en_us.json
+bdd0ad4304ea80e95dc0d3bc00b0a4a4908a6f51 assets/l2magic/lang/en_ud.json
+100f195fcb272996729ecd27d753c23ab63d2a4a assets/l2magic/lang/en_us.json
 938f94ee7f52226971d4451a76a9674c63f2d34f assets/l2magic/models/block/enchant_gold_block.json
-9c9a8fcc0fe537da5794094e45fc4ca8d397d73f assets/l2magic/models/block/eternal_anvil.json
 f002518e09f6121f59e21cb032ef0f50c1d67e07 assets/l2magic/models/block/magicium_block.json
 150e5575311f87601003b1bc9744720b6004b795 assets/l2magic/models/item/arcane_inject_book.json
 c65923b86084504c9274d8ba0e0dbd094c3014fe assets/l2magic/models/item/disenchant_book.json
@@ -81,7 +79,6 @@ cae02f0623535acfafae26797fd62fa553312029 data/l2magic/advancements/recipes/ritua
 e38d3aca2d850bff6b8c3a153177e22fcd39b239 data/l2magic/advancements/recipes/ritual_potion_modify/ritual_potion/set_radius_40.json
 aa6a2780ec56ef64f1df6c0d57170b2a08db1b29 data/l2magic/advancements/recipes/ritual_potion_spell/ritual_potion/spell_card.json
 f37a3371b309eb6865724ce7acbeb24bf3c4297c data/l2magic/loot_tables/blocks/enchant_gold_block.json
-2b2a4bde1a1c86393b28fa3ff9b81ef1ddeed22d data/l2magic/loot_tables/blocks/eternal_anvil.json
 61dbc33fef44fc497dcd375436a7d99b324a8c4e data/l2magic/loot_tables/blocks/magicium_block.json
 6a2f39906b7390d7ea83c15e6a4bcfba5139485b data/l2magic/loot_tables/blocks/ritual_core.json
 62cabc640f52ed52c1b44a902440bdb2f2cad29a data/l2magic/loot_tables/blocks/ritual_side.json

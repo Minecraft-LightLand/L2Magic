@@ -1,7 +1,7 @@
 package dev.xkmc.l2magic.compat.jei.ingredients;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import dev.xkmc.l2magic.content.common.capability.player.CapProxy;
+import dev.xkmc.l2magic.content.common.capability.MagicData;
 import dev.xkmc.l2magic.content.magic.gui.AbstractHexGui;
 import dev.xkmc.l2magic.init.data.LangData;
 import mezz.jei.api.ingredients.IIngredientRenderer;
@@ -24,7 +24,7 @@ public class ElemIngredientRenderer implements IIngredientRenderer<ElementIngred
 
 	@Override
 	public List<Component> getTooltip(ElementIngredient elem, TooltipFlag iTooltipFlag) {
-		int has = CapProxy.getHandler().magicHolder.getElement(elem.elem);
+		int has = MagicData.getClientAccess().magicHolder.getElement(elem.elem);
 		List<Component> list = new ArrayList<>();
 		list.add(elem.elem.getDesc());
 		MutableComponent txt = LangData.IDS.GUI_ELEMENT_COUNT.get(has);

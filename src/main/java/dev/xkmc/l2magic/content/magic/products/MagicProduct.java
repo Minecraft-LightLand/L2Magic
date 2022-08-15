@@ -4,9 +4,8 @@ import dev.xkmc.l2library.idea.magic.HexHandler;
 import dev.xkmc.l2library.serial.SerialClass;
 import dev.xkmc.l2library.serial.codec.TagCodec;
 import dev.xkmc.l2library.util.nbt.NBTObj;
-import dev.xkmc.l2magic.content.common.capability.player.CapProxy;
-import dev.xkmc.l2magic.content.common.capability.player.LLPlayerData;
-import dev.xkmc.l2magic.content.common.capability.player.MagicHolder;
+import dev.xkmc.l2magic.content.common.capability.MagicData;
+import dev.xkmc.l2magic.content.common.capability.MagicHolder;
 import dev.xkmc.l2magic.content.magic.products.info.ProductState;
 import dev.xkmc.l2magic.content.magic.products.recipe.IMagicRecipe;
 import dev.xkmc.l2magic.init.data.LangData;
@@ -107,7 +106,7 @@ public class MagicProduct<I, P extends MagicProduct<I, P>> extends IMagicProduct
 	}
 
 	@Nullable
-	public CodeState logged(LLPlayerData handler) {
+	public CodeState logged(MagicData handler) {
 		if (!usable())
 			return null;
 		List<MagicElement> list = getMiscData().list;
@@ -123,7 +122,7 @@ public class MagicProduct<I, P extends MagicProduct<I, P>> extends IMagicProduct
 
 	@OnlyIn(Dist.CLIENT)
 	public List<FormattedText> getFullDesc() {
-		LLPlayerData h = CapProxy.getHandler();
+		MagicData h = MagicData.getClientAccess();
 		List<FormattedText> list = new ArrayList<>();
 		list.add(LangData.get(getState()));
 		if (!unlocked()) {

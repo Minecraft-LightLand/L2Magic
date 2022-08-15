@@ -2,9 +2,9 @@ package dev.xkmc.l2magic.content.common.entity;
 
 import dev.xkmc.l2library.serial.SerialClass;
 import dev.xkmc.l2library.util.math.MathHelper;
+import dev.xkmc.l2magic.content.arcane.internal.ArcaneEffect;
 import dev.xkmc.l2magic.content.arcane.internal.ArcaneItemUseHelper;
 import dev.xkmc.l2magic.init.registrate.LLEntities;
-import dev.xkmc.l2magic.util.EffectAddUtil;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.protocol.Packet;
@@ -100,7 +100,7 @@ public class WindBladeEntity extends ThrowableProjectile implements IEntityAddit
 			DamageSource source = new IndirectEntityDamageSource("wind_blade", entity, owner);
 			entity.hurt(source, damage);
 			if (isArcane && entity instanceof LivingEntity le && owner instanceof LivingEntity ow) {
-				EffectAddUtil.addArcane(le, ow);
+				ArcaneEffect.addArcane(le, ow);
 				if (issuer != null)
 					ArcaneItemUseHelper.addArcaneMana(issuer, (int) damage);
 			}

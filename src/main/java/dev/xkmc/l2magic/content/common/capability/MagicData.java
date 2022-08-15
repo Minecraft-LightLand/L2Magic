@@ -1,14 +1,17 @@
-package dev.xkmc.l2magic.content.common.capability.player;
+package dev.xkmc.l2magic.content.common.capability;
 
 import dev.xkmc.l2library.capability.player.PlayerCapabilityHolder;
 import dev.xkmc.l2library.capability.player.PlayerCapabilityNetworkHandler;
 import dev.xkmc.l2library.capability.player.PlayerCapabilityTemplate;
 import dev.xkmc.l2library.serial.SerialClass;
+import dev.xkmc.l2library.util.Proxy;
 import dev.xkmc.l2magic.init.L2Magic;
 import dev.xkmc.l2magic.network.packets.CapToClient;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.capabilities.CapabilityToken;
@@ -16,14 +19,14 @@ import net.minecraftforge.common.capabilities.CapabilityToken;
 import java.util.function.Consumer;
 
 @SerialClass
-public class LLPlayerData extends PlayerCapabilityTemplate<LLPlayerData> {
+public class MagicData extends PlayerCapabilityTemplate<MagicData> {
 
-	public static final Capability<LLPlayerData> CAPABILITY = CapabilityManager.get(new CapabilityToken<LLPlayerData>() {
+	public static final Capability<MagicData> CAPABILITY = CapabilityManager.get(new CapabilityToken<MagicData>() {
 	});
 
-	public static final PlayerCapabilityHolder<LLPlayerData> HOLDER = new PlayerCapabilityHolder<>(
+	public static final PlayerCapabilityHolder<MagicData> HOLDER = new PlayerCapabilityHolder<>(
 			new ResourceLocation(L2Magic.MODID, "player_data"), CAPABILITY,
-			LLPlayerData.class, LLPlayerData::new, holder -> new PlayerCapabilityNetworkHandler<>(holder) {
+			MagicData.class, MagicData::new, holder -> new PlayerCapabilityNetworkHandler<>(holder) {
 
 		@Override
 		public void toClientSyncAll(ServerPlayer e) {
@@ -36,12 +39,17 @@ public class LLPlayerData extends PlayerCapabilityTemplate<LLPlayerData> {
 		}
 	});
 
-	public static LLPlayerData get(Player player) {
+	public static MagicData get(Player player) {
 		return HOLDER.get(player);
 	}
 
 	public static boolean isProper(Player player) {
 		return HOLDER.isProper(player);
+	}
+
+	@OnlyIn(Dist.CLIENT)
+	public static MagicData getClientAccess() {
+		return get(Proxy.getClientPlayer());
 	}
 
 	public static void register() {
@@ -78,7 +86,7 @@ public class LLPlayerData extends PlayerCapabilityTemplate<LLPlayerData> {
 		check();
 	}
 
-	public LLPlayerData check() {
+	public MagicData check() {
 		if (state != State.ACTIVE)
 			init();
 		return this;
@@ -129,9 +137,9 @@ public class LLPlayerData extends PlayerCapabilityTemplate<LLPlayerData> {
 			h.magicHolder = new MagicHolder(h);
 		});
 
-		final Consumer<LLPlayerData> cons;
+		final Consumer<MagicData> cons;
 
-		Reset(Consumer<LLPlayerData> cons) {
+		Reset(Consumer<MagicData> cons) {
 			this.cons = cons;
 		}
 	}

@@ -9,7 +9,7 @@ import dev.xkmc.l2library.block.mult.ScheduleTickBlockMethod;
 import dev.xkmc.l2library.block.one.BlockEntityBlockMethod;
 import dev.xkmc.l2library.block.type.BlockMethod;
 import dev.xkmc.l2library.serial.SerialClass;
-import dev.xkmc.l2magic.content.common.capability.player.LLPlayerData;
+import dev.xkmc.l2magic.content.common.capability.MagicData;
 import dev.xkmc.l2magic.content.magic.item.MagicWand;
 import dev.xkmc.l2magic.content.magic.products.MagicElement;
 import dev.xkmc.l2magic.content.magic.products.MagicProduct;
@@ -137,7 +137,7 @@ public class RitualCore {
 							map.put(elem, map.getOrDefault(elem, 0) + lv);
 						}
 						for (MagicElement elem : map.keySet()) {
-							int has = LLPlayerData.get(player).magicHolder.getElement(elem);
+							int has = MagicData.get(player).magicHolder.getElement(elem);
 							int take = map.get(elem);
 							if (has < take) {
 								send(player, LangData.IDS.RITUAL_ELEM.get());
@@ -152,9 +152,9 @@ public class RitualCore {
 
 				if (player != null) {
 					for (MagicElement elem : map.keySet()) {
-						LLPlayerData.get(player).magicHolder.addElement(elem, -map.get(elem));
+						MagicData.get(player).magicHolder.addElement(elem, -map.get(elem));
 					}
-					new CapToClient(CapToClient.Action.ALL, LLPlayerData.get(player)).toClientPlayer(player);
+					new CapToClient(CapToClient.Action.ALL, MagicData.get(player)).toClientPlayer(player);
 				}
 			});
 

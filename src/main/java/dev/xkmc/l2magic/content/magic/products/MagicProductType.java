@@ -2,7 +2,7 @@ package dev.xkmc.l2magic.content.magic.products;
 
 import dev.xkmc.l2library.base.NamedEntry;
 import dev.xkmc.l2library.util.nbt.NBTObj;
-import dev.xkmc.l2magic.content.common.capability.player.MagicHolder;
+import dev.xkmc.l2magic.content.common.capability.MagicHolder;
 import dev.xkmc.l2magic.content.magic.products.info.TypeConfig;
 import dev.xkmc.l2magic.content.magic.products.recipe.IMagicRecipe;
 import dev.xkmc.l2magic.init.special.LightLandRegistry;

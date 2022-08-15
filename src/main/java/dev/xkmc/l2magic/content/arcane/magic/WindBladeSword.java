@@ -2,7 +2,7 @@ package dev.xkmc.l2magic.content.arcane.magic;
 
 import dev.xkmc.l2magic.content.arcane.internal.Arcane;
 import dev.xkmc.l2magic.content.arcane.internal.ArcaneType;
-import dev.xkmc.l2magic.content.common.capability.player.LLPlayerData;
+import dev.xkmc.l2magic.content.common.capability.MagicData;
 import dev.xkmc.l2magic.content.common.entity.WindBladeEntity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -23,7 +23,7 @@ public class WindBladeSword extends Arcane {
 	}
 
 	@Override
-	public boolean activate(Player player, LLPlayerData magic, ItemStack stack, @Nullable LivingEntity target) {
+	public boolean activate(Player player, MagicData magic, ItemStack stack, @Nullable LivingEntity target) {
 		if (target != null)
 			return false;
 		float strength = player.getAttackStrengthScale(0.5f);
