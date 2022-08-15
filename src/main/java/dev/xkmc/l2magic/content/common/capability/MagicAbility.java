@@ -4,6 +4,7 @@ import dev.xkmc.l2foundation.init.registrate.LFEffects;
 import dev.xkmc.l2library.base.effects.EffectUtil;
 import dev.xkmc.l2library.serial.SerialClass;
 import dev.xkmc.l2library.util.nbt.NBTObj;
+import dev.xkmc.l2magic.compat.api.MagicBehaviorListener;
 import dev.xkmc.l2magic.content.arcane.internal.ArcaneType;
 import dev.xkmc.l2magic.content.magic.item.MagicScroll;
 import dev.xkmc.l2magic.content.magic.spell.internal.Spell;
@@ -19,6 +20,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.ItemStack;
 
+@SuppressWarnings("unused")
 @SerialClass
 public class MagicAbility {
 
@@ -31,7 +33,7 @@ public class MagicAbility {
 	@SerialClass.SerialField
 	public ListTag spell_activation = new ListTag();
 	@SerialClass.SerialField
-	public int magic_level, spell_level, tick;
+	public int magic_level, spell_level = MagicBehaviorListener.INSTANCE.getDefaultSpellSlot(), tick;
 	@SerialClass.SerialField
 	public int magic_mana, spell_load;
 
@@ -53,19 +55,18 @@ public class MagicAbility {
 		tick++;
 		time_after_sync++;
 		if (tick % 20 == 0) {
-			int armor_cost = 0;//(int) Math.ceil(1.0 / ENCHANT_FACTOR * ArmorEnchant.getArmorEnchantLevel(parent.player)); TODO API
+			int armor_cost = MagicBehaviorListener.INSTANCE.getArmorLoad(parent.player);
 			int mana_restore = getManaRestoration();
 			int spell_restore = getSpellReduction();
 			int t0 = Math.min(armor_cost, mana_restore);
 			armor_cost -= t0;
 			mana_restore -= t0;
 			spell_restore -= armor_cost;
-			spell_restore = Math.max(-Math.max(100, getMaxSpellEndurance()) / 5, spell_restore);
+			spell_restore = Math.max(-getMaxSpellEndurance() / 5, spell_restore);
 
 			magic_mana = Mth.clamp(magic_mana + mana_restore, 0, getMaxMana());
 			spell_load = Math.max(spell_load - spell_restore, 0);
 			tick = 0;
-			// parent.abilityPoints.tickSeconds(); TODO API
 			int load = spell_load / getMaxSpellEndurance();
 			if (load == 1) {
 				add(MobEffects.MOVEMENT_SLOWDOWN, 2);
@@ -141,19 +142,19 @@ public class MagicAbility {
 	}
 
 	public int getSpellLoad() {
-		return (int) (getMana() * parent.player.getAttributeValue(MagicRegistry.MANA_RESTORE.get()));
+		return (int) Math.round(getMana() * parent.player.getAttributeValue(MagicRegistry.MANA_RESTORE.get()));
 	}
 
 	public int getSpellReduction() {
-		return spell_level;
+		return (int) Math.round(spell_level * parent.player.getAttributeValue(MagicRegistry.LOAD_RESTORE.get()));
 	}
 
 	public boolean isArcaneTypeUnlocked(ArcaneType type) {
-		return new NBTObj(arcane_type).getSub(type.getID()).tag.getInt("level") > 0;
+		return MagicBehaviorListener.INSTANCE.unlockAll() || new NBTObj(arcane_type).getSub(type.getID()).tag.getInt("level") > 0;
 	}
 
 	public void unlockArcaneType(ArcaneType type, boolean force) {
-		if (!isArcaneTypeUnlocked(type) && (force)) {//parent.abilityPoints.levelArcane() TODO
+		if (!isArcaneTypeUnlocked(type) && (force || MagicBehaviorListener.INSTANCE.doLevelArcane(parent.player))) {
 			new NBTObj(arcane_type).getSub(type.getID()).tag.putInt("level", 1);
 		}
 	}

@@ -3,6 +3,7 @@ package dev.xkmc.l2magic.init.special;
 import dev.xkmc.l2library.base.L2Registrate;
 import dev.xkmc.l2library.repack.registrate.util.entry.RegistryEntry;
 import dev.xkmc.l2library.repack.registrate.util.nullness.NonNullSupplier;
+import dev.xkmc.l2magic.compat.api.MagicBehaviorListener;
 import dev.xkmc.l2magic.content.arcane.internal.Arcane;
 import dev.xkmc.l2magic.content.arcane.internal.ArcaneType;
 import dev.xkmc.l2magic.content.magic.products.MagicElement;
@@ -25,10 +26,16 @@ public class MagicRegistry {
 	public static final L2Registrate.RegistryInstance<MagicProductType<?, ?>> PRODUCT_TYPE = REGISTRATE.newRegistry("magic_product_type", MagicProductType.class);
 	public static final L2Registrate.RegistryInstance<ArcaneType> ARCANE_TYPE = REGISTRATE.newRegistry("arcane_type", ArcaneType.class);
 
-	public static final RegistryEntry<Attribute> SPELL_BOOST = REGISTRATE.simple("spell_boost", ForgeRegistries.ATTRIBUTES.getRegistryKey(), () -> new RangedAttribute("attribute.name.spell_boost", 1, 0, 1000).setSyncable(true));
-	public static final RegistryEntry<Attribute> MAX_MANA = REGISTRATE.simple("max_mana", ForgeRegistries.ATTRIBUTES.getRegistryKey(), () -> new RangedAttribute("attribute.name.max_mana", 0, 0, 1000000).setSyncable(true));
-	public static final RegistryEntry<Attribute> MAX_SPELL_LOAD = REGISTRATE.simple("max_spell_load", ForgeRegistries.ATTRIBUTES.getRegistryKey(), () -> new RangedAttribute("attribute.name.max_spell_load", 100, 100, 1000000).setSyncable(true));
-	public static final RegistryEntry<Attribute> MANA_RESTORE = REGISTRATE.simple("mana_restore", ForgeRegistries.ATTRIBUTES.getRegistryKey(), () -> new RangedAttribute("attribute.name.mana_restore", 0.01, 0, 1).setSyncable(true));
+	public static final RegistryEntry<Attribute> SPELL_BOOST = REGISTRATE.simple("spell_boost", ForgeRegistries.ATTRIBUTES.getRegistryKey(),
+			() -> new RangedAttribute("attribute.name.spell_boost", 1, 0, 1000).setSyncable(true));
+	public static final RegistryEntry<Attribute> MAX_MANA = REGISTRATE.simple("max_mana", ForgeRegistries.ATTRIBUTES.getRegistryKey(),
+			() -> new RangedAttribute("attribute.name.max_mana", MagicBehaviorListener.INSTANCE.getDefaultMana(), 0, 1000000).setSyncable(true));
+	public static final RegistryEntry<Attribute> MAX_SPELL_LOAD = REGISTRATE.simple("max_spell_load", ForgeRegistries.ATTRIBUTES.getRegistryKey(),
+			() -> new RangedAttribute("attribute.name.max_spell_load", MagicBehaviorListener.INSTANCE.getDefaultLoad(), 100, 1000000).setSyncable(true));
+	public static final RegistryEntry<Attribute> MANA_RESTORE = REGISTRATE.simple("mana_restore", ForgeRegistries.ATTRIBUTES.getRegistryKey(),
+			() -> new RangedAttribute("attribute.name.mana_restore", MagicBehaviorListener.INSTANCE.getDefaultManaRestore(), 0, 1).setSyncable(true));
+	public static final RegistryEntry<Attribute> LOAD_RESTORE = REGISTRATE.simple("load_restore", ForgeRegistries.ATTRIBUTES.getRegistryKey(),
+			() -> new RangedAttribute("attribute.name.load_restore", MagicBehaviorListener.INSTANCE.getDefaultLoadRestore(), 0, 1).setSyncable(true));
 
 	public static final RegistryEntry<MagicElement> ELEM_EARTH = regElem("earth", () -> new MagicElement(0x7F511F));
 	public static final RegistryEntry<MagicElement> ELEM_WATER = regElem("water", () -> new MagicElement(0x008ED6));

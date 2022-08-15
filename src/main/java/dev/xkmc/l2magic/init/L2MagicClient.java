@@ -1,6 +1,7 @@
 package dev.xkmc.l2magic.init;
 
 import dev.xkmc.l2magic.content.common.render.MagicWandOverlay;
+import dev.xkmc.l2magic.content.common.render.SpellBarOverlay;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
@@ -33,11 +34,15 @@ public class L2MagicClient {
 		if (event.getOverlay().id().equals(VanillaGuiOverlay.CROSSHAIR.id())) {
 			event.setCanceled(true);
 		}
+		if (event.getOverlay().id().equals(VanillaGuiOverlay.HOTBAR.id())) {
+			event.setCanceled(true);
+		}
 	}
 
 	@OnlyIn(Dist.CLIENT)
 	public static void registerOverlays(RegisterGuiOverlaysEvent event) {
 		event.registerAbove(VanillaGuiOverlay.CROSSHAIR.id(), "magic_wand", MagicWandOverlay.INSTANCE);
+		event.registerAbove(VanillaGuiOverlay.HOTBAR.id(), "spell_bar", new SpellBarOverlay());
 	}
 
 	@OnlyIn(Dist.CLIENT)

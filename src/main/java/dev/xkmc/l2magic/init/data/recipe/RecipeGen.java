@@ -1,5 +1,7 @@
 package dev.xkmc.l2magic.init.data.recipe;
 
+import dev.xkmc.l2foundation.init.data.GenItem;
+import dev.xkmc.l2foundation.init.registrate.LFBlocks;
 import dev.xkmc.l2library.base.ingredients.MobEffectIngredient;
 import dev.xkmc.l2library.repack.registrate.providers.RegistrateRecipeProvider;
 import dev.xkmc.l2library.repack.registrate.util.DataIngredient;
@@ -46,6 +48,12 @@ public class RecipeGen {
 			storage(pvd, LMItems.MAGICIUM_NUGGET, LMItems.MAGICIUM_INGOT, LMBlocks.MAGICIUM_BLOCK);
 		}
 
+		currentFolder = "foundation/";
+		{
+			full(pvd, LMItems.ENC_GOLD_NUGGET.get(), LFBlocks.LAYLINE_HEAD.get().asItem(), GenItem.Mats.STEEL.getNugget(), GenItem.Mats.LAYLINE.getIngot(), 1);
+			full(pvd, LMItems.ENC_GOLD_NUGGET.get(), LFBlocks.LAYROOT_HEAD.get().asItem(), Items.IRON_NUGGET, GenItem.Mats.LAYROOT.getIngot(), 1);
+		}
+
 		currentFolder = "magic_food/";
 		{
 			circle(pvd, Items.APPLE, LMItems.ENC_GOLD_INGOT.get(), LMItems.APPLE.get(), 1);
@@ -90,7 +98,6 @@ public class RecipeGen {
 
 		currentFolder = "ritual/";
 		{
-			/*
 			unlock(pvd, new BasicRitualBuilder()::unlockedBy, Items.IRON_INGOT)
 					.setCore(Ingredient.of(Items.IRON_INGOT),
 							GenItem.Mats.ETERNIUM.getIngot().getDefaultInstance())
@@ -101,7 +108,7 @@ public class RecipeGen {
 					.setSide(Enchantments.INFINITY_ARROWS, 1, 5)
 					.setSide(Enchantments.ALL_DAMAGE_PROTECTION, 4, 7)
 					.save(pvd, getID(GenItem.Mats.ETERNIUM.getIngot()));
-			*/
+
 			unlock(pvd, new BasicRitualBuilder()::unlockedBy, Items.IRON_INGOT)
 					.setCore(Ingredient.of(Items.IRON_INGOT),
 							LMItems.MAGICIUM_INGOT.get().getDefaultInstance())
