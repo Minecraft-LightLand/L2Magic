@@ -11,7 +11,6 @@ import dev.xkmc.l2magic.content.magic.block.RitualSide;
 import dev.xkmc.l2magic.init.L2Magic;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.world.level.block.AnvilBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -20,10 +19,10 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 /**
  * handles blocks and block entities
  */
-public class LLBlocks {
+public class LMBlocks {
 
 	static {
-		L2Magic.REGISTRATE.creativeModeTab(() -> LLItems.TAB_MAIN);
+		L2Magic.REGISTRATE.creativeModeTab(() -> LMItems.TAB_MAIN);
 	}
 
 	public static final BlockEntry<DelegateBlock> B_RITUAL_CORE, B_RITUAL_SIDE;

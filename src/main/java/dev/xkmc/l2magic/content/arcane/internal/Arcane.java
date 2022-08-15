@@ -1,12 +1,12 @@
 package dev.xkmc.l2magic.content.arcane.internal;
 
+import dev.xkmc.l2foundation.compat.TeamAccessor;
 import dev.xkmc.l2library.base.NamedEntry;
 import dev.xkmc.l2library.repack.registrate.util.entry.RegistryEntry;
 import dev.xkmc.l2library.util.annotation.DoubleSidedCall;
 import dev.xkmc.l2library.util.annotation.ServerOnly;
-import dev.xkmc.l2magic.compat.TeamAccessor;
 import dev.xkmc.l2magic.content.common.capability.MagicData;
-import dev.xkmc.l2magic.init.registrate.LLEffects;
+import dev.xkmc.l2magic.init.registrate.LMEffects;
 import dev.xkmc.l2magic.init.special.LightLandRegistry;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
@@ -42,7 +42,7 @@ public abstract class Arcane extends NamedEntry<Arcane> {
 				return false;
 			if (e.getPosition(1).distanceToSqr(center) > radius * radius)
 				return false;
-			return !require_mark || ((LivingEntity) e).hasEffect(LLEffects.ARCANE.get());
+			return !require_mark || ((LivingEntity) e).hasEffect(LMEffects.ARCANE.get());
 		}).forEach(e -> strike.strike(w, player, (LivingEntity) e));
 	}
 

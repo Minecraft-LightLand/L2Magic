@@ -1,12 +1,14 @@
 package dev.xkmc.l2magic.content.arcane.internal;
 
 import dev.xkmc.l2foundation.events.ItemUseEventHandler;
+import dev.xkmc.l2foundation.init.registrate.LFBlocks;
 import dev.xkmc.l2library.util.annotation.DoubleSidedCall;
 import dev.xkmc.l2library.util.annotation.ServerOnly;
 import dev.xkmc.l2magic.content.arcane.item.ArcaneAxe;
 import dev.xkmc.l2magic.content.arcane.item.ArcaneSword;
 import dev.xkmc.l2magic.content.common.capability.MagicData;
 import dev.xkmc.l2magic.init.special.LightLandRegistry;
+import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
@@ -171,10 +173,23 @@ public class ArcaneItemUseHelper implements ItemUseEventHandler.ItemClickHandler
 	@Override
 	public void onPlayerRightClickBlock(ItemStack stack, PlayerInteractEvent.RightClickBlock event) {
 		BlockState block = event.getLevel().getBlockState(event.getHitVec().getBlockPos());
-		/*if (block.is(LLBlocks.LAYLINE_CHARGER.get())) {
-			event.setUseBlock(Event.Result.ALLOW);
+		if (block.is(LFBlocks.LAYLINE_CHARGER.get())) {
+			BlockPos pos = event.getPos().below();
+			Level level = event.getLevel();
+			if (ArcaneItemUseHelper.getArcaneMana(stack) >= 20 &&
+					level.getBlockState(pos).getBlock() == LFBlocks.LAYROOT_HEAD.get()) {
+				ArcaneItemUseHelper.addArcaneMana(stack, -20);
+				if (!level.isClientSide()) {
+					level.setBlockAndUpdate(pos, LFBlocks.LAYLINE_HEAD.getDefaultState());
+				}
+				event.setCancellationResult(InteractionResult.SUCCESS);
+			} else {
+				event.setCancellationResult(InteractionResult.FAIL);
+			}
+			event.setCanceled(true);
 			return;
-		}TODO recharge*/
+		}
+
 		handleRightClickEvent(stack, event, null);
 	}
 

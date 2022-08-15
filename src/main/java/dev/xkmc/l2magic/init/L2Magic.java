@@ -50,12 +50,12 @@ public class L2Magic {
 
 	private static void registerRegistrates(IEventBus bus) {
 		ForgeMod.enableMilkFluid();
-		LLBlocks.register();
-		LLEntities.register();
-		LLItems.register();
-		LLMenu.register();
-		LLRecipes.register(bus);
-		LLEffects.register();
+		LMBlocks.register();
+		LMEntities.register();
+		LMItems.register();
+		LMMenu.register();
+		LMRecipes.register(bus);
+		LMEffects.register();
 		LightLandRegistry.register();
 		MagicRegistry.register();
 		ArcaneType.register();
@@ -79,7 +79,7 @@ public class L2Magic {
 		bus.addListener(EventPriority.LOWEST, L2Magic::gatherData);
 		bus.addListener(L2Magic::onParticleRegistryEvent);
 		bus.addListener(L2Magic::registerCaps);
-		bus.addListener(LLEntities::registerEntityAttributes);
+		bus.addListener(LMEntities::registerEntityAttributes);
 		bus.addListener(L2Magic::modifyAttributes);
 	}
 
@@ -101,8 +101,8 @@ public class L2Magic {
 
 	private static void setup(final FMLCommonSetupEvent event) {
 		event.enqueueWork(() -> {
-			EffectSyncEvents.TRACKED.add(LLEffects.ARCANE.get());
-			LLEffects.registerBrewingRecipe();
+			EffectSyncEvents.TRACKED.add(LMEffects.ARCANE.get());
+			LMEffects.registerBrewingRecipe();
 			AttributeEntry.add(LightLandRegistry.MAX_MANA, true, 20000);
 			AttributeEntry.add(LightLandRegistry.MAX_SPELL_LOAD, true, 21000);
 			AttributeEntry.add(LightLandRegistry.MANA_RESTORE, true, 22000);

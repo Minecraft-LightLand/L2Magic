@@ -14,14 +14,14 @@ import java.util.Objects;
  * handles container menu
  */
 @MethodsReturnNonnullByDefault
-public class LLMenu {
+public class LMMenu {
 
 	public static final MenuEntry<ArcaneInjectContainer> MT_ARCANE = L2Magic.REGISTRATE.menu("arcane_inject",
-			ArcaneInjectContainer::new, () -> ArcaneInjectScreen::new).lang(LLMenu::getLangKey).register();
+			ArcaneInjectContainer::new, () -> ArcaneInjectScreen::new).lang(LMMenu::getLangKey).register();
 	public static final MenuEntry<DisEnchanterContainer> MT_DISENC = L2Magic.REGISTRATE.menu("disenchanter",
-			DisEnchanterContainer::new, () -> DisEnchanterScreen::new).lang(LLMenu::getLangKey).register();
+			DisEnchanterContainer::new, () -> DisEnchanterScreen::new).lang(LMMenu::getLangKey).register();
 	public static final MenuEntry<SpellCraftContainer> MT_SPCRAFT = L2Magic.REGISTRATE.menu("spell_craft",
-			SpellCraftContainer::new, () -> SpellCraftScreen::new).lang(LLMenu::getLangKey).register();
+			SpellCraftContainer::new, () -> SpellCraftScreen::new).lang(LMMenu::getLangKey).register();
 
 	public static void register() {
 

@@ -1,6 +1,6 @@
 package dev.xkmc.l2magic.content.common.entity;
 
-import dev.xkmc.l2magic.init.registrate.LLEntities;
+import dev.xkmc.l2magic.init.registrate.LMEntities;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -15,7 +15,7 @@ public class FireArrowEntity extends Arrow {
 	}
 
 	public FireArrowEntity(Level world, LivingEntity owner) {
-		this(LLEntities.ET_FIRE_ARROW.get(), world);
+		this(LMEntities.ET_FIRE_ARROW.get(), world);
 		this.setOwner(owner);
 	}
 

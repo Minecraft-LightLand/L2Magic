@@ -4,7 +4,7 @@ import dev.xkmc.l2library.serial.SerialClass;
 import dev.xkmc.l2library.util.math.MathHelper;
 import dev.xkmc.l2magic.content.arcane.internal.ArcaneEffect;
 import dev.xkmc.l2magic.content.arcane.internal.ArcaneItemUseHelper;
-import dev.xkmc.l2magic.init.registrate.LLEntities;
+import dev.xkmc.l2magic.init.registrate.LMEntities;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.protocol.Packet;
@@ -41,7 +41,7 @@ public class WindBladeEntity extends ThrowableProjectile implements IEntityAddit
 	}
 
 	public WindBladeEntity(Level w) {
-		this(LLEntities.ET_WIND_BLADE.get(), w);
+		this(LMEntities.ET_WIND_BLADE.get(), w);
 	}
 
 	@Override

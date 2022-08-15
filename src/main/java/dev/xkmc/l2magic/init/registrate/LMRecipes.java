@@ -16,7 +16,7 @@ import net.minecraftforge.registries.RegistryObject;
 
 import static dev.xkmc.l2magic.init.L2Magic.REGISTRATE;
 
-public class LLRecipes {
+public class LMRecipes {
 
 	public static final DeferredRegister<RecipeType<?>> RECIPE_TYPES = DeferredRegister.create(Registry.RECIPE_TYPE_REGISTRY, L2Magic.MODID);
 	public static RegistryObject<RecipeType<AbstractRitualRecipe<?>>> RT_RITUAL = REGISTRATE.recipe(RECIPE_TYPES, "ritual");

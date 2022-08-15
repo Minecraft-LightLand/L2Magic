@@ -4,8 +4,8 @@ import dev.xkmc.l2library.serial.SerialClass;
 import dev.xkmc.l2magic.content.magic.block.RitualCore;
 import dev.xkmc.l2magic.content.magic.block.RitualSide;
 import dev.xkmc.l2magic.content.magic.item.MagicScroll;
-import dev.xkmc.l2magic.init.registrate.LLItems;
-import dev.xkmc.l2magic.init.registrate.LLRecipes;
+import dev.xkmc.l2magic.init.registrate.LMItems;
+import dev.xkmc.l2magic.init.registrate.LMRecipes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.item.ItemStack;
@@ -17,7 +17,7 @@ import java.util.List;
 public class PotionSpellRecipe extends AbstractRitualRecipe<PotionSpellRecipe> {
 
 	public PotionSpellRecipe(ResourceLocation id) {
-		super(id, LLRecipes.RSP_SPELL.get());
+		super(id, LMRecipes.RSP_SPELL.get());
 	}
 
 	@Override
@@ -29,7 +29,7 @@ public class PotionSpellRecipe extends AbstractRitualRecipe<PotionSpellRecipe> {
 		inv.setItem(5, assemble(inv));
 		for (RitualSide.TE te : inv.sides) {
 			ItemStack stack = te.getItem(0);
-			if (stack.getItem() == LLItems.SPELL_CARD.get()) {
+			if (stack.getItem() == LMItems.SPELL_CARD.get()) {
 				MagicScroll.initEffect(list, stack);
 				MagicScroll.setTarget(target, stack);
 				MagicScroll.setRadius(radius, stack);

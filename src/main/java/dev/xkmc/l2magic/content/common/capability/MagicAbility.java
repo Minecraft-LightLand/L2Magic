@@ -7,7 +7,6 @@ import dev.xkmc.l2library.util.nbt.NBTObj;
 import dev.xkmc.l2magic.content.arcane.internal.ArcaneType;
 import dev.xkmc.l2magic.content.magic.item.MagicScroll;
 import dev.xkmc.l2magic.content.magic.spell.internal.Spell;
-import dev.xkmc.l2magic.init.registrate.LLEffects;
 import dev.xkmc.l2magic.init.special.LightLandRegistry;
 import dev.xkmc.l2magic.network.packets.CapToClient;
 import net.minecraft.nbt.CompoundTag;

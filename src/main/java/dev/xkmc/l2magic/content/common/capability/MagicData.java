@@ -25,7 +25,7 @@ public class MagicData extends PlayerCapabilityTemplate<MagicData> {
 	});
 
 	public static final PlayerCapabilityHolder<MagicData> HOLDER = new PlayerCapabilityHolder<>(
-			new ResourceLocation(L2Magic.MODID, "player_data"), CAPABILITY,
+			new ResourceLocation(L2Magic.MODID, "magic_data"), CAPABILITY,
 			MagicData.class, MagicData::new, holder -> new PlayerCapabilityNetworkHandler<>(holder) {
 
 		@Override
@@ -125,12 +125,10 @@ public class MagicData extends PlayerCapabilityTemplate<MagicData> {
 		}), HOLDER((h) -> {
 			h.magicHolder = new MagicHolder(h);
 			h.magicHolder.checkUnlocks();
-		}), SKILL(h -> {
 		}),
 		ALL((h) -> {
 			ABILITY.cons.accept(h);
 			HOLDER.cons.accept(h);
-			SKILL.cons.accept(h);
 		}), FOR_INJECT((h) -> {
 			h.state = State.PREINJECT;
 			h.magicAbility = new MagicAbility(h);

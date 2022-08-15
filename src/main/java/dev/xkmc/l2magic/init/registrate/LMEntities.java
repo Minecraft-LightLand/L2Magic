@@ -8,7 +8,7 @@ import net.minecraft.client.renderer.entity.TippableArrowRenderer;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 
-public class LLEntities {
+public class LMEntities {
 
 	public static final EntityEntry<WindBladeEntity> ET_WIND_BLADE;
 	public static final EntityEntry<SpellEntity> ET_SPELL;

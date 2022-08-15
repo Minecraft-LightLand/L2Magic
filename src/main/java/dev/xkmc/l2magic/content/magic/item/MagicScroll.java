@@ -7,7 +7,7 @@ import dev.xkmc.l2magic.content.common.capability.MagicAbility;
 import dev.xkmc.l2magic.content.common.capability.MagicData;
 import dev.xkmc.l2magic.content.magic.spell.internal.Spell;
 import dev.xkmc.l2magic.init.data.LangData;
-import dev.xkmc.l2magic.init.registrate.LLItems;
+import dev.xkmc.l2magic.init.registrate.LMItems;
 import dev.xkmc.l2magic.init.special.LightLandRegistry;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -185,9 +185,9 @@ public class MagicScroll extends Item implements IGlowingTarget {
 	}
 
 	public enum ScrollType {
-		CARD(64, LLItems.SPELL_CARD),
-		PARCHMENT(16, LLItems.SPELL_PARCHMENT),
-		SCROLL(4, LLItems.SPELL_SCROLL);
+		CARD(64, LMItems.SPELL_CARD),
+		PARCHMENT(16, LMItems.SPELL_PARCHMENT),
+		SCROLL(4, LMItems.SPELL_SCROLL);
 
 		public final int stack;
 		private final Supplier<MagicScroll> item;

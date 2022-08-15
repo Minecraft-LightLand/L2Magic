@@ -12,7 +12,7 @@ import dev.xkmc.l2magic.content.magic.ritual.AbstractLevelRitualRecipe;
 import dev.xkmc.l2magic.content.magic.ritual.AbstractRitualRecipe;
 import dev.xkmc.l2magic.content.magic.spell.internal.Spell;
 import dev.xkmc.l2magic.init.data.LangData;
-import dev.xkmc.l2magic.init.registrate.LLRecipes;
+import dev.xkmc.l2magic.init.registrate.LMRecipes;
 import dev.xkmc.l2magic.init.special.MagicRegistry;
 import dev.xkmc.l2magic.network.packets.CapToServer;
 import net.minecraft.client.player.AbstractClientPlayer;
@@ -114,7 +114,7 @@ public class MagicWandOverlay implements IGuiOverlay {
 				if (pl != null) {
 					x = (width / 2 + 60);
 					int cost = p.getCost();
-					Optional<AbstractRitualRecipe<?>> opr = Proxy.getWorld().getRecipeManager().getAllRecipesFor(LLRecipes.RT_RITUAL.get()).stream()
+					Optional<AbstractRitualRecipe<?>> opr = Proxy.getWorld().getRecipeManager().getAllRecipesFor(LMRecipes.RT_RITUAL.get()).stream()
 							.filter(e -> e instanceof AbstractLevelRitualRecipe<?>).filter(e -> p.recipe.getID().equals(e.getMagic()))
 							.findFirst();
 					if (opr.isPresent()) {

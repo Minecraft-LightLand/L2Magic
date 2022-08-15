@@ -12,9 +12,9 @@ import dev.xkmc.l2magic.content.magic.gui.craft.DisEnchanterScreen;
 import dev.xkmc.l2magic.content.magic.gui.craft.SpellCraftScreen;
 import dev.xkmc.l2magic.content.magic.products.recipe.IMagicRecipe;
 import dev.xkmc.l2magic.init.L2Magic;
-import dev.xkmc.l2magic.init.registrate.LLBlocks;
-import dev.xkmc.l2magic.init.registrate.LLItems;
-import dev.xkmc.l2magic.init.registrate.LLRecipes;
+import dev.xkmc.l2magic.init.registrate.LMBlocks;
+import dev.xkmc.l2magic.init.registrate.LMItems;
+import dev.xkmc.l2magic.init.registrate.LMRecipes;
 import dev.xkmc.l2magic.init.special.LightLandRegistry;
 import dev.xkmc.l2magic.init.special.MagicRegistry;
 import mezz.jei.api.IModPlugin;
@@ -82,7 +82,7 @@ public class L2MagicJeiPlugin implements IModPlugin {
 	@Override
 	public void registerRecipes(IRecipeRegistration registration) {
 		registration.addRecipes(DISENCHANT.getRecipeType(), List.copyOf(IMagicRecipe.getMap(MagicRegistry.MPT_ENCH.get()).values()));
-		registration.addRecipes(MAGIC_CRAFT.getRecipeType(), Proxy.getWorld().getRecipeManager().getAllRecipesFor(LLRecipes.RT_RITUAL.get()));
+		registration.addRecipes(MAGIC_CRAFT.getRecipeType(), Proxy.getWorld().getRecipeManager().getAllRecipesFor(LMRecipes.RT_RITUAL.get()));
 	}
 
 	@Override
@@ -91,8 +91,8 @@ public class L2MagicJeiPlugin implements IModPlugin {
 
 	@Override
 	public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
-		registration.addRecipeCatalyst(LLItems.DISENC_BOOK.get().getDefaultInstance(), DISENCHANT.getRecipeType());
-		registration.addRecipeCatalyst(LLBlocks.B_RITUAL_CORE.get().asItem().getDefaultInstance(), MAGIC_CRAFT.getRecipeType());
+		registration.addRecipeCatalyst(LMItems.DISENC_BOOK.get().getDefaultInstance(), DISENCHANT.getRecipeType());
+		registration.addRecipeCatalyst(LMBlocks.B_RITUAL_CORE.get().asItem().getDefaultInstance(), MAGIC_CRAFT.getRecipeType());
 	}
 
 	@Override

@@ -6,7 +6,7 @@ import dev.xkmc.l2library.util.raytrace.RayTraceUtil;
 import dev.xkmc.l2magic.content.magic.render.SpellComponent;
 import dev.xkmc.l2magic.content.magic.spell.internal.ActivationConfig;
 import dev.xkmc.l2magic.content.magic.spell.internal.SpellConfig;
-import dev.xkmc.l2magic.init.registrate.LLEntities;
+import dev.xkmc.l2magic.init.registrate.LMEntities;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -31,7 +31,7 @@ public class SpellEntity extends BaseEntity {
 	}
 
 	public SpellEntity(Level w) {
-		this(LLEntities.ET_SPELL.get(), w);
+		this(LMEntities.ET_SPELL.get(), w);
 	}
 
 	public void setData(double x, double y, double z, int time, int setup, int close, float xr, float yr, String id) {

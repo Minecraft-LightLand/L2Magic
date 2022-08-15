@@ -5,7 +5,6 @@ import dev.xkmc.l2library.base.effects.EffectUtil;
 import dev.xkmc.l2magic.content.arcane.internal.Arcane;
 import dev.xkmc.l2magic.content.arcane.internal.ArcaneType;
 import dev.xkmc.l2magic.content.common.capability.MagicData;
-import dev.xkmc.l2magic.init.registrate.LLEffects;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;

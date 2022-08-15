@@ -1,7 +1,7 @@
 package dev.xkmc.l2magic.content.common.entity;
 
 import dev.xkmc.l2foundation.content.entity.ISizedItemEntity;
-import dev.xkmc.l2magic.init.registrate.LLEntities;
+import dev.xkmc.l2magic.init.registrate.LMEntities;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.world.entity.EntityDimensions;
@@ -25,7 +25,7 @@ public class MagicFireBallEntity extends LargeFireball implements IEntityAdditio
 	private float size;
 
 	public MagicFireBallEntity(Level world, LivingEntity owner, Vec3 vec, float size) {
-		this(LLEntities.ET_FIRE_BALL.get(), world);
+		this(LMEntities.ET_FIRE_BALL.get(), world);
 		this.setOwner(owner);
 		this.setPos(vec.x, vec.y, vec.z);
 		this.size = size;

@@ -9,7 +9,7 @@ import dev.xkmc.l2magic.content.magic.gui.craft.SpellCraftContainer;
 import dev.xkmc.l2magic.content.magic.gui.hex.HexStatus;
 import dev.xkmc.l2magic.content.magic.products.info.ProductState;
 import dev.xkmc.l2magic.init.L2Magic;
-import dev.xkmc.l2magic.init.registrate.LLEffects;
+import dev.xkmc.l2magic.init.registrate.LMEffects;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.world.item.Item;
@@ -156,7 +156,7 @@ public class LangData {
 		});
 
 		List<Item> list = List.of(Items.POTION, Items.SPLASH_POTION, Items.LINGERING_POTION);
-		for (RegistryEntry<? extends Potion> ent : LLEffects.POTION_LIST) {
+		for (RegistryEntry<? extends Potion> ent : LMEffects.POTION_LIST) {
 			for (Item item : list) {
 				String str = ent.get().getName(item.getDescriptionId() + ".effect.");
 				pvd.accept(str, RegistrateLangProvider.toEnglishName(str));

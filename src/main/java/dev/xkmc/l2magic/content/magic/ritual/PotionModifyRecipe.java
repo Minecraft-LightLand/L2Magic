@@ -3,7 +3,7 @@ package dev.xkmc.l2magic.content.magic.ritual;
 import dev.xkmc.l2library.serial.SerialClass;
 import dev.xkmc.l2magic.content.magic.block.RitualCore;
 import dev.xkmc.l2magic.content.magic.item.MagicScroll;
-import dev.xkmc.l2magic.init.registrate.LLRecipes;
+import dev.xkmc.l2magic.init.registrate.LMRecipes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 
@@ -11,7 +11,7 @@ import net.minecraft.world.item.ItemStack;
 public class PotionModifyRecipe extends AbstractRitualRecipe<PotionModifyRecipe> {
 
 	public PotionModifyRecipe(ResourceLocation id) {
-		super(id, LLRecipes.RSP_MODIFY.get());
+		super(id, LMRecipes.RSP_MODIFY.get());
 	}
 
 	@Override

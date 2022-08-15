@@ -17,7 +17,7 @@ import java.util.List;
 /**
  * handles enchantment, mob effects, and potions
  */
-public class LLEffects {
+public class LMEffects {
 
 	public static final RegistryEntry<ArcaneEffect> ARCANE = genEffect("arcane", () -> new ArcaneEffect(MobEffectCategory.NEUTRAL, 0x4800FF));
 

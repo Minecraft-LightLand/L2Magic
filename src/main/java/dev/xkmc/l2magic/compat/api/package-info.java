@@ -1,7 +1,7 @@
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 
-package dev.xkmc.l2magic.compat;
+package dev.xkmc.l2magic.compat.api;
 
 import net.minecraft.MethodsReturnNonnullByDefault;
 

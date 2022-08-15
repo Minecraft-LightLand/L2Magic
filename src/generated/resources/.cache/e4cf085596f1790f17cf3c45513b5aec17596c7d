@@ -1,10 +1,10 @@
-// 1.19.2	2022-08-15T22:16:26.458414	Registrate Provider for l2magic [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+// 1.19.2	2022-08-15T22:44:01.782657	Registrate Provider for l2magic [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
 842d01123046ec0c0a67332c6f8f2d925e369216 assets/l2magic/blockstates/enchant_gold_block.json
 1f7cdb24c5252972676537940f93c31500a57d86 assets/l2magic/blockstates/magicium_block.json
 8a50017a51b20cc6bbfedd72be2d192814a86fbe assets/l2magic/blockstates/ritual_core.json
 2b09b903fe1cb7c96dbabe36bd643827f415a76a assets/l2magic/blockstates/ritual_side.json
-bdd0ad4304ea80e95dc0d3bc00b0a4a4908a6f51 assets/l2magic/lang/en_ud.json
-100f195fcb272996729ecd27d753c23ab63d2a4a assets/l2magic/lang/en_us.json
+6e2c5795258938a2d889a0ab6b2e980acff2465f assets/l2magic/lang/en_ud.json
+21e71cfbe67b7d780af0e9fbc3b23aba084e61d5 assets/l2magic/lang/en_us.json
 938f94ee7f52226971d4451a76a9674c63f2d34f assets/l2magic/models/block/enchant_gold_block.json
 f002518e09f6121f59e21cb032ef0f50c1d67e07 assets/l2magic/models/block/magicium_block.json
 150e5575311f87601003b1bc9744720b6004b795 assets/l2magic/models/item/arcane_inject_book.json
@@ -16,8 +16,6 @@ deae8789732e8f4875db900ee9a02ebf11c76923 assets/l2magic/models/item/enchant_gold
 3ccb6d490c34ddee46111aff30874e45bb96e896 assets/l2magic/models/item/enchant_gold_ingot.json
 7a488417af0fab4cc893897bae873a07315aac60 assets/l2magic/models/item/enchant_gold_nugget.json
 8e0097e2e61dd3e4cc177cdd4f140f92dd9a620a assets/l2magic/models/item/enchant_melon.json
-d6fc44e4f4c43f59808d25be40b53190c48ee391 assets/l2magic/models/item/ethernium_ingot.json
-867d0629ef2215c2ee9860821da2f47ad8258343 assets/l2magic/models/item/ethernium_nugget.json
 d5688ccc11699f71e140949061b6b95e264b9a84 assets/l2magic/models/item/gilded_arcane_axe.json
 2b85f103a55de448558f209d213ec3b1b3ea8b69 assets/l2magic/models/item/gilded_arcane_sword.json
 3c57728d92d9f0b6bcaa42d83ce84ae0231a6d89 assets/l2magic/models/item/magic_book.json

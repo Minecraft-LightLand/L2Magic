@@ -1,16 +1,15 @@
 package dev.xkmc.l2magic.content.magic.spell;
 
+import dev.xkmc.l2foundation.compat.TeamAccessor;
 import dev.xkmc.l2foundation.init.registrate.LFEffects;
 import dev.xkmc.l2library.base.effects.EffectUtil;
 import dev.xkmc.l2library.serial.SerialClass;
 import dev.xkmc.l2library.util.annotation.DataGenOnly;
-import dev.xkmc.l2magic.compat.TeamAccessor;
 import dev.xkmc.l2magic.content.common.entity.SpellEntity;
 import dev.xkmc.l2magic.content.magic.item.MagicScroll;
 import dev.xkmc.l2magic.content.magic.spell.internal.ActivationConfig;
 import dev.xkmc.l2magic.content.magic.spell.internal.SimpleSpell;
 import dev.xkmc.l2magic.content.magic.spell.internal.SpellConfig;
-import dev.xkmc.l2magic.init.registrate.LLEffects;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;

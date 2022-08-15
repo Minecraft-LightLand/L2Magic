@@ -29,7 +29,7 @@ import static dev.xkmc.l2magic.init.L2Magic.REGISTRATE;
 
 @SuppressWarnings({"rawtypes", "unchecked", "unsafe"})
 @MethodsReturnNonnullByDefault
-public class LLItems {
+public class LMItems {
 
 	public static class Tab extends CreativeModeTab {
 
@@ -46,7 +46,7 @@ public class LLItems {
 		}
 	}
 
-	public static final Tab TAB_MAIN = new Tab("magic", () -> LLItems.MAGIC_WAND);
+	public static final Tab TAB_MAIN = new Tab("magic", () -> LMItems.MAGIC_WAND);
 
 	static {
 		REGISTRATE.creativeModeTab(() -> TAB_MAIN);
@@ -56,16 +56,13 @@ public class LLItems {
 	public static final ItemEntry<ScreenBook> MAGIC_BOOK;
 	public static final ItemEntry<ContainerBook> ARCANE_INJECT_BOOK, DISENC_BOOK, SPCRAFT_BOOK;
 
-
-	//TODO public static final FluidEntry<VirtualFluid> CLEANSE_WATER, HOLY_WATER;
-
 	static {
 		// Books
 		{
 			MAGIC_BOOK = REGISTRATE.item("magic_book", p -> new ScreenBook(p, () -> MagicTreeScreen::new)).defaultModel().defaultLang().register();
-			ARCANE_INJECT_BOOK = REGISTRATE.item("arcane_inject_book", p -> new ContainerBook(p, () -> LLMenu.MT_ARCANE)).defaultModel().defaultLang().register();
-			DISENC_BOOK = REGISTRATE.item("disenchant_book", p -> new ContainerBook(p, () -> LLMenu.MT_DISENC)).defaultModel().defaultLang().register();
-			SPCRAFT_BOOK = REGISTRATE.item("spell_craft_book", p -> new ContainerBook(p, () -> LLMenu.MT_SPCRAFT)).defaultModel().defaultLang().register();
+			ARCANE_INJECT_BOOK = REGISTRATE.item("arcane_inject_book", p -> new ContainerBook(p, () -> LMMenu.MT_ARCANE)).defaultModel().defaultLang().register();
+			DISENC_BOOK = REGISTRATE.item("disenchant_book", p -> new ContainerBook(p, () -> LMMenu.MT_DISENC)).defaultModel().defaultLang().register();
+			SPCRAFT_BOOK = REGISTRATE.item("spell_craft_book", p -> new ContainerBook(p, () -> LMMenu.MT_SPCRAFT)).defaultModel().defaultLang().register();
 		}
 	}
 
@@ -78,7 +75,7 @@ public class LLItems {
 	public static final ItemEntry<PotionCore> POTION_CORE;
 	public static final ItemEntry<MagicScroll> SPELL_CARD, SPELL_PARCHMENT, SPELL_SCROLL;
 	public static final ItemEntry<ManaStorage> ENC_GOLD_NUGGET, ENC_GOLD_INGOT, COOKIE, MELON, CARROT, APPLE;
-	public static final ItemEntry<Item> MAGICIUM_INGOT, MAGICIUM_NUGGET, ETHERNIUM_NUGGET, ETHERNIUM_INGOT;
+	public static final ItemEntry<Item> MAGICIUM_INGOT, MAGICIUM_NUGGET;
 
 	static {
 		ARCANE_SWORD_GILDED = REGISTRATE.item("gilded_arcane_sword", p ->
@@ -115,8 +112,6 @@ public class LLItems {
 
 		MAGICIUM_INGOT = simpleItem("magicium_ingot");
 		MAGICIUM_NUGGET = simpleItem("magicium_nugget");
-		ETHERNIUM_INGOT = simpleItem("ethernium_ingot");
-		ETHERNIUM_NUGGET = simpleItem("ethernium_nugget");
 	}
 
 
