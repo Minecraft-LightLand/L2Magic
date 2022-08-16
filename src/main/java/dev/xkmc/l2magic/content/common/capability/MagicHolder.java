@@ -2,7 +2,7 @@ package dev.xkmc.l2magic.content.common.capability;
 
 import dev.xkmc.l2library.serial.SerialClass;
 import dev.xkmc.l2library.util.nbt.NBTObj;
-import dev.xkmc.l2magic.compat.api.MagicBehaviorListener;
+import dev.xkmc.l2magic.compat.api.MagicBehaviorHandler;
 import dev.xkmc.l2magic.content.magic.products.MagicElement;
 import dev.xkmc.l2magic.content.magic.products.MagicProduct;
 import dev.xkmc.l2magic.content.magic.products.MagicProductType;
@@ -105,7 +105,7 @@ public class MagicHolder {
 	}
 
 	public int getElement(MagicElement elem) {
-		if (MagicBehaviorListener.INSTANCE.unlockAll())
+		if (MagicBehaviorHandler.INSTANCE.unlockAll())
 			return 100;
 		return elements.getInt(elem.getID());
 	}

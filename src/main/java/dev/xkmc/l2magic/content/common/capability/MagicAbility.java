@@ -4,7 +4,7 @@ import dev.xkmc.l2foundation.init.registrate.LFEffects;
 import dev.xkmc.l2library.base.effects.EffectUtil;
 import dev.xkmc.l2library.serial.SerialClass;
 import dev.xkmc.l2library.util.nbt.NBTObj;
-import dev.xkmc.l2magic.compat.api.MagicBehaviorListener;
+import dev.xkmc.l2magic.compat.api.MagicBehaviorHandler;
 import dev.xkmc.l2magic.content.arcane.internal.ArcaneType;
 import dev.xkmc.l2magic.content.magic.item.MagicScroll;
 import dev.xkmc.l2magic.content.magic.spell.internal.Spell;
@@ -33,7 +33,7 @@ public class MagicAbility {
 	@SerialClass.SerialField
 	public ListTag spell_activation = new ListTag();
 	@SerialClass.SerialField
-	public int magic_level, spell_level = MagicBehaviorListener.INSTANCE.getDefaultSpellSlot(), tick;
+	public int magic_level, spell_level = MagicBehaviorHandler.INSTANCE.getDefaultSpellSlot(), tick;
 	@SerialClass.SerialField
 	public int magic_mana, spell_load;
 
@@ -55,7 +55,7 @@ public class MagicAbility {
 		tick++;
 		time_after_sync++;
 		if (tick % 20 == 0) {
-			int armor_cost = MagicBehaviorListener.INSTANCE.getArmorLoad(parent.player);
+			int armor_cost = MagicBehaviorHandler.INSTANCE.getArmorLoad(parent.player);
 			int mana_restore = getManaRestoration();
 			int spell_restore = getSpellReduction();
 			int t0 = Math.min(armor_cost, mana_restore);
@@ -150,11 +150,11 @@ public class MagicAbility {
 	}
 
 	public boolean isArcaneTypeUnlocked(ArcaneType type) {
-		return MagicBehaviorListener.INSTANCE.unlockAll() || new NBTObj(arcane_type).getSub(type.getID()).tag.getInt("level") > 0;
+		return MagicBehaviorHandler.INSTANCE.unlockAll() || new NBTObj(arcane_type).getSub(type.getID()).tag.getInt("level") > 0;
 	}
 
 	public void unlockArcaneType(ArcaneType type, boolean force) {
-		if (!isArcaneTypeUnlocked(type) && (force || MagicBehaviorListener.INSTANCE.doLevelArcane(parent.player))) {
+		if (!isArcaneTypeUnlocked(type) && (force || MagicBehaviorHandler.INSTANCE.doLevelArcane(parent.player))) {
 			new NBTObj(arcane_type).getSub(type.getID()).tag.putInt("level", 1);
 		}
 	}

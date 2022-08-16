@@ -4,6 +4,8 @@ import net.minecraft.world.entity.player.Player;
 
 public class MagicBehaviorHandler implements MagicBehaviorListener {
 
+	public static MagicBehaviorListener INSTANCE = new MagicBehaviorHandler();
+
 	public int getArmorLoad(Player player) {
 		return 0;
 	}
