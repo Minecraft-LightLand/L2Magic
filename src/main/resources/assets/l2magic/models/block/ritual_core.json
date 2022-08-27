@@ -2,10 +2,10 @@
 	"credit": "Made with Blockbench",
 	"parent":"block/block",
 	"textures": {
-		"0": "l2rpgcommon:block/ritual_gold",
-		"1": "l2rpgcommon:block/ritual_wood",
-		"2": "l2rpgcommon:block/ritual_gold",
-		"particle": "l2rpgcommon:block/ritual_gold"
+		"0": "l2magic:block/ritual_gold",
+		"1": "l2magic:block/ritual_wood",
+		"2": "l2magic:block/ritual_gold",
+		"particle": "l2magic:block/ritual_gold"
 	},
 	"elements": [
 		{

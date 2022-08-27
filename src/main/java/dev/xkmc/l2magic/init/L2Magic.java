@@ -104,6 +104,7 @@ public class L2Magic {
 			AttributeEntry.add(MagicRegistry.MAX_MANA, true, 20000);
 			AttributeEntry.add(MagicRegistry.MAX_SPELL_LOAD, true, 21000);
 			AttributeEntry.add(MagicRegistry.MANA_RESTORE, true, 22000);
+			AttributeEntry.add(MagicRegistry.LOAD_RESTORE, true, 23000);
 		});
 	}
 
@@ -111,6 +112,7 @@ public class L2Magic {
 		event.add(EntityType.PLAYER, MagicRegistry.MAX_MANA.get());
 		event.add(EntityType.PLAYER, MagicRegistry.MAX_SPELL_LOAD.get());
 		event.add(EntityType.PLAYER, MagicRegistry.MANA_RESTORE.get());
+		event.add(EntityType.PLAYER, MagicRegistry.LOAD_RESTORE.get());
 	}
 
 	public static void gatherData(GatherDataEvent event) {

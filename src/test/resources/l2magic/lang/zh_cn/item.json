@@ -23,7 +23,7 @@
   },
   "-cartesian": {
 	"gen_item_mat": {
-	  "path": "item.l2rpgcommon",
+	  "path": "item.l2magic",
 	  "list": [
 		{
 		  "enchant_gold": "蓄魔金",
@@ -36,7 +36,7 @@
 	  ]
 	},
 	"gen_block_mat": {
-	  "path": "block.l2rpgcommon",
+	  "path": "block.l2magic",
 	  "list": [
 		{
 		  "enchant_gold": "蓄魔金",
