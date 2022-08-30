@@ -15,6 +15,7 @@ import net.minecraft.util.Mth;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.apache.logging.log4j.LogManager;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -139,7 +140,7 @@ public class HexGraphGui extends AbstractHexGui {
 		return false;
 	}
 
-	private boolean click(LocateResult hover) {
+	private boolean click(@Nullable LocateResult hover) {
 		if (hover == null)
 			return false;
 		if (hover.getType() == LocateResult.ResultType.ARROW) {
