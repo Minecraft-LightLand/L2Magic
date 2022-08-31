@@ -1,7 +1,6 @@
 package dev.xkmc.l2magic.content.transport.item;
 
 import dev.xkmc.l2magic.content.transport.api.IContentHolder;
-import dev.xkmc.l2magic.content.transport.api.RealToken;
 import net.minecraft.world.item.ItemStack;
 
 public record ItemHolder(ItemStack stack) implements IContentHolder<ItemStack> {

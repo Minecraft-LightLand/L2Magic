@@ -1,0 +1,73 @@
+{
+  "type": "l2magic:ritual_default",
+  "core": {
+    "input": {
+      "item": "minecraft:iron_ingot"
+    },
+    "output": {
+      "item": "l2foundation:eternium_ingot"
+    }
+  },
+  "side": [
+    {
+      "input": {
+        "type": "l2library:enchantment",
+        "enchantment": "minecraft:mending",
+        "min_level": 1
+      }
+    },
+    {
+      "input": {
+        "item": "l2foundation:layline_ingot"
+      },
+      "output": {
+        "item": "l2foundation:layroot_ingot"
+      }
+    },
+    {
+      "input": {
+        "type": "l2library:enchantment",
+        "enchantment": "minecraft:unbreaking",
+        "min_level": 3
+      }
+    },
+    {
+      "input": {
+        "item": "l2foundation:layline_ingot"
+      },
+      "output": {
+        "item": "l2foundation:layroot_ingot"
+      }
+    },
+    {
+      "input": {
+        "item": "l2foundation:layline_ingot"
+      },
+      "output": {
+        "item": "l2foundation:layroot_ingot"
+      }
+    },
+    {
+      "input": {
+        "type": "l2library:enchantment",
+        "enchantment": "minecraft:infinity",
+        "min_level": 1
+      }
+    },
+    {
+      "input": {
+        "item": "l2foundation:layline_ingot"
+      },
+      "output": {
+        "item": "l2foundation:layroot_ingot"
+      }
+    },
+    {
+      "input": {
+        "type": "l2library:enchantment",
+        "enchantment": "minecraft:protection",
+        "min_level": 4
+      }
+    }
+  ]
+}

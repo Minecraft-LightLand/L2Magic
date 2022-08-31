@@ -10,7 +10,7 @@ record ErrorNode<T>(BlockPos pos) implements INetworkNode<T> {
 	}
 
 	@Override
-	public void refreshCoolDown(boolean success) {
+	public void refreshCoolDown(TransportContext<T> ctx, boolean success) {
 
 	}
 

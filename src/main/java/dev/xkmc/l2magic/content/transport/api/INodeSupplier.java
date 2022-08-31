@@ -7,7 +7,7 @@ public interface INodeSupplier<T> {
 	/**
 	 * return true if this node is ready to accept items
 	 * return false if this node is still in cooldown
-	 * */
+	 */
 	boolean isValid();
 
 	/**

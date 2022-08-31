@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.TreeSet;
 
 @SerialClass
-public class OrderedConnector extends Connector {
+public class OrderedConnector implements Connector {
 
 	@SerialClass.SerialField(toClient = true)
 	public TreeSet<BlockPos> set = new TreeSet<>(this::comparator);
@@ -29,6 +29,12 @@ public class OrderedConnector extends Connector {
 	@Override
 	public NetworkType getNetworkType() {
 		return NetworkType.ONE;
+	}
+
+	@Override
+	public void link(BlockPos pos) {
+		if (set.contains(pos)) set.remove(pos);
+		else set.add(pos);
 	}
 
 	private int comparator(BlockPos a, BlockPos b) {

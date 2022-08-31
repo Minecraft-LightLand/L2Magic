@@ -19,7 +19,7 @@ public interface ItemNodeEntity {
 
 	List<BlockPos> target();
 
-	void refreshCoolDown(BlockPos target, boolean success);
+	void refreshCoolDown(BlockPos target, boolean success, boolean simulate);
 
 	BlockPos getBlockPos();
 

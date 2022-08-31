@@ -4,11 +4,7 @@ import dev.xkmc.l2magic.content.transport.api.IContentToken;
 import dev.xkmc.l2magic.content.transport.api.INetworkNode;
 import dev.xkmc.l2magic.content.transport.api.TransportContext;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.ItemHandlerHelper;
-import org.apache.http.util.Asserts;
 
 public abstract class AbstractNodeTarget<T> implements INetworkNode<T> {
 
@@ -29,7 +25,7 @@ public abstract class AbstractNodeTarget<T> implements INetworkNode<T> {
 	}
 
 	@Override
-	public void refreshCoolDown(boolean success) {
+	public void refreshCoolDown(TransportContext<T> ctx, boolean success) {
 	}
 
 	@Override

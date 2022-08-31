@@ -14,6 +14,7 @@ import dev.xkmc.l2magic.content.magic.item.MagicScroll;
 import dev.xkmc.l2magic.content.magic.item.MagicWand;
 import dev.xkmc.l2magic.content.magic.item.ManaStorage;
 import dev.xkmc.l2magic.content.magic.item.PotionCore;
+import dev.xkmc.l2magic.content.transport.tools.LinkerItem;
 import dev.xkmc.l2magic.init.L2Magic;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -55,6 +56,7 @@ public class LMItems {
 	// -------- common --------
 	public static final ItemEntry<ScreenBook> MAGIC_BOOK;
 	public static final ItemEntry<ContainerBook> ARCANE_INJECT_BOOK, DISENC_BOOK, SPCRAFT_BOOK;
+	public static final ItemEntry<LinkerItem> LINKER;
 
 	static {
 		// Books
@@ -64,6 +66,8 @@ public class LMItems {
 			DISENC_BOOK = REGISTRATE.item("disenchant_book", p -> new ContainerBook(p, () -> LMMenu.MT_DISENC)).defaultModel().defaultLang().register();
 			SPCRAFT_BOOK = REGISTRATE.item("spell_craft_book", p -> new ContainerBook(p, () -> LMMenu.MT_SPCRAFT)).defaultModel().defaultLang().register();
 		}
+
+		LINKER = REGISTRATE.item("linker", LinkerItem::new).defaultModel().defaultLang().register();
 	}
 
 	// -------- magic --------

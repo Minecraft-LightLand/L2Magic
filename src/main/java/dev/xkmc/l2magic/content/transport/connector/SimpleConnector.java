@@ -8,7 +8,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 @SerialClass
-public class SimpleConnector extends Connector {
+public class SimpleConnector implements Connector {
 
 	@Nullable
 	@SerialClass.SerialField(toClient = true)
@@ -22,5 +22,14 @@ public class SimpleConnector extends Connector {
 	@Override
 	public NetworkType getNetworkType() {
 		return NetworkType.ONE;
+	}
+
+	@Override
+	public void link(BlockPos pos) {
+		if (this.pos != null && this.pos.equals(pos)) {
+			this.pos = null;
+		} else {
+			this.pos = pos;
+		}
 	}
 }

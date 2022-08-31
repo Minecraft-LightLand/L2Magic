@@ -14,12 +14,13 @@ public class TransportHandler {
 	}
 
 	public static <T> T insert(INodeHolder<T> node, IContentHolder<T> holder, boolean simulate) {
-		TransportContext<T> ctx = new TransportContext<>();
+		TransportContext<T> ctx = new TransportContext<>(simulate);
 		IContentToken<T> token = new GenericToken<>(holder);
-		INetworkNode<T> tree = TransportHandler.broadcastRecursive(ctx, node, token);
-		if (!simulate) {
-			tree.refreshCoolDown(tree.hasAction());
+		if (!node.isReady() || !node.isValid(holder)) {
+			return holder.get();
 		}
+		INetworkNode<T> tree = TransportHandler.broadcastRecursive(ctx, node, token);
+		tree.refreshCoolDown(ctx, tree.hasAction());
 		if (!tree.hasAction()) {
 			return holder.get();
 		}

@@ -20,11 +20,11 @@ record BroadcastTree<T>(INodeHolder<T> node, List<INetworkNode<T>> children, ICo
 		return consumed;
 	}
 
-	public void refreshCoolDown(boolean success) {
+	public void refreshCoolDown(TransportContext<T> ctx, boolean success) {
 		for (INetworkNode<T> child : children) {
 			boolean subSuc = success && child.hasAction();
-			node.refreshCooldown(child.getIdentifier(), subSuc);
-			child.refreshCoolDown(subSuc);
+			node.refreshCooldown(child.getIdentifier(), subSuc, ctx);
+			child.refreshCoolDown(ctx, subSuc);
 		}
 	}
 

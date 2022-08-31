@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @SerialClass
-public class SyncedConnector extends Connector {
+public class SyncedConnector implements Connector {
 
 	@SerialClass.SerialField(toClient = true)
 	public ArrayList<BlockPos> list = new ArrayList<>();
@@ -21,6 +21,12 @@ public class SyncedConnector extends Connector {
 	@Override
 	public NetworkType getNetworkType() {
 		return NetworkType.ALL;
+	}
+
+	@Override
+	public void link(BlockPos pos) {
+		if (list.contains(pos)) list.remove(pos);
+		else list.add(pos);
 	}
 
 }

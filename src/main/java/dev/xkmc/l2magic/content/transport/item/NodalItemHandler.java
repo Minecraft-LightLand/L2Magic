@@ -1,9 +1,6 @@
 package dev.xkmc.l2magic.content.transport.item;
 
-import dev.xkmc.l2magic.content.transport.api.IContentHolder;
-import dev.xkmc.l2magic.content.transport.api.INodeSupplier;
-import dev.xkmc.l2magic.content.transport.api.NetworkType;
-import dev.xkmc.l2magic.content.transport.api.TransportHandler;
+import dev.xkmc.l2magic.content.transport.api.*;
 import dev.xkmc.l2magic.content.transport.core.ItemStackNode;
 import dev.xkmc.l2magic.content.transport.core.SimpleNodeSupplier;
 import net.minecraft.core.BlockPos;
@@ -81,8 +78,8 @@ public record NodalItemHandler(ItemNodeEntity be) implements IItemHandler, ItemS
 	}
 
 	@Override
-	public void refreshCooldown(BlockPos target, boolean success) {
-		be.refreshCoolDown(target, success);
+	public void refreshCooldown(BlockPos target, boolean success, TransportContext<ItemStack> ctx) {
+		be.refreshCoolDown(target, success, ctx.simulate);
 	}
 
 	@Override

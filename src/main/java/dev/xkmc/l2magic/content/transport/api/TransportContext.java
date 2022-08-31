@@ -8,9 +8,10 @@ import java.util.TreeSet;
 public class TransportContext<T> {
 
 	private final Set<BlockPos> set = new TreeSet<>();
+	public final boolean simulate;
 
-	TransportContext() {
-
+	TransportContext(boolean simulate) {
+		this.simulate = simulate;
 	}
 
 	public boolean add(BlockPos id) {
