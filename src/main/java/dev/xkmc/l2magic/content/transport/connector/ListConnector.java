@@ -8,10 +8,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 @SerialClass
-public class SyncedConnector implements Connector {
+public class ListConnector implements Connector {
 
 	@SerialClass.SerialField(toClient = true)
 	public ArrayList<BlockPos> list = new ArrayList<>();
+
+	private final NetworkType type;
+
+	public ListConnector(NetworkType type){
+		this.type = type;
+	}
 
 	@Override
 	public List<BlockPos> target() {
@@ -20,7 +26,7 @@ public class SyncedConnector implements Connector {
 
 	@Override
 	public NetworkType getNetworkType() {
-		return NetworkType.ALL;
+		return type;
 	}
 
 	@Override

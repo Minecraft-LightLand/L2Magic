@@ -63,16 +63,19 @@ public record NodalItemHandler(ItemNodeEntity be) implements IItemHandler, ItemS
 		List<INodeSupplier<ItemStack>> ans = new ArrayList<>();
 		for (BlockPos pos : be.target()) {
 			BlockEntity target = level.getBlockEntity(pos);
-			if (target == null) continue;
-			var lazyCap = target.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY);
-			if (lazyCap.resolve().isPresent()) {
-				var cap = lazyCap.resolve().get();
-				if (cap instanceof ItemStackNode node) {
-					ans.add(new SimpleNodeSupplier<>(pos, node.isReady(), (ctx, token) -> TransportHandler.broadcastRecursive(ctx, node, token)));
-				} else {
-					ans.add(new SimpleNodeSupplier<>(pos, true, (ctx, token) -> new ItemNodeTarget(target, cap, token)));
+			if (target != null) {
+				var lazyCap = target.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY);
+				if (lazyCap.resolve().isPresent()) {
+					var cap = lazyCap.resolve().get();
+					if (cap instanceof ItemStackNode node) {
+						ans.add(new SimpleNodeSupplier<>(pos, node.isReady(), (ctx, token) -> TransportHandler.broadcastRecursive(ctx, node, token)));
+					} else {
+						ans.add(new SimpleNodeSupplier<>(pos, true, (ctx, token) -> new ItemNodeTarget(target, cap, token)));
+					}
+					continue;
 				}
 			}
+			ans.add(new SimpleNodeSupplier<>(pos, false, (ctx, token) -> new ErrorNode<>(pos)));
 		}
 		return ans;
 	}

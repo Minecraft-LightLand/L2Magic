@@ -13,6 +13,7 @@ import dev.xkmc.l2magic.content.magic.block.RitualSide;
 import dev.xkmc.l2magic.content.transport.tile.block.ItemTransferBlock;
 import dev.xkmc.l2magic.content.transport.tile.block.NodeSetFilter;
 import dev.xkmc.l2magic.content.transport.tile.client.NodeRenderer;
+import dev.xkmc.l2magic.content.transport.tile.item.DistributeItemNodeBlockEntity;
 import dev.xkmc.l2magic.content.transport.tile.item.OrderedItemNodeBlockEntity;
 import dev.xkmc.l2magic.content.transport.tile.item.SimpleItemNodeBlockEntity;
 import dev.xkmc.l2magic.content.transport.tile.item.SyncedItemNodeBlockEntity;
@@ -37,7 +38,7 @@ public class LMBlocks {
 	public static final BlockEntry<DelegateBlock> B_RITUAL_CORE, B_RITUAL_SIDE;
 	public static final BlockEntry<Block> ENCHANT_GOLD_BLOCK, MAGICIUM_BLOCK;
 
-	public static final BlockEntry<DelegateBlock> B_ITEM_SIMPLE, B_ITEM_ORDERED, B_ITEM_SYNCED;
+	public static final BlockEntry<DelegateBlock> B_ITEM_SIMPLE, B_ITEM_ORDERED, B_ITEM_SYNCED, B_ITEM_DISTRIBUTE;
 
 	public static final BlockEntityEntry<RitualCore.TE> TE_RITUAL_CORE;
 	public static final BlockEntityEntry<RitualSide.TE> TE_RITUAL_SIDE;
@@ -45,6 +46,7 @@ public class LMBlocks {
 	public static final BlockEntityEntry<SimpleItemNodeBlockEntity> TE_ITEM_SIMPLE;
 	public static final BlockEntityEntry<OrderedItemNodeBlockEntity> TE_ITEM_ORDERED;
 	public static final BlockEntityEntry<SyncedItemNodeBlockEntity> TE_ITEM_SYNCED;
+	public static final BlockEntityEntry<DistributeItemNodeBlockEntity> TE_ITEM_DISTRIBUTE;
 
 	static {
 		{
@@ -97,12 +99,19 @@ public class LMBlocks {
 					.blockstate(LMBlocks::genNodeModel).tag(BlockTags.MINEABLE_WITH_PICKAXE)
 					.defaultLoot().defaultLang().simpleItem().register();
 
+			B_ITEM_DISTRIBUTE = L2Magic.REGISTRATE.block("node_item_distribute",
+							(p) -> DelegateBlock.newBaseBlock(PROP, NodeSetFilter.INSTANCE, ItemTransferBlock.DISTRIBUTE))
+					.blockstate(LMBlocks::genNodeModel).tag(BlockTags.MINEABLE_WITH_PICKAXE)
+					.defaultLoot().defaultLang().simpleItem().register();
+
 			TE_ITEM_SIMPLE = L2Magic.REGISTRATE.blockEntity("node_item_simple", SimpleItemNodeBlockEntity::new)
 					.validBlock(B_ITEM_SIMPLE).renderer(() -> NodeRenderer::new).register();
 			TE_ITEM_ORDERED = L2Magic.REGISTRATE.blockEntity("node_item_ordered", OrderedItemNodeBlockEntity::new)
-					.validBlock(B_ITEM_SIMPLE).renderer(() -> NodeRenderer::new).register();
+					.validBlock(B_ITEM_ORDERED).renderer(() -> NodeRenderer::new).register();
 			TE_ITEM_SYNCED = L2Magic.REGISTRATE.blockEntity("node_item_synced", SyncedItemNodeBlockEntity::new)
-					.validBlock(B_ITEM_SIMPLE).renderer(() -> NodeRenderer::new).register();
+					.validBlock(B_ITEM_SYNCED).renderer(() -> NodeRenderer::new).register();
+			TE_ITEM_DISTRIBUTE = L2Magic.REGISTRATE.blockEntity("node_item_distribute", DistributeItemNodeBlockEntity::new)
+					.validBlock(B_ITEM_DISTRIBUTE).renderer(() -> NodeRenderer::new).register();
 		}
 	}
 
@@ -114,7 +123,7 @@ public class LMBlocks {
 					.withExistingParent(name, lit ?
 							new ResourceLocation("block/cube_all") :
 							new ResourceLocation(L2Magic.MODID, "block/node_small"))
-					.texture("all", new ResourceLocation(L2Magic.MODID, "block/" + name))
+					.texture("all", new ResourceLocation(L2Magic.MODID, "block/node/item/" + name))
 					.renderType("cutout")).build();
 		});
 	}

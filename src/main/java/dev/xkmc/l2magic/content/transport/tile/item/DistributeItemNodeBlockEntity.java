@@ -9,12 +9,12 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
 @SerialClass
-public class SyncedItemNodeBlockEntity extends AbstractItemNodeBlockEntity<SyncedItemNodeBlockEntity> {
+public class DistributeItemNodeBlockEntity extends AbstractItemNodeBlockEntity<DistributeItemNodeBlockEntity> {
 
 	@SerialClass.SerialField(toClient = true)
-	private final ListConnector connector = new ListConnector(NetworkType.SYNCED);
+	private final ListConnector connector = new ListConnector(NetworkType.FILL);
 
-	public SyncedItemNodeBlockEntity(BlockEntityType<SyncedItemNodeBlockEntity> type, BlockPos pos, BlockState state) {
+	public DistributeItemNodeBlockEntity(BlockEntityType<DistributeItemNodeBlockEntity> type, BlockPos pos, BlockState state) {
 		super(type, pos, state);
 	}
 

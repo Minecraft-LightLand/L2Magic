@@ -2,6 +2,6 @@
   "parent": "l2magic:block/node_small",
   "render_type": "minecraft:cutout",
   "textures": {
-    "all": "l2magic:block/node_item_ordered"
+    "all": "l2magic:block/node/item/node_item_ordered"
   }
 }

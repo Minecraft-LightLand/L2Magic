@@ -1,21 +1,24 @@
-// 1.19.2	2022-08-31T20:30:01.56756	Registrate Provider for l2magic [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+// 1.19.2	2022-08-31T21:40:10.362735	Registrate Provider for l2magic [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
 842d01123046ec0c0a67332c6f8f2d925e369216 assets/l2magic/blockstates/enchant_gold_block.json
 1f7cdb24c5252972676537940f93c31500a57d86 assets/l2magic/blockstates/magicium_block.json
+c27274c24ea986e826170e3423d9293037e4013f assets/l2magic/blockstates/node_item_distribute.json
 0cca19cdc924c716475b22609d8917bdb85ae114 assets/l2magic/blockstates/node_item_ordered.json
 c710a39c85b7e16fb67749d41c423dcd97c133df assets/l2magic/blockstates/node_item_simple.json
 c5a50b0d8f7ea83283381730aac035242110cf88 assets/l2magic/blockstates/node_item_synced.json
 8a50017a51b20cc6bbfedd72be2d192814a86fbe assets/l2magic/blockstates/ritual_core.json
 2b09b903fe1cb7c96dbabe36bd643827f415a76a assets/l2magic/blockstates/ritual_side.json
-76c9075819cbfc715fd8eec882b9bf96f9e9052c assets/l2magic/lang/en_ud.json
-31e3f322d792294959f449801c0dfc3d356afed0 assets/l2magic/lang/en_us.json
+df8a6a9ec2bdf25aab3f456359a191c221df8f61 assets/l2magic/lang/en_ud.json
+28f9154b3bffee6e210aef821d6ef910a81c83b3 assets/l2magic/lang/en_us.json
 938f94ee7f52226971d4451a76a9674c63f2d34f assets/l2magic/models/block/enchant_gold_block.json
 f002518e09f6121f59e21cb032ef0f50c1d67e07 assets/l2magic/models/block/magicium_block.json
-fa68775a8659a33b9f091cb4e8659d12e0d4f88f assets/l2magic/models/block/node_item_ordered.json
-0305b023475c39896210279e3af8e41d7c8d2b09 assets/l2magic/models/block/node_item_ordered_lit.json
-ce5172c77c0b8f5bf1837fd38e530494b4daad78 assets/l2magic/models/block/node_item_simple.json
-27434bd466634c215f911c179e8c8a8e2e714bfe assets/l2magic/models/block/node_item_simple_lit.json
-7a21d4358a42868ca571a18aeb39ae0998a89dad assets/l2magic/models/block/node_item_synced.json
-d869c4b594f8cae3e00916d60136198baeda2e06 assets/l2magic/models/block/node_item_synced_lit.json
+bb0ad6f2e9a02db647a3bf90eeaf801e6c0080f8 assets/l2magic/models/block/node_item_distribute.json
+8f3be33cf796767b4362d9da22a709356ef6b6a6 assets/l2magic/models/block/node_item_distribute_lit.json
+0b56a760a284a6bdcd2d56059374ecaf766bbc65 assets/l2magic/models/block/node_item_ordered.json
+7c0682f1b6a90b20f50cb097b8bebeb8c032cf9e assets/l2magic/models/block/node_item_ordered_lit.json
+59573a32e2031da0883924e919dc5a7ba60cabfe assets/l2magic/models/block/node_item_simple.json
+df22724ad19309e2f9f6f009b7ed9ed85e7577f7 assets/l2magic/models/block/node_item_simple_lit.json
+9c3740c0236cd27ac34ec4515e5cd3a1dac05369 assets/l2magic/models/block/node_item_synced.json
+c011851d6764afc7dc62468bfa5b698c1ea099c0 assets/l2magic/models/block/node_item_synced_lit.json
 150e5575311f87601003b1bc9744720b6004b795 assets/l2magic/models/item/arcane_inject_book.json
 c65923b86084504c9274d8ba0e0dbd094c3014fe assets/l2magic/models/item/disenchant_book.json
 297534fe5d6f5be1117ac0a31cf147977758648b assets/l2magic/models/item/enchant_apple.json
@@ -33,6 +36,7 @@ d5688ccc11699f71e140949061b6b95e264b9a84 assets/l2magic/models/item/gilded_arcan
 6a11b0f5bd128c3d89ed8d31cf3866df7f00a700 assets/l2magic/models/item/magicium_block.json
 9cd0a507b5d8cc8e73f7f4c89acaa6cc122bc324 assets/l2magic/models/item/magicium_ingot.json
 242631ddfcbb0fec33c6a09b5edb606613b2ece1 assets/l2magic/models/item/magicium_nugget.json
+8d80ac6e7689527fe14d2a4cc0b1e87dab59bd37 assets/l2magic/models/item/node_item_distribute.json
 78330d4c1965ec65f29cce55df7480d919eff3fd assets/l2magic/models/item/node_item_ordered.json
 4195ce426fb220628a208066bfdbb8a3be52b5ed assets/l2magic/models/item/node_item_simple.json
 e3cf8b9c7fa9f6cf0b94aa49a23cd459eaadd29e assets/l2magic/models/item/node_item_synced.json
@@ -94,6 +98,7 @@ e38d3aca2d850bff6b8c3a153177e22fcd39b239 data/l2magic/advancements/recipes/ritua
 aa6a2780ec56ef64f1df6c0d57170b2a08db1b29 data/l2magic/advancements/recipes/ritual_potion_spell/ritual_potion/spell_card.json
 f37a3371b309eb6865724ce7acbeb24bf3c4297c data/l2magic/loot_tables/blocks/enchant_gold_block.json
 61dbc33fef44fc497dcd375436a7d99b324a8c4e data/l2magic/loot_tables/blocks/magicium_block.json
+211ce98e779ebbc7ff062ad166fb1e5907697522 data/l2magic/loot_tables/blocks/node_item_distribute.json
 62d7e395b9abea28d16cf8680104a561d0c60418 data/l2magic/loot_tables/blocks/node_item_ordered.json
 1116505b662b1e654acdace147062ba7abb62c3e data/l2magic/loot_tables/blocks/node_item_simple.json
 ac6815c9dd98259ea9d3b17d2759143b956cc51e data/l2magic/loot_tables/blocks/node_item_synced.json
@@ -148,4 +153,4 @@ bafd718aa8ec2a6b844a6f30e803372f23b11935 data/l2magic/recipes/storage/enchant_go
 9150f6cba70044f1614379afaf6eb7b7474a758d data/l2magic/recipes/storage/magicium_block_unpack.json
 e670870310319cea790fbc5b56ddb14702943847 data/l2magic/recipes/storage/magicium_ingot_storage.json
 9565fe3eba74e192ca35128ffe2b8cebb14d51b7 data/l2magic/recipes/storage/magicium_ingot_unpack.json
-a3e2c1e711adbcac831abb29988b5ec951ae7115 data/minecraft/tags/blocks/mineable/pickaxe.json
+d07ea7535e2f5bdf3104e0bba64880fad9d95632 data/minecraft/tags/blocks/mineable/pickaxe.json

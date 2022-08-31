@@ -8,7 +8,7 @@ public class TransportHandler {
 		if (!node.isValid(token.get())) {
 			return BroadcastTree.empty(node, token);
 		}
-		BroadcastTree.Builder<T> root = BroadcastTree.constructRoot(node, token);
+		TreeBuilder<T> root = BroadcastTree.constructRoot(node, token);
 		root.iterate(ctx, node.getTargets());
 		return root.build();
 	}

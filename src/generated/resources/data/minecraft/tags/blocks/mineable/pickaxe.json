@@ -6,6 +6,7 @@
     "l2magic:magicium_block",
     "l2magic:node_item_simple",
     "l2magic:node_item_ordered",
-    "l2magic:node_item_synced"
+    "l2magic:node_item_synced",
+    "l2magic:node_item_distribute"
   ]
 }
