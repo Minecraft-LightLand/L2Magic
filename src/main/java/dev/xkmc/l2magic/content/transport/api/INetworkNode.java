@@ -12,7 +12,7 @@ public interface INetworkNode<T> {
 	/**
 	 * refresh the cooldown of the node
 	 */
-	void refreshCoolDown(TransportContext<T> ctx);
+	void refreshCoolDown(boolean success);
 
 	/**
 	 * perform transaction guarded by a real token

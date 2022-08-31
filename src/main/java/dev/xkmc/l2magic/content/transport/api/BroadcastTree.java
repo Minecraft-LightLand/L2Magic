@@ -20,14 +20,11 @@ record BroadcastTree<T>(INodeHolder<T> node, List<INetworkNode<T>> children, ICo
 		return consumed;
 	}
 
-	public void refreshCoolDown(TransportContext<T> ctx) {
-		node.refreshCooldown(ctx);
+	public void refreshCoolDown(boolean success) {
 		for (INetworkNode<T> child : children) {
-			child.refreshCoolDown(ctx);
-			CoolDownType type = child.hasAction() ? CoolDownType.SUCCESS : CoolDownType.FAIL;
-			if (ctx.hasError() && ctx.evaluate(node.getIdentifier(), child.getIdentifier()))
-				type = CoolDownType.COLLISION;
-			node.setCoolDownType(type);
+			boolean subSuc = success && child.hasAction();
+			node.refreshCooldown(child.getIdentifier(), subSuc);
+			child.refreshCoolDown(subSuc);
 		}
 	}
 
@@ -64,17 +61,27 @@ record BroadcastTree<T>(INodeHolder<T> node, List<INetworkNode<T>> children, ICo
 			this.token = token;
 		}
 
+		public void iterate(TransportContext<T> ctx, List<INodeSupplier<T>> targets) {
+			for (INodeSupplier<T> pos : targets) {
+				append(ctx, pos);
+				if (!shouldContinue()) break;
+			}
+		}
+
 		public void append(TransportContext<T> ctx, INodeSupplier<T> factory) {
-			ctx.push(factory.getIdentifier());
-			if (!ctx.hasError()) {
-				INetworkNode<T> node = factory.constructNode(ctx, this);
-				int c = node.getConsumed();
-				if (type == NetworkType.ALL && c != 1) {
+			INetworkNode<T> node;
+			if (factory.isValid() && ctx.add(factory.getIdentifier())) {
+				node = factory.constructNode(ctx, this);
+			} else {
+				node = new ErrorNode<>(factory.getIdentifier());
+			}
+			int c = node.getConsumed();
+			if (type == NetworkType.ALL) {
+				if (c != 1) {
 					valid = false;
 				}
-				children.add(node);
 			}
-			ctx.pop();
+			children.add(node);
 		}
 
 		public INetworkNode<T> build() {
@@ -97,9 +104,9 @@ record BroadcastTree<T>(INodeHolder<T> node, List<INetworkNode<T>> children, ICo
 
 		@Override
 		public int getAvailable() {
-			if (type == NetworkType.ONE)
-				return token.getAvailable() - consumed;
-			else return 1;
+			if (type == NetworkType.ALL)
+				return 1;
+			return token.getAvailable() - consumed;
 		}
 
 		@Override

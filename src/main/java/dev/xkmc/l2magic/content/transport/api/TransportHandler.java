@@ -9,10 +9,7 @@ public class TransportHandler {
 			return BroadcastTree.empty(node, token);
 		}
 		BroadcastTree.Builder<T> root = BroadcastTree.constructRoot(node, token);
-		for (INodeSupplier<T> pos : node.getTargets()) {
-			root.append(ctx, pos);
-			if (ctx.hasError() || !root.shouldContinue()) break;
-		}
+		root.iterate(ctx, node.getTargets());
 		return root.build();
 	}
 
@@ -21,9 +18,9 @@ public class TransportHandler {
 		IContentToken<T> token = new GenericToken<>(holder);
 		INetworkNode<T> tree = TransportHandler.broadcastRecursive(ctx, node, token);
 		if (!simulate) {
-			tree.refreshCoolDown(ctx);
+			tree.refreshCoolDown(tree.hasAction());
 		}
-		if (ctx.hasError() || !tree.hasAction()) {
+		if (!tree.hasAction()) {
 			return holder.get();
 		}
 		if (!simulate) {

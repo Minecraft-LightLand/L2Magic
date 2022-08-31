@@ -2,9 +2,7 @@ package dev.xkmc.l2magic.content.transport.item;
 
 import dev.xkmc.l2library.base.tile.BaseBlockEntity;
 import dev.xkmc.l2library.serial.SerialClass;
-import dev.xkmc.l2magic.content.transport.api.CoolDownType;
 import dev.xkmc.l2magic.content.transport.api.NetworkType;
-import dev.xkmc.l2magic.content.transport.api.TransportContext;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
@@ -33,9 +31,9 @@ public abstract class NodeBlockEntity<BE extends NodeBlockEntity<BE>> extends Ba
 
 	public abstract NetworkType getNetworkType();
 
-	public abstract void refreshCooldown(TransportContext<ItemStack> ctx);
+	public abstract void refreshCooldown(BlockPos target, boolean success);
 
-	public abstract void setCoolDownType(CoolDownType type);
+	public abstract boolean isReady();
 
 	@Override
 	public @NotNull <C> LazyOptional<C> getCapability(@NotNull Capability<C> cap, @Nullable Direction side) {

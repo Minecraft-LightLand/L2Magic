@@ -24,15 +24,15 @@ public interface INodeHolder<T> {
 	/**
 	 * refresh cool down for this node
 	 */
-	void refreshCooldown(TransportContext<T> ctx);
-
-	/**
-	 * set the state of this node
-	 */
-	void setCoolDownType(CoolDownType type);
+	void refreshCooldown(BlockPos target, boolean success);
 
 	/**
 	 * return the block position of the node it represents
 	 */
 	BlockPos getIdentifier();
+
+	/**
+	 * return true if this node is ready to accept items
+	 * */
+	boolean isReady();
 }

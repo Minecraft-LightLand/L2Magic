@@ -29,7 +29,7 @@ public abstract class AbstractNodeTarget<T> implements INetworkNode<T> {
 	}
 
 	@Override
-	public void refreshCoolDown(TransportContext<T> ctx) {
+	public void refreshCoolDown(boolean success) {
 	}
 
 	@Override

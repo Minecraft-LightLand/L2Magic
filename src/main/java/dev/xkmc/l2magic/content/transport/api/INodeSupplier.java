@@ -5,6 +5,12 @@ import net.minecraft.core.BlockPos;
 public interface INodeSupplier<T> {
 
 	/**
+	 * return true if this node is ready to accept items
+	 * return false if this node is still in cooldown
+	 * */
+	boolean isValid();
+
+	/**
 	 * construct the network node: test its sub nodes against the content
 	 */
 	INetworkNode<T> constructNode(TransportContext<T> ctx, IContentToken<T> token);

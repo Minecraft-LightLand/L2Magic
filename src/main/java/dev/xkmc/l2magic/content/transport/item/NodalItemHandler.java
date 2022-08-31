@@ -68,9 +68,9 @@ public record NodalItemHandler(NodeBlockEntity<?> be) implements IItemHandler, I
 			if (lazyCap.resolve().isPresent()) {
 				var cap = lazyCap.resolve().get();
 				if (cap instanceof ItemStackNode node) {
-					ans.add(new SimpleNodeSupplier<>(pos, (ctx, token) -> TransportHandler.broadcastRecursive(ctx, node, token)));
+					ans.add(new SimpleNodeSupplier<>(pos, node.isReady(), (ctx, token) -> TransportHandler.broadcastRecursive(ctx, node, token)));
 				} else {
-					ans.add(new SimpleNodeSupplier<>(pos, (ctx, token) -> new ItemNodeTarget(target, cap, token)));
+					ans.add(new SimpleNodeSupplier<>(pos, true, (ctx, token) -> new ItemNodeTarget(target, cap, token)));
 				}
 			}
 		}
@@ -78,18 +78,18 @@ public record NodalItemHandler(NodeBlockEntity<?> be) implements IItemHandler, I
 	}
 
 	@Override
-	public void refreshCooldown(TransportContext<ItemStack> ctx) {
-		be.refreshCooldown(ctx);
-	}
-
-	@Override
-	public void setCoolDownType(CoolDownType type) {
-		be.setCoolDownType(type);
+	public void refreshCooldown(BlockPos target, boolean success) {
+		be.refreshCooldown(target, success);
 	}
 
 	@Override
 	public BlockPos getIdentifier() {
 		return be.getBlockPos();
+	}
+
+	@Override
+	public boolean isReady() {
+		return be.isReady();
 	}
 
 }
