@@ -1,6 +1,9 @@
 package dev.xkmc.l2magic.content.transport.item;
 
-import dev.xkmc.l2magic.content.transport.api.*;
+import dev.xkmc.l2magic.content.transport.api.IContentHolder;
+import dev.xkmc.l2magic.content.transport.api.INodeSupplier;
+import dev.xkmc.l2magic.content.transport.api.NetworkType;
+import dev.xkmc.l2magic.content.transport.api.TransportHandler;
 import dev.xkmc.l2magic.content.transport.core.ItemStackNode;
 import dev.xkmc.l2magic.content.transport.core.SimpleNodeSupplier;
 import net.minecraft.core.BlockPos;
@@ -14,7 +17,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-public record NodalItemHandler(NodeBlockEntity<?> be) implements IItemHandler, ItemStackNode {
+public record NodalItemHandler(ItemNodeEntity be) implements IItemHandler, ItemStackNode {
 
 	@Override
 	public int getSlots() {
@@ -79,7 +82,7 @@ public record NodalItemHandler(NodeBlockEntity<?> be) implements IItemHandler, I
 
 	@Override
 	public void refreshCooldown(BlockPos target, boolean success) {
-		be.refreshCooldown(target, success);
+		be.refreshCoolDown(target, success);
 	}
 
 	@Override

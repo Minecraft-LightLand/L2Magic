@@ -2,7 +2,7 @@ package dev.xkmc.l2magic.content.transport.api;
 
 import net.minecraft.core.BlockPos;
 
-public record ErrorNode<T>(BlockPos pos) implements INetworkNode<T> {
+record ErrorNode<T>(BlockPos pos) implements INetworkNode<T> {
 
 	@Override
 	public int getConsumed() {
