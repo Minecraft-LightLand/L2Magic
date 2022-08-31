@@ -1,7 +1,7 @@
 package dev.xkmc.l2magic.content.transport.tools;
 
 import dev.xkmc.l2library.util.nbt.NBTObj;
-import dev.xkmc.l2magic.content.transport.tile.ILinkableNode;
+import dev.xkmc.l2magic.content.transport.tile.base.ILinkableNode;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.Tag;
 import net.minecraft.world.InteractionResult;
@@ -10,10 +10,19 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.items.CapabilityItemHandler;
+import org.jetbrains.annotations.Nullable;
 
 public class LinkerItem extends Item {
 
 	private static final String KEY_POS = "first_pos";
+
+	@Nullable
+	public static BlockPos getPos(ItemStack stack) {
+		if (stack.getTag() != null && stack.getTag().contains(KEY_POS, Tag.TAG_COMPOUND)) {
+			return new NBTObj(stack, KEY_POS).toBlockPos();
+		}
+		return null;
+	}
 
 	public LinkerItem(Properties properties) {
 		super(properties.stacksTo(1));
@@ -24,9 +33,14 @@ public class LinkerItem extends Item {
 		BlockEntity be = ctx.getLevel().getBlockEntity(ctx.getClickedPos());
 		ItemStack stack = ctx.getItemInHand();
 		BlockEntity old = null;
-		if (stack.getTag() != null && stack.getTag().contains(KEY_POS, Tag.TAG_COMPOUND)) {
-			BlockPos pos = new NBTObj(stack, KEY_POS).toBlockPos();
-			old = ctx.getLevel().getBlockEntity(pos);
+		BlockPos storedPos = getPos(stack);
+		if (storedPos != null) {
+			old = ctx.getLevel().getBlockEntity(storedPos);
+		}
+		if (old instanceof ILinkableNode node) {
+			if (old.getBlockPos().distSqr(ctx.getClickedPos()) > node.getMaxDistanceSqr()) {
+				old = null;
+			}
 		}
 		if (old instanceof ILinkableNode node) {
 			if (be != null) {

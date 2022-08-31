@@ -12,6 +12,7 @@ import dev.xkmc.l2magic.content.magic.block.RitualRenderer;
 import dev.xkmc.l2magic.content.magic.block.RitualSide;
 import dev.xkmc.l2magic.content.transport.tile.block.ItemTransferBlock;
 import dev.xkmc.l2magic.content.transport.tile.block.NodeSetFilter;
+import dev.xkmc.l2magic.content.transport.tile.client.ItemNodeRenderer;
 import dev.xkmc.l2magic.content.transport.tile.client.NodeRenderer;
 import dev.xkmc.l2magic.content.transport.tile.item.DistributeItemNodeBlockEntity;
 import dev.xkmc.l2magic.content.transport.tile.item.OrderedItemNodeBlockEntity;
@@ -105,13 +106,13 @@ public class LMBlocks {
 					.defaultLoot().defaultLang().simpleItem().register();
 
 			TE_ITEM_SIMPLE = L2Magic.REGISTRATE.blockEntity("node_item_simple", SimpleItemNodeBlockEntity::new)
-					.validBlock(B_ITEM_SIMPLE).renderer(() -> NodeRenderer::new).register();
+					.validBlock(B_ITEM_SIMPLE).renderer(() -> ItemNodeRenderer::new).register();
 			TE_ITEM_ORDERED = L2Magic.REGISTRATE.blockEntity("node_item_ordered", OrderedItemNodeBlockEntity::new)
-					.validBlock(B_ITEM_ORDERED).renderer(() -> NodeRenderer::new).register();
+					.validBlock(B_ITEM_ORDERED).renderer(() -> ItemNodeRenderer::new).register();
 			TE_ITEM_SYNCED = L2Magic.REGISTRATE.blockEntity("node_item_synced", SyncedItemNodeBlockEntity::new)
-					.validBlock(B_ITEM_SYNCED).renderer(() -> NodeRenderer::new).register();
+					.validBlock(B_ITEM_SYNCED).renderer(() -> ItemNodeRenderer::new).register();
 			TE_ITEM_DISTRIBUTE = L2Magic.REGISTRATE.blockEntity("node_item_distribute", DistributeItemNodeBlockEntity::new)
-					.validBlock(B_ITEM_DISTRIBUTE).renderer(() -> NodeRenderer::new).register();
+					.validBlock(B_ITEM_DISTRIBUTE).renderer(() -> ItemNodeRenderer::new).register();
 		}
 	}
 

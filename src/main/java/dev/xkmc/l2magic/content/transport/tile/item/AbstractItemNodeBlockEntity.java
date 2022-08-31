@@ -3,7 +3,8 @@ package dev.xkmc.l2magic.content.transport.tile.item;
 import dev.xkmc.l2library.serial.SerialClass;
 import dev.xkmc.l2magic.content.transport.item.ItemNodeEntity;
 import dev.xkmc.l2magic.content.transport.item.NodalItemHandler;
-import dev.xkmc.l2magic.content.transport.tile.AbstractNodeBlockEntity;
+import dev.xkmc.l2magic.content.transport.tile.base.AbstractNodeBlockEntity;
+import dev.xkmc.l2magic.content.transport.tile.base.IRenderableItemNode;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
@@ -17,7 +18,7 @@ import org.jetbrains.annotations.Nullable;
 
 @SerialClass
 public abstract class AbstractItemNodeBlockEntity<BE extends AbstractItemNodeBlockEntity<BE>> extends AbstractNodeBlockEntity<BE>
-		implements ItemNodeEntity {
+		implements ItemNodeEntity, IRenderableItemNode {
 
 	private final LazyOptional<NodalItemHandler> itemHandler = LazyOptional.of(() -> new NodalItemHandler(this));
 

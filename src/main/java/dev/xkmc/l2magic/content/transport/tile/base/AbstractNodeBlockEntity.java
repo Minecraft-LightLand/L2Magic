@@ -1,4 +1,4 @@
-package dev.xkmc.l2magic.content.transport.tile;
+package dev.xkmc.l2magic.content.transport.tile.base;
 
 import dev.xkmc.l2library.base.tile.BaseBlockEntity;
 import dev.xkmc.l2library.block.TickableBlockEntity;
@@ -39,6 +39,10 @@ public abstract class AbstractNodeBlockEntity<BE extends AbstractNodeBlockEntity
 	public abstract int getMaxCoolDown();
 
 	public abstract Connector getConnector();
+
+	public int getMaxDistanceSqr() {
+		return 256;
+	}
 
 	public final int getCoolDown() {
 		return Math.min(getMaxCoolDown(), cooldown);

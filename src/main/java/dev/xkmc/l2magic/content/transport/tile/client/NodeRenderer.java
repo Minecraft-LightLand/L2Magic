@@ -2,9 +2,11 @@ package dev.xkmc.l2magic.content.transport.tile.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
+import dev.xkmc.l2library.util.Proxy;
 import dev.xkmc.l2library.util.math.RenderUtils;
-import dev.xkmc.l2magic.content.transport.tile.CoolDownType;
-import dev.xkmc.l2magic.content.transport.tile.IRenderableNode;
+import dev.xkmc.l2magic.content.transport.tile.base.CoolDownType;
+import dev.xkmc.l2magic.content.transport.tile.base.IRenderableNode;
+import dev.xkmc.l2magic.content.transport.tools.LinkerItem;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
@@ -12,16 +14,18 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.phys.Vec3;
 
 public class NodeRenderer<T extends BlockEntity & IRenderableNode> implements BlockEntityRenderer<T> {
 
 	public static final ResourceLocation BEAM_TEXTURE = new ResourceLocation("textures/entity/beacon_beam.png");
 
 	public static void renderLightBeam(PoseStack mat, MultiBufferSource vcp, ResourceLocation id, float t1,
-									   BeamRenderer br, float x, float y, float z) {
-		float xz = (float) Math.sqrt(x * x + z * z);
+									   BeamRenderer br, double x, double y, double z) {
+		double xz = Math.sqrt(x * x + z * z);
 		float len = (float) Math.sqrt(xz * xz + y * y);
 		mat.pushPose();
 		mat.mulPose(Vector3f.YN.rotation((float) (Math.atan2(z, x) - Math.PI / 2)));
@@ -60,10 +64,16 @@ public class NodeRenderer<T extends BlockEntity & IRenderableNode> implements Bl
 			br.setColorHSB(hue, sat, bright);
 			renderLightBeam(poseStack, source, BEAM_TEXTURE, time, br, x, y, z);
 		}
-		poseStack.popPose();
-		if (level != null && !entity.getItem().isEmpty()) {
-			RenderUtils.renderItemAbove(entity.getItem(), 0.5, level, partialTick, poseStack, source, light, overlay);
+		ItemStack linker = Proxy.getPlayer().getMainHandItem();
+		if (linker.getItem() instanceof LinkerItem) {
+			BlockPos pos = LinkerItem.getPos(linker);
+			if (pos != null && pos.equals(entity.getBlockPos())) {
+				br.setColorHSB(0, 0, 0.5f);
+				Vec3 p = Proxy.getPlayer().getEyePosition(partialTick);
+				renderLightBeam(poseStack, source, BEAM_TEXTURE, time, br, p.x, p.y, p.z);
+			}
 		}
+		poseStack.popPose();
 	}
 
 	public boolean shouldRenderOffScreen(T entity) {

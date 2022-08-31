@@ -1,7 +1,7 @@
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 
-package dev.xkmc.l2magic.content.transport.tile;
+package dev.xkmc.l2magic.content.transport.tile.base;
 
 import net.minecraft.MethodsReturnNonnullByDefault;
 

@@ -1,4 +1,4 @@
-package dev.xkmc.l2magic.content.transport.tile;
+package dev.xkmc.l2magic.content.transport.tile.base;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.ItemStack;
@@ -14,8 +14,5 @@ public interface IRenderableNode {
 	List<BlockPos> target();
 
 	CoolDownType getType(BlockPos pos);
-
-	ItemStack getItem();
-
 
 }
