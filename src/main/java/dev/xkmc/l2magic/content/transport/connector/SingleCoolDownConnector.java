@@ -5,6 +5,7 @@ import dev.xkmc.l2magic.content.transport.tile.base.CoolDownType;
 import net.minecraft.core.BlockPos;
 
 import java.util.HashMap;
+import java.util.List;
 
 @SerialClass
 public abstract class SingleCoolDownConnector implements Connector {
@@ -18,6 +19,11 @@ public abstract class SingleCoolDownConnector implements Connector {
 	private int simulatedCoolDown;
 
 	public int maxCoolDown;
+
+	@Override
+	public List<BlockPos> getAvailableTarget() {
+		return getConnected();
+	}
 
 	protected SingleCoolDownConnector(int maxCoolDown) {
 		this.maxCoolDown = maxCoolDown;

@@ -9,7 +9,9 @@ import java.util.function.Predicate;
 
 public interface Connector extends NetworkType {
 
-	List<BlockPos> target();
+	List<BlockPos> getConnected();
+
+	List<BlockPos> getAvailableTarget();
 
 	void perform();
 

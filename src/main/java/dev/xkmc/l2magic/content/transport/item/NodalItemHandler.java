@@ -61,7 +61,7 @@ public record NodalItemHandler(ItemNodeEntity be) implements IItemHandler, ItemS
 		Level level = be.getLevel();
 		if (level == null) return List.of();
 		List<INodeSupplier<ItemStack>> ans = new ArrayList<>();
-		for (BlockPos pos : be.getConnector().target()) {
+		for (BlockPos pos : be.getConnector().getAvailableTarget()) {
 			BlockEntity target = level.getBlockEntity(pos);
 			if (target != null) {
 				var lazyCap = target.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY);

@@ -13,7 +13,7 @@ public class DistributeConnector extends SingleCoolDownConnector {
 	@SerialClass.SerialField(toClient = true)
 	public ArrayList<BlockPos> list = new ArrayList<>();
 
-	@SerialClass.SerialField
+	@SerialClass.SerialField(toClient = true)
 	private int id;
 
 	public DistributeConnector(int max) {
@@ -21,7 +21,12 @@ public class DistributeConnector extends SingleCoolDownConnector {
 	}
 
 	@Override
-	public List<BlockPos> target() {
+	public List<BlockPos> getConnected() {
+		return list;
+	}
+
+	@Override
+	public List<BlockPos> getAvailableTarget() {
 		if (list.isEmpty()) {
 			return List.of();
 		}
@@ -56,4 +61,5 @@ public class DistributeConnector extends SingleCoolDownConnector {
 	public boolean shouldContinue(int available, int consumed, int size) {
 		return consumed == 0 && super.shouldContinue(available, consumed, size);
 	}
+
 }

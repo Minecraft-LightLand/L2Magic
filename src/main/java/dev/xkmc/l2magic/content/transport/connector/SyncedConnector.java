@@ -18,7 +18,7 @@ public class SyncedConnector extends SingleCoolDownConnector {
 	}
 
 	@Override
-	public List<BlockPos> target() {
+	public List<BlockPos> getConnected() {
 		return list;
 	}
 

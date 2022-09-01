@@ -23,7 +23,7 @@ public class OrderedConnector extends SingleCoolDownConnector {
 	}
 
 	@Override
-	public List<BlockPos> target() {
+	public List<BlockPos> getConnected() {
 		return new ArrayList<>(set);
 	}
 
