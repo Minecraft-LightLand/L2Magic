@@ -53,7 +53,7 @@ public abstract class AbstractNodeBlockEntity<BE extends AbstractNodeBlockEntity
 	}
 
 	public final NetworkType getNetworkType() {
-		return getConnector().getNetworkType();
+		return getConnector();
 	}
 
 	public final void refreshCoolDown(BlockPos target, boolean success, boolean simulate) {

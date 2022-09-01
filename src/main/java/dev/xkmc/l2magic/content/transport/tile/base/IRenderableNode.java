@@ -1,7 +1,6 @@
 package dev.xkmc.l2magic.content.transport.tile.base;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.item.ItemStack;
 
 import java.util.List;
 

@@ -1,7 +1,6 @@
 package dev.xkmc.l2magic.content.transport.connector;
 
 import dev.xkmc.l2library.serial.SerialClass;
-import dev.xkmc.l2magic.content.transport.api.NetworkType;
 import net.minecraft.core.BlockPos;
 import org.jetbrains.annotations.Nullable;
 
@@ -20,11 +19,6 @@ public class SimpleConnector implements Connector {
 	}
 
 	@Override
-	public NetworkType getNetworkType() {
-		return NetworkType.ONE;
-	}
-
-	@Override
 	public void link(BlockPos pos) {
 		if (this.pos != null && this.pos.equals(pos)) {
 			this.pos = null;
@@ -32,4 +26,20 @@ public class SimpleConnector implements Connector {
 			this.pos = pos;
 		}
 	}
+
+	@Override
+	public boolean testConsumption(int c) {
+		return true;
+	}
+
+	@Override
+	public boolean alwaysContinue() {
+		return false;
+	}
+
+	@Override
+	public int provide(int available, int consumed, int size) {
+		return Math.max(0, available - consumed);
+	}
+
 }

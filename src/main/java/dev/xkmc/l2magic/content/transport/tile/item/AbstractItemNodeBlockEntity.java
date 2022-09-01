@@ -48,7 +48,7 @@ public abstract class AbstractItemNodeBlockEntity<BE extends AbstractItemNodeBlo
 		return super.getCapability(cap, side);
 	}
 
-	protected NodalItemHandler getHandler(){
+	protected NodalItemHandler getHandler() {
 		return itemHandler.resolve().get();
 	}
 

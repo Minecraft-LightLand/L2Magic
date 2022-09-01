@@ -5,11 +5,9 @@ import net.minecraft.core.BlockPos;
 
 import java.util.List;
 
-public interface Connector {
+public interface Connector extends NetworkType {
 
 	List<BlockPos> target();
-
-	NetworkType getNetworkType();
 
 	void link(BlockPos pos);
 }

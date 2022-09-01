@@ -3,9 +3,9 @@ package dev.xkmc.l2magic.content.transport.tile.client;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
 import dev.xkmc.l2library.util.Proxy;
-import dev.xkmc.l2library.util.math.RenderUtils;
 import dev.xkmc.l2magic.content.transport.tile.base.CoolDownType;
 import dev.xkmc.l2magic.content.transport.tile.base.IRenderableNode;
+import dev.xkmc.l2magic.content.transport.tools.ILinker;
 import dev.xkmc.l2magic.content.transport.tools.LinkerItem;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -65,7 +65,7 @@ public class NodeRenderer<T extends BlockEntity & IRenderableNode> implements Bl
 			renderLightBeam(poseStack, source, BEAM_TEXTURE, time, br, x, y, z);
 		}
 		ItemStack linker = Proxy.getPlayer().getMainHandItem();
-		if (linker.getItem() instanceof LinkerItem) {
+		if (linker.getItem() instanceof ILinker item && item.storesPos()) {
 			BlockPos pos = LinkerItem.getPos(linker);
 			if (pos != null && pos.equals(entity.getBlockPos())) {
 				br.setColorHSB(0, 0, 0.5f);

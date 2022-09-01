@@ -1,7 +1,6 @@
 package dev.xkmc.l2magic.content.transport.tile.item;
 
 import dev.xkmc.l2library.serial.SerialClass;
-import dev.xkmc.l2magic.content.transport.api.NetworkType;
 import dev.xkmc.l2magic.content.transport.connector.Connector;
 import dev.xkmc.l2magic.content.transport.connector.ListConnector;
 import net.minecraft.core.BlockPos;
@@ -12,7 +11,7 @@ import net.minecraft.world.level.block.state.BlockState;
 public class DistributeItemNodeBlockEntity extends AbstractItemNodeBlockEntity<DistributeItemNodeBlockEntity> {
 
 	@SerialClass.SerialField(toClient = true)
-	private final ListConnector connector = new ListConnector(NetworkType.FILL);
+	private final ListConnector connector = new ListConnector(false);
 
 	public DistributeItemNodeBlockEntity(BlockEntityType<DistributeItemNodeBlockEntity> type, BlockPos pos, BlockState state) {
 		super(type, pos, state);

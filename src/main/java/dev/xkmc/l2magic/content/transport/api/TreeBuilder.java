@@ -50,7 +50,7 @@ class TreeBuilder<T> implements IContentToken<T> {
 	}
 
 	public boolean shouldContinue() {
-		return type.alwaysContinue() || token.getAvailable() > 0;
+		return type.alwaysContinue() || getAvailable() > 0;
 	}
 
 	@Override

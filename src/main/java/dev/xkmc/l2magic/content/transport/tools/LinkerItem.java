@@ -12,7 +12,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.items.CapabilityItemHandler;
 import org.jetbrains.annotations.Nullable;
 
-public class LinkerItem extends Item {
+public class LinkerItem extends Item implements ILinker {
 
 	private static final String KEY_POS = "first_pos";
 
@@ -61,4 +61,10 @@ public class LinkerItem extends Item {
 		}
 		return InteractionResult.PASS;
 	}
+
+	@Override
+	public boolean storesPos() {
+		return true;
+	}
+
 }

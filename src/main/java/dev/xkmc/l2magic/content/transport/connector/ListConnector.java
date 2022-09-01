@@ -1,7 +1,6 @@
 package dev.xkmc.l2magic.content.transport.connector;
 
 import dev.xkmc.l2library.serial.SerialClass;
-import dev.xkmc.l2magic.content.transport.api.NetworkType;
 import net.minecraft.core.BlockPos;
 
 import java.util.ArrayList;
@@ -13,10 +12,10 @@ public class ListConnector implements Connector {
 	@SerialClass.SerialField(toClient = true)
 	public ArrayList<BlockPos> list = new ArrayList<>();
 
-	private final NetworkType type;
+	private final boolean sync;
 
-	public ListConnector(NetworkType type){
-		this.type = type;
+	public ListConnector(boolean sync) {
+		this.sync = sync;
 	}
 
 	@Override
@@ -25,14 +24,25 @@ public class ListConnector implements Connector {
 	}
 
 	@Override
-	public NetworkType getNetworkType() {
-		return type;
-	}
-
-	@Override
 	public void link(BlockPos pos) {
 		if (list.contains(pos)) list.remove(pos);
 		else list.add(pos);
 	}
 
+
+	@Override
+	public boolean testConsumption(int c) {
+		return false;
+	}
+
+	@Override
+	public boolean alwaysContinue() {
+		return false;
+	}
+
+	@Override
+	public int provide(int available, int consumed, int size) {
+		if (sync) return 1;
+		return Math.max(available - consumed, available / size);
+	}
 }
