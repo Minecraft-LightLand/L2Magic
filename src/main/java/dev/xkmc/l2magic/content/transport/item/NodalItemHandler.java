@@ -48,7 +48,7 @@ public record NodalItemHandler(ItemNodeEntity be) implements IItemHandler, ItemS
 
 	@Override
 	public NetworkType getNetworkType() {
-		return be.getNetworkType();
+		return be.getConnector();
 	}
 
 	@Override
@@ -61,7 +61,7 @@ public record NodalItemHandler(ItemNodeEntity be) implements IItemHandler, ItemS
 		Level level = be.getLevel();
 		if (level == null) return List.of();
 		List<INodeSupplier<ItemStack>> ans = new ArrayList<>();
-		for (BlockPos pos : be.target()) {
+		for (BlockPos pos : be.getConnector().target()) {
 			BlockEntity target = level.getBlockEntity(pos);
 			if (target != null) {
 				var lazyCap = target.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY);
@@ -92,7 +92,7 @@ public record NodalItemHandler(ItemNodeEntity be) implements IItemHandler, ItemS
 
 	@Override
 	public boolean isReady() {
-		return be.isReady();
+		return be.getConnector().isReady();
 	}
 
 }

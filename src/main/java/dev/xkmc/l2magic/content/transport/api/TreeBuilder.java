@@ -24,19 +24,20 @@ class TreeBuilder<T> implements IContentToken<T> {
 		size = targets.size();
 		for (INodeSupplier<T> pos : targets) {
 			append(ctx, pos);
-			if (!shouldContinue()) break;
+			if (!type.shouldContinue(token.getAvailable(), consumed, size)) break;
 		}
 	}
 
 	public void append(TransportContext<T> ctx, INodeSupplier<T> factory) {
 		INetworkNode<T> node;
+		int avail = getAvailable();
 		if (factory.isValid() && ctx.add(factory.getIdentifier())) {
 			node = factory.constructNode(ctx, this);
 		} else {
 			node = new ErrorNode<>(factory.getIdentifier());
 		}
 		int c = node.getConsumed();
-		valid &= type.testConsumption(c);
+		valid &= type.testConsumption(avail, c);
 		children.add(node);
 	}
 
@@ -47,10 +48,6 @@ class TreeBuilder<T> implements IContentToken<T> {
 			val = consumed;
 		}
 		return new BroadcastTree<>(node, children, token.get(), val);
-	}
-
-	public boolean shouldContinue() {
-		return type.alwaysContinue() || getAvailable() > 0;
 	}
 
 	@Override

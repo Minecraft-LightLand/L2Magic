@@ -4,6 +4,7 @@ import dev.xkmc.l2library.serial.SerialClass;
 import dev.xkmc.l2magic.content.transport.connector.Connector;
 import dev.xkmc.l2magic.content.transport.connector.SimpleConnector;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -16,15 +17,10 @@ import net.minecraftforge.items.IItemHandler;
 public class RetrieverItemNodeBlockEntity extends AbstractItemNodeBlockEntity<RetrieverItemNodeBlockEntity> {
 
 	@SerialClass.SerialField(toClient = true)
-	private final SimpleConnector connector = new SimpleConnector();
+	private final SimpleConnector connector = new SimpleConnector(80);
 
 	public RetrieverItemNodeBlockEntity(BlockEntityType<RetrieverItemNodeBlockEntity> type, BlockPos pos, BlockState state) {
 		super(type, pos, state);
-	}
-
-	@Override
-	public int getMaxCoolDown() {
-		return 80;
 	}
 
 	@Override
@@ -34,7 +30,7 @@ public class RetrieverItemNodeBlockEntity extends AbstractItemNodeBlockEntity<Re
 
 	@Override
 	public void tick() {
-		if (level != null && !level.isClientSide() && isReady()) {
+		if (level != null && !level.isClientSide() && getConnector().isReady()) {
 			BlockPos next = getBlockPos().relative(getBlockState().getValue(BlockStateProperties.FACING));
 			BlockEntity target = level.getBlockEntity(next);
 			if (target != null) {
@@ -55,10 +51,18 @@ public class RetrieverItemNodeBlockEntity extends AbstractItemNodeBlockEntity<Re
 			if (stack.isEmpty()) continue;
 			ItemStack attempt = getHandler().insertItem(0, stack, true);
 			if (attempt.getCount() == stack.getCount()) continue;
-			stack = target.extractItem(i, attempt.getCount(), false);
-			getHandler().insertItem(0, stack, false);
+			stack = target.extractItem(i, stack.getCount() - attempt.getCount(), false);
+			ItemStack leftover = getHandler().insertItem(0, stack, false);
+			drop(leftover);
 			return;
 		}
+	}
+
+	private void drop(ItemStack stack) {
+		if (stack.isEmpty()) return;
+		if (level == null || level.isClientSide()) return;
+		BlockPos pos = getBlockPos();
+		level.addFreshEntity(new ItemEntity(level, pos.getX() + 0.5, pos.getY() + 1.5, pos.getZ() + 0.5, stack));
 	}
 
 }

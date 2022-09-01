@@ -8,11 +8,15 @@ import java.util.List;
 import java.util.function.Predicate;
 
 @SerialClass
-public class SimpleConnector implements Connector {
+public class SimpleConnector extends SingleCoolDownConnector {
 
 	@Nullable
 	@SerialClass.SerialField(toClient = true)
 	public BlockPos pos = null;
+
+	public SimpleConnector(int max) {
+		super(max);
+	}
 
 	@Override
 	public List<BlockPos> target() {
@@ -32,21 +36,6 @@ public class SimpleConnector implements Connector {
 	public void removeIf(Predicate<BlockPos> o) {
 		if (pos == null) return;
 		if (o.test(pos)) pos = null;
-	}
-
-	@Override
-	public boolean testConsumption(int c) {
-		return true;
-	}
-
-	@Override
-	public boolean alwaysContinue() {
-		return false;
-	}
-
-	@Override
-	public int provide(int available, int consumed, int size) {
-		return Math.max(0, available - consumed);
 	}
 
 }

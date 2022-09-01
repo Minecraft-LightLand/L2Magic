@@ -2,7 +2,7 @@ package dev.xkmc.l2magic.content.transport.tile.item;
 
 import dev.xkmc.l2library.serial.SerialClass;
 import dev.xkmc.l2magic.content.transport.connector.Connector;
-import dev.xkmc.l2magic.content.transport.connector.ListConnector;
+import dev.xkmc.l2magic.content.transport.connector.DistributeConnector;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -11,15 +11,10 @@ import net.minecraft.world.level.block.state.BlockState;
 public class DistributeItemNodeBlockEntity extends AbstractItemNodeBlockEntity<DistributeItemNodeBlockEntity> {
 
 	@SerialClass.SerialField(toClient = true)
-	private final ListConnector connector = new ListConnector(false);
+	private final DistributeConnector connector = new DistributeConnector(80);
 
 	public DistributeItemNodeBlockEntity(BlockEntityType<DistributeItemNodeBlockEntity> type, BlockPos pos, BlockState state) {
 		super(type, pos, state);
-	}
-
-	@Override
-	public int getMaxCoolDown() {
-		return 80;
 	}
 
 	@Override

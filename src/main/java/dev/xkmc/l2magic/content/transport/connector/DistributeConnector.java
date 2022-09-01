@@ -8,47 +8,45 @@ import java.util.List;
 import java.util.function.Predicate;
 
 @SerialClass
-public class ListConnector implements Connector {
+public class DistributeConnector extends SingleCoolDownConnector {
 
 	@SerialClass.SerialField(toClient = true)
 	public ArrayList<BlockPos> list = new ArrayList<>();
 
-	private final boolean sync;
+	@SerialClass.SerialField
+	private int id;
 
-	public ListConnector(boolean sync) {
-		this.sync = sync;
+	public DistributeConnector(int max) {
+		super(max);
 	}
 
 	@Override
 	public List<BlockPos> target() {
-		return list;
+		id %= list.size();
+		return List.of(list.get(id));
+	}
+
+	@Override
+	public void perform() {
+		super.perform();
+		id++;
 	}
 
 	@Override
 	public void link(BlockPos pos) {
 		if (list.contains(pos)) list.remove(pos);
 		else list.add(pos);
+		id = 0;
 	}
 
 	@Override
 	public void removeIf(Predicate<BlockPos> o) {
 		list.removeIf(o);
+		id = 0;
 	}
 
 	@Override
-	public boolean testConsumption(int c) {
-		return false;
+	public boolean shouldContinue(int available, int consumed, int size) {
+		return consumed == 0 && super.shouldContinue(available, consumed, size);
 	}
-
-	@Override
-	public boolean alwaysContinue() {
-		return false;
-	}
-
-	@Override
-	public int provide(int available, int consumed, int size) {
-		if (sync) return 1;
-		return Math.min(available - consumed, available / size);
-	}
-
 }

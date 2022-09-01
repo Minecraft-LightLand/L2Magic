@@ -10,14 +10,15 @@ import java.util.TreeSet;
 import java.util.function.Predicate;
 
 @SerialClass
-public class OrderedConnector implements Connector {
+public class OrderedConnector extends SingleCoolDownConnector {
 
 	@SerialClass.SerialField(toClient = true)
 	public TreeSet<BlockPos> set = new TreeSet<>(this::comparator);
 
 	private final BlockEntity center;
 
-	public OrderedConnector(BlockEntity center) {
+	public OrderedConnector(BlockEntity center, int max) {
+		super(max);
 		this.center = center;
 	}
 
@@ -39,21 +40,6 @@ public class OrderedConnector implements Connector {
 
 	private int comparator(BlockPos a, BlockPos b) {
 		return Double.compare(center.getBlockPos().distSqr(a), center.getBlockPos().distSqr(b));
-	}
-
-	@Override
-	public boolean testConsumption(int c) {
-		return false;
-	}
-
-	@Override
-	public boolean alwaysContinue() {
-		return false;
-	}
-
-	@Override
-	public int provide(int available, int consumed, int size) {
-		return Math.max(0, available - consumed);
 	}
 
 }

@@ -29,12 +29,12 @@ public class RitualTE extends SyncedSingleItemTE {
 
 	@Override
 	public boolean canPlaceItemThroughFace(int slot, ItemStack stack, @Nullable Direction dire) {
-		return dire == Direction.UP && super.canPlaceItemThroughFace(slot, stack, dire);
+		return super.canPlaceItemThroughFace(slot, stack, dire);
 	}
 
 	@Override
 	public boolean canTakeItemThroughFace(int slot, ItemStack stack, Direction dire) {
-		return dire == Direction.DOWN && super.canTakeItemThroughFace(slot, stack, dire);
+		return super.canTakeItemThroughFace(slot, stack, dire);
 	}
 
 	@Override

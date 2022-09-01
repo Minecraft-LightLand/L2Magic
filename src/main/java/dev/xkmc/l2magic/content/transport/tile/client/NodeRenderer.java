@@ -3,6 +3,7 @@ package dev.xkmc.l2magic.content.transport.tile.client;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
 import dev.xkmc.l2library.util.Proxy;
+import dev.xkmc.l2magic.content.transport.connector.Connector;
 import dev.xkmc.l2magic.content.transport.tile.base.CoolDownType;
 import dev.xkmc.l2magic.content.transport.tile.base.IRenderableNode;
 import dev.xkmc.l2magic.content.transport.tools.ILinker;
@@ -43,21 +44,22 @@ public class NodeRenderer<T extends BlockEntity & IRenderableNode> implements Bl
 
 	@Override
 	public void render(T entity, float partialTick, PoseStack poseStack, MultiBufferSource source, int light, int overlay) {
-		float coolDown = Math.max(0, entity.getCoolDown() - partialTick);
-		int max = Math.max(1, entity.getMaxCoolDown());
-		float percentage = Mth.clamp(coolDown / max, 0, 1);
 		Level level = entity.getLevel();
 		long gameTime = level == null ? 0 : level.getGameTime();
 		float time = Math.floorMod(gameTime, 80L) + partialTick;
 		poseStack.pushPose();
 		poseStack.translate(0.5D, 0.5D, 0.5D);
 		BeamRenderer br = new BeamRenderer();
-		for (BlockPos target : entity.target()) {
+		Connector connector = entity.getConnector();
+		for (BlockPos target : connector.target()) {
+			float coolDown = Math.max(0, connector.getCoolDown(target) - partialTick);
+			int max = Math.max(1, connector.getMaxCoolDown(target));
+			float percentage = Mth.clamp(coolDown / max, 0, 1);
 			BlockPos p = target.subtract(entity.getBlockPos());
 			int x = p.getX();
 			int y = p.getY();
 			int z = p.getZ();
-			CoolDownType type = entity.getType(target);
+			CoolDownType type = connector.getType(target);
 			float hue = type == CoolDownType.GREEN ? 0.67f : 0;
 			float sat = type == CoolDownType.GREY ? 0 : percentage;
 			float bright = type == CoolDownType.GREY ? 0.5f : (percentage + 1) * 0.5f;
@@ -70,7 +72,8 @@ public class NodeRenderer<T extends BlockEntity & IRenderableNode> implements Bl
 			if (pos != null && pos.equals(entity.getBlockPos())) {
 				br.setColorHSB(0, 0, 0.5f);
 				Vec3 p = Proxy.getPlayer().getEyePosition(partialTick);
-				renderLightBeam(poseStack, source, BEAM_TEXTURE, time, br, p.x, p.y, p.z);
+				BlockPos c = entity.getBlockPos();
+				renderLightBeam(poseStack, source, BEAM_TEXTURE, time, br, p.x - c.getX() - 0.5, p.y - c.getY() - 1, p.z - c.getZ() - 0.5);
 			}
 		}
 		poseStack.popPose();
