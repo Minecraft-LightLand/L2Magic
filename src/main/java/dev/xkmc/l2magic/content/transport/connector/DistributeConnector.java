@@ -22,8 +22,15 @@ public class DistributeConnector extends SingleCoolDownConnector {
 
 	@Override
 	public List<BlockPos> target() {
+		if (list.isEmpty()) {
+			return List.of();
+		}
 		id %= list.size();
-		return List.of(list.get(id));
+		List<BlockPos> ans = new ArrayList<>();
+		for (int i = 0; i < list.size(); i++) {
+			ans.add(list.get((id + i) % list.size()));
+		}
+		return ans;
 	}
 
 	@Override
