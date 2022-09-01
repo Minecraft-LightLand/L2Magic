@@ -1,0 +1,7 @@
+{
+  "parent": "l2magic:block/node_side_large",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "all": "l2magic:block/node/item/node_item_retrieve_lit"
+  }
+}

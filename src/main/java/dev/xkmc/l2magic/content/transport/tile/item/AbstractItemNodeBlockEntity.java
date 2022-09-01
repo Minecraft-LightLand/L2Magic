@@ -20,7 +20,7 @@ import org.jetbrains.annotations.Nullable;
 public abstract class AbstractItemNodeBlockEntity<BE extends AbstractItemNodeBlockEntity<BE>> extends AbstractNodeBlockEntity<BE>
 		implements ItemNodeEntity, IRenderableItemNode {
 
-	private final LazyOptional<NodalItemHandler> itemHandler = LazyOptional.of(() -> new NodalItemHandler(this));
+	protected final LazyOptional<NodalItemHandler> itemHandler = LazyOptional.of(() -> new NodalItemHandler(this));
 
 	public AbstractItemNodeBlockEntity(BlockEntityType<BE> type, BlockPos pos, BlockState state) {
 		super(type, pos, state);
@@ -46,6 +46,10 @@ public abstract class AbstractItemNodeBlockEntity<BE extends AbstractItemNodeBlo
 			return itemHandler.cast();
 		}
 		return super.getCapability(cap, side);
+	}
+
+	protected NodalItemHandler getHandler(){
+		return itemHandler.resolve().get();
 	}
 
 }

@@ -13,11 +13,7 @@ import dev.xkmc.l2magic.content.magic.block.RitualSide;
 import dev.xkmc.l2magic.content.transport.tile.block.ItemTransferBlock;
 import dev.xkmc.l2magic.content.transport.tile.block.NodeSetFilter;
 import dev.xkmc.l2magic.content.transport.tile.client.ItemNodeRenderer;
-import dev.xkmc.l2magic.content.transport.tile.client.NodeRenderer;
-import dev.xkmc.l2magic.content.transport.tile.item.DistributeItemNodeBlockEntity;
-import dev.xkmc.l2magic.content.transport.tile.item.OrderedItemNodeBlockEntity;
-import dev.xkmc.l2magic.content.transport.tile.item.SimpleItemNodeBlockEntity;
-import dev.xkmc.l2magic.content.transport.tile.item.SyncedItemNodeBlockEntity;
+import dev.xkmc.l2magic.content.transport.tile.item.*;
 import dev.xkmc.l2magic.init.L2Magic;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
@@ -39,7 +35,7 @@ public class LMBlocks {
 	public static final BlockEntry<DelegateBlock> B_RITUAL_CORE, B_RITUAL_SIDE;
 	public static final BlockEntry<Block> ENCHANT_GOLD_BLOCK, MAGICIUM_BLOCK;
 
-	public static final BlockEntry<DelegateBlock> B_ITEM_SIMPLE, B_ITEM_ORDERED, B_ITEM_SYNCED, B_ITEM_DISTRIBUTE;
+	public static final BlockEntry<DelegateBlock> B_ITEM_SIMPLE, B_ITEM_ORDERED, B_ITEM_SYNCED, B_ITEM_DISTRIBUTE, B_ITEM_RETRIEVE;
 
 	public static final BlockEntityEntry<RitualCore.TE> TE_RITUAL_CORE;
 	public static final BlockEntityEntry<RitualSide.TE> TE_RITUAL_SIDE;
@@ -48,6 +44,7 @@ public class LMBlocks {
 	public static final BlockEntityEntry<OrderedItemNodeBlockEntity> TE_ITEM_ORDERED;
 	public static final BlockEntityEntry<SyncedItemNodeBlockEntity> TE_ITEM_SYNCED;
 	public static final BlockEntityEntry<DistributeItemNodeBlockEntity> TE_ITEM_DISTRIBUTE;
+	public static final BlockEntityEntry<RetrieverItemNodeBlockEntity> TE_ITEM_RETRIEVE;
 
 	static {
 		{
@@ -105,6 +102,11 @@ public class LMBlocks {
 					.blockstate(LMBlocks::genNodeModel).tag(BlockTags.MINEABLE_WITH_PICKAXE)
 					.defaultLoot().defaultLang().simpleItem().register();
 
+			B_ITEM_RETRIEVE = L2Magic.REGISTRATE.block("node_item_retrieve",
+							(p) -> DelegateBlock.newBaseBlock(PROP, NodeSetFilter.INSTANCE, BlockProxy.ALL_DIRECTION, ItemTransferBlock.RETRIEVE))
+					.blockstate(LMBlocks::genFacingModel).tag(BlockTags.MINEABLE_WITH_PICKAXE)
+					.defaultLoot().defaultLang().simpleItem().register();
+
 			TE_ITEM_SIMPLE = L2Magic.REGISTRATE.blockEntity("node_item_simple", SimpleItemNodeBlockEntity::new)
 					.validBlock(B_ITEM_SIMPLE).renderer(() -> ItemNodeRenderer::new).register();
 			TE_ITEM_ORDERED = L2Magic.REGISTRATE.blockEntity("node_item_ordered", OrderedItemNodeBlockEntity::new)
@@ -113,6 +115,8 @@ public class LMBlocks {
 					.validBlock(B_ITEM_SYNCED).renderer(() -> ItemNodeRenderer::new).register();
 			TE_ITEM_DISTRIBUTE = L2Magic.REGISTRATE.blockEntity("node_item_distribute", DistributeItemNodeBlockEntity::new)
 					.validBlock(B_ITEM_DISTRIBUTE).renderer(() -> ItemNodeRenderer::new).register();
+			TE_ITEM_RETRIEVE = L2Magic.REGISTRATE.blockEntity("node_item_retrieve", RetrieverItemNodeBlockEntity::new)
+					.validBlock(B_ITEM_RETRIEVE).renderer(() -> ItemNodeRenderer::new).register();
 		}
 	}
 
@@ -126,6 +130,19 @@ public class LMBlocks {
 							new ResourceLocation(L2Magic.MODID, "block/node_small"))
 					.texture("all", new ResourceLocation(L2Magic.MODID, "block/node/item/" + name))
 					.renderType("cutout")).build();
+		});
+	}
+
+	private static void genFacingModel(DataGenContext<Block, DelegateBlock> ctx, RegistrateBlockstateProvider pvd) {
+		pvd.directionalBlock(ctx.getEntry(), bs -> {
+			boolean lit = bs.getValue(BlockStateProperties.LIT);
+			String name = ctx.getName() + (lit ? "_lit" : "");
+			return pvd.models()
+					.withExistingParent(name, lit ?
+							new ResourceLocation(L2Magic.MODID, "block/node_side_large") :
+							new ResourceLocation(L2Magic.MODID, "block/node_side"))
+					.texture("all", new ResourceLocation(L2Magic.MODID, "block/node/item/" + name))
+					.renderType("cutout");
 		});
 	}
 
