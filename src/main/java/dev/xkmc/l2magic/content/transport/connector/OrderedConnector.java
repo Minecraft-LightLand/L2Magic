@@ -7,6 +7,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeSet;
+import java.util.function.Predicate;
 
 @SerialClass
 public class OrderedConnector implements Connector {
@@ -29,6 +30,11 @@ public class OrderedConnector implements Connector {
 	public void link(BlockPos pos) {
 		if (set.contains(pos)) set.remove(pos);
 		else set.add(pos);
+	}
+
+	@Override
+	public void removeIf(Predicate<BlockPos> o) {
+		set.removeIf(o);
 	}
 
 	private int comparator(BlockPos a, BlockPos b) {

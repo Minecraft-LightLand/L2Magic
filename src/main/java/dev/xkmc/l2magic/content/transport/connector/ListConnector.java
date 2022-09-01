@@ -5,6 +5,7 @@ import net.minecraft.core.BlockPos;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 @SerialClass
 public class ListConnector implements Connector {
@@ -29,6 +30,10 @@ public class ListConnector implements Connector {
 		else list.add(pos);
 	}
 
+	@Override
+	public void removeIf(Predicate<BlockPos> o) {
+		list.removeIf(o);
+	}
 
 	@Override
 	public boolean testConsumption(int c) {
@@ -43,6 +48,7 @@ public class ListConnector implements Connector {
 	@Override
 	public int provide(int available, int consumed, int size) {
 		if (sync) return 1;
-		return Math.max(available - consumed, available / size);
+		return Math.min(available - consumed, available / size);
 	}
+
 }

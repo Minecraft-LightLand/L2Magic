@@ -15,6 +15,7 @@ import dev.xkmc.l2magic.content.magic.item.MagicWand;
 import dev.xkmc.l2magic.content.magic.item.ManaStorage;
 import dev.xkmc.l2magic.content.magic.item.PotionCore;
 import dev.xkmc.l2magic.content.transport.tools.LinkerItem;
+import dev.xkmc.l2magic.content.transport.tools.RotateItem;
 import dev.xkmc.l2magic.init.L2Magic;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -57,6 +58,7 @@ public class LMItems {
 	public static final ItemEntry<ScreenBook> MAGIC_BOOK;
 	public static final ItemEntry<ContainerBook> ARCANE_INJECT_BOOK, DISENC_BOOK, SPCRAFT_BOOK;
 	public static final ItemEntry<LinkerItem> LINKER;
+	public static final ItemEntry<RotateItem> ROTATE;
 
 	static {
 		// Books
@@ -68,6 +70,7 @@ public class LMItems {
 		}
 
 		LINKER = REGISTRATE.item("linker", LinkerItem::new).defaultModel().defaultLang().register();
+		ROTATE = REGISTRATE.item("rotate", RotateItem::new).defaultModel().defaultLang().register();
 	}
 
 	// -------- magic --------

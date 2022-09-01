@@ -6,6 +6,10 @@ public interface ILinkableNode {
 
 	void link(BlockPos clickedPos);
 
+	void validate();
+
+	void removeAll();
+
 	int getMaxDistanceSqr();
 
 }

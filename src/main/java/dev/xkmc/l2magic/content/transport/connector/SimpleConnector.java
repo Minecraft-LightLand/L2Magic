@@ -5,6 +5,7 @@ import net.minecraft.core.BlockPos;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.function.Predicate;
 
 @SerialClass
 public class SimpleConnector implements Connector {
@@ -25,6 +26,12 @@ public class SimpleConnector implements Connector {
 		} else {
 			this.pos = pos;
 		}
+	}
+
+	@Override
+	public void removeIf(Predicate<BlockPos> o) {
+		if (pos == null) return;
+		if (o.test(pos)) pos = null;
 	}
 
 	@Override

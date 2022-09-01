@@ -53,7 +53,8 @@ public class LinkerItem extends Item implements ILinker {
 					return InteractionResult.SUCCESS;
 				}
 			}
-		} else if (be instanceof ILinkableNode) {
+		}
+		if (be instanceof ILinkableNode) {
 			if (!ctx.getLevel().isClientSide()) {
 				new NBTObj(stack, KEY_POS).fromBlockPos(ctx.getClickedPos());
 			}

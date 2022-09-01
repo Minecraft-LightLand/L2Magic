@@ -131,7 +131,7 @@ public class LangData {
 			pvd.accept(L2Magic.MODID + "." + id.id,
 					RegistrateLangProvider.toEnglishName(str) + getParams(id.count));
 		}
-		pvd.accept("itemGroup.l2magic.material", "L2 Magic");
+		pvd.accept("itemGroup.l2magic.magic", "L2 Magic");
 		MAP.forEach((v, k) -> {
 			for (Enum<?> e : v.getEnumConstants()) {
 				String en = e.name().toLowerCase(Locale.ROOT);

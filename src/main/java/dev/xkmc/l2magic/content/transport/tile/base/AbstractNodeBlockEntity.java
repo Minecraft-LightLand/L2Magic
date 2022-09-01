@@ -8,9 +8,11 @@ import dev.xkmc.l2magic.content.transport.connector.Connector;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
+import net.minecraftforge.items.CapabilityItemHandler;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
@@ -72,6 +74,21 @@ public abstract class AbstractNodeBlockEntity<BE extends AbstractNodeBlockEntity
 		if (pos.equals(getBlockPos()))
 			return;
 		getConnector().link(pos);
+		sync();
+	}
+
+	public void validate() {
+		getConnector().removeIf(e -> {
+			if (level == null) return true;
+			BlockEntity be = level.getBlockEntity(e);
+			if (be == null) return true;
+			return be.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).resolve().isEmpty();
+		});
+		sync();
+	}
+
+	public void removeAll() {
+		getConnector().removeIf(e -> true);
 		sync();
 	}
 
