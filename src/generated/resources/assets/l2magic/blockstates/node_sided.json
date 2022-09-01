@@ -1,0 +1,30 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "l2magic:block/node_sided",
+      "x": 180
+    },
+    "facing=east": {
+      "model": "l2magic:block/node_sided",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north": {
+      "model": "l2magic:block/node_sided",
+      "x": 90
+    },
+    "facing=south": {
+      "model": "l2magic:block/node_sided",
+      "x": 90,
+      "y": 180
+    },
+    "facing=up": {
+      "model": "l2magic:block/node_sided"
+    },
+    "facing=west": {
+      "model": "l2magic:block/node_sided",
+      "x": 90,
+      "y": 270
+    }
+  }
+}

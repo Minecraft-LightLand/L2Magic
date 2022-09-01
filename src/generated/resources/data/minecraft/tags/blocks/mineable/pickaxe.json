@@ -8,6 +8,7 @@
     "l2magic:node_item_ordered",
     "l2magic:node_item_synced",
     "l2magic:node_item_distribute",
-    "l2magic:node_item_retrieve"
+    "l2magic:node_item_retrieve",
+    "l2magic:node_sided"
   ]
 }

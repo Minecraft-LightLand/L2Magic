@@ -4,6 +4,7 @@ import dev.xkmc.l2library.serial.SerialClass;
 import dev.xkmc.l2magic.content.transport.connector.Connector;
 import dev.xkmc.l2magic.content.transport.connector.SimpleConnector;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -31,10 +32,11 @@ public class RetrieverItemNodeBlockEntity extends AbstractItemNodeBlockEntity<Re
 	@Override
 	public void tick() {
 		if (level != null && !level.isClientSide() && getConnector().isReady()) {
-			BlockPos next = getBlockPos().relative(getBlockState().getValue(BlockStateProperties.FACING));
+			Direction facing = getBlockState().getValue(BlockStateProperties.FACING);
+			BlockPos next = getBlockPos().relative(facing);
 			BlockEntity target = level.getBlockEntity(next);
 			if (target != null) {
-				var lazyCap = target.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY);
+				var lazyCap = target.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, facing.getOpposite());
 				if (lazyCap.resolve().isPresent()) {
 					var cap = lazyCap.resolve().get();
 					tryRetrieve(cap);
