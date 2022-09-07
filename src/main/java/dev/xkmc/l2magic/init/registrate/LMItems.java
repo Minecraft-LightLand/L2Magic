@@ -14,10 +14,6 @@ import dev.xkmc.l2magic.content.magic.item.MagicScroll;
 import dev.xkmc.l2magic.content.magic.item.MagicWand;
 import dev.xkmc.l2magic.content.magic.item.ManaStorage;
 import dev.xkmc.l2magic.content.magic.item.PotionCore;
-import dev.xkmc.l2magic.content.transport.tools.ClearItem;
-import dev.xkmc.l2magic.content.transport.tools.LinkerItem;
-import dev.xkmc.l2magic.content.transport.tools.RotateItem;
-import dev.xkmc.l2magic.content.transport.tools.ValidatorItem;
 import dev.xkmc.l2magic.init.L2Magic;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -59,10 +55,6 @@ public class LMItems {
 	// -------- common --------
 	public static final ItemEntry<ScreenBook> MAGIC_BOOK;
 	public static final ItemEntry<ContainerBook> ARCANE_INJECT_BOOK, DISENC_BOOK, SPCRAFT_BOOK;
-	public static final ItemEntry<LinkerItem> LINKER;
-	public static final ItemEntry<RotateItem> ROTATE;
-	public static final ItemEntry<ValidatorItem> VALIDATOR;
-	public static final ItemEntry<ClearItem> CLEAR;
 
 	static {
 		// Books
@@ -73,10 +65,6 @@ public class LMItems {
 			SPCRAFT_BOOK = REGISTRATE.item("spell_craft_book", p -> new ContainerBook(p, () -> LMMenu.MT_SPCRAFT)).defaultModel().defaultLang().register();
 		}
 
-		LINKER = REGISTRATE.item("linker", LinkerItem::new).defaultModel().defaultLang().register();
-		ROTATE = REGISTRATE.item("rotate", RotateItem::new).defaultModel().defaultLang().register();
-		VALIDATOR = REGISTRATE.item("validator", ValidatorItem::new).defaultModel().defaultLang().register();
-		CLEAR = REGISTRATE.item("clear", ClearItem::new).defaultModel().defaultLang().register();
 	}
 
 	// -------- magic --------

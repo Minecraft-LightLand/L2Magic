@@ -3,18 +3,19 @@ package dev.xkmc.l2magic.init.registrate;
 import dev.xkmc.l2library.block.BlockProxy;
 import dev.xkmc.l2library.block.DelegateBlock;
 import dev.xkmc.l2library.block.DelegateBlockProperties;
-import dev.xkmc.l2library.repack.registrate.providers.DataGenContext;
-import dev.xkmc.l2library.repack.registrate.providers.RegistrateBlockstateProvider;
 import dev.xkmc.l2library.repack.registrate.util.entry.BlockEntityEntry;
 import dev.xkmc.l2library.repack.registrate.util.entry.BlockEntry;
+import dev.xkmc.l2magic.content.altar.block.AltarBaseBlock;
+import dev.xkmc.l2magic.content.altar.methods.AltarBaseState;
+import dev.xkmc.l2magic.content.altar.methods.AltarPillarState;
+import dev.xkmc.l2magic.content.altar.methods.PillarStatus;
+import dev.xkmc.l2magic.content.altar.tile.AltarBaseBlockEntity;
+import dev.xkmc.l2magic.content.altar.tile.AltarCoreBlockEntity;
+import dev.xkmc.l2magic.content.altar.tile.AltarHolderBlockEntity;
+import dev.xkmc.l2magic.content.altar.tile.AltarTableBlockEntity;
 import dev.xkmc.l2magic.content.magic.block.RitualCore;
 import dev.xkmc.l2magic.content.magic.block.RitualRenderer;
 import dev.xkmc.l2magic.content.magic.block.RitualSide;
-import dev.xkmc.l2magic.content.transport.tile.base.SidedBlockEntity;
-import dev.xkmc.l2magic.content.transport.tile.block.ItemTransferBlock;
-import dev.xkmc.l2magic.content.transport.tile.block.NodeSetFilter;
-import dev.xkmc.l2magic.content.transport.tile.client.ItemNodeRenderer;
-import dev.xkmc.l2magic.content.transport.tile.item.*;
 import dev.xkmc.l2magic.init.L2Magic;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
@@ -36,17 +37,14 @@ public class LMBlocks {
 	public static final BlockEntry<DelegateBlock> B_RITUAL_CORE, B_RITUAL_SIDE;
 	public static final BlockEntry<Block> ENCHANT_GOLD_BLOCK, MAGICIUM_BLOCK;
 
-	public static final BlockEntry<DelegateBlock> B_SIDED, B_ITEM_SIMPLE, B_ITEM_ORDERED, B_ITEM_SYNCED, B_ITEM_DISTRIBUTE, B_ITEM_RETRIEVE;
-
 	public static final BlockEntityEntry<RitualCore.TE> TE_RITUAL_CORE;
 	public static final BlockEntityEntry<RitualSide.TE> TE_RITUAL_SIDE;
 
-	public static final BlockEntityEntry<SimpleItemNodeBlockEntity> TE_ITEM_SIMPLE;
-	public static final BlockEntityEntry<OrderedItemNodeBlockEntity> TE_ITEM_ORDERED;
-	public static final BlockEntityEntry<SyncedItemNodeBlockEntity> TE_ITEM_SYNCED;
-	public static final BlockEntityEntry<DistributeItemNodeBlockEntity> TE_ITEM_DISTRIBUTE;
-	public static final BlockEntityEntry<RetrieverItemNodeBlockEntity> TE_ITEM_RETRIEVE;
-	public static final BlockEntityEntry<SidedBlockEntity> TE_SIDED;
+	public static final BlockEntry<DelegateBlock> ALTAR_BASE, ALTAR_PILLAR, ALTAR_TABLE, ALTAR_HOLDER, ALTAR_CORE;
+	public static final BlockEntityEntry<AltarBaseBlockEntity> TE_ALTAR_BASE;
+	public static final BlockEntityEntry<AltarTableBlockEntity> TE_ALTAR_TABLE;
+	public static final BlockEntityEntry<AltarHolderBlockEntity> TE_ALTAR_HOLDER;
+	public static final BlockEntityEntry<AltarCoreBlockEntity> TE_ALTAR_CORE;
 
 	static {
 		{
@@ -81,86 +79,69 @@ public class LMBlocks {
 		}
 		{
 
-			DelegateBlockProperties NOLIT = DelegateBlockProperties.copy(Blocks.STONE).make(e -> e
-					.noOcclusion().lightLevel(bs -> 7)
-					.isRedstoneConductor((a, b, c) -> false));
+			DelegateBlockProperties STONE = DelegateBlockProperties.copy(Blocks.STONE).make(e -> e
+					.lightLevel(bs -> AltarBaseState.isPowered(bs) ? 7 : 0));
 
-			DelegateBlockProperties LIT = DelegateBlockProperties.copy(Blocks.STONE).make(e -> e
-					.noOcclusion().lightLevel(bs -> bs.getValue(BlockStateProperties.LIT) ? 15 : 7)
-					.isRedstoneConductor((a, b, c) -> false));
+			DelegateBlockProperties PILLAR = DelegateBlockProperties.copy(Blocks.STONE).make(e -> e
+					.lightLevel(bs -> bs.getValue(AltarPillarState.PILLAR).lighted(bs.getValue(AltarPillarState.GROUNDED)))
+					.noOcclusion());
 
-			B_ITEM_SIMPLE = L2Magic.REGISTRATE.block("node_item_simple",
-							(p) -> DelegateBlock.newBaseBlock(LIT, NodeSetFilter.INSTANCE, ItemTransferBlock.SIMPLE))
-					.blockstate(LMBlocks::genNodeModel).tag(BlockTags.MINEABLE_WITH_PICKAXE)
-					.defaultLoot().defaultLang().simpleItem().register();
+			DelegateBlockProperties CORE = DelegateBlockProperties.copy(Blocks.STONE).make(e -> e
+					.lightLevel(bs -> 15).noOcclusion());
 
-			B_ITEM_ORDERED = L2Magic.REGISTRATE.block("node_item_ordered",
-							(p) -> DelegateBlock.newBaseBlock(LIT, NodeSetFilter.INSTANCE, ItemTransferBlock.ORDERED))
-					.blockstate(LMBlocks::genNodeModel).tag(BlockTags.MINEABLE_WITH_PICKAXE)
-					.defaultLoot().defaultLang().simpleItem().register();
+			ALTAR_BASE = L2Magic.REGISTRATE.block("altar_base", p -> AltarBaseBlock.ALTAR_BASE.get())
+					.blockstate((ctx, pvd) -> pvd.getVariantBuilder(ctx.getEntry()).forAllStates(state ->
+							ConfiguredModel.builder().modelFile(pvd.models().getExistingFile(new ResourceLocation(
+									AltarBaseState.isPowered(state) ? "blackstone" : "cobblestone"))).build()))
+					.tag(BlockTags.MINEABLE_WITH_PICKAXE).defaultLoot().defaultLang()
+					.item().model((ctx, pvd) -> pvd.generated(ctx, new ResourceLocation("item/coal"))).build().register();
 
-			B_ITEM_SYNCED = L2Magic.REGISTRATE.block("node_item_synced",
-							(p) -> DelegateBlock.newBaseBlock(LIT, NodeSetFilter.INSTANCE, ItemTransferBlock.SYNCED))
-					.blockstate(LMBlocks::genNodeModel).tag(BlockTags.MINEABLE_WITH_PICKAXE)
-					.defaultLoot().defaultLang().simpleItem().register();
+			ALTAR_PILLAR = L2Magic.REGISTRATE.block("altar_pillar", p -> AltarBaseBlock.ALTAR_PILLAR.get())
+					.blockstate((ctx, pvd) -> pvd.getVariantBuilder(ctx.getEntry()).forAllStates(state ->
+							ConfiguredModel.builder().modelFile(pvd.models().getExistingFile(new ResourceLocation(
+									(state.getValue(AltarPillarState.PILLAR) == PillarStatus.DARK ?
+											state.getValue(AltarPillarState.GROUNDED) ? "cobbled_deepslate" : "cobblestone" :
+											state.getValue(AltarPillarState.PILLAR) == PillarStatus.CONNECTED ?
+													state.getValue(AltarPillarState.GROUNDED) ? "deepslate_brick" : "stone_brick" :
+													state.getValue(AltarPillarState.GROUNDED) ? "end_stone_brick" : "blackstone")
+											+ "_wall_post"))).build()
+					)).tag(BlockTags.MINEABLE_WITH_PICKAXE).defaultLoot().defaultLang()
+					.item().model((ctx, pvd) -> pvd.generated(ctx, new ResourceLocation("item/stick"))).build().register();
 
-			B_ITEM_DISTRIBUTE = L2Magic.REGISTRATE.block("node_item_distribute",
-							(p) -> DelegateBlock.newBaseBlock(LIT, NodeSetFilter.INSTANCE, ItemTransferBlock.DISTRIBUTE))
-					.blockstate(LMBlocks::genNodeModel).tag(BlockTags.MINEABLE_WITH_PICKAXE)
-					.defaultLoot().defaultLang().simpleItem().register();
+			ALTAR_TABLE = L2Magic.REGISTRATE.block("altar_table", p -> AltarBaseBlock.ALTAR_TABLE.get())
+					.blockstate((ctx, pvd) -> pvd.getVariantBuilder(ctx.getEntry()).forAllStates(state ->
+							ConfiguredModel.builder().modelFile(pvd.models().getExistingFile(new ResourceLocation(
+									state.getValue(AltarPillarState.GROUNDED) ? "diamond_block" : "diamond_ore"
+							))).build()))
+					.tag(BlockTags.MINEABLE_WITH_PICKAXE).defaultLoot().defaultLang()
+					.item().model((ctx, pvd) -> pvd.generated(ctx, new ResourceLocation("item/campfire"))).build().register();
 
-			B_ITEM_RETRIEVE = L2Magic.REGISTRATE.block("node_item_retrieve",
-							(p) -> DelegateBlock.newBaseBlock(LIT, NodeSetFilter.INSTANCE, BlockProxy.ALL_DIRECTION, ItemTransferBlock.RETRIEVE))
-					.blockstate(LMBlocks::genFacingModel).tag(BlockTags.MINEABLE_WITH_PICKAXE)
-					.defaultLoot().defaultLang().simpleItem().register();
+			ALTAR_HOLDER = L2Magic.REGISTRATE.block("altar_holder", p -> AltarBaseBlock.ALTAR_HOLDER.get())
+					.blockstate((ctx, pvd) -> pvd.getVariantBuilder(ctx.getEntry()).forAllStates(state ->
+							ConfiguredModel.builder().modelFile(pvd.models().getExistingFile(new ResourceLocation(
+									state.getValue(AltarPillarState.GROUNDED) ?
+											state.getValue(AltarPillarState.PILLAR).connectsHolder() ?
+													"diamond_block" : "diamond_ore" :
+											state.getValue(AltarPillarState.PILLAR).connectsHolder() ?
+													"gold_block" : "gold_ore"
+							))).build()))
+					.tag(BlockTags.MINEABLE_WITH_PICKAXE).defaultLoot().defaultLang()
+					.item().model((ctx, pvd) -> pvd.generated(ctx, new ResourceLocation("item/soul_campfire"))).build().register();
 
+			ALTAR_CORE = L2Magic.REGISTRATE.block("altar_core", p -> AltarBaseBlock.ALTAR_CORE.get())
+					.blockstate((ctx, pvd) -> pvd.simpleBlock(ctx.getEntry(), pvd.models().getExistingFile(new ResourceLocation("bedrock"))))
+					.tag(BlockTags.MINEABLE_WITH_PICKAXE).defaultLoot().defaultLang()
+					.item().model((ctx, pvd) -> pvd.generated(ctx, new ResourceLocation("item/diamond"))).build().register();
 
-			B_SIDED = L2Magic.REGISTRATE.block("node_sided",
-							(p) -> DelegateBlock.newBaseBlock(NOLIT, BlockProxy.ALL_DIRECTION, ItemTransferBlock.SIDED))
-					.blockstate(LMBlocks::genFacingModel).tag(BlockTags.MINEABLE_WITH_PICKAXE)
-					.defaultLoot().defaultLang().simpleItem().register();
-
-			TE_ITEM_SIMPLE = L2Magic.REGISTRATE.blockEntity("node_item_simple", SimpleItemNodeBlockEntity::new)
-					.validBlock(B_ITEM_SIMPLE).renderer(() -> ItemNodeRenderer::new).register();
-			TE_ITEM_ORDERED = L2Magic.REGISTRATE.blockEntity("node_item_ordered", OrderedItemNodeBlockEntity::new)
-					.validBlock(B_ITEM_ORDERED).renderer(() -> ItemNodeRenderer::new).register();
-			TE_ITEM_SYNCED = L2Magic.REGISTRATE.blockEntity("node_item_synced", SyncedItemNodeBlockEntity::new)
-					.validBlock(B_ITEM_SYNCED).renderer(() -> ItemNodeRenderer::new).register();
-			TE_ITEM_DISTRIBUTE = L2Magic.REGISTRATE.blockEntity("node_item_distribute", DistributeItemNodeBlockEntity::new)
-					.validBlock(B_ITEM_DISTRIBUTE).renderer(() -> ItemNodeRenderer::new).register();
-			TE_ITEM_RETRIEVE = L2Magic.REGISTRATE.blockEntity("node_item_retrieve", RetrieverItemNodeBlockEntity::new)
-					.validBlock(B_ITEM_RETRIEVE).renderer(() -> ItemNodeRenderer::new).register();
-			TE_SIDED = L2Magic.REGISTRATE.blockEntity("node_sided", SidedBlockEntity::new)
-					.validBlock(B_SIDED).register();
+			TE_ALTAR_BASE = L2Magic.REGISTRATE.blockEntity("altar_base", AltarBaseBlockEntity::new)
+					.validBlock(ALTAR_BASE).register();
+			TE_ALTAR_TABLE = L2Magic.REGISTRATE.blockEntity("altar_table", AltarTableBlockEntity::new)
+					.validBlock(ALTAR_TABLE).register();
+			TE_ALTAR_HOLDER = L2Magic.REGISTRATE.blockEntity("altar_holder", AltarHolderBlockEntity::new)
+					.validBlock(ALTAR_HOLDER).register();
+			TE_ALTAR_CORE = L2Magic.REGISTRATE.blockEntity("altar_core", AltarCoreBlockEntity::new)
+					.validBlock(ALTAR_CORE).register();
 		}
-	}
-
-	private static void genNodeModel(DataGenContext<Block, DelegateBlock> ctx, RegistrateBlockstateProvider pvd) {
-		pvd.getVariantBuilder(ctx.getEntry()).forAllStates(bs -> {
-			boolean lit = bs.getValue(BlockStateProperties.LIT);
-			String model = ctx.getName() + (lit ? "_lit" : "");
-			String name = ctx.getName().replace('_', '/') + (lit ? "_lit" : "");
-			return ConfiguredModel.builder().modelFile(pvd.models()
-					.withExistingParent(model, lit ?
-							new ResourceLocation("block/cube_all") :
-							new ResourceLocation(L2Magic.MODID, "block/node_small"))
-					.texture("all", new ResourceLocation(L2Magic.MODID, "block/" + name))
-					.renderType("cutout")).build();
-		});
-	}
-
-	private static void genFacingModel(DataGenContext<Block, DelegateBlock> ctx, RegistrateBlockstateProvider pvd) {
-		pvd.directionalBlock(ctx.getEntry(), bs -> {
-			boolean lit = bs.hasProperty(BlockStateProperties.LIT) && bs.getValue(BlockStateProperties.LIT);
-			String model = ctx.getName() + (lit ? "_lit" : "");
-			String name = ctx.getName().replace('_', '/') + (lit ? "_lit" : "");
-			return pvd.models()
-					.withExistingParent(model, lit ?
-							new ResourceLocation(L2Magic.MODID, "block/node_side_large") :
-							new ResourceLocation(L2Magic.MODID, "block/node_side"))
-					.texture("all", new ResourceLocation(L2Magic.MODID, "block/" + name))
-					.renderType("cutout");
-		});
 	}
 
 	public static void register() {

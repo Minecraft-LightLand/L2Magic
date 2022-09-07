@@ -1,0 +1,22 @@
+{
+  "variants": {
+    "grounded=false,pillar=connected": {
+      "model": "minecraft:block/stone_brick_wall_post"
+    },
+    "grounded=false,pillar=dark": {
+      "model": "minecraft:block/cobblestone_wall_post"
+    },
+    "grounded=false,pillar=powered": {
+      "model": "minecraft:block/blackstone_wall_post"
+    },
+    "grounded=true,pillar=connected": {
+      "model": "minecraft:block/deepslate_brick_wall_post"
+    },
+    "grounded=true,pillar=dark": {
+      "model": "minecraft:block/cobbled_deepslate_wall_post"
+    },
+    "grounded=true,pillar=powered": {
+      "model": "minecraft:block/end_stone_brick_wall_post"
+    }
+  }
+}

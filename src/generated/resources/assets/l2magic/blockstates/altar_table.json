@@ -1,0 +1,22 @@
+{
+  "variants": {
+    "grounded=false,pillar=connected": {
+      "model": "minecraft:block/diamond_ore"
+    },
+    "grounded=false,pillar=dark": {
+      "model": "minecraft:block/diamond_ore"
+    },
+    "grounded=false,pillar=powered": {
+      "model": "minecraft:block/diamond_ore"
+    },
+    "grounded=true,pillar=connected": {
+      "model": "minecraft:block/diamond_block"
+    },
+    "grounded=true,pillar=dark": {
+      "model": "minecraft:block/diamond_block"
+    },
+    "grounded=true,pillar=powered": {
+      "model": "minecraft:block/diamond_block"
+    }
+  }
+}
