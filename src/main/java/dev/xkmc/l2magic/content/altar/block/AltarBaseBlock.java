@@ -33,15 +33,16 @@ public class AltarBaseBlock {
 
 	private static final DelayedTicker TICKER = new DelayedTicker();
 	private static final EntityTicker ENTITY_TICKER = new EntityTicker();
+	private static final ActivatableBlockMethod ACTIVATE = new ActivatableBlockMethod();
 
 	public static final Supplier<DelegateBlock> ALTAR_BASE, ALTAR_TABLE, ALTAR_HOLDER, ALTAR_PILLAR, ALTAR_CORE;
 
 	static {
-		ALTAR_BASE = () -> DelegateBlock.newBaseBlock(STONE.get(), TICKER, new AltarBaseState(), TE_BASE);
-		ALTAR_TABLE = () -> DelegateBlock.newBaseBlock(PILLAR.get(), TICKER, new AltarPillarState(PillarStatus.CONNECTED), TE_TABLE);
-		ALTAR_HOLDER = () -> DelegateBlock.newBaseBlock(PILLAR.get(), TICKER, ENTITY_TICKER, new AltarPillarState(PillarStatus.POWERED), TE_HOLDER);
+		ALTAR_BASE = () -> DelegateBlock.newBaseBlock(STONE.get(), TICKER, new AltarBaseState(), ENTITY_TICKER, TE_BASE);
+		ALTAR_TABLE = () -> DelegateBlock.newBaseBlock(PILLAR.get(), TICKER, new AltarPillarState(PillarStatus.CONNECTED), ENTITY_TICKER, TE_TABLE);
+		ALTAR_HOLDER = () -> DelegateBlock.newBaseBlock(PILLAR.get(), TICKER, new AltarPillarState(PillarStatus.POWERED), ENTITY_TICKER, TE_HOLDER);
 		ALTAR_PILLAR = () -> DelegateBlock.newBaseBlock(PILLAR.get(), TICKER, new AltarPillarState(PillarStatus.DARK));
-		ALTAR_CORE = () -> DelegateBlock.newBaseBlock(CORE.get(), TICKER, ENTITY_TICKER, new AltarCoreState(), TE_CORE);
+		ALTAR_CORE = () -> DelegateBlock.newBaseBlock(CORE.get(), TICKER, new AltarCoreState(), ACTIVATE, ENTITY_TICKER, TE_CORE);
 	}
 
 }

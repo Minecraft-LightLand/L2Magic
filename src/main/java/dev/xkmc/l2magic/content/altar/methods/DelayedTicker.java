@@ -23,7 +23,7 @@ public class DelayedTicker implements ShapeUpdateBlockMethod, PlacementBlockMeth
 		return blockState;
 	}
 
-	private void update(Block self, LevelAccessor level, BlockPos pos) {
+	public static void update(Block self, LevelAccessor level, BlockPos pos) {
 		if (!level.getBlockTicks().hasScheduledTick(pos, self))
 			level.scheduleTick(pos, self, 2);
 	}

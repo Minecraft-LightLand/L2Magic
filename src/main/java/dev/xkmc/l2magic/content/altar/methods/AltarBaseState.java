@@ -32,7 +32,8 @@ public class AltarBaseState implements CreateBlockStateBlockMethod, DefaultState
 	}
 
 	private BlockState updateShape(BlockState selfState, LevelAccessor level, BlockPos selfPos) {
-		if (selfState.getValue(DISTANCE) == 0) return selfState;
+		int oldDist = selfState.getValue(DISTANCE);
+		if (oldDist == 0) return selfState;
 		int dist = MAX;
 		for (int i = 0; i < 4; i++) {
 			Direction dire = Direction.from2DDataValue(i);
@@ -40,6 +41,7 @@ public class AltarBaseState implements CreateBlockStateBlockMethod, DefaultState
 			if (neighbor.is(selfState.getBlock()))
 				dist = Math.min(dist, neighbor.getValue(DISTANCE));
 		}
+		if (oldDist < dist) dist = MAX;
 		return selfState.setValue(DISTANCE, Math.min(MAX, dist + 1));
 	}
 

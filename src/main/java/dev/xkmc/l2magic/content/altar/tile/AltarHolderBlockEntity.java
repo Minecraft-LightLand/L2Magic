@@ -2,6 +2,7 @@ package dev.xkmc.l2magic.content.altar.tile;
 
 import dev.xkmc.l2library.serial.SerialClass;
 import dev.xkmc.l2magic.content.altar.methods.AltarPillarState;
+import dev.xkmc.l2magic.content.altar.methods.DelayedTicker;
 import dev.xkmc.l2magic.content.altar.methods.PillarStatus;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -24,7 +25,7 @@ public class AltarHolderBlockEntity extends PillarTopBlockEntity {
 		notifyHolder();
 	}
 
-	public void blockRemoved(){
+	public void blockRemoved() {
 		notifyHolder();
 	}
 
@@ -49,6 +50,15 @@ public class AltarHolderBlockEntity extends PillarTopBlockEntity {
 				level.setBlockAndUpdate(getBlockPos(), newState);
 				StructureDebugHandler.info("set holder to " + newState + " at " + getBlockPos());
 			}
+		}
+	}
+
+	public void refreshState() {
+		if (level == null || level.isClientSide()) return;
+		if (getBlockState().getValue(AltarPillarState.PILLAR) != PillarStatus.DARK) {
+			level.setBlockAndUpdate(getBlockPos(), getBlockState().setValue(AltarPillarState.PILLAR, PillarStatus.DARK));
+			DelayedTicker.update(getBlockState().getBlock(), level, getBlockPos());
+			StructureDebugHandler.info("set holder to DARK at " + getBlockPos());
 		}
 	}
 

@@ -4,6 +4,7 @@ public interface DelayedTickerBlockEntity {
 
 	void update();
 
-	default void blockRemoved(){}
+	default void blockRemoved() {
+	}
 
 }

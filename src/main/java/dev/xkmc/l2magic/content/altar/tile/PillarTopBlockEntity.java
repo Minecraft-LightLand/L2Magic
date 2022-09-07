@@ -12,7 +12,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 /**
  * On update, calculate distance to floor
- * */
+ */
 @SerialClass
 public class PillarTopBlockEntity extends BaseBlockEntity implements DelayedTickerBlockEntity {
 
