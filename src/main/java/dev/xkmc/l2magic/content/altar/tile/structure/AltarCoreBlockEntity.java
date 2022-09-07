@@ -1,4 +1,4 @@
-package dev.xkmc.l2magic.content.altar.tile;
+package dev.xkmc.l2magic.content.altar.tile.structure;
 
 import dev.xkmc.l2library.base.tile.BaseBlockEntity;
 import dev.xkmc.l2library.block.TickableBlockEntity;

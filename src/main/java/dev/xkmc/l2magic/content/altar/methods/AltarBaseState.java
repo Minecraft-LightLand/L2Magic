@@ -4,7 +4,7 @@ import dev.xkmc.l2library.block.mult.CreateBlockStateBlockMethod;
 import dev.xkmc.l2library.block.mult.DefaultStateBlockMethod;
 import dev.xkmc.l2library.block.mult.PlacementBlockMethod;
 import dev.xkmc.l2library.block.mult.ScheduleTickBlockMethod;
-import dev.xkmc.l2magic.content.altar.tile.StructureDebugHandler;
+import dev.xkmc.l2magic.content.altar.tile.structure.StructureDebugHandler;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;

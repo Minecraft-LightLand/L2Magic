@@ -1,4 +1,4 @@
-package dev.xkmc.l2magic.content.altar.tile;
+package dev.xkmc.l2magic.content.altar.tile.structure;
 
 import dev.xkmc.l2library.base.tile.BaseBlockEntity;
 import dev.xkmc.l2library.serial.SerialClass;
@@ -47,8 +47,8 @@ public class AltarBaseBlockEntity extends BaseBlockEntity implements DelayedTick
 				BlockPos pos = getBlockPos().relative(dire);
 				if (level.getBlockEntity(pos) instanceof AltarBaseBlockEntity base) {
 					if (base.wasValid && AltarBaseState.isPowered(base.getBlockState())) {
-						dx = base.dx - dire.getStepX();
-						dz = base.dz - dire.getStepX();
+						dx = base.dx + dire.getStepX();
+						dz = base.dz + dire.getStepZ();
 						break;
 					}
 				}
@@ -104,6 +104,8 @@ public class AltarBaseBlockEntity extends BaseBlockEntity implements DelayedTick
 
 	public void markActivated(int height) {
 		this.wasCore = true;
+		this.wasValid = true;
+		this.dx = this.dz = 0;
 		this.height = height;
 	}
 

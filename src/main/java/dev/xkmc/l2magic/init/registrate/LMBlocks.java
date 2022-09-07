@@ -6,13 +6,14 @@ import dev.xkmc.l2library.block.DelegateBlockProperties;
 import dev.xkmc.l2library.repack.registrate.util.entry.BlockEntityEntry;
 import dev.xkmc.l2library.repack.registrate.util.entry.BlockEntry;
 import dev.xkmc.l2magic.content.altar.block.AltarBaseBlock;
+import dev.xkmc.l2magic.content.altar.client.AltarTableRenderer;
 import dev.xkmc.l2magic.content.altar.methods.AltarBaseState;
 import dev.xkmc.l2magic.content.altar.methods.AltarPillarState;
 import dev.xkmc.l2magic.content.altar.methods.PillarStatus;
-import dev.xkmc.l2magic.content.altar.tile.AltarBaseBlockEntity;
-import dev.xkmc.l2magic.content.altar.tile.AltarCoreBlockEntity;
-import dev.xkmc.l2magic.content.altar.tile.AltarHolderBlockEntity;
-import dev.xkmc.l2magic.content.altar.tile.AltarTableBlockEntity;
+import dev.xkmc.l2magic.content.altar.tile.structure.AltarBaseBlockEntity;
+import dev.xkmc.l2magic.content.altar.tile.structure.AltarCoreBlockEntity;
+import dev.xkmc.l2magic.content.altar.tile.structure.AltarHolderBlockEntity;
+import dev.xkmc.l2magic.content.altar.tile.structure.AltarTableBlockEntity;
 import dev.xkmc.l2magic.content.magic.block.RitualCore;
 import dev.xkmc.l2magic.content.magic.block.RitualRenderer;
 import dev.xkmc.l2magic.content.magic.block.RitualSide;
@@ -136,7 +137,7 @@ public class LMBlocks {
 			TE_ALTAR_BASE = L2Magic.REGISTRATE.blockEntity("altar_base", AltarBaseBlockEntity::new)
 					.validBlock(ALTAR_BASE).register();
 			TE_ALTAR_TABLE = L2Magic.REGISTRATE.blockEntity("altar_table", AltarTableBlockEntity::new)
-					.validBlock(ALTAR_TABLE).register();
+					.validBlock(ALTAR_TABLE).renderer(() -> AltarTableRenderer::new).register();
 			TE_ALTAR_HOLDER = L2Magic.REGISTRATE.blockEntity("altar_holder", AltarHolderBlockEntity::new)
 					.validBlock(ALTAR_HOLDER).register();
 			TE_ALTAR_CORE = L2Magic.REGISTRATE.blockEntity("altar_core", AltarCoreBlockEntity::new)

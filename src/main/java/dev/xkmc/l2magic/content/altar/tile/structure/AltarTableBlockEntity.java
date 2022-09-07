@@ -1,9 +1,12 @@
-package dev.xkmc.l2magic.content.altar.tile;
+package dev.xkmc.l2magic.content.altar.tile.structure;
 
 import dev.xkmc.l2library.serial.SerialClass;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.Connection;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
@@ -48,6 +51,27 @@ public class AltarTableBlockEntity extends PillarTopBlockEntity {
 			}
 		}
 		return null;
+	}
+
+
+	@Nullable
+	private AABB compiledBox;
+
+	@Override
+	public AABB getRenderBoundingBox() {
+		if (compiledBox == null) {
+			compiledBox = new AABB(getBlockPos());
+			BlockPos target = getCorePos();
+			if (target != null)
+				compiledBox = compiledBox.minmax(new AABB(target));
+		}
+		return compiledBox;
+	}
+
+	@Override
+	public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
+		super.onDataPacket(net, pkt);
+		compiledBox = null;
 	}
 
 }

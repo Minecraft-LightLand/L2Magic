@@ -1,7 +1,7 @@
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 
-package dev.xkmc.l2magic.content.altar.tile;
+package dev.xkmc.l2magic.content.altar.client;
 
 import net.minecraft.MethodsReturnNonnullByDefault;
 
