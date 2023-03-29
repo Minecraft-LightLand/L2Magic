@@ -1,7 +1,7 @@
 package dev.xkmc.l2magic.init.registrate;
 
-import dev.xkmc.l2foundation.content.item.misc.ContainerBook;
-import dev.xkmc.l2foundation.content.item.misc.ScreenBook;
+import dev.xkmc.l2complements.content.item.base.ContainerBook;
+import dev.xkmc.l2complements.content.item.base.ScreenBook;
 import dev.xkmc.l2library.base.L2Registrate;
 import dev.xkmc.l2library.repack.registrate.builders.ItemBuilder;
 import dev.xkmc.l2library.repack.registrate.providers.DataGenContext;

@@ -1,6 +1,6 @@
 package dev.xkmc.l2magic.content.arcane.internal;
 
-import dev.xkmc.l2foundation.compat.TeamAccessor;
+import dev.xkmc.l2complements.compat.TeamAccessor;
 import dev.xkmc.l2library.base.NamedEntry;
 import dev.xkmc.l2library.repack.registrate.util.entry.RegistryEntry;
 import dev.xkmc.l2library.util.annotation.DoubleSidedCall;

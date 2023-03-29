@@ -1,6 +1,6 @@
 package dev.xkmc.l2magic.init;
 
-import dev.xkmc.l2foundation.events.ItemUseEventHandler;
+import dev.xkmc.l2complements.events.ItemUseEventHandler;
 import dev.xkmc.l2library.base.L2Registrate;
 import dev.xkmc.l2library.base.effects.EffectSyncEvents;
 import dev.xkmc.l2library.base.tabs.contents.AttributeEntry;

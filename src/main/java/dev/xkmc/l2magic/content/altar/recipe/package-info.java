@@ -1,7 +1,7 @@
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 
-package dev.xkmc.l2magic.util;
+package dev.xkmc.l2magic.content.altar.recipe;
 
 import net.minecraft.MethodsReturnNonnullByDefault;
 

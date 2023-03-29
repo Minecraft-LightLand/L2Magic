@@ -4,6 +4,7 @@ import dev.xkmc.l2library.base.tile.BaseBlockEntity;
 import dev.xkmc.l2library.block.TickableBlockEntity;
 import dev.xkmc.l2library.serial.SerialClass;
 import dev.xkmc.l2magic.content.altar.methods.*;
+import dev.xkmc.l2magic.content.altar.tile.craft.CraftManager;
 import dev.xkmc.l2magic.init.registrate.LMBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -21,34 +22,40 @@ public class AltarCoreBlockEntity extends BaseBlockEntity implements TickableBlo
 	@SerialClass.SerialField
 	private int height;
 
+	@SerialClass.SerialField(toClient = true)
+	public CraftManager manager = new CraftManager(this);
+
 	public AltarCoreBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
 		super(type, pos, state);
 	}
 
 	@Override
 	public void tick() {
-		if (level == null || level.isClientSide()) return;
-		CoreStatus oldStatus = getBlockState().getValue(AltarCoreState.STATUS);
-		CoreStatus newStatus = oldStatus;
-		if (holderDirty) {
-			newStatus = holderCleanUp();
+		if (level != null && !level.isClientSide()) {
+			CoreStatus oldStatus = getBlockState().getValue(AltarCoreState.STATUS);
+			CoreStatus newStatus = oldStatus;
+			if (holderDirty) {
+				newStatus = holderCleanUp();
+				if (newStatus != oldStatus) {
+					setupHolders(newStatus);
+					if (oldStatus.isActivated())
+						centerDirty = true;
+				}
+			}
+			if (centerDirty) {
+				int oldHeight = height;
+				newStatus = centerCleanUp();
+				if (newStatus != oldStatus) {
+					setupCenter(newStatus, newStatus.isActivated() ? height : oldHeight);
+				}
+			}
 			if (newStatus != oldStatus) {
-				setupHolders(newStatus);
-				if (oldStatus.isActivated())
-					centerDirty = true;
+				if (!newStatus.isActivated()) manager.terminate();
+				level.setBlockAndUpdate(getBlockPos(), getBlockState().setValue(AltarCoreState.STATUS, newStatus));
+				StructureDebugHandler.info("setup core to " + newStatus + " at " + getBlockPos());
 			}
 		}
-		if (centerDirty) {
-			int oldHeight = height;
-			newStatus = centerCleanUp();
-			if (newStatus != oldStatus) {
-				setupCenter(newStatus, newStatus.isActivated() ? height : oldHeight);
-			}
-		}
-		if (newStatus != oldStatus) {
-			level.setBlockAndUpdate(getBlockPos(), getBlockState().setValue(AltarCoreState.STATUS, newStatus));
-			StructureDebugHandler.info("setup core to " + newStatus + " at " + getBlockPos());
-		}
+		manager.tick();
 	}
 
 	public void onHolderUpdate() {
@@ -154,9 +161,18 @@ public class AltarCoreBlockEntity extends BaseBlockEntity implements TickableBlo
 
 	@Override
 	public boolean activate(ItemStack stack) {
-		if (getBlockState().getValue(AltarCoreState.STATUS) == CoreStatus.READY) {
+		CoreStatus status = getBlockState().getValue(AltarCoreState.STATUS);
+		if (status == CoreStatus.READY) {
 			centerDirty = true;
 			return true;
+		} else if (status == CoreStatus.ACTIVATED) {
+			if (manager.activate()) {
+				if (level != null && !level.isClientSide()) {
+					level.setBlockAndUpdate(getBlockPos(), getBlockState().setValue(AltarCoreState.STATUS, CoreStatus.PROCESSING));
+					StructureDebugHandler.info("start processing at " + getBlockPos());
+				}
+				return true;
+			}
 		}
 		return false;
 	}
@@ -173,6 +189,14 @@ public class AltarCoreBlockEntity extends BaseBlockEntity implements TickableBlo
 	@Override
 	public void blockRemoved() {
 		if (level == null || level.isClientSide()) return;
+		manager.terminate();
+		if (getBlockState().getValue(AltarCoreState.STATUS).isActivated()) {
+			BlockPos pos = getBlockPos().below(height);
+			if (level.getBlockEntity(pos) instanceof AltarBaseBlockEntity base &&
+					base.getBlockState().getValue(AltarBaseState.DISTANCE) == 0) {
+				base.clearAll();
+			}
+		}
 		for (int i = 0; i < 4; i++) {
 			BlockPos pos = getBlockPos()
 					.relative(Direction.from2DDataValue(i))
@@ -184,4 +208,7 @@ public class AltarCoreBlockEntity extends BaseBlockEntity implements TickableBlo
 		}
 	}
 
+	public CraftManager getManager() {
+		return manager;
+	}
 }

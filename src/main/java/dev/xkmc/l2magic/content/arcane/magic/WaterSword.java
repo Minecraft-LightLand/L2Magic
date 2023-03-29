@@ -1,11 +1,12 @@
 package dev.xkmc.l2magic.content.arcane.magic;
 
-import dev.xkmc.l2foundation.init.registrate.LFEffects;
+import dev.xkmc.l2complements.init.registrate.LCEffects;
 import dev.xkmc.l2library.base.effects.EffectUtil;
 import dev.xkmc.l2magic.content.arcane.internal.Arcane;
 import dev.xkmc.l2magic.content.arcane.internal.ArcaneType;
 import dev.xkmc.l2magic.content.common.capability.MagicData;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -32,7 +33,7 @@ public class WaterSword extends Arcane {
 		strike(w, player, target);
 		if (!w.isClientSide()) {
 			search(w, player, radius, target.getPosition(1), target, false, this::strike);
-			EffectUtil.addEffect(target, new MobEffectInstance(LFEffects.WATER_TRAP.get(), time, 1),
+			EffectUtil.addEffect(target, new MobEffectInstance(LCEffects.STONE_CAGE.get(), time, 1),
 					EffectUtil.AddReason.SKILL, player);
 		}
 		return true;
@@ -40,7 +41,7 @@ public class WaterSword extends Arcane {
 
 	private void strike(Level w, Player player, LivingEntity target) {
 		if (!w.isClientSide()) {
-			EffectUtil.addEffect(target, new MobEffectInstance(LFEffects.WATER_TRAP.get(), time, 0),
+			EffectUtil.addEffect(target, new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, time, 4),
 					EffectUtil.AddReason.SKILL, player);
 		}
 	}

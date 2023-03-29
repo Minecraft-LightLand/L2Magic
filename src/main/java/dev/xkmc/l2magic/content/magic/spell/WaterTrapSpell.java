@@ -1,7 +1,7 @@
 package dev.xkmc.l2magic.content.magic.spell;
 
-import dev.xkmc.l2foundation.compat.TeamAccessor;
-import dev.xkmc.l2foundation.init.registrate.LFEffects;
+import dev.xkmc.l2complements.compat.TeamAccessor;
+import dev.xkmc.l2complements.init.registrate.LCEffects;
 import dev.xkmc.l2library.base.effects.EffectUtil;
 import dev.xkmc.l2library.serial.SerialClass;
 import dev.xkmc.l2library.util.annotation.DataGenOnly;
@@ -42,7 +42,7 @@ public class WaterTrapSpell extends SimpleSpell<WaterTrapSpell.Config> {
 							!TeamAccessor.arePlayerAndEntityInSameTeam(player, le) &&
 							le.position().distanceTo(spell.position()) < config.radius
 			).forEach(le -> EffectUtil.addEffect((LivingEntity) le,
-					new MobEffectInstance(LFEffects.WATER_TRAP.get(), config.effect_time, config.effect_level),
+					new MobEffectInstance(LCEffects.STONE_CAGE.get(), config.effect_time, config.effect_level),
 					EffectUtil.AddReason.SKILL, player));
 		});
 		world.addFreshEntity(e);

@@ -1,7 +1,5 @@
 package dev.xkmc.l2magic.init.data.recipe;
 
-import dev.xkmc.l2foundation.init.data.GenItem;
-import dev.xkmc.l2foundation.init.registrate.LFBlocks;
 import dev.xkmc.l2library.base.ingredients.MobEffectIngredient;
 import dev.xkmc.l2library.repack.registrate.providers.RegistrateRecipeProvider;
 import dev.xkmc.l2library.repack.registrate.util.DataIngredient;
@@ -50,8 +48,8 @@ public class RecipeGen {
 
 		currentFolder = "foundation/";
 		{
-			full(pvd, LMItems.ENC_GOLD_NUGGET.get(), LFBlocks.LAYLINE_HEAD.get().asItem(), GenItem.Mats.STEEL.getNugget(), GenItem.Mats.LAYLINE.getIngot(), 1);
-			full(pvd, LMItems.ENC_GOLD_NUGGET.get(), LFBlocks.LAYROOT_HEAD.get().asItem(), Items.IRON_NUGGET, GenItem.Mats.LAYROOT.getIngot(), 1);
+			//full(pvd, LMItems.ENC_GOLD_NUGGET.get(), LFBlocks.LAYLINE_HEAD.get().asItem(), GenItem.Mats.STEEL.getNugget(), GenItem.Mats.LAYLINE.getIngot(), 1);
+			//full(pvd, LMItems.ENC_GOLD_NUGGET.get(), LFBlocks.LAYROOT_HEAD.get().asItem(), Items.IRON_NUGGET, GenItem.Mats.LAYROOT.getIngot(), 1);
 		}
 
 		currentFolder = "magic_food/";
@@ -98,17 +96,18 @@ public class RecipeGen {
 
 		currentFolder = "ritual/";
 		{
+			/*
 			unlock(pvd, new BasicRitualBuilder()::unlockedBy, Items.IRON_INGOT)
 					.setCore(Ingredient.of(Items.IRON_INGOT),
-							GenItem.Mats.ETERNIUM.getIngot().getDefaultInstance())
-					.setSides(Ingredient.of(GenItem.Mats.LAYLINE.getIngot()),
-							GenItem.Mats.LAYROOT.getIngot().getDefaultInstance(), 1, 3, 4, 6)
+							LCMats.ETERNIUM.getIngot().getDefaultInstance())
+					.setSides(Ingredient.of(LCMats.LAYLINE.getIngot()),
+							LCMats.LAYROOT.getIngot().getDefaultInstance(), 1, 3, 4, 6)
 					.setSide(Enchantments.MENDING, 1, 0)
 					.setSide(Enchantments.UNBREAKING, 3, 2)
 					.setSide(Enchantments.INFINITY_ARROWS, 1, 5)
 					.setSide(Enchantments.ALL_DAMAGE_PROTECTION, 4, 7)
-					.save(pvd, getID(GenItem.Mats.ETERNIUM.getIngot()));
-
+					.save(pvd, getID(LCMats.ETERNIUM.getIngot()));
+			*/
 			unlock(pvd, new BasicRitualBuilder()::unlockedBy, Items.IRON_INGOT)
 					.setCore(Ingredient.of(Items.IRON_INGOT),
 							LMItems.MAGICIUM_INGOT.get().getDefaultInstance())

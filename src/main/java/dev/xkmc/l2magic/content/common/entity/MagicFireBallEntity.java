@@ -1,6 +1,6 @@
 package dev.xkmc.l2magic.content.common.entity;
 
-import dev.xkmc.l2foundation.content.entity.ISizedItemEntity;
+import dev.xkmc.l2complements.content.entity.ISizedItemEntity;
 import dev.xkmc.l2magic.init.registrate.LMEntities;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.protocol.Packet;

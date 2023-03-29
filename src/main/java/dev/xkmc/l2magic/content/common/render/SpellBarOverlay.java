@@ -1,7 +1,7 @@
 package dev.xkmc.l2magic.content.common.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import dev.xkmc.l2library.base.menu.OverlayManager;
+import dev.xkmc.l2library.base.overlay.OverlayManager;
 import dev.xkmc.l2magic.content.common.capability.MagicData;
 import dev.xkmc.l2magic.init.L2Magic;
 import net.minecraft.world.entity.player.Player;

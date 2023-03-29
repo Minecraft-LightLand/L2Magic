@@ -1,6 +1,8 @@
 package dev.xkmc.l2magic.content.altar.tile.structure;
 
+import dev.xkmc.l2library.block.TickableBlockEntity;
 import dev.xkmc.l2library.serial.SerialClass;
+import dev.xkmc.l2magic.content.altar.methods.AltarCoreState;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
@@ -12,7 +14,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Objects;
 
 @SerialClass
-public class AltarTableBlockEntity extends PillarTopBlockEntity {
+public class AltarTableBlockEntity extends PillarTopBlockEntity implements TickableBlockEntity {
 
 	@Nullable
 	@SerialClass.SerialField(toClient = true)
@@ -23,12 +25,35 @@ public class AltarTableBlockEntity extends PillarTopBlockEntity {
 	}
 
 	@Override
+	public void tick() {
+
+	}
+
+	// core reference code
+
+	@Override
 	public void update() {
 		super.update();
 		BlockPos newCore = updateCorePos();
 		if (Objects.equals(core, newCore)) return;
+		if (core != null) updateCore(core, false);
 		core = newCore;
+		if (core != null) updateCore(core, true);
 		sync();
+	}
+
+	@Override
+	public void blockRemoved() {
+		if (core != null) updateCore(core, false);
+	}
+
+	private void updateCore(BlockPos corePos, boolean add) {
+		if (level == null || level.isClientSide()) return;
+		if (level.getBlockEntity(corePos) instanceof AltarCoreBlockEntity coreEntity) {
+			if (coreEntity.getBlockState().getValue(AltarCoreState.STATUS).isActivated()) {
+				coreEntity.getManager().addTable(getBlockPos(), add);
+			}
+		}
 	}
 
 	@Nullable
@@ -53,6 +78,7 @@ public class AltarTableBlockEntity extends PillarTopBlockEntity {
 		return null;
 	}
 
+	// client render code
 
 	@Nullable
 	private AABB compiledBox;
