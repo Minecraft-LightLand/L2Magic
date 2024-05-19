@@ -1,0 +1,34 @@
+{
+  "action": {
+    "type": "l2magic:iterate_delayed",
+    "child": {
+      "type": "l2magic:random_pos_fan",
+      "child": {
+        "type": "l2magic:rotate",
+        "child": {
+          "type": "l2magic:random_offset",
+          "child": {
+            "type": "l2magic:particle",
+            "particle": "minecraft:snowflake",
+            "speed": "0.5"
+          },
+          "shape": "RECT",
+          "x": "0",
+          "y": "1.5",
+          "z": "0"
+        },
+        "degree": "75"
+      },
+      "count": "3",
+      "maxAngle": "180",
+      "maxRadius": "8",
+      "minAngle": "-180",
+      "minRadius": "3"
+    },
+    "delay": "4",
+    "step": "5"
+  },
+  "cast_type": "CONTINUOUS",
+  "icon": "minecraft:snowball",
+  "trigger_type": "SELF_POS"
+}

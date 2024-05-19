@@ -15,7 +15,7 @@ import java.util.function.Function;
 
 public interface ConfiguredEngine<T extends Record & ConfiguredEngine<T>> {
 
-	Codec<ConfiguredEngine<?>> CODEC = EngineRegistry.REGISTRY.get().byNameCodec()
+	Codec<ConfiguredEngine<?>> CODEC = EngineHelper.lazyCodec(EngineRegistry.REGISTRY)
 			.dispatch(ConfiguredEngine::type, EngineType::codec);
 
 	static <T> RecordCodecBuilder<T, ConfiguredEngine<?>> codec(String str, Function<T, ConfiguredEngine<?>> func) {

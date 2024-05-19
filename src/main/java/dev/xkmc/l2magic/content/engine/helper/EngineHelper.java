@@ -1,16 +1,21 @@
 package dev.xkmc.l2magic.content.engine.helper;
 
+import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.DataResult;
+import com.mojang.serialization.DynamicOps;
 import dev.xkmc.l2magic.content.engine.context.BuilderContext;
 import dev.xkmc.l2magic.content.engine.core.ConfiguredEngine;
 import dev.xkmc.l2magic.content.engine.variable.Variable;
 import dev.xkmc.l2serial.serialization.type_cache.RecordCache;
+import net.minecraftforge.registries.IForgeRegistry;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Supplier;
 
 public class EngineHelper {
 
@@ -64,4 +69,19 @@ public class EngineHelper {
 			}
 		}, Enum::name);
 	}
+
+	public static <T> Codec<T> lazyCodec(Supplier<IForgeRegistry<T>> registry) {
+		return new Codec<>() {
+			@Override
+			public <T1> DataResult<Pair<T, T1>> decode(DynamicOps<T1> a, T1 b) {
+				return registry.get().getCodec().decode(a, b);
+			}
+
+			@Override
+			public <T1> DataResult<T1> encode(T a, DynamicOps<T1> b, T1 c) {
+				return registry.get().getCodec().encode(a, b, c);
+			}
+		};
+	}
+
 }

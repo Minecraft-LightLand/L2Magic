@@ -1,12 +1,17 @@
 package dev.xkmc.l2magic.init;
 
+import dev.xkmc.l2itemselector.select.item.IItemSelector;
 import dev.xkmc.l2library.base.L2Registrate;
 import dev.xkmc.l2library.serial.config.PacketHandlerWithConfig;
 import dev.xkmc.l2magic.content.engine.core.SpellAction;
+import dev.xkmc.l2magic.content.item.CreativeSpellSelector;
+import dev.xkmc.l2magic.init.data.LMDatapackRegistriesGen;
 import dev.xkmc.l2magic.init.registrate.EngineRegistry;
+import dev.xkmc.l2magic.init.registrate.LMItems;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.data.event.GatherDataEvent;
+import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -28,17 +33,20 @@ public class L2Magic {
 	public static final L2Registrate REGISTRATE = new L2Registrate(MODID);
 
 	public L2Magic() {
+		EngineRegistry.register();
+		LMItems.register();
 	}
 
 	@SubscribeEvent
 	public static void setup(final FMLCommonSetupEvent event) {
+		IItemSelector.register(new CreativeSpellSelector(loc("spell_select")));
 		event.enqueueWork(() -> {
 		});
 	}
 
 	@SubscribeEvent
 	public static void onDatapackRegistry(DataPackRegistryEvent.NewRegistry event) {
-		event.dataPackRegistry(EngineRegistry.SPELL, SpellAction.CODEC);
+		event.dataPackRegistry(EngineRegistry.SPELL, SpellAction.CODEC, SpellAction.CODEC);
 	}
 
 	@SubscribeEvent(priority = EventPriority.HIGH)
@@ -48,6 +56,7 @@ public class L2Magic {
 		PackOutput output = gen.getPackOutput();
 		var pvd = event.getLookupProvider();
 		var helper = event.getExistingFileHelper();
+		gen.addProvider(run, new LMDatapackRegistriesGen(output, pvd));
 	}
 
 	public static ResourceLocation loc(String id) {

@@ -1,0 +1,29 @@
+{
+  "action": {
+    "type": "l2magic:iterate_delayed",
+    "child": {
+      "type": "l2magic:random_pos_fan",
+      "child": {
+        "type": "l2magic:direction",
+        "child": {
+          "type": "l2magic:particle",
+          "particle": "minecraft:flame",
+          "speed": "1.5"
+        },
+        "x": "0",
+        "y": "1",
+        "z": "0"
+      },
+      "count": "10",
+      "maxAngle": "180",
+      "maxRadius": "4",
+      "minAngle": "-180",
+      "minRadius": "0"
+    },
+    "delay": "1",
+    "step": "40"
+  },
+  "cast_type": "INSTANT",
+  "icon": "minecraft:fire_charge",
+  "trigger_type": "TARGET_POS"
+}

@@ -73,7 +73,7 @@ public record RingRandomIterator(DoubleVariable minRadius, DoubleVariable maxRad
 				param.put(index + "_angle", th);
 				param.put(index + "_radius", r);
 			}
-			child.execute(new EngineContext(ctx.user(), LocationContext.of(off, dir, ori.normal()), param));
+			child.execute(new EngineContext(ctx.user(), LocationContext.of(ctx.loc().pos().add(off), dir, ori.normal()), param));
 		}
 	}
 
