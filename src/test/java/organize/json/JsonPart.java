@@ -1,7 +1,7 @@
 package organize.json;
 
 import com.google.gson.JsonElement;
-import dev.xkmc.l2library.serial.SerialClass;
+import dev.xkmc.l2serial.serialization.SerialClass;
 
 @SerialClass
 public abstract class JsonPart {

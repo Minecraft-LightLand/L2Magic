@@ -5,7 +5,7 @@ import com.google.common.io.Files;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
-import dev.xkmc.l2library.serial.codec.JsonCodec;
+import dev.xkmc.l2serial.serialization.codec.JsonCodec;
 import organize.ResourceOrganizer;
 import organize.json.JsonPart;
 
