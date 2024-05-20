@@ -1,5 +1,6 @@
 package dev.xkmc.l2magic.content.engine.helper;
 
+import dev.xkmc.l2magic.init.L2Magic;
 import it.unimi.dsi.fastutil.longs.Long2ObjectOpenHashMap;
 
 import java.util.ArrayList;
@@ -18,8 +19,13 @@ public class Scheduler {
 		time++;
 		var list = map.remove(time);
 		if (list != null) {
-			for (var e : list) {
-				e.run();
+			try {
+				for (var e : list) {
+					e.run();
+				}
+			} catch (Exception e) {
+				L2Magic.LOGGER.throwing(e);
+				return true;
 			}
 		}
 		return isFinished();

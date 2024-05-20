@@ -68,6 +68,9 @@ public class WandItem extends Item implements IGlowingTarget {
 		if (spell != null) {
 			if (spell.castType() == SpellCastType.INSTANT) {
 				if (castSpell(stack, level, player, spell, 0)) {
+					if (!level.isClientSide) {
+						player.getCooldowns().addCooldown(this, 10);
+					}
 					return InteractionResultHolder.consume(stack);
 				} else {
 					return InteractionResultHolder.fail(stack);
@@ -140,38 +143,53 @@ public class WandItem extends Item implements IGlowingTarget {
 
 	private boolean castSpell(ItemStack stack, Level level, LivingEntity user, SpellAction spell, int useTick) {
 		double power = 1;
+		Vec3 pos, dir;
 		switch (spell.triggerType()) {
-			case SELF_POS -> spell.execute(new SpellContext(user, user.position(), LocationContext.UP, useTick, power));
+			case SELF_POS -> {
+				pos = user.position();
+				dir = LocationContext.UP;
+			}
 			case TARGET_POS -> {
 				var start = user.getEyePosition();
-				var dir = getForward(user);
-				var end = start.add(dir.scale(getDistance(stack)));
+				var forward = getForward(user);
+				var end = start.add(forward.scale(getDistance(stack)));
 				AABB box = (new AABB(start, end)).inflate(1.0);
 				var bhit = level.clip(new ClipContext(start, end, ClipContext.Block.OUTLINE, ClipContext.Fluid.NONE, user));
 				var ehit = ProjectileUtil.getEntityHitResult(level, user, start, end, box, e -> true);
 				if ((ehit == null || ehit.getType() == HitResult.Type.MISS) && bhit.getType() == HitResult.Type.MISS) {
 					return false;
 				}
-				var hit = ehit != null && ehit.getLocation().distanceToSqr(start) < bhit.getLocation().distanceToSqr(start) ?
+				pos = ehit != null && ehit.getLocation().distanceToSqr(start) < bhit.getLocation().distanceToSqr(start) ?
 						ehit.getLocation() : bhit.getLocation();
-				spell.execute(new SpellContext(user, hit, LocationContext.UP, useTick, power));
+				dir = LocationContext.UP;
+			}
+			case HORIZONTAL_FACING -> {
+				dir = getForward(user).multiply(1, 0, 1).normalize();
+				pos = user.position();
+				if (dir.length() < 0.5) return false;
 			}
 			case FACING_BACK -> {
-				var dir = getForward(user);
-				var pos = user.getEyePosition();
-				spell.execute(new SpellContext(user, pos.add(dir), dir, useTick, power));
+				dir = getForward(user);
+				pos = user.getEyePosition().add(dir);
 			}
 			case FACING_FRONT -> {
-				var dir = getForward(user);
-				var pos = user.getEyePosition();
-				spell.execute(new SpellContext(user, pos.add(dir.scale(-1)), dir, useTick, power));
+				dir = getForward(user);
+				pos = user.getEyePosition().add(dir.scale(-1));
 			}
 			case TARGET_ENTITY -> {
 				var target = getTarget(user);
-				if (target != null)
-					spell.execute(new SpellContext(user, target.position(), LocationContext.UP, useTick, power));
+				if (target != null) {
+					pos = target.position();
+					dir = LocationContext.UP;
+				}
 				else return false;
 			}
+			default -> {
+				return false;
+			}
+		}
+		if (!level.isClientSide()) {
+			spell.execute(new SpellContext(user, pos, dir, useTick, power));
 		}
 		return true;
 	}

@@ -29,10 +29,11 @@ public record DelayedIterator(IntVariable step, IntVariable delay, ConfiguredEng
 	@Override
 	public void execute(EngineContext ctx) {
 		int step = step().eval(ctx);
+		int delay = delay().eval(ctx);
 		for (int i = 0; i < step; i++) {
 			int I = i;
 			if (i == 0) child.execute(ctx.iterateOn(ctx.loc(), index, 0));
-			else ctx.schedule(i, () -> child.execute(ctx.iterateOn(ctx.loc(), index, I)));
+			else ctx.schedule(i*delay, () -> child.execute(ctx.iterateOn(ctx.loc(), index, I)));
 		}
 	}
 

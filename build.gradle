@@ -211,6 +211,7 @@ dependencies {
     implementation fg.deobf("curse.maven:caelus-308989:4581481")
     implementation fg.deobf("curse.maven:irons-spells-n-spellbooks-855414:4693050")
     implementation fg.deobf("curse.maven:ars-nouveau-401955:4751471")
+    implementation fg.deobf("curse.maven:uwrad-forge-853354:4502036")
 
     runtimeOnly fg.deobf("curse.maven:just-enough-effect-descriptions-jeed-532286:4599236")
 

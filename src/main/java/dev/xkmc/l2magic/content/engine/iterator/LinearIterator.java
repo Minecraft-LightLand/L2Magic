@@ -20,7 +20,7 @@ public record LinearIterator(DoubleVariable alongDir, Vec3 offset, DoubleVariabl
 	public static Codec<LinearIterator> CODEC = RecordCodecBuilder.create(i -> i.group(
 			DoubleVariable.optionalCodec("alongDir", e -> e.alongDir),
 			Vec3.CODEC.optionalFieldOf("offset").forGetter(e -> Optional.of(e.offset)),
-			DoubleVariable.optionalCodec("alongOffset", e -> e.alongDir),
+			DoubleVariable.optionalCodec("alongOffset", e -> e.alongOffset),
 			IntVariable.codec("step", e -> e.step),
 			Codec.BOOL.optionalFieldOf("startFromOrigin").forGetter(e -> Optional.of(e.startFromOrigin)),
 			ConfiguredEngine.codec("child", e -> e.child),

@@ -38,6 +38,7 @@ public class EngineRegistry {
 	public static final RegistryEntry<EngineType<ListInstance>> LIST = register("list", () -> ListInstance.CODEC);
 
 	public static final RegistryEntry<EngineType<DelayModifier>> DELAY = register("delay", () -> DelayModifier.CODEC);
+	public static final RegistryEntry<EngineType<RandomVariableModifier>> RANDOM = register("random", () -> RandomVariableModifier.CODEC);
 	public static final RegistryEntry<EngineType<ForwardOffsetModifier>> FORWARD = register("forward", () -> ForwardOffsetModifier.CODEC);
 	public static final RegistryEntry<EngineType<RotationModifier>> ROTATE = register("rotate", () -> RotationModifier.CODEC);
 	public static final RegistryEntry<EngineType<OffsetModifier>> OFFSET = register("offset", () -> OffsetModifier.CODEC);

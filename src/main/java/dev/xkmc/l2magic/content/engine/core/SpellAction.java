@@ -6,8 +6,10 @@ import dev.xkmc.l2library.init.events.GeneralEventHandler;
 import dev.xkmc.l2magic.content.engine.context.*;
 import dev.xkmc.l2magic.content.engine.helper.EngineHelper;
 import dev.xkmc.l2magic.content.engine.helper.Scheduler;
+import dev.xkmc.l2magic.events.ClientEventHandler;
 import dev.xkmc.l2magic.init.L2Magic;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -32,13 +34,23 @@ public record SpellAction(ConfiguredEngine<?> action, Item icon,
 
 	public void execute(SpellContext ctx) {
 		var sche = new Scheduler();
-		action().execute(new EngineContext(
-				new UserContext(ctx.user().level(), ctx.user(), ctx.user().getRandom(), sche),
-				new LocationContext(ctx.origin(), ctx.facing(), LocationContext.UP),
-				ctx.defaultArgs()
-		));
+		try {
+			action().execute(new EngineContext(
+					new UserContext(ctx.user().level(), ctx.user(), RandomSource.createNewThreadLocalInstance(), sche),
+					new LocationContext(ctx.origin(), ctx.facing(), LocationContext.UP),
+					ctx.defaultArgs()
+			));
+		} catch (Exception e) {
+			L2Magic.LOGGER.throwing(e);
+			return;
+		}
 		if (!sche.isFinished()) {
-			GeneralEventHandler.schedulePersistent(sche::tick);
+			if (ctx.user().level().isClientSide())
+				ClientEventHandler.schedulePersistent(sche::tick);
+			else GeneralEventHandler.schedulePersistent(sche::tick);
+		}
+		if (!ctx.user().level().isClientSide()) {
+			L2Magic.HANDLER.toTrackingPlayers(new SpellUsePacket(this, ctx), ctx.user());
 		}
 	}
 
