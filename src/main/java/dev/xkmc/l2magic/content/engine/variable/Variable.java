@@ -1,9 +1,7 @@
 package dev.xkmc.l2magic.content.engine.variable;
 
-import dev.xkmc.l2magic.content.engine.context.BuilderContext;
+import dev.xkmc.l2magic.content.engine.core.Verifiable;
 
-public interface Variable {
-
-	boolean verify(BuilderContext ctx);
+public interface Variable extends Verifiable {
 
 }

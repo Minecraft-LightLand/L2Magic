@@ -9,7 +9,7 @@ import net.minecraft.world.phys.Vec3;
 public class ClientSpellHandler {
 
 	public static void useSpell(int user, ResourceLocation spellId,
-								Vec3 origin, Vec3 facing, double tickUsing, double power) {
+								Vec3 origin, Vec3 facing, long seed, double tickUsing, double power) {
 		var level = Minecraft.getInstance().level;
 		if (level == null) return;
 		var e = level.getEntity(user);
@@ -17,6 +17,6 @@ public class ClientSpellHandler {
 		var spell = level.registryAccess().registryOrThrow(EngineRegistry.SPELL)
 				.get(spellId);
 		if (spell == null) return;
-		spell.execute(new SpellContext(le, origin, facing, tickUsing, power));
+		spell.execute(new SpellContext(le, origin, facing, seed, tickUsing, power));
 	}
 }

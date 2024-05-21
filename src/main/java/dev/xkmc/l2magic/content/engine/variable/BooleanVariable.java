@@ -4,7 +4,7 @@ import com.mojang.serialization.Codec;
 import dev.xkmc.l2magic.content.engine.context.BuilderContext;
 import dev.xkmc.l2magic.content.engine.context.EngineContext;
 
-public record BooleanVariable(String str, ExpressionHolder exp) implements Variable {
+public record BooleanVariable(String str, ExpressionHolder exp) implements NumericVariable {
 
 	public static final Codec<BooleanVariable> CODEC = Codec.STRING.xmap(BooleanVariable::of, BooleanVariable::str);
 
@@ -16,8 +16,4 @@ public record BooleanVariable(String str, ExpressionHolder exp) implements Varia
 		return exp.eval(ctx) > 0.5;
 	}
 
-	@Override
-	public boolean verify(BuilderContext ctx) {
-		return exp.verify(ctx);
-	}
 }

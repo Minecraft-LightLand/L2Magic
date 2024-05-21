@@ -4,27 +4,26 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import dev.xkmc.l2magic.content.engine.context.EngineContext;
 import dev.xkmc.l2magic.content.engine.context.LocationContext;
-import dev.xkmc.l2magic.content.engine.core.ConfiguredEngine;
-import dev.xkmc.l2magic.content.engine.core.EngineType;
+import dev.xkmc.l2magic.content.engine.core.Modifier;
+import dev.xkmc.l2magic.content.engine.core.ModifierType;
 import dev.xkmc.l2magic.content.engine.variable.DoubleVariable;
 import dev.xkmc.l2magic.init.registrate.EngineRegistry;
 import net.minecraft.world.phys.Vec3;
 
-public record OffsetModifier(DoubleVariable x, DoubleVariable y, DoubleVariable z, ConfiguredEngine<?> child)
+public record OffsetModifier(DoubleVariable x, DoubleVariable y, DoubleVariable z)
 		implements Modifier<OffsetModifier> {
 
 	public static Codec<OffsetModifier> CODEC = RecordCodecBuilder.create(i -> i.group(
 			DoubleVariable.optionalCodec("x", OffsetModifier::x),
 			DoubleVariable.optionalCodec("y", OffsetModifier::y),
-			DoubleVariable.optionalCodec("z", OffsetModifier::z),
-			ConfiguredEngine.codec("child", Modifier::child)
-	).apply(i, (x, y, z, c) -> new OffsetModifier(
+			DoubleVariable.optionalCodec("z", OffsetModifier::z)
+	).apply(i, (x, y, z) -> new OffsetModifier(
 			x.orElse(DoubleVariable.ZERO),
 			y.orElse(DoubleVariable.ZERO),
-			z.orElse(DoubleVariable.ZERO), c)));
+			z.orElse(DoubleVariable.ZERO))));
 
 	@Override
-	public EngineType<OffsetModifier> type() {
+	public ModifierType<OffsetModifier> type() {
 		return EngineRegistry.OFFSET.get();
 	}
 

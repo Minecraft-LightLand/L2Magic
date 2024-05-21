@@ -13,9 +13,9 @@ import org.jetbrains.annotations.MustBeInvokedByOverriders;
 import java.util.Optional;
 import java.util.function.Function;
 
-public interface ConfiguredEngine<T extends Record & ConfiguredEngine<T>> {
+public interface ConfiguredEngine<T extends Record & ConfiguredEngine<T>> extends Verifiable {
 
-	Codec<ConfiguredEngine<?>> CODEC = EngineHelper.lazyCodec(EngineRegistry.REGISTRY)
+	Codec<ConfiguredEngine<?>> CODEC = EngineRegistry.ENGINE.codec()
 			.dispatch(ConfiguredEngine::type, EngineType::codec);
 
 	static <T> RecordCodecBuilder<T, ConfiguredEngine<?>> codec(String str, Function<T, ConfiguredEngine<?>> func) {
@@ -27,16 +27,6 @@ public interface ConfiguredEngine<T extends Record & ConfiguredEngine<T>> {
 	}
 
 	void execute(EngineContext ctx);
-
-	default T self() {
-		return Wrappers.cast(this);
-	}
-
-	@MustBeInvokedByOverriders
-	default boolean verify(BuilderContext ctx) {
-		EngineHelper.verifyVars(self(), ctx, Wrappers.cast(self().getClass()));
-		return true;
-	}
 
 	EngineType<T> type();
 

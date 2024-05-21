@@ -78,8 +78,8 @@ public record RingRandomIterator(DoubleVariable minRadius, DoubleVariable maxRad
 	}
 
 	@Override
-	public Set<String> params() {
-		if (index == null) return Set.of();
+	public Set<String> verificationParameters() {
+		if (index == null) return null;
 		return Set.of(index, index + "_angle", index + "_radius");
 	}
 

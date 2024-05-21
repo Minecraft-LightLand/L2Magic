@@ -8,9 +8,11 @@ import dev.xkmc.l2magic.content.engine.helper.EngineHelper;
 import dev.xkmc.l2magic.content.engine.helper.Scheduler;
 import dev.xkmc.l2magic.events.ClientEventHandler;
 import dev.xkmc.l2magic.init.L2Magic;
+import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.levelgen.SingleThreadedRandomSource;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.Set;
@@ -35,8 +37,9 @@ public record SpellAction(ConfiguredEngine<?> action, Item icon,
 	public void execute(SpellContext ctx) {
 		var sche = new Scheduler();
 		try {
+			var source = new SingleThreadedRandomSource(ctx.seed());
 			action().execute(new EngineContext(
-					new UserContext(ctx.user().level(), ctx.user(), RandomSource.createNewThreadLocalInstance(), sche),
+					new UserContext(ctx.user().level(), ctx.user(), source, sche),
 					new LocationContext(ctx.origin(), ctx.facing(), LocationContext.UP),
 					ctx.defaultArgs()
 			));
@@ -56,6 +59,11 @@ public record SpellAction(ConfiguredEngine<?> action, Item icon,
 
 	public boolean verify(ResourceLocation id) {
 		return action().verify(new BuilderContext(L2Magic.LOGGER, id.toString(), params()));
+	}
+
+	public void verifyOnBuild(BootstapContext<SpellAction> ctx, ResourceKey<SpellAction> id) {
+		verify(id.location());
+		ctx.register(id, this);
 	}
 
 }

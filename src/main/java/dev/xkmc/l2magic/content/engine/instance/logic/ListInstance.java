@@ -28,18 +28,4 @@ public record ListInstance(List<ConfiguredEngine<?>> children)
 		}
 	}
 
-	@Override
-	public boolean verify(BuilderContext ctx) {
-		boolean ans = ConfiguredEngine.super.verify(ctx);
-		for (int i = 0; i < children.size(); i++) {
-			if (children.get(i) == null) {
-				ctx.error("entry at index " + i + " is null");
-				ans = false;
-				continue;
-			}
-			ans &= children.get(i).verify(ctx.of("children[" + i + "]"));
-		}
-		return ans;
-	}
-
 }

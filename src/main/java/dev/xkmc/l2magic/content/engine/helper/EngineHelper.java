@@ -5,8 +5,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.DynamicOps;
 import dev.xkmc.l2magic.content.engine.context.BuilderContext;
-import dev.xkmc.l2magic.content.engine.core.ConfiguredEngine;
-import dev.xkmc.l2magic.content.engine.variable.Variable;
+import dev.xkmc.l2magic.content.engine.core.Verifiable;
 import dev.xkmc.l2serial.serialization.type_cache.RecordCache;
 import net.minecraftforge.registries.IForgeRegistry;
 
@@ -21,7 +20,7 @@ public class EngineHelper {
 
 	private static final Map<Class<?>, EngineHelper> CACHE = new LinkedHashMap<>();
 
-	public static <T extends Record & ConfiguredEngine<T>> EngineHelper get(Class<T> cls) {
+	public static EngineHelper get(Class<?> cls) {
 		if (CACHE.containsKey(cls)) {
 			return CACHE.get(cls);
 		}
@@ -30,10 +29,21 @@ public class EngineHelper {
 		return ans;
 	}
 
-	public static <T extends Record & ConfiguredEngine<T>> void verifyVars(T obj, BuilderContext ctx, Class<T> cls) {
+	public static void verifyFields(Verifiable obj, BuilderContext ctx, Class<?> cls) {
+		if (!cls.isRecord())
+			throw new IllegalStateException("class " + cls.getSimpleName() + " is not a record");
 		try {
-			for (var e : get(cls).variables) {
-				((Variable) e.get(obj)).verify(ctx.of(e.getName()));
+			var set = obj.verificationParameters();
+			for (var e : get(cls).children) {
+				Verifiable v = (Verifiable) e.get(obj);
+				if (v != null) v.verify(ctx.of(e.getName(), set));
+			}
+			for (var e : get(cls).collections) {
+				List l = (List) e.get(obj);
+				for (int i = 0; i < l.size(); i++) {
+					if (l.get(i) instanceof Verifiable v)
+						v.verify(ctx.of(e.getName() + "[" + i + "]"));
+				}
 			}
 		} catch (Exception e) {
 			throw new IllegalStateException("class " + cls.getSimpleName() + " failed configuration", e);
@@ -48,14 +58,18 @@ public class EngineHelper {
 		}
 	}
 
-	private final List<Field> variables = new ArrayList<>();
+	private final List<Field> children = new ArrayList<>();
+	private final List<Field> collections = new ArrayList<>();
 
 	public EngineHelper(Class<?> cls) throws Exception {
 		assert cls.isRecord();
 		var cache = RecordCache.get(cls);
 		for (var e : cache.getFields()) {
-			if (Variable.class.isAssignableFrom(e.getType())) {
-				variables.add(e);
+			if (Verifiable.class.isAssignableFrom(e.getType())) {
+				children.add(e);
+			}
+			if (List.class.isAssignableFrom(e.getType())) {
+				collections.add(e);
 			}
 		}
 	}

@@ -106,8 +106,4 @@ public interface ColorVariable extends Variable {
 
 	Vector3f eval(EngineContext ctx);
 
-	@Override
-	default boolean verify(BuilderContext ctx) {
-		return false;
-	}
 }

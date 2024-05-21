@@ -3,71 +3,86 @@
     "type": "l2magic:list",
     "children": [
       {
-        "type": "l2magic:direction",
+        "type": "l2magic:move",
         "child": {
-          "type": "l2magic:rotate",
-          "child": {
-            "type": "l2magic:list",
-            "children": [
-              {
-                "type": "l2magic:iterate",
+          "type": "l2magic:list",
+          "children": [
+            {
+              "type": "l2magic:iterate",
+              "child": {
+                "type": "l2magic:move",
                 "child": {
-                  "type": "l2magic:rotate",
+                  "type": "l2magic:iterate_linear",
+                  "alongDir": "0.304",
+                  "alongOffset": "0",
                   "child": {
-                    "type": "l2magic:forward",
-                    "child": {
-                      "type": "l2magic:rotate",
-                      "child": {
-                        "type": "l2magic:iterate_linear",
-                        "alongDir": "0.304",
-                        "alongOffset": "0",
-                        "child": {
-                          "type": "l2magic:particle",
-                          "particle": "minecraft:flame",
-                          "speed": "0"
-                        },
-                        "offset": [
-                          0.0,
-                          0.0,
-                          0.0
-                        ],
-                        "startFromOrigin": true,
-                        "step": "26"
-                      },
-                      "degree": "162"
-                    },
-                    "distance": "4.0"
+                    "type": "l2magic:particle",
+                    "particle": "minecraft:flame",
+                    "speed": "0"
                   },
-                  "degree": "72*ri"
+                  "offset": [
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  "startFromOrigin": true,
+                  "step": "26"
                 },
-                "index": "ri",
-                "step": "5"
+                "modifiers": [
+                  {
+                    "type": "l2magic:rotate",
+                    "degree": "rand(0,360)"
+                  },
+                  {
+                    "type": "l2magic:forward",
+                    "distance": "rand(0,360)"
+                  },
+                  {
+                    "type": "l2magic:rotate",
+                    "degree": "rand(0,360)"
+                  }
+                ]
               },
-              {
-                "type": "l2magic:iterate",
+              "index": "ri",
+              "step": "5"
+            },
+            {
+              "type": "l2magic:iterate",
+              "child": {
+                "type": "l2magic:move",
                 "child": {
-                  "type": "l2magic:rotate",
-                  "child": {
-                    "type": "l2magic:forward",
-                    "child": {
-                      "type": "l2magic:particle",
-                      "particle": "minecraft:flame",
-                      "speed": "0"
-                    },
-                    "distance": "4.0"
-                  },
-                  "degree": "4.285714285714286*ri"
+                  "type": "l2magic:particle",
+                  "particle": "minecraft:flame",
+                  "speed": "0"
                 },
-                "index": "ri",
-                "step": "84"
-              }
-            ]
-          },
-          "degree": "rand(0,360)"
+                "modifiers": [
+                  {
+                    "type": "l2magic:rotate",
+                    "degree": "rand(0,360)"
+                  },
+                  {
+                    "type": "l2magic:forward",
+                    "distance": "rand(0,360)"
+                  }
+                ]
+              },
+              "index": "ri",
+              "step": "84"
+            }
+          ]
         },
-        "x": "1",
-        "y": "0",
-        "z": "0"
+        "modifiers": [
+          {
+            "type": "l2magic:direction",
+            "x": "1",
+            "y": "0",
+            "z": "0"
+          },
+          {
+            "type": "l2magic:rotate",
+            "degree": "rand(0,360)"
+          }
+        ]
       },
       {
         "type": "l2magic:iterate_delayed",
@@ -76,7 +91,7 @@
           "child": {
             "type": "l2magic:random",
             "child": {
-              "type": "l2magic:direction",
+              "type": "l2magic:move",
               "child": {
                 "type": "l2magic:if",
                 "action": {
@@ -91,9 +106,14 @@
                 },
                 "predicate": "r2<0.25"
               },
-              "x": "(r0-0.5)*0.2",
-              "y": "1",
-              "z": "(r1-0.5)*0.2"
+              "modifiers": [
+                {
+                  "type": "l2magic:direction",
+                  "x": "(r0-0.5)*0.2",
+                  "y": "1",
+                  "z": "(r1-0.5)*0.2"
+                }
+              ]
             },
             "count": 4,
             "name": "r"

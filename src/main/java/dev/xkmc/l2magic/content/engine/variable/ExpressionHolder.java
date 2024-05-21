@@ -25,11 +25,15 @@ public class ExpressionHolder {
 	}
 
 
-	public synchronized double eval(EngineContext ctx) {
+	public double eval(EngineContext ctx) {
 		if (isConstant) {
 			return constant;
 		}
 		if (exp == null) throw new IllegalStateException("Must call verify before fetching expression");
+		return evalImpl(ctx);
+	}
+
+	private synchronized double evalImpl(EngineContext ctx) {
 		random = ctx.user().rand();
 		double ans = ctx.eval(exp);
 		random = null;

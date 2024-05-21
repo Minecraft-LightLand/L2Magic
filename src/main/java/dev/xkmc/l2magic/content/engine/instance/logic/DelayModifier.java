@@ -1,4 +1,4 @@
-package dev.xkmc.l2magic.content.engine.modifier;
+package dev.xkmc.l2magic.content.engine.instance.logic;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -27,8 +27,4 @@ public record DelayModifier(IntVariable tick, ConfiguredEngine<?> child)
 		ctx.schedule(tick.eval(ctx), () -> child.execute(ctx));
 	}
 
-	@Override
-	public boolean verify(BuilderContext ctx) {
-		return ConfiguredEngine.super.verify(ctx) & child().verify(ctx.of("child"));
-	}
 }

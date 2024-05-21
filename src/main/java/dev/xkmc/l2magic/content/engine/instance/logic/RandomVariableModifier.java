@@ -1,8 +1,7 @@
-package dev.xkmc.l2magic.content.engine.modifier;
+package dev.xkmc.l2magic.content.engine.instance.logic;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import dev.xkmc.l2magic.content.engine.context.BuilderContext;
 import dev.xkmc.l2magic.content.engine.context.EngineContext;
 import dev.xkmc.l2magic.content.engine.core.ConfiguredEngine;
 import dev.xkmc.l2magic.content.engine.core.EngineType;
@@ -35,7 +34,7 @@ public record RandomVariableModifier(String name, int count, ConfiguredEngine<?>
 		child.execute(new EngineContext(ctx.user(), ctx.loc(), params));
 	}
 
-	private Set<String> params() {
+	public Set<String> verificationParameters() {
 		Set<String> ans = new LinkedHashSet<>();
 		for (int i = 0; i < count; i++) {
 			ans.add(name + i);
@@ -43,8 +42,4 @@ public record RandomVariableModifier(String name, int count, ConfiguredEngine<?>
 		return ans;
 	}
 
-	@Override
-	public boolean verify(BuilderContext ctx) {
-		return ConfiguredEngine.super.verify(ctx) & child().verify(ctx.of("child", params()));
-	}
 }

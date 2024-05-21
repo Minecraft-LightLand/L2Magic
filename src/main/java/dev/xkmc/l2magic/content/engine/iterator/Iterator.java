@@ -1,6 +1,5 @@
 package dev.xkmc.l2magic.content.engine.iterator;
 
-import dev.xkmc.l2magic.content.engine.context.BuilderContext;
 import dev.xkmc.l2magic.content.engine.core.ConfiguredEngine;
 
 import javax.annotation.Nullable;
@@ -13,15 +12,11 @@ public interface Iterator<T extends Record & Iterator<T>> extends ConfiguredEngi
 	@Nullable
 	String index();
 
-	default Set<String> params() {
+	@Override
+	@Nullable
+	default Set<String> verificationParameters() {
 		String str = index();
 		return str == null ? Set.of() : Set.of(str);
-	}
-
-	@Override
-	default boolean verify(BuilderContext ctx) {
-		boolean verify = ConfiguredEngine.super.verify(ctx);
-		return verify & child().verify(index() == null ? ctx.of("child") : ctx.of("child", params()));
 	}
 
 }

@@ -5,6 +5,8 @@
   "compatibilityLevel": "JAVA_17",
   "refmap": "l2magic.refmap.json",
   "mixins": [
+    "PersistentEntitySectionManagerAccessor",
+    "ServerLevelAccessor"
   ],
   "client": [
   ],

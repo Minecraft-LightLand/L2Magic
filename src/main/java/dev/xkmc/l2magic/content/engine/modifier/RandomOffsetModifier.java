@@ -10,11 +10,7 @@ import dev.xkmc.l2magic.content.engine.variable.DoubleVariable;
 import dev.xkmc.l2magic.init.registrate.EngineRegistry;
 import net.minecraft.world.phys.Vec3;
 
-import java.util.Optional;
-
-public record RandomOffsetModifier(Type shape,
-								   DoubleVariable x, DoubleVariable y, DoubleVariable z,
-								   ConfiguredEngine<?> child)
+public record RandomOffsetModifier(Type shape, DoubleVariable x, DoubleVariable y, DoubleVariable z)
 		implements Modifier<RandomOffsetModifier> {
 
 	public enum Type {
@@ -25,15 +21,14 @@ public record RandomOffsetModifier(Type shape,
 			EngineHelper.enumCodec(Type.class, Type.values()).fieldOf("shape").forGetter(e -> e.shape),
 			DoubleVariable.optionalCodec("x", RandomOffsetModifier::x),
 			DoubleVariable.optionalCodec("y", RandomOffsetModifier::y),
-			DoubleVariable.optionalCodec("z", RandomOffsetModifier::z),
-			ConfiguredEngine.codec("child", Modifier::child)
-	).apply(i, (t, x, y, z, c) -> new RandomOffsetModifier(t,
+			DoubleVariable.optionalCodec("z", RandomOffsetModifier::z)
+	).apply(i, (t, x, y, z) -> new RandomOffsetModifier(t,
 			x.orElse(DoubleVariable.ZERO),
 			y.orElse(DoubleVariable.ZERO),
-			z.orElse(DoubleVariable.ZERO), c)));
+			z.orElse(DoubleVariable.ZERO))));
 
 	@Override
-	public EngineType<RandomOffsetModifier> type() {
+	public ModifierType<RandomOffsetModifier> type() {
 		return EngineRegistry.RANDOM_OFFSET.get();
 	}
 

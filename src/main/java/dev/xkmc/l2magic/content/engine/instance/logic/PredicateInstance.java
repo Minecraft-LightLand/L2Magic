@@ -36,10 +36,4 @@ public record PredicateInstance(
 		if (fallback != null) fallback.execute(ctx);
 	}
 
-	@Override
-	public boolean verify(BuilderContext ctx) {
-		return ConfiguredEngine.super.verify(ctx) &
-				(action == null || action.verify(ctx.of("action"))) &
-				(fallback == null || fallback.verify(ctx.of("fallback")));
-	}
 }

@@ -8,6 +8,7 @@ import dev.xkmc.l2magic.content.engine.core.SpellAction;
 import dev.xkmc.l2magic.content.engine.core.SpellCastType;
 import dev.xkmc.l2magic.content.engine.core.SpellTriggerType;
 import dev.xkmc.l2magic.init.registrate.EngineRegistry;
+import io.netty.util.internal.ThreadLocalRandom;
 import net.minecraft.nbt.Tag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
@@ -189,7 +190,8 @@ public class WandItem extends Item implements IGlowingTarget {
 			}
 		}
 		if (!level.isClientSide()) {
-			spell.execute(new SpellContext(user, pos, dir, useTick, power));
+			long seed = ThreadLocalRandom.current().nextLong();
+			spell.execute(new SpellContext(user, pos, dir, seed, useTick, power));
 		}
 		return true;
 	}

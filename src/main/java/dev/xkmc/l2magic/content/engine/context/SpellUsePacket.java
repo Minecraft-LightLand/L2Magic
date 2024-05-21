@@ -14,6 +14,8 @@ public class SpellUsePacket extends SerialPacketBase {
 	@SerialClass.SerialField
 	public int user;
 	@SerialClass.SerialField
+	public long seed;
+	@SerialClass.SerialField
 	public ResourceLocation spell;
 	@SerialClass.SerialField
 	public Vec3 origin, facing;
@@ -36,6 +38,6 @@ public class SpellUsePacket extends SerialPacketBase {
 
 	@Override
 	public void handle(NetworkEvent.Context context) {
-		ClientSpellHandler.useSpell(user, spell, origin, facing, tickUsing, power);
+		ClientSpellHandler.useSpell(user, spell, origin, facing, seed, tickUsing, power);
 	}
 }

@@ -2,13 +2,12 @@ package dev.xkmc.l2magic.content.engine.variable;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import dev.xkmc.l2magic.content.engine.context.BuilderContext;
 import dev.xkmc.l2magic.content.engine.context.EngineContext;
 
 import java.util.Optional;
 import java.util.function.Function;
 
-public record IntVariable(String str, ExpressionHolder exp) implements Variable {
+public record IntVariable(String str, ExpressionHolder exp) implements NumericVariable {
 
 	public static final Codec<IntVariable> CODEC = Codec.STRING.xmap(IntVariable::of, IntVariable::str);
 
@@ -28,8 +27,4 @@ public record IntVariable(String str, ExpressionHolder exp) implements Variable 
 		return (int) exp.eval(ctx);
 	}
 
-	@Override
-	public boolean verify(BuilderContext ctx) {
-		return exp.verify(ctx);
-	}
 }

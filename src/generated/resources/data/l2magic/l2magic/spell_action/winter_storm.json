@@ -4,19 +4,24 @@
     "child": {
       "type": "l2magic:random_pos_fan",
       "child": {
-        "type": "l2magic:rotate",
+        "type": "l2magic:move",
         "child": {
-          "type": "l2magic:offset",
-          "child": {
-            "type": "l2magic:particle",
-            "particle": "minecraft:snowflake",
-            "speed": "0.5"
-          },
-          "x": "0",
-          "y": "rand(0.5,2.5)",
-          "z": "0"
+          "type": "l2magic:particle",
+          "particle": "minecraft:snowflake",
+          "speed": "0.5"
         },
-        "degree": "75"
+        "modifiers": [
+          {
+            "type": "l2magic:rotate",
+            "degree": "rand(0,360)"
+          },
+          {
+            "type": "l2magic:offset",
+            "x": "0",
+            "y": "rand(0.5,2.5)",
+            "z": "0"
+          }
+        ]
       },
       "count": "5",
       "maxAngle": "180",
