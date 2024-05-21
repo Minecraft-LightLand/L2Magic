@@ -2,7 +2,6 @@ package dev.xkmc.l2magic.content.engine.instance.logic;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import dev.xkmc.l2magic.content.engine.context.BuilderContext;
 import dev.xkmc.l2magic.content.engine.context.EngineContext;
 import dev.xkmc.l2magic.content.engine.core.ConfiguredEngine;
 import dev.xkmc.l2magic.content.engine.core.EngineType;
@@ -11,20 +10,20 @@ import dev.xkmc.l2magic.init.registrate.EngineRegistry;
 
 import javax.annotation.Nullable;
 
-public record PredicateInstance(
+public record PredicateLogic(
 		BooleanVariable predicate,
 		@Nullable ConfiguredEngine<?> action,
 		@Nullable ConfiguredEngine<?> fallback
-) implements ConfiguredEngine<PredicateInstance> {
+) implements ConfiguredEngine<PredicateLogic> {
 
-	public static Codec<PredicateInstance> CODEC = RecordCodecBuilder.create(i -> i.group(
+	public static Codec<PredicateLogic> CODEC = RecordCodecBuilder.create(i -> i.group(
 			BooleanVariable.CODEC.fieldOf("predicate").forGetter(e -> e.predicate),
-			ConfiguredEngine.optionalCodec("action", PredicateInstance::action),
-			ConfiguredEngine.optionalCodec("fallback", PredicateInstance::fallback)
-	).apply(i, (a, b, c) -> new PredicateInstance(a, b.orElse(null), c.orElse(null))));
+			ConfiguredEngine.optionalCodec("action", PredicateLogic::action),
+			ConfiguredEngine.optionalCodec("fallback", PredicateLogic::fallback)
+	).apply(i, (a, b, c) -> new PredicateLogic(a, b.orElse(null), c.orElse(null))));
 
 	@Override
-	public EngineType<PredicateInstance> type() {
+	public EngineType<PredicateLogic> type() {
 		return EngineRegistry.IF.get();
 	}
 

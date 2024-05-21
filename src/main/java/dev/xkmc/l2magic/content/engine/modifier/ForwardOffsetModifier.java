@@ -16,7 +16,7 @@ public record ForwardOffsetModifier(DoubleVariable distance) implements Modifier
 	).apply(i, ForwardOffsetModifier::new));
 
 	public static ForwardOffsetModifier of(String str) {
-		return new ForwardOffsetModifier(DoubleVariable.of("rand(0,360)"));
+		return new ForwardOffsetModifier(DoubleVariable.of(str));
 	}
 
 	@Override

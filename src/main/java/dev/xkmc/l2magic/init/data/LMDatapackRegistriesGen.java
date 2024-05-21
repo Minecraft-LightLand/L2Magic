@@ -70,7 +70,7 @@ public class LMDatapackRegistriesGen extends DatapackBuiltinEntriesProvider {
 						DoubleVariable.of("-180"),
 						DoubleVariable.of("180"),
 						IntVariable.of("5"),
-						new EngineModifier(List.of(
+						new MoveEngine(List.of(
 								RotationModifier.of("75"),
 								new OffsetModifier(
 										DoubleVariable.ZERO,
@@ -86,8 +86,8 @@ public class LMDatapackRegistriesGen extends DatapackBuiltinEntriesProvider {
 	}
 
 	private static ConfiguredEngine<?> flameBurst() {
-		return new ListInstance(List.of(
-				new EngineModifier(List.of(
+		return new ListLogic(List.of(
+				new MoveEngine(List.of(
 						new SetDirectionModifier(
 								DoubleVariable.of("1"),
 								DoubleVariable.ZERO,
@@ -104,15 +104,15 @@ public class LMDatapackRegistriesGen extends DatapackBuiltinEntriesProvider {
 								DoubleVariable.of("-180"),
 								DoubleVariable.of("180"),
 								IntVariable.of("10"),
-								new RandomVariableModifier(
+								new RandomVariableLogic(
 										"r", 4,
-										new EngineModifier(List.of(
+										new MoveEngine(List.of(
 												new SetDirectionModifier(
 														DoubleVariable.of("(r0-0.5)*0.2"),
 														DoubleVariable.of("1"),
 														DoubleVariable.of("(r1-0.5)*0.2")
 												)),
-												new PredicateInstance(
+												new PredicateLogic(
 														BooleanVariable.of("r2<0.25"),
 														new SimpleParticleInstance(
 																ParticleTypes.SOUL,
@@ -133,12 +133,12 @@ public class LMDatapackRegistriesGen extends DatapackBuiltinEntriesProvider {
 		return new DelayedIterator(
 				IntVariable.of("min(TickUsing/10,3)"),
 				IntVariable.of("10"),
-				new RandomVariableModifier("r", 2,
+				new RandomVariableLogic("r", 2,
 						new LoopIterator(
 								IntVariable.of("3+i*2"),
-								new DelayModifier(
-										IntVariable.of("abs(2-j)"),
-										new EngineModifier(List.of(
+								new DelayLogic(
+										IntVariable.of("abs(i+1-j)*1"),
+										new MoveEngine(List.of(
 												RotationModifier.of("180/(3+i*2)*(j+(r0+r1)/2)-90"),
 												ForwardOffsetModifier.of("6*i+4"),
 														new RandomOffsetModifier(
@@ -147,8 +147,8 @@ public class LMDatapackRegistriesGen extends DatapackBuiltinEntriesProvider {
 																DoubleVariable.ZERO,
 																DoubleVariable.of("0.1")
 														)),
-												new ListInstance(List.of(
-														new EngineModifier(
+												new ListLogic(List.of(
+														new MoveEngine(
 																List.of(RotationModifier.of("rand(0,360)")),
 																star(2, 0.2)),
 														new RingRandomIterator(
@@ -157,7 +157,7 @@ public class LMDatapackRegistriesGen extends DatapackBuiltinEntriesProvider {
 																DoubleVariable.of("-180"),
 																DoubleVariable.of("180"),
 																IntVariable.of("100"),
-																new EngineModifier(List.of(
+																new MoveEngine(List.of(
 																		new SetDirectionModifier(
 																				DoubleVariable.ZERO,
 																				DoubleVariable.of("1"),
@@ -179,10 +179,10 @@ public class LMDatapackRegistriesGen extends DatapackBuiltinEntriesProvider {
 	private static ConfiguredEngine<?> star(double radius, double step) {
 		int linestep = (int) Math.round(1.9 * radius / step);
 		int circlestep = (int) Math.round(radius * Math.PI * 2 / step);
-		return new ListInstance(List.of(
+		return new ListLogic(List.of(
 						new LoopIterator(
 								IntVariable.of("5"),
-								new EngineModifier(List.of(
+								new MoveEngine(List.of(
 										RotationModifier.of("72*ri"),
 										ForwardOffsetModifier.of(radius + ""),
 										RotationModifier.of("162")),
@@ -202,7 +202,7 @@ public class LMDatapackRegistriesGen extends DatapackBuiltinEntriesProvider {
 						),
 						new LoopIterator(
 								IntVariable.of(circlestep + ""),
-								new EngineModifier(List.of(
+								new MoveEngine(List.of(
 										RotationModifier.of(360d / circlestep + "*ri"),
 										ForwardOffsetModifier.of(radius + "")
 								),

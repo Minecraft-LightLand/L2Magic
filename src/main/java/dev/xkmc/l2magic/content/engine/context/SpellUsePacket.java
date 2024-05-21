@@ -33,6 +33,7 @@ public class SpellUsePacket extends SerialPacketBase {
 		facing = ctx.facing();
 		tickUsing = ctx.tickUsing();
 		power = ctx.power();
+		seed = ctx.seed();
 	}
 
 

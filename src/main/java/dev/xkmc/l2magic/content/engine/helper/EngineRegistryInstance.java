@@ -1,8 +1,7 @@
-package dev.xkmc.l2magic.content.engine.core;
+package dev.xkmc.l2magic.content.engine.helper;
 
 import com.google.common.base.Suppliers;
 import com.mojang.serialization.Codec;
-import dev.xkmc.l2magic.content.engine.helper.EngineHelper;
 import dev.xkmc.l2magic.init.L2Magic;
 import dev.xkmc.l2serial.util.Wrappers;
 import net.minecraft.core.Registry;

@@ -1,4 +1,4 @@
-package dev.xkmc.l2magic.content.engine.instance.damage;
+package dev.xkmc.l2magic.content.engine.selector;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -14,7 +14,7 @@ import net.minecraft.world.phys.Vec3;
 import java.util.ArrayList;
 import java.util.List;
 
-public record AxialEntitySelector(
+public record AxialEntitySelector(//TODO
 		AxialEntitySelector.Type shape,
 		DoubleVariable rx,
 		DoubleVariable ry,

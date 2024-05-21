@@ -5,6 +5,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import dev.xkmc.l2magic.content.engine.context.EngineContext;
 import dev.xkmc.l2magic.content.engine.core.ConfiguredEngine;
 import dev.xkmc.l2magic.content.engine.core.EngineType;
+import dev.xkmc.l2magic.content.engine.selector.AxialEntitySelector;
 import dev.xkmc.l2magic.content.engine.variable.DoubleVariable;
 import dev.xkmc.l2magic.init.registrate.EngineRegistry;
 import net.minecraft.core.Holder;
@@ -16,7 +17,7 @@ import net.minecraft.world.damagesource.DamageType;
 
 import java.util.Optional;
 
-public record DamageInstance(
+public record DamageInstance(//TODO
 		AxialEntitySelector selector,
 		Holder<DamageType> damageType,
 		DoubleVariable damage,

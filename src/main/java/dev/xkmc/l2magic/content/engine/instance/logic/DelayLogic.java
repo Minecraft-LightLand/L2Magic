@@ -2,23 +2,22 @@ package dev.xkmc.l2magic.content.engine.instance.logic;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import dev.xkmc.l2magic.content.engine.context.BuilderContext;
 import dev.xkmc.l2magic.content.engine.context.EngineContext;
 import dev.xkmc.l2magic.content.engine.core.ConfiguredEngine;
 import dev.xkmc.l2magic.content.engine.core.EngineType;
 import dev.xkmc.l2magic.content.engine.variable.IntVariable;
 import dev.xkmc.l2magic.init.registrate.EngineRegistry;
 
-public record DelayModifier(IntVariable tick, ConfiguredEngine<?> child)
-		implements ConfiguredEngine<DelayModifier> {
+public record DelayLogic(IntVariable tick, ConfiguredEngine<?> child)
+		implements ConfiguredEngine<DelayLogic> {
 
-	public static Codec<DelayModifier> CODEC = RecordCodecBuilder.create(i -> i.group(
-			IntVariable.codec("tick", DelayModifier::tick),
-			ConfiguredEngine.codec("child", DelayModifier::child)
-	).apply(i, DelayModifier::new));
+	public static Codec<DelayLogic> CODEC = RecordCodecBuilder.create(i -> i.group(
+			IntVariable.codec("tick", DelayLogic::tick),
+			ConfiguredEngine.codec("child", DelayLogic::child)
+	).apply(i, DelayLogic::new));
 
 	@Override
-	public EngineType<DelayModifier> type() {
+	public EngineType<DelayLogic> type() {
 		return EngineRegistry.DELAY.get();
 	}
 

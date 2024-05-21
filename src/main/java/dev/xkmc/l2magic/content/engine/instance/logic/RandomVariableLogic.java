@@ -11,17 +11,17 @@ import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-public record RandomVariableModifier(String name, int count, ConfiguredEngine<?> child)
-		implements ConfiguredEngine<RandomVariableModifier> {
+public record RandomVariableLogic(String name, int count, ConfiguredEngine<?> child)
+		implements ConfiguredEngine<RandomVariableLogic> {
 
-	public static Codec<RandomVariableModifier> CODEC = RecordCodecBuilder.create(i -> i.group(
+	public static Codec<RandomVariableLogic> CODEC = RecordCodecBuilder.create(i -> i.group(
 			Codec.STRING.fieldOf("name").forGetter(e -> e.name),
 			Codec.INT.fieldOf("count").forGetter(e -> e.count),
-			ConfiguredEngine.codec("child", RandomVariableModifier::child)
-	).apply(i, RandomVariableModifier::new));
+			ConfiguredEngine.codec("child", RandomVariableLogic::child)
+	).apply(i, RandomVariableLogic::new));
 
 	@Override
-	public EngineType<RandomVariableModifier> type() {
+	public EngineType<RandomVariableLogic> type() {
 		return EngineRegistry.RANDOM.get();
 	}
 

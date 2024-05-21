@@ -31,15 +31,15 @@
                 "modifiers": [
                   {
                     "type": "l2magic:rotate",
-                    "degree": "rand(0,360)"
+                    "degree": "72*ri"
                   },
                   {
                     "type": "l2magic:forward",
-                    "distance": "rand(0,360)"
+                    "distance": "4.0"
                   },
                   {
                     "type": "l2magic:rotate",
-                    "degree": "rand(0,360)"
+                    "degree": "162"
                   }
                 ]
               },
@@ -58,11 +58,11 @@
                 "modifiers": [
                   {
                     "type": "l2magic:rotate",
-                    "degree": "rand(0,360)"
+                    "degree": "4.285714285714286*ri"
                   },
                   {
                     "type": "l2magic:forward",
-                    "distance": "rand(0,360)"
+                    "distance": "4.0"
                   }
                 ]
               },

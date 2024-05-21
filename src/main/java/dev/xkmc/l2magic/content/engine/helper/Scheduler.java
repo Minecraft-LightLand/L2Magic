@@ -32,8 +32,8 @@ public class Scheduler {
 	}
 
 	public void schedule(long tick, Runnable o) {
-		if (tick <= time) o.run();
-		var list = map.computeIfAbsent(tick, k -> new ArrayList<>());
+		if (tick <= 0) o.run();
+		var list = map.computeIfAbsent(tick + time, k -> new ArrayList<>());
 		list.add(o);
 	}
 }

@@ -10,16 +10,16 @@ import dev.xkmc.l2magic.init.registrate.EngineRegistry;
 
 import java.util.List;
 
-public record EngineModifier(List<Modifier<?>> modifiers, ConfiguredEngine<?> child)
-		implements ConfiguredEngine<EngineModifier> {
+public record MoveEngine(List<Modifier<?>> modifiers, ConfiguredEngine<?> child)
+		implements ConfiguredEngine<MoveEngine> {
 
-	public static final Codec<EngineModifier> CODEC = RecordCodecBuilder.create(i -> i.group(
+	public static final Codec<MoveEngine> CODEC = RecordCodecBuilder.create(i -> i.group(
 			Codec.list(Modifier.CODEC).fieldOf("modifiers").forGetter(e -> e.modifiers),
 			ConfiguredEngine.codec("child", e -> e.child)
-	).apply(i, EngineModifier::new));
+	).apply(i, MoveEngine::new));
 
 	@Override
-	public EngineType<EngineModifier> type() {
+	public EngineType<MoveEngine> type() {
 		return EngineRegistry.MOVE_ENGINE.get();
 	}
 

@@ -13,7 +13,7 @@
         "modifiers": [
           {
             "type": "l2magic:rotate",
-            "degree": "rand(0,360)"
+            "degree": "75"
           },
           {
             "type": "l2magic:offset",

@@ -2,6 +2,7 @@ package dev.xkmc.l2magic.init.registrate;
 
 import com.tterrag.registrate.util.entry.RegistryEntry;
 import dev.xkmc.l2magic.content.engine.core.*;
+import dev.xkmc.l2magic.content.engine.helper.EngineRegistryInstance;
 import dev.xkmc.l2magic.content.engine.instance.damage.DamageInstance;
 import dev.xkmc.l2magic.content.engine.instance.logic.*;
 import dev.xkmc.l2magic.content.engine.instance.particle.*;
@@ -28,11 +29,11 @@ public class EngineRegistry {
 	public static final RegistryEntry<ModifierType<SetDirectionModifier>> DIRECTION = register("direction", () -> SetDirectionModifier.CODEC);
 	public static final RegistryEntry<ModifierType<RandomOffsetModifier>> RANDOM_OFFSET = register("random_offset", () -> RandomOffsetModifier.CODEC);
 
-	public static final RegistryEntry<EngineType<PredicateInstance>> IF = register("if", () -> PredicateInstance.CODEC);
-	public static final RegistryEntry<EngineType<ListInstance>> LIST = register("list", () -> ListInstance.CODEC);
-	public static final RegistryEntry<EngineType<DelayModifier>> DELAY = register("delay", () -> DelayModifier.CODEC);
-	public static final RegistryEntry<EngineType<RandomVariableModifier>> RANDOM = register("random", () -> RandomVariableModifier.CODEC);
-	public static final RegistryEntry<EngineType<EngineModifier>> MOVE_ENGINE = register("move", () -> EngineModifier.CODEC);
+	public static final RegistryEntry<EngineType<PredicateLogic>> IF = register("if", () -> PredicateLogic.CODEC);
+	public static final RegistryEntry<EngineType<ListLogic>> LIST = register("list", () -> ListLogic.CODEC);
+	public static final RegistryEntry<EngineType<DelayLogic>> DELAY = register("delay", () -> DelayLogic.CODEC);
+	public static final RegistryEntry<EngineType<RandomVariableLogic>> RANDOM = register("random", () -> RandomVariableLogic.CODEC);
+	public static final RegistryEntry<EngineType<MoveEngine>> MOVE_ENGINE = register("move", () -> MoveEngine.CODEC);
 
 	public static final RegistryEntry<EngineType<LoopIterator>> ITERATE = register("iterate", () -> LoopIterator.CODEC);
 	public static final RegistryEntry<EngineType<DelayedIterator>> ITERATE_DELAY = register("iterate_delayed", () -> DelayedIterator.CODEC);

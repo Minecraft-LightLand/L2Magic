@@ -16,7 +16,7 @@ public record RotationModifier(DoubleVariable degree) implements Modifier<Rotati
 	).apply(i, RotationModifier::new));
 
 	public static RotationModifier of(String str) {
-		return new RotationModifier(DoubleVariable.of("rand(0,360)"));
+		return new RotationModifier(DoubleVariable.of(str));
 	}
 
 	@Override
