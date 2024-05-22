@@ -17,6 +17,3 @@ dust_particle
 transition_particle
 
 // todo view param
-// todo random rotate
-// todo random variable
-// todo default functions and operators (min, max, < > <= >= == !=)

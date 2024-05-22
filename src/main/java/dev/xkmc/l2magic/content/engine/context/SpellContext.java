@@ -8,7 +8,7 @@ import java.util.Set;
 
 public record SpellContext(LivingEntity user, Vec3 origin, Vec3 facing, long seed, double tickUsing, double power) {
 
-	public static Set<String> DEFAULT_PARAMS = Set.of("TickUsing", "Power", "CastX", "CastY", "CastZ");
+	public static Set<String> DEFAULT_PARAMS = Set.of("TickUsing", "Power", "CastX", "CastY", "CastZ", "Time");
 
 	public Map<String, Double> defaultArgs() {
 		return Map.of("TickUsing", tickUsing(),

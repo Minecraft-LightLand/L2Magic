@@ -9,7 +9,7 @@ import java.util.List;
 public class Scheduler {
 
 	private final Long2ObjectOpenHashMap<List<Runnable>> map = new Long2ObjectOpenHashMap<>();
-	private long time = 0;
+	public long time = 0;
 
 	public boolean isFinished() {
 		return map.isEmpty();

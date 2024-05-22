@@ -89,6 +89,19 @@
                   ]
                 },
                 {
+                  "type": "l2magic:damage",
+                  "damage": "10",
+                  "damage_type": "minecraft:explosion",
+                  "indirect": true,
+                  "knockback": "2",
+                  "positioned": true,
+                  "selector": {
+                    "type": "l2magic:cylinder",
+                    "r": "4",
+                    "y": "2"
+                  }
+                },
+                {
                   "type": "l2magic:random_pos_fan",
                   "child": {
                     "type": "l2magic:move",

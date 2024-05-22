@@ -6,6 +6,7 @@ import dev.xkmc.l2magic.init.registrate.EngineRegistry;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
 
+import java.util.LinkedHashSet;
 import java.util.List;
 
 public interface EntitySelector<T extends Record & EntitySelector<T>> extends Verifiable {
@@ -15,6 +16,6 @@ public interface EntitySelector<T extends Record & EntitySelector<T>> extends Ve
 
 	SelectorType<T> type();
 
-	List<LivingEntity> find(ServerLevel sl, EngineContext ctx);
+	LinkedHashSet<LivingEntity> find(ServerLevel sl, EngineContext ctx);
 
 }

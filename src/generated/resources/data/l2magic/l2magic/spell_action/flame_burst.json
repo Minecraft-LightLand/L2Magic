@@ -87,43 +87,65 @@
       {
         "type": "l2magic:iterate_delayed",
         "child": {
-          "type": "l2magic:random_pos_fan",
-          "child": {
-            "type": "l2magic:random",
-            "child": {
-              "type": "l2magic:move",
-              "child": {
-                "type": "l2magic:if",
-                "action": {
-                  "type": "l2magic:particle",
-                  "particle": "minecraft:soul",
-                  "speed": "0.5+r3*0.2"
-                },
-                "fallback": {
-                  "type": "l2magic:particle",
-                  "particle": "minecraft:flame",
-                  "speed": "0.5+r3*0.2"
-                },
-                "predicate": "r2<0.25"
-              },
-              "modifiers": [
-                {
-                  "type": "l2magic:direction",
-                  "x": "(r0-0.5)*0.2",
-                  "y": "1",
-                  "z": "(r1-0.5)*0.2"
+          "type": "l2magic:list",
+          "children": [
+            {
+              "type": "l2magic:if",
+              "action": {
+                "type": "l2magic:damage",
+                "damage": "4",
+                "damage_type": "minecraft:in_fire",
+                "indirect": true,
+                "knockback": "0",
+                "positioned": false,
+                "selector": {
+                  "type": "l2magic:cylinder",
+                  "r": "4",
+                  "y": "6"
                 }
-              ]
+              },
+              "predicate": "Time%2==0"
             },
-            "count": 4,
-            "name": "r"
-          },
-          "count": "10",
-          "index": "i",
-          "maxAngle": "180",
-          "maxRadius": "4",
-          "minAngle": "-180",
-          "minRadius": "0"
+            {
+              "type": "l2magic:random_pos_fan",
+              "child": {
+                "type": "l2magic:random",
+                "child": {
+                  "type": "l2magic:move",
+                  "child": {
+                    "type": "l2magic:if",
+                    "action": {
+                      "type": "l2magic:particle",
+                      "particle": "minecraft:soul",
+                      "speed": "0.5+r3*0.2"
+                    },
+                    "fallback": {
+                      "type": "l2magic:particle",
+                      "particle": "minecraft:flame",
+                      "speed": "0.5+r3*0.2"
+                    },
+                    "predicate": "r2<0.25"
+                  },
+                  "modifiers": [
+                    {
+                      "type": "l2magic:direction",
+                      "x": "(r0-0.5)*0.2",
+                      "y": "1",
+                      "z": "(r1-0.5)*0.2"
+                    }
+                  ]
+                },
+                "count": 4,
+                "name": "r"
+              },
+              "count": "10",
+              "index": "i",
+              "maxAngle": "180",
+              "maxRadius": "4",
+              "minAngle": "-180",
+              "minRadius": "0"
+            }
+          ]
         },
         "delay": "1",
         "step": "40"

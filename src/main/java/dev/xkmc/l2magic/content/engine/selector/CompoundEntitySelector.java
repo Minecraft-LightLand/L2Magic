@@ -10,7 +10,6 @@ import dev.xkmc.l2magic.init.registrate.EngineRegistry;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
 
-import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
 
@@ -51,13 +50,13 @@ public record CompoundEntitySelector(
 	}
 
 	@Override
-	public List<LivingEntity> find(ServerLevel sl, EngineContext ctx) {
+	public LinkedHashSet<LivingEntity> find(ServerLevel sl, EngineContext ctx) {
 		LinkedHashSet<LivingEntity> ans = null;
 		for (var s : selectors) {
-			var l = new LinkedHashSet<>(s.find(sl, ctx));
+			var l = s.find(sl, ctx);
 			if (ans == null) ans = l;
 			else function.merge(ans, l);
 		}
-		return ans == null ? List.of() : new ArrayList<>(ans);
+		return ans == null ? new LinkedHashSet<>() : ans;
 	}
 }

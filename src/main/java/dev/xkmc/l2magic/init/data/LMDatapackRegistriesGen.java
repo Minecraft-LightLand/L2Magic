@@ -1,9 +1,11 @@
 package dev.xkmc.l2magic.init.data;
 
+import dev.xkmc.l2magic.content.engine.context.DataGenContext;
 import dev.xkmc.l2magic.content.engine.core.ConfiguredEngine;
 import dev.xkmc.l2magic.content.engine.core.SpellAction;
 import dev.xkmc.l2magic.content.engine.core.SpellCastType;
 import dev.xkmc.l2magic.content.engine.core.SpellTriggerType;
+import dev.xkmc.l2magic.content.engine.instance.damage.DamageInstance;
 import dev.xkmc.l2magic.content.engine.instance.logic.*;
 import dev.xkmc.l2magic.content.engine.instance.particle.BlockParticleInstance;
 import dev.xkmc.l2magic.content.engine.instance.particle.SimpleParticleInstance;
@@ -12,6 +14,8 @@ import dev.xkmc.l2magic.content.engine.iterator.LinearIterator;
 import dev.xkmc.l2magic.content.engine.iterator.LoopIterator;
 import dev.xkmc.l2magic.content.engine.iterator.RingRandomIterator;
 import dev.xkmc.l2magic.content.engine.modifier.*;
+import dev.xkmc.l2magic.content.engine.selector.ApproxCylinderSelector;
+import dev.xkmc.l2magic.content.engine.selector.ArcCubeSelector;
 import dev.xkmc.l2magic.content.engine.variable.BooleanVariable;
 import dev.xkmc.l2magic.content.engine.variable.DoubleVariable;
 import dev.xkmc.l2magic.content.engine.variable.IntVariable;
@@ -22,6 +26,7 @@ import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.Vec3;
@@ -41,51 +46,68 @@ public class LMDatapackRegistriesGen extends DatapackBuiltinEntriesProvider {
 	private static final RegistrySetBuilder BUILDER = new RegistrySetBuilder()
 			.add(EngineRegistry.SPELL, ctx -> {
 				new SpellAction(
-						winterStorm(),
+						winterStorm(new DataGenContext(ctx)),
 						Items.SNOWBALL,
 						SpellCastType.CONTINUOUS,
 						SpellTriggerType.SELF_POS
 				).verifyOnBuild(ctx, WINTER);
 				new SpellAction(
-						flameBurst(),
+						flameBurst(new DataGenContext(ctx)),
 						Items.FIRE_CHARGE,
 						SpellCastType.INSTANT,
 						SpellTriggerType.TARGET_POS
 				).verifyOnBuild(ctx, FLAME);
 				new SpellAction(
-						flameBurstCircle(),
+						flameBurstCircle(new DataGenContext(ctx)),
 						Items.TNT,
 						SpellCastType.CHARGE,
 						SpellTriggerType.HORIZONTAL_FACING
 				).verifyOnBuild(ctx, QUAKE);
 			});
 
-	private static ConfiguredEngine<?> winterStorm() {
-		return new DelayedIterator(
+	private static ConfiguredEngine<?> winterStorm(DataGenContext ctx) {
+		return new ListLogic(List.of(
+				new PredicateLogic(
+						BooleanVariable.of("TickUsing>=10&TickUsing%4==0"),
+						new DamageInstance(
+								new ArcCubeSelector(
+										IntVariable.of("11"),
+										DoubleVariable.of("5.5"),
+										DoubleVariable.of("2.5"),
+										DoubleVariable.of("-180"),
+										DoubleVariable.of("-180+360/12*11")
+								), ctx.damage(DamageTypes.FREEZE),
+								DoubleVariable.of("4"),
+								DoubleVariable.of("1"),
+								true, true
+						), null),
+				new DelayedIterator(
 				IntVariable.of("10"),
 				IntVariable.of("2"),
-				new RingRandomIterator(
-						DoubleVariable.of("3"),
-						DoubleVariable.of("8"),
-						DoubleVariable.of("-180"),
-						DoubleVariable.of("180"),
-						IntVariable.of("5"),
-						new MoveEngine(List.of(
-								RotationModifier.of("75"),
-								new OffsetModifier(
-										DoubleVariable.ZERO,
-										DoubleVariable.of("rand(0.5,2.5)"),
-										DoubleVariable.ZERO
-								)),
-								new SimpleParticleInstance(
-										ParticleTypes.SNOWFLAKE,
-										DoubleVariable.of("0.5")
-								)), null
-				), null
-		);
+						new RingRandomIterator(
+								DoubleVariable.of("3"),
+								DoubleVariable.of("8"),
+								DoubleVariable.of("-180"),
+								DoubleVariable.of("180"),
+								IntVariable.of("5"),
+								new MoveEngine(List.of(
+										RotationModifier.of("75"),
+										new OffsetModifier(
+												DoubleVariable.ZERO,
+												DoubleVariable.of("rand(0.5,2.5)"),
+												DoubleVariable.ZERO
+										)),
+										new SimpleParticleInstance(
+												ParticleTypes.SNOWFLAKE,
+												DoubleVariable.of("0.5")
+										)
+								), null
+						), null
+				)
+		));
 	}
 
-	private static ConfiguredEngine<?> flameBurst() {
+	private static ConfiguredEngine<?> flameBurst(DataGenContext ctx) {
 		return new ListLogic(List.of(
 				new MoveEngine(List.of(
 						new SetDirectionModifier(
@@ -98,6 +120,18 @@ public class LMDatapackRegistriesGen extends DatapackBuiltinEntriesProvider {
 				new DelayedIterator(
 						IntVariable.of("40"),
 						IntVariable.of("1"),
+						new ListLogic(List.of(
+								new PredicateLogic(
+										BooleanVariable.of("Time%2==0"),
+										new DamageInstance(
+												new ApproxCylinderSelector(
+														DoubleVariable.of("4"),
+														DoubleVariable.of("6")
+												), ctx.damage(DamageTypes.IN_FIRE),
+												DoubleVariable.of("4"),
+												DoubleVariable.ZERO,
+												true, false
+										), null),
 						new RingRandomIterator(
 								DoubleVariable.of("0"),
 								DoubleVariable.of("4"),
@@ -124,12 +158,12 @@ public class LMDatapackRegistriesGen extends DatapackBuiltinEntriesProvider {
 														)
 												))
 								), "i"
-						), null
+						))), null
 				)
 		));
 	}
 
-	private static ConfiguredEngine<?> flameBurstCircle() {
+	private static ConfiguredEngine<?> flameBurstCircle(DataGenContext ctx) {
 		return new DelayedIterator(
 				IntVariable.of("min(TickUsing/10,3)"),
 				IntVariable.of("10"),
@@ -151,6 +185,15 @@ public class LMDatapackRegistriesGen extends DatapackBuiltinEntriesProvider {
 														new MoveEngine(
 																List.of(RotationModifier.of("rand(0,360)")),
 																star(2, 0.2)),
+														new DamageInstance(
+																new ApproxCylinderSelector(
+																		DoubleVariable.of("4"),
+																		DoubleVariable.of("2")
+																), ctx.damage(DamageTypes.EXPLOSION),
+																DoubleVariable.of("10"),
+																DoubleVariable.of("2"),
+																true, true
+														),
 														new RingRandomIterator(
 																DoubleVariable.of("0"),
 																DoubleVariable.of("2"),

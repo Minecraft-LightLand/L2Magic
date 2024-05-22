@@ -65,7 +65,7 @@ public record DamageInstance(
 			if (kb > 0.05) {
 				var p = e.position().subtract(ctx.loc().pos())
 						.multiply(1, 0, 1).normalize();
-				e.knockback(kb, p.x, p.z);
+				e.knockback(kb, -p.x, -p.z);
 			}
 		}
 	}

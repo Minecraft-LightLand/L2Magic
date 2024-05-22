@@ -2,7 +2,6 @@ package dev.xkmc.l2magic.content.engine.context;
 
 import dev.xkmc.l2magic.content.engine.core.ConfiguredEngine;
 import dev.xkmc.shadow.objecthunter.exp4j.Expression;
-import dev.xkmc.shadow.objecthunter.exp4j.ExpressionBuilder;
 import net.minecraft.util.RandomSource;
 
 import javax.annotation.Nullable;
@@ -37,13 +36,8 @@ public record EngineContext(UserContext user, LocationContext loc, RandomSource 
 		child.execute(new EngineContext(user, loc, nextRand(), parameters));
 	}
 
-	public double eval(String val) {
-		return new ExpressionBuilder(val).variables(parameters.keySet())
-				.build().setVariables(parameters).evaluate();
-	}
-
 	public double eval(Expression exp) {
-		return exp.setVariables(parameters).evaluate();
+		return exp.setVariables(parameters).setVariable("Time", user.scheduler().time).evaluate();
 	}
 
 	public void schedule(int tick, Runnable o) {
