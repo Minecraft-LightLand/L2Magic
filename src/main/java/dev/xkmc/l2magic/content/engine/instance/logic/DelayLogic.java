@@ -23,7 +23,7 @@ public record DelayLogic(IntVariable tick, ConfiguredEngine<?> child)
 
 	@Override
 	public void execute(EngineContext ctx) {
-		ctx.schedule(tick.eval(ctx), () -> child.execute(ctx));
+		ctx.schedule(tick.eval(ctx), () -> ctx.execute(child));
 	}
 
 }

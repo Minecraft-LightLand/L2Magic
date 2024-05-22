@@ -30,9 +30,9 @@ public record PredicateLogic(
 	@Override
 	public void execute(EngineContext ctx) {
 		if (predicate.eval(ctx)) {
-			if (action != null) action.execute(ctx);
+			if (action != null) ctx.execute(action);
 		}
-		if (fallback != null) fallback.execute(ctx);
+		if (fallback != null) ctx.execute(fallback);
 	}
 
 }

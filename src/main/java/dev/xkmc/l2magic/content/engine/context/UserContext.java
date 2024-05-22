@@ -6,7 +6,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 
-public record UserContext(Level level, LivingEntity user, RandomSource rand, Scheduler scheduler) {
+public record UserContext(Level level, LivingEntity user, Scheduler scheduler) {
 
 	public boolean canHitEntity(Entity entity) {
 		return true;//TODO

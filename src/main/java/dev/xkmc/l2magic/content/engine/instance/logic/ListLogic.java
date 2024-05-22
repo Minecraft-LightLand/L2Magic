@@ -23,7 +23,7 @@ public record ListLogic(List<ConfiguredEngine<?>> children)
 	@Override
 	public void execute(EngineContext ctx) {
 		for (var e : children) {
-			e.execute(ctx);
+			ctx.execute(e);
 		}
 	}
 

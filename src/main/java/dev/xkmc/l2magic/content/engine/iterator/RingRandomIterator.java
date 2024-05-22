@@ -63,8 +63,8 @@ public record RingRandomIterator(DoubleVariable minRadius, DoubleVariable maxRad
 		int count = count().eval(ctx);
 		var ori = Orientation.fromNormal(ctx.loc().dir());
 		for (int i = 0; i < count; i++) {
-			double th = ctx.user().rand().nextDouble() * (maxAngle - minAngle) + minAngle;
-			double r = randomRadius(minRadius, maxRadius, ctx.user().rand());
+			double th = ctx.rand().nextDouble() * (maxAngle - minAngle) + minAngle;
+			double r = randomRadius(minRadius, maxRadius, ctx.rand());
 			Vec3 dir = ori.rotateDegrees(th);
 			Vec3 off = dir.scale(r);
 			var param = new LinkedHashMap<>(ctx.parameters());
@@ -73,7 +73,7 @@ public record RingRandomIterator(DoubleVariable minRadius, DoubleVariable maxRad
 				param.put(index + "_angle", th);
 				param.put(index + "_radius", r);
 			}
-			child.execute(new EngineContext(ctx.user(), LocationContext.of(ctx.loc().pos().add(off), dir, ori.normal()), param));
+			ctx.execute(LocationContext.of(ctx.loc().pos().add(off), dir, ori.normal()), param, child);
 		}
 	}
 

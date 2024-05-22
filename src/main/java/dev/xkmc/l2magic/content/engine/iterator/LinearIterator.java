@@ -43,7 +43,7 @@ public record LinearIterator(DoubleVariable alongDir, Vec3 offset, DoubleVariabl
 			Vec3 pos = ctx.loc().pos()
 					.add(ctx.loc().dir().scale(x * alongDir))
 					.add(offset.scale(x * alongOffset));
-			child.execute(ctx.iterateOn(ctx.loc().with(pos), index, i));
+			ctx.iterateOn(ctx.loc().with(pos), index, i, child);
 		}
 	}
 

@@ -4,8 +4,11 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import dev.xkmc.fastprojectileapi.collision.EntityStorageCache;
 import dev.xkmc.l2magic.content.engine.context.EngineContext;
+import dev.xkmc.l2magic.content.engine.core.EntitySelector;
+import dev.xkmc.l2magic.content.engine.core.SelectorType;
 import dev.xkmc.l2magic.content.engine.helper.EngineHelper;
 import dev.xkmc.l2magic.content.engine.variable.DoubleVariable;
+import dev.xkmc.l2magic.init.registrate.EngineRegistry;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.phys.AABB;
@@ -14,12 +17,12 @@ import net.minecraft.world.phys.Vec3;
 import java.util.ArrayList;
 import java.util.List;
 
-public record AxialEntitySelector(//TODO
+public record AxialEntitySelector(
 		AxialEntitySelector.Type shape,
 		DoubleVariable rx,
 		DoubleVariable ry,
 		DoubleVariable rz
-) {
+) implements EntitySelector<AxialEntitySelector> {
 
 	private static final Codec<Type> TYPE_CODEC = EngineHelper.enumCodec(Type.class, Type.values());
 
@@ -60,6 +63,11 @@ public record AxialEntitySelector(//TODO
 			return dx * dx + dy * dy + dz * dz <= 1;
 		}
 
+	}
+
+	@Override
+	public SelectorType<AxialEntitySelector> type() {
+		return EngineRegistry.AXIAL.get();
 	}
 
 	public List<LivingEntity> find(ServerLevel sl, EngineContext ctx) {

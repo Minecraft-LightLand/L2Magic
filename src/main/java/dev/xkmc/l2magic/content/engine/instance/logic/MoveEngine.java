@@ -28,7 +28,7 @@ public record MoveEngine(List<Modifier<?>> modifiers, ConfiguredEngine<?> child)
 		for (var e : modifiers) {
 			ctx = ctx.with(e.modify(ctx));
 		}
-		child.execute(ctx);
+		ctx.execute(child);
 	}
 
 }

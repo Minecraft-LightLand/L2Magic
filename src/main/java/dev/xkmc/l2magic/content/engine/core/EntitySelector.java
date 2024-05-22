@@ -8,7 +8,7 @@ import net.minecraft.world.entity.LivingEntity;
 
 import java.util.List;
 
-public interface EntitySelector<T extends Record & EntitySelector<T>> {
+public interface EntitySelector<T extends Record & EntitySelector<T>> extends Verifiable {
 
 	Codec<EntitySelector<?>> CODEC = EngineRegistry.SELECTOR.codec()
 			.dispatch(EntitySelector::type, SelectorType::codec);

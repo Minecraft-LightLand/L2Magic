@@ -32,8 +32,8 @@ public record DelayedIterator(IntVariable step, IntVariable delay, ConfiguredEng
 		int delay = delay().eval(ctx);
 		for (int i = 0; i < step; i++) {
 			int I = i;
-			if (i == 0) child.execute(ctx.iterateOn(ctx.loc(), index, 0));
-			else ctx.schedule(i*delay, () -> child.execute(ctx.iterateOn(ctx.loc(), index, I)));
+			if (i == 0) ctx.iterateOn(ctx.loc(), index, 0, child);
+			else ctx.schedule(i * delay, () -> ctx.iterateOn(ctx.loc(), index, I, child));
 		}
 	}
 

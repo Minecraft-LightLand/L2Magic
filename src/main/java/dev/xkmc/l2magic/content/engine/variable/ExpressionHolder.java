@@ -34,7 +34,7 @@ public class ExpressionHolder {
 	}
 
 	private synchronized double evalImpl(EngineContext ctx) {
-		random = ctx.user().rand();
+		random = ctx.rand();
 		double ans = ctx.eval(exp);
 		random = null;
 		return ans;

@@ -39,9 +39,9 @@ public record SpellAction(ConfiguredEngine<?> action, Item icon,
 		try {
 			var source = new SingleThreadedRandomSource(ctx.seed());
 			action().execute(new EngineContext(
-					new UserContext(ctx.user().level(), ctx.user(), source, sche),
+					new UserContext(ctx.user().level(), ctx.user(), sche),
 					new LocationContext(ctx.origin(), ctx.facing(), LocationContext.UP),
-					ctx.defaultArgs()
+					source, ctx.defaultArgs()
 			));
 		} catch (Exception e) {
 			L2Magic.LOGGER.throwing(e);

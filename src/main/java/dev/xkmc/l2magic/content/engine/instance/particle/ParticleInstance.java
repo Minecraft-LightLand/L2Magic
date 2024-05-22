@@ -1,7 +1,7 @@
 package dev.xkmc.l2magic.content.engine.instance.particle;
 
-import dev.xkmc.l2magic.content.engine.core.ConfiguredEngine;
 import dev.xkmc.l2magic.content.engine.context.EngineContext;
+import dev.xkmc.l2magic.content.engine.core.ConfiguredEngine;
 import dev.xkmc.l2magic.content.engine.variable.DoubleVariable;
 import net.minecraft.core.particles.ParticleOptions;
 

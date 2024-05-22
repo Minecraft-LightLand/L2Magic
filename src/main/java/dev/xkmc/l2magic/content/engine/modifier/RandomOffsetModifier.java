@@ -36,19 +36,19 @@ public record RandomOffsetModifier(Type shape, DoubleVariable x, DoubleVariable 
 	public LocationContext modify(EngineContext ctx) {
 		Vec3 r = switch (shape) {
 			case RECT -> new Vec3(
-					ctx.user().rand().nextDouble() * 2 - 1,
-					ctx.user().rand().nextDouble() * 2 - 1,
-					ctx.user().rand().nextDouble() * 2 - 1
+					ctx.rand().nextDouble() * 2 - 1,
+					ctx.rand().nextDouble() * 2 - 1,
+					ctx.rand().nextDouble() * 2 - 1
 			);
 			case BALL -> new Vec3(
-					ctx.user().rand().nextGaussian(),
-					ctx.user().rand().nextGaussian(),
-					ctx.user().rand().nextGaussian()
+					ctx.rand().nextGaussian(),
+					ctx.rand().nextGaussian(),
+					ctx.rand().nextGaussian()
 			).normalize();
 			case GAUSSIAN -> new Vec3(
-					ctx.user().rand().nextGaussian(),
-					ctx.user().rand().nextGaussian(),
-					ctx.user().rand().nextGaussian()
+					ctx.rand().nextGaussian(),
+					ctx.rand().nextGaussian(),
+					ctx.rand().nextGaussian()
 			);
 		};
 		return ctx.loc().add(r.multiply(x.eval(ctx), y.eval(ctx), z.eval(ctx)));

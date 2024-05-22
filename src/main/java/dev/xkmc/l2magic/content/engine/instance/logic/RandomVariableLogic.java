@@ -29,9 +29,9 @@ public record RandomVariableLogic(String name, int count, ConfiguredEngine<?> ch
 	public void execute(EngineContext ctx) {
 		var params = new HashMap<>(ctx.parameters());
 		for (int i = 0; i < count; i++) {
-			params.put(name + i, ctx.user().rand().nextDouble());
+			params.put(name + i, ctx.rand().nextDouble());
 		}
-		child.execute(new EngineContext(ctx.user(), ctx.loc(), params));
+		ctx.execute(ctx.loc(), params, child);
 	}
 
 	public Set<String> verificationParameters() {

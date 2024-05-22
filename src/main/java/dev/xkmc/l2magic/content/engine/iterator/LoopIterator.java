@@ -29,7 +29,7 @@ public record LoopIterator(IntVariable step, ConfiguredEngine<?> child, @Nullabl
 	public void execute(EngineContext ctx) {
 		int step = step().eval(ctx);
 		for (int i = 0; i < step; i++) {
-			child.execute(ctx.iterateOn(ctx.loc(), index, i));
+			ctx.iterateOn(ctx.loc(), index, i, child);
 		}
 	}
 
