@@ -44,8 +44,8 @@ public record RingIterator(DoubleVariable radius,
 		double r = radius.eval(ctx);
 		int count = count().eval(ctx);
 		var ori = ctx.loc().getOrientation();
-		int n = maxInclusive ? count + 1 : count;
-		for (int i = 0; i < n; i++) {
+		int n = maxInclusive ? count - 1 : count;
+		for (int i = 0; i < count; i++) {
 			double th = (maxAngle - minAngle) / n * i + minAngle;
 			Vec3 dir = ori.rotateDegrees(th);
 			Vec3 off = dir.scale(r);

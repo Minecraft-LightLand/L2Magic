@@ -41,6 +41,7 @@ public class LMDatapackRegistriesGen extends DatapackBuiltinEntriesProvider {
 	public static final ResourceKey<SpellAction> FLAME = spell("flame_burst");
 	public static final ResourceKey<SpellAction> QUAKE = spell("earthquake");
 	public static final ResourceKey<SpellAction> ARROW = spell("magic_arrows");
+	public static final ResourceKey<SpellAction> ARROW_RING = spell("magic_arrow_ring");
 
 	private static final RegistrySetBuilder BUILDER = new RegistrySetBuilder()
 			.add(EngineRegistry.SPELL, ctx -> {
@@ -62,6 +63,12 @@ public class LMDatapackRegistriesGen extends DatapackBuiltinEntriesProvider {
 						SpellCastType.CHARGE,
 						SpellTriggerType.HORIZONTAL_FACING
 				).verifyOnBuild(ctx, QUAKE);
+				new SpellAction(
+						arrowRing(new DataGenContext(ctx)),
+						Items.SPECTRAL_ARROW,
+						SpellCastType.INSTANT,
+						SpellTriggerType.FACING_FRONT
+				).verifyOnBuild(ctx, ARROW_RING);
 				new SpellAction(
 						arrows(new DataGenContext(ctx)),
 						Items.ARROW,
@@ -221,12 +228,12 @@ public class LMDatapackRegistriesGen extends DatapackBuiltinEntriesProvider {
 		);
 	}
 
-	private static ConfiguredEngine<?> arrows(DataGenContext ctx) {
+	private static ConfiguredEngine<?> arrowRing(DataGenContext ctx) {
 		return new ListLogic(List.of(
-				new MoveEngine(List.of(OffsetModifier.of("0", "-0.1", "0"),
-						new Normal2DirModifier()),
+				new MoveEngine(List.of(OffsetModifier.of("0", "-0.1", "0")),
 						shoot(ctx)),
 				new RandomVariableLogic("r", 1,
+						new MoveEngine(List.of(new Dir2NormalModifier()),
 						new RingIterator(
 								DoubleVariable.of("0.5"),
 								DoubleVariable.of("r0*360"),
@@ -236,8 +243,21 @@ public class LMDatapackRegistriesGen extends DatapackBuiltinEntriesProvider {
 								new MoveEngine(List.of(RotationModifier.of("0", "75")),
 										shoot(ctx)),
 								null
-						))
+						)))
 		));
+	}
+
+	private static ConfiguredEngine<?> arrows(DataGenContext ctx) {
+		return new MoveEngine(List.of(OffsetModifier.of("0", "-0.1", "0")),
+				new RingIterator(
+						DoubleVariable.of("0.5"),
+						DoubleVariable.of("-30"),
+						DoubleVariable.of("30"),
+						IntVariable.of("7"),
+						true,
+						shoot(ctx),
+						null
+				));
 	}
 
 

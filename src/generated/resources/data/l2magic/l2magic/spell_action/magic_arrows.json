@@ -1,113 +1,55 @@
 {
   "action": {
-    "type": "l2magic:list",
-    "children": [
-      {
-        "type": "l2magic:move",
-        "child": {
-          "type": "l2magic:list",
-          "children": [
-            {
-              "type": "l2magic:damage",
-              "damage": "6",
-              "damage_type": "minecraft:indirect_magic",
-              "indirect": true,
-              "knockback": "1",
-              "positioned": true,
-              "selector": {
-                "type": "l2magic:line",
-                "size": "1.0",
-                "step": "24.0"
-              }
-            },
-            {
-              "type": "l2magic:iterate_linear",
-              "alongDir": "0.2",
-              "alongOffset": "0",
-              "child": {
-                "type": "l2magic:particle",
-                "particle": "minecraft:end_rod",
-                "speed": "0"
-              },
-              "offset": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "startFromOrigin": true,
-              "step": "120.0"
-            }
-          ]
-        },
-        "modifiers": [
+    "type": "l2magic:move",
+    "child": {
+      "type": "l2magic:iterate_arc",
+      "child": {
+        "type": "l2magic:list",
+        "children": [
           {
-            "type": "l2magic:offset",
-            "x": "0",
-            "y": "-0.1",
-            "z": "0"
+            "type": "l2magic:damage",
+            "damage": "6",
+            "damage_type": "minecraft:indirect_magic",
+            "indirect": true,
+            "knockback": "1",
+            "positioned": true,
+            "selector": {
+              "type": "l2magic:line",
+              "size": "1.0",
+              "step": "24.0"
+            }
           },
           {
-            "type": "l2magic:normal_to_direction"
+            "type": "l2magic:iterate_linear",
+            "alongDir": "0.2",
+            "alongOffset": "0",
+            "child": {
+              "type": "l2magic:particle",
+              "particle": "minecraft:end_rod",
+              "speed": "0"
+            },
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "startFromOrigin": true,
+            "step": "120.0"
           }
         ]
       },
+      "maxAngle": "30",
+      "maxInclusive": true,
+      "minAngle": "-30",
+      "radius": "0.5",
+      "step": "7"
+    },
+    "modifiers": [
       {
-        "type": "l2magic:random",
-        "child": {
-          "type": "l2magic:iterate_arc",
-          "child": {
-            "type": "l2magic:move",
-            "child": {
-              "type": "l2magic:list",
-              "children": [
-                {
-                  "type": "l2magic:damage",
-                  "damage": "6",
-                  "damage_type": "minecraft:indirect_magic",
-                  "indirect": true,
-                  "knockback": "1",
-                  "positioned": true,
-                  "selector": {
-                    "type": "l2magic:line",
-                    "size": "1.0",
-                    "step": "24.0"
-                  }
-                },
-                {
-                  "type": "l2magic:iterate_linear",
-                  "alongDir": "0.2",
-                  "alongOffset": "0",
-                  "child": {
-                    "type": "l2magic:particle",
-                    "particle": "minecraft:end_rod",
-                    "speed": "0"
-                  },
-                  "offset": [
-                    0.0,
-                    0.0,
-                    0.0
-                  ],
-                  "startFromOrigin": true,
-                  "step": "120.0"
-                }
-              ]
-            },
-            "modifiers": [
-              {
-                "type": "l2magic:rotate",
-                "degree": "0",
-                "vertical": "75"
-              }
-            ]
-          },
-          "maxAngle": "360+r0*360",
-          "maxInclusive": false,
-          "minAngle": "r0*360",
-          "radius": "0.5",
-          "step": "7"
-        },
-        "count": 1,
-        "name": "r"
+        "type": "l2magic:offset",
+        "x": "0",
+        "y": "-0.1",
+        "z": "0"
       }
     ]
   },

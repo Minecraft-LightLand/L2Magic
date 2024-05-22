@@ -5,6 +5,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import dev.xkmc.l2library.init.events.GeneralEventHandler;
 import dev.xkmc.l2magic.content.engine.context.*;
 import dev.xkmc.l2magic.content.engine.helper.EngineHelper;
+import dev.xkmc.l2magic.content.engine.helper.Orientation;
 import dev.xkmc.l2magic.content.engine.helper.Scheduler;
 import dev.xkmc.l2magic.events.ClientEventHandler;
 import dev.xkmc.l2magic.init.L2Magic;
@@ -38,9 +39,13 @@ public record SpellAction(ConfiguredEngine<?> action, Item icon,
 		var sche = new Scheduler();
 		try {
 			var source = new SingleThreadedRandomSource(ctx.seed());
+			var normal = triggerType == SpellTriggerType.FACING_FRONT ||
+					triggerType == SpellTriggerType.FACING_BACK ?
+					Orientation.fromForward(ctx.facing()).normal() :
+					LocationContext.UP;
 			action().execute(new EngineContext(
 					new UserContext(ctx.user().level(), ctx.user(), sche),
-					new LocationContext(ctx.origin(), ctx.facing(), ctx.facing()),
+					new LocationContext(ctx.origin(), ctx.facing(), normal),
 					source, ctx.defaultArgs()
 			));
 		} catch (Exception e) {
