@@ -27,13 +27,24 @@ public record LocationContext(Vec3 pos, Vec3 dir, Vec3 normal) {
 		return new LocationContext(pos, getOrientation().rotateDegrees(degree), normal);
 	}
 
+	public LocationContext rotateDegree(double degree, double vertical) {
+		return new LocationContext(pos, getOrientation().rotateDegrees(degree, vertical), normal);
+	}
+
 	public LocationContext setDir(Vec3 vec3) {
 		return new LocationContext(pos, vec3, normal);
+	}
+
+	public LocationContext setNormal(Vec3 dir) {
+		return new LocationContext(pos, dir(), dir);
 	}
 
 	public Orientation getOrientation() {
 		if (dir.distanceTo(UP) < 0.01 && normal.distanceTo(UP) < 0.01) {
 			return Orientation.getOrientation(new Vec3(1, 0, 0), UP);
+		}
+		if (dir.distanceTo(normal) < 0.01) {
+			return Orientation.fromNormal(normal);
 		}
 		return Orientation.getOrientation(dir, normal);
 	}

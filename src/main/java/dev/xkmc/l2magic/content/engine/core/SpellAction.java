@@ -40,7 +40,7 @@ public record SpellAction(ConfiguredEngine<?> action, Item icon,
 			var source = new SingleThreadedRandomSource(ctx.seed());
 			action().execute(new EngineContext(
 					new UserContext(ctx.user().level(), ctx.user(), sche),
-					new LocationContext(ctx.origin(), ctx.facing(), LocationContext.UP),
+					new LocationContext(ctx.origin(), ctx.facing(), ctx.facing()),
 					source, ctx.defaultArgs()
 			));
 		} catch (Exception e) {

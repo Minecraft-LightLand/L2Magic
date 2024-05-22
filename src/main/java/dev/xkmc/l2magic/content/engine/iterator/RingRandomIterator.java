@@ -61,7 +61,7 @@ public record RingRandomIterator(DoubleVariable minRadius, DoubleVariable maxRad
 		double minAngle = minAngle().eval(ctx);
 		double maxAngle = maxAngle().eval(ctx);
 		int count = count().eval(ctx);
-		var ori = Orientation.fromNormal(ctx.loc().dir());
+		var ori = ctx.loc().getOrientation();
 		for (int i = 0; i < count; i++) {
 			double th = ctx.rand().nextDouble() * (maxAngle - minAngle) + minAngle;
 			double r = randomRadius(minRadius, maxRadius, ctx.rand());

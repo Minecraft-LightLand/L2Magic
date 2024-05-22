@@ -9,14 +9,22 @@ import dev.xkmc.l2magic.content.engine.core.ModifierType;
 import dev.xkmc.l2magic.content.engine.variable.DoubleVariable;
 import dev.xkmc.l2magic.init.registrate.EngineRegistry;
 
-public record RotationModifier(DoubleVariable degree) implements Modifier<RotationModifier> {
+public record RotationModifier(
+		DoubleVariable degree,
+		DoubleVariable vertical
+) implements Modifier<RotationModifier> {
 
 	public static Codec<RotationModifier> CODEC = RecordCodecBuilder.create(i -> i.group(
-			DoubleVariable.codec("degree", e -> e.degree)
-	).apply(i, RotationModifier::new));
+			DoubleVariable.codec("degree", e -> e.degree),
+			DoubleVariable.optionalCodec("vertical", e -> e.vertical)
+	).apply(i, (a, b) -> new RotationModifier(a, b.orElse(DoubleVariable.ZERO))));
 
 	public static RotationModifier of(String str) {
-		return new RotationModifier(DoubleVariable.of(str));
+		return new RotationModifier(DoubleVariable.of(str), DoubleVariable.ZERO);
+	}
+
+	public static RotationModifier of(String str, String ver) {
+		return new RotationModifier(DoubleVariable.of(str), DoubleVariable.of(ver));
 	}
 
 	@Override
@@ -26,7 +34,7 @@ public record RotationModifier(DoubleVariable degree) implements Modifier<Rotati
 
 	@Override
 	public LocationContext modify(EngineContext ctx) {
-		return ctx.loc().rotateDegree(degree.eval(ctx));
+		return ctx.loc().rotateDegree(degree.eval(ctx), vertical.eval(ctx));
 	}
 
 }

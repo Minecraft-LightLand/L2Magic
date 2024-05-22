@@ -171,11 +171,11 @@ public class WandItem extends Item implements IGlowingTarget {
 			}
 			case FACING_BACK -> {
 				dir = getForward(user);
-				pos = user.getEyePosition().add(dir);
+				pos = user.getEyePosition().add(dir.scale(-1));
 			}
 			case FACING_FRONT -> {
 				dir = getForward(user);
-				pos = user.getEyePosition().add(dir.scale(-1));
+				pos = user.getEyePosition().add(dir);
 			}
 			case TARGET_ENTITY -> {
 				var target = getTarget(user);

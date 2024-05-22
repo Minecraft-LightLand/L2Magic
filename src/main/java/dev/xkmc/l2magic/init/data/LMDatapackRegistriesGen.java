@@ -9,13 +9,11 @@ import dev.xkmc.l2magic.content.engine.instance.damage.DamageInstance;
 import dev.xkmc.l2magic.content.engine.instance.logic.*;
 import dev.xkmc.l2magic.content.engine.instance.particle.BlockParticleInstance;
 import dev.xkmc.l2magic.content.engine.instance.particle.SimpleParticleInstance;
-import dev.xkmc.l2magic.content.engine.iterator.DelayedIterator;
-import dev.xkmc.l2magic.content.engine.iterator.LinearIterator;
-import dev.xkmc.l2magic.content.engine.iterator.LoopIterator;
-import dev.xkmc.l2magic.content.engine.iterator.RingRandomIterator;
+import dev.xkmc.l2magic.content.engine.iterator.*;
 import dev.xkmc.l2magic.content.engine.modifier.*;
 import dev.xkmc.l2magic.content.engine.selector.ApproxCylinderSelector;
 import dev.xkmc.l2magic.content.engine.selector.ArcCubeSelector;
+import dev.xkmc.l2magic.content.engine.selector.LinearCubeSelector;
 import dev.xkmc.l2magic.content.engine.variable.BooleanVariable;
 import dev.xkmc.l2magic.content.engine.variable.DoubleVariable;
 import dev.xkmc.l2magic.content.engine.variable.IntVariable;
@@ -42,6 +40,7 @@ public class LMDatapackRegistriesGen extends DatapackBuiltinEntriesProvider {
 	public static final ResourceKey<SpellAction> WINTER = spell("winter_storm");
 	public static final ResourceKey<SpellAction> FLAME = spell("flame_burst");
 	public static final ResourceKey<SpellAction> QUAKE = spell("earthquake");
+	public static final ResourceKey<SpellAction> ARROW = spell("magic_arrows");
 
 	private static final RegistrySetBuilder BUILDER = new RegistrySetBuilder()
 			.add(EngineRegistry.SPELL, ctx -> {
@@ -63,6 +62,12 @@ public class LMDatapackRegistriesGen extends DatapackBuiltinEntriesProvider {
 						SpellCastType.CHARGE,
 						SpellTriggerType.HORIZONTAL_FACING
 				).verifyOnBuild(ctx, QUAKE);
+				new SpellAction(
+						arrows(new DataGenContext(ctx)),
+						Items.ARROW,
+						SpellCastType.INSTANT,
+						SpellTriggerType.FACING_FRONT
+				).verifyOnBuild(ctx, ARROW);
 			});
 
 	private static ConfiguredEngine<?> winterStorm(DataGenContext ctx) {
@@ -92,11 +97,8 @@ public class LMDatapackRegistriesGen extends DatapackBuiltinEntriesProvider {
 								IntVariable.of("5"),
 								new MoveEngine(List.of(
 										RotationModifier.of("75"),
-										new OffsetModifier(
-												DoubleVariable.ZERO,
-												DoubleVariable.of("rand(0.5,2.5)"),
-												DoubleVariable.ZERO
-										)),
+										OffsetModifier.of("0", "rand(0.5,2.5)", "0")
+								),
 										new SimpleParticleInstance(
 												ParticleTypes.SNOWFLAKE,
 												DoubleVariable.of("0.5")
@@ -219,6 +221,26 @@ public class LMDatapackRegistriesGen extends DatapackBuiltinEntriesProvider {
 		);
 	}
 
+	private static ConfiguredEngine<?> arrows(DataGenContext ctx) {
+		return new ListLogic(List.of(
+				new MoveEngine(List.of(OffsetModifier.of("0", "-0.1", "0"),
+						new Normal2DirModifier()),
+						shoot(ctx)),
+				new RandomVariableLogic("r", 1,
+						new RingIterator(
+								DoubleVariable.of("0.5"),
+								DoubleVariable.of("r0*360"),
+								DoubleVariable.of("360+r0*360"),
+								IntVariable.of("7"),
+								false,
+								new MoveEngine(List.of(RotationModifier.of("0", "75")),
+										shoot(ctx)),
+								null
+						))
+		));
+	}
+
+
 	private static ConfiguredEngine<?> star(double radius, double step) {
 		int linestep = (int) Math.round(1.9 * radius / step);
 		int circlestep = (int) Math.round(radius * Math.PI * 2 / step);
@@ -257,6 +279,35 @@ public class LMDatapackRegistriesGen extends DatapackBuiltinEntriesProvider {
 						)
 		)
 		);
+	}
+
+	private static ConfiguredEngine<?> shoot(DataGenContext ctx) {
+		int dis = 24;
+		double step = 0.2;
+		double rad = 1;
+		return new ListLogic(List.of(
+				new DamageInstance(
+						new LinearCubeSelector(
+								IntVariable.of(dis / rad + ""),
+								DoubleVariable.of(rad + "")
+						),
+						ctx.damage(DamageTypes.INDIRECT_MAGIC),
+						DoubleVariable.of("6"),
+						DoubleVariable.of("1"),
+						true, true
+				),
+				new LinearIterator(
+						DoubleVariable.of(step + ""),
+						Vec3.ZERO,
+						DoubleVariable.ZERO,
+						IntVariable.of(dis / step + ""),
+						true,
+						new SimpleParticleInstance(
+								ParticleTypes.END_ROD,
+								DoubleVariable.ZERO
+						),
+						null
+				)));
 	}
 
 	private static ResourceKey<SpellAction> spell(String id) {

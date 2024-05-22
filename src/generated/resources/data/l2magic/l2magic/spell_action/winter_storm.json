@@ -36,7 +36,8 @@
             "modifiers": [
               {
                 "type": "l2magic:rotate",
-                "degree": "75"
+                "degree": "75",
+                "vertical": "0"
               },
               {
                 "type": "l2magic:offset",

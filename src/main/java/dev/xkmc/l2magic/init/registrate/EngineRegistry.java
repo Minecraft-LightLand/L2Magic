@@ -6,10 +6,7 @@ import dev.xkmc.l2magic.content.engine.helper.EngineRegistryInstance;
 import dev.xkmc.l2magic.content.engine.instance.damage.DamageInstance;
 import dev.xkmc.l2magic.content.engine.instance.logic.*;
 import dev.xkmc.l2magic.content.engine.instance.particle.*;
-import dev.xkmc.l2magic.content.engine.iterator.DelayedIterator;
-import dev.xkmc.l2magic.content.engine.iterator.LinearIterator;
-import dev.xkmc.l2magic.content.engine.iterator.LoopIterator;
-import dev.xkmc.l2magic.content.engine.iterator.RingRandomIterator;
+import dev.xkmc.l2magic.content.engine.iterator.*;
 import dev.xkmc.l2magic.content.engine.modifier.*;
 import dev.xkmc.l2magic.content.engine.selector.*;
 import dev.xkmc.l2magic.init.L2Magic;
@@ -29,6 +26,9 @@ public class EngineRegistry {
 	public static final RegistryEntry<ModifierType<OffsetModifier>> OFFSET = register("offset", () -> OffsetModifier.CODEC);
 	public static final RegistryEntry<ModifierType<SetDirectionModifier>> DIRECTION = register("direction", () -> SetDirectionModifier.CODEC);
 	public static final RegistryEntry<ModifierType<RandomOffsetModifier>> RANDOM_OFFSET = register("random_offset", () -> RandomOffsetModifier.CODEC);
+	public static final RegistryEntry<ModifierType<SetNormalModifier>> NORMAL = register("set_normal", () -> SetNormalModifier.CODEC);
+	public static final RegistryEntry<ModifierType<Dir2NormalModifier>> DIR_2_NORMAL = register("direction_to_normal", () -> Dir2NormalModifier.CODEC);
+	public static final RegistryEntry<ModifierType<Normal2DirModifier>> NORMAL_2_DIR = register("normal_to_direction", () -> Normal2DirModifier.CODEC);
 
 	public static final RegistryEntry<EngineType<PredicateLogic>> IF = register("if", () -> PredicateLogic.CODEC);
 	public static final RegistryEntry<EngineType<ListLogic>> LIST = register("list", () -> ListLogic.CODEC);
@@ -39,6 +39,7 @@ public class EngineRegistry {
 	public static final RegistryEntry<EngineType<LoopIterator>> ITERATE = register("iterate", () -> LoopIterator.CODEC);
 	public static final RegistryEntry<EngineType<DelayedIterator>> ITERATE_DELAY = register("iterate_delayed", () -> DelayedIterator.CODEC);
 	public static final RegistryEntry<EngineType<LinearIterator>> ITERATE_LINEAR = register("iterate_linear", () -> LinearIterator.CODEC);
+	public static final RegistryEntry<EngineType<RingIterator>> ITERATE_ARC = register("iterate_arc", () -> RingIterator.CODEC);
 	public static final RegistryEntry<EngineType<RingRandomIterator>> RANDOM_FAN = register("random_pos_fan", () -> RingRandomIterator.CODEC);
 
 	public static final RegistryEntry<EngineType<DamageInstance>> DAMAGE = register("damage", () -> DamageInstance.CODEC);
