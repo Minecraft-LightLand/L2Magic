@@ -1,4 +1,4 @@
-package dev.xkmc.l2magic.content.engine.instance.particle;
+package dev.xkmc.l2magic.content.engine.particle;
 
 import dev.xkmc.l2magic.content.engine.context.EngineContext;
 import dev.xkmc.l2magic.content.engine.core.ConfiguredEngine;

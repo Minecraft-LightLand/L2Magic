@@ -1,7 +1,7 @@
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 
-package dev.xkmc.l2magic.content.engine.instance.damage;
+package dev.xkmc.l2magic.content.engine.particle;
 
 import net.minecraft.MethodsReturnNonnullByDefault;
 

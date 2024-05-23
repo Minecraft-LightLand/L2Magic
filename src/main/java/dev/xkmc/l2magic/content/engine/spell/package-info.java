@@ -1,7 +1,7 @@
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 
-package dev.xkmc.l2magic.content.engine.instance.particle;
+package dev.xkmc.l2magic.content.engine.spell;
 
 import net.minecraft.MethodsReturnNonnullByDefault;
 

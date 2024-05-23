@@ -1,6 +1,6 @@
 package dev.xkmc.l2magic.content.engine.context;
 
-import dev.xkmc.l2magic.content.engine.core.SpellAction;
+import dev.xkmc.l2magic.content.engine.spell.SpellAction;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;

@@ -2,18 +2,20 @@ package dev.xkmc.l2magic.init.data;
 
 import dev.xkmc.l2magic.content.engine.context.DataGenContext;
 import dev.xkmc.l2magic.content.engine.core.ConfiguredEngine;
-import dev.xkmc.l2magic.content.engine.core.SpellAction;
-import dev.xkmc.l2magic.content.engine.core.SpellCastType;
-import dev.xkmc.l2magic.content.engine.core.SpellTriggerType;
-import dev.xkmc.l2magic.content.engine.instance.damage.DamageInstance;
-import dev.xkmc.l2magic.content.engine.instance.logic.*;
-import dev.xkmc.l2magic.content.engine.instance.particle.BlockParticleInstance;
-import dev.xkmc.l2magic.content.engine.instance.particle.SimpleParticleInstance;
 import dev.xkmc.l2magic.content.engine.iterator.*;
+import dev.xkmc.l2magic.content.engine.logic.*;
 import dev.xkmc.l2magic.content.engine.modifier.*;
+import dev.xkmc.l2magic.content.engine.particle.BlockParticleInstance;
+import dev.xkmc.l2magic.content.engine.particle.SimpleParticleInstance;
+import dev.xkmc.l2magic.content.engine.processor.DamageProcessor;
+import dev.xkmc.l2magic.content.engine.processor.KnockBackProcessor;
+import dev.xkmc.l2magic.content.engine.processor.PushProcessor;
 import dev.xkmc.l2magic.content.engine.selector.ApproxCylinderSelector;
 import dev.xkmc.l2magic.content.engine.selector.ArcCubeSelector;
 import dev.xkmc.l2magic.content.engine.selector.LinearCubeSelector;
+import dev.xkmc.l2magic.content.engine.spell.SpellAction;
+import dev.xkmc.l2magic.content.engine.spell.SpellCastType;
+import dev.xkmc.l2magic.content.engine.spell.SpellTriggerType;
 import dev.xkmc.l2magic.content.engine.variable.BooleanVariable;
 import dev.xkmc.l2magic.content.engine.variable.DoubleVariable;
 import dev.xkmc.l2magic.content.engine.variable.IntVariable;
@@ -80,19 +82,25 @@ public class LMDatapackRegistriesGen extends DatapackBuiltinEntriesProvider {
 	private static ConfiguredEngine<?> winterStorm(DataGenContext ctx) {
 		return new ListLogic(List.of(
 				new PredicateLogic(
-						BooleanVariable.of("TickUsing>=10&TickUsing%4==0"),
-						new DamageInstance(
+						BooleanVariable.of("TickUsing>=10"),
+						new ProcessorEngine(
 								new ArcCubeSelector(
 										IntVariable.of("11"),
 										DoubleVariable.of("5.5"),
 										DoubleVariable.of("2.5"),
 										DoubleVariable.of("-180"),
 										DoubleVariable.of("-180+360/12*11")
-								), ctx.damage(DamageTypes.FREEZE),
-								DoubleVariable.of("4"),
-								DoubleVariable.of("1"),
-								true, true
-						), null),
+								),
+								List.of(
+										new DamageProcessor(ctx.damage(DamageTypes.FREEZE),
+												DoubleVariable.of("4"), true, true),
+										new PushProcessor(
+												DoubleVariable.of("0.1"),
+												DoubleVariable.of("75"),
+												DoubleVariable.ZERO,
+												PushProcessor.Type.TO_CENTER
+										)
+								)), null),
 				new DelayedIterator(
 				IntVariable.of("10"),
 				IntVariable.of("2"),
@@ -130,17 +138,23 @@ public class LMDatapackRegistriesGen extends DatapackBuiltinEntriesProvider {
 						IntVariable.of("40"),
 						IntVariable.of("1"),
 						new ListLogic(List.of(
-								new PredicateLogic(
-										BooleanVariable.of("Time%2==0"),
-										new DamageInstance(
-												new ApproxCylinderSelector(
-														DoubleVariable.of("4"),
-														DoubleVariable.of("6")
-												), ctx.damage(DamageTypes.IN_FIRE),
+								new ProcessorEngine(
+										new ApproxCylinderSelector(
 												DoubleVariable.of("4"),
-												DoubleVariable.ZERO,
+												DoubleVariable.of("6")
+										), List.of(
+										new DamageProcessor(
+												ctx.damage(DamageTypes.IN_FIRE),
+												DoubleVariable.of("4"),
 												true, false
-										), null),
+										),
+										new PushProcessor(
+												DoubleVariable.of("0.1"),
+												DoubleVariable.ZERO,
+												DoubleVariable.ZERO,
+												PushProcessor.Type.UNIFORM
+										)
+								)),
 						new RingRandomIterator(
 								DoubleVariable.of("0"),
 								DoubleVariable.of("4"),
@@ -194,15 +208,15 @@ public class LMDatapackRegistriesGen extends DatapackBuiltinEntriesProvider {
 														new MoveEngine(
 																List.of(RotationModifier.of("rand(0,360)")),
 																star(2, 0.2)),
-														new DamageInstance(
+														new ProcessorEngine(
 																new ApproxCylinderSelector(
 																		DoubleVariable.of("4"),
 																		DoubleVariable.of("2")
-																), ctx.damage(DamageTypes.EXPLOSION),
-																DoubleVariable.of("10"),
-																DoubleVariable.of("2"),
-																true, true
-														),
+																), List.of(
+																new DamageProcessor(ctx.damage(DamageTypes.EXPLOSION),
+																		DoubleVariable.of("10"), true, true),
+																KnockBackProcessor.of("2")
+														)),
 														new RingRandomIterator(
 																DoubleVariable.of("0"),
 																DoubleVariable.of("2"),
@@ -306,16 +320,16 @@ public class LMDatapackRegistriesGen extends DatapackBuiltinEntriesProvider {
 		double step = 0.2;
 		double rad = 1;
 		return new ListLogic(List.of(
-				new DamageInstance(
+				new ProcessorEngine(
 						new LinearCubeSelector(
 								IntVariable.of(dis / rad + ""),
 								DoubleVariable.of(rad + "")
-						),
+						), List.of(new DamageProcessor(
 						ctx.damage(DamageTypes.INDIRECT_MAGIC),
 						DoubleVariable.of("6"),
-						DoubleVariable.of("1"),
-						true, true
-				),
+								true, true),
+						KnockBackProcessor.of("1")
+				)),
 				new LinearIterator(
 						DoubleVariable.of(step + ""),
 						Vec3.ZERO,

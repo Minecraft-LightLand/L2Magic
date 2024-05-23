@@ -1,6 +1,6 @@
 package dev.xkmc.l2magic.content.engine.context;
 
-import dev.xkmc.l2magic.content.engine.core.SpellAction;
+import dev.xkmc.l2magic.content.engine.spell.SpellAction;
 import dev.xkmc.l2magic.init.registrate.EngineRegistry;
 import dev.xkmc.l2serial.network.SerialPacketBase;
 import dev.xkmc.l2serial.serialization.SerialClass;

@@ -1,9 +1,10 @@
-package dev.xkmc.l2magic.content.engine.core;
+package dev.xkmc.l2magic.content.engine.spell;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import dev.xkmc.l2library.init.events.GeneralEventHandler;
 import dev.xkmc.l2magic.content.engine.context.*;
+import dev.xkmc.l2magic.content.engine.core.ConfiguredEngine;
 import dev.xkmc.l2magic.content.engine.helper.EngineHelper;
 import dev.xkmc.l2magic.content.engine.helper.Orientation;
 import dev.xkmc.l2magic.content.engine.helper.Scheduler;

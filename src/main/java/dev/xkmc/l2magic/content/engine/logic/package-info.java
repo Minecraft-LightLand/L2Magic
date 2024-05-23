@@ -1,7 +1,7 @@
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 
-package dev.xkmc.l2magic.content.engine.instance.logic;
+package dev.xkmc.l2magic.content.engine.logic;
 
 import net.minecraft.MethodsReturnNonnullByDefault;
 

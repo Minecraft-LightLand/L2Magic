@@ -1,4 +1,4 @@
-package dev.xkmc.l2magic.content.engine.instance.logic;
+package dev.xkmc.l2magic.content.engine.logic;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;

@@ -7,12 +7,22 @@
         "type": "l2magic:list",
         "children": [
           {
-            "type": "l2magic:damage",
-            "damage": "6",
-            "damage_type": "minecraft:indirect_magic",
-            "indirect": true,
-            "knockback": "1",
-            "positioned": true,
+            "type": "l2magic:processor",
+            "processors": [
+              {
+                "type": "l2magic:damage",
+                "damage": "6",
+                "damage_type": "minecraft:indirect_magic",
+                "indirect": true,
+                "positioned": true
+              },
+              {
+                "type": "l2magic:knockback",
+                "angle": "0",
+                "knockback": "1",
+                "tilt": "0"
+              }
+            ],
             "selector": {
               "type": "l2magic:line",
               "size": "1.0",

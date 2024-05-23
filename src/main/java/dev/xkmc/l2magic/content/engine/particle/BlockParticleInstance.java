@@ -1,4 +1,4 @@
-package dev.xkmc.l2magic.content.engine.instance.particle;
+package dev.xkmc.l2magic.content.engine.particle;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;

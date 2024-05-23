@@ -3,12 +3,8 @@ package dev.xkmc.l2magic.content.engine.core;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import dev.xkmc.l2magic.content.engine.context.BuilderContext;
 import dev.xkmc.l2magic.content.engine.context.EngineContext;
-import dev.xkmc.l2magic.content.engine.helper.EngineHelper;
 import dev.xkmc.l2magic.init.registrate.EngineRegistry;
-import dev.xkmc.l2serial.util.Wrappers;
-import org.jetbrains.annotations.MustBeInvokedByOverriders;
 
 import java.util.Optional;
 import java.util.function.Function;

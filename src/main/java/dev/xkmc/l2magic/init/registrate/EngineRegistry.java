@@ -3,12 +3,15 @@ package dev.xkmc.l2magic.init.registrate;
 import com.tterrag.registrate.util.entry.RegistryEntry;
 import dev.xkmc.l2magic.content.engine.core.*;
 import dev.xkmc.l2magic.content.engine.helper.EngineRegistryInstance;
-import dev.xkmc.l2magic.content.engine.instance.damage.DamageInstance;
-import dev.xkmc.l2magic.content.engine.instance.logic.*;
-import dev.xkmc.l2magic.content.engine.instance.particle.*;
 import dev.xkmc.l2magic.content.engine.iterator.*;
+import dev.xkmc.l2magic.content.engine.logic.*;
 import dev.xkmc.l2magic.content.engine.modifier.*;
+import dev.xkmc.l2magic.content.engine.particle.*;
+import dev.xkmc.l2magic.content.engine.processor.DamageProcessor;
+import dev.xkmc.l2magic.content.engine.processor.KnockBackProcessor;
+import dev.xkmc.l2magic.content.engine.processor.PushProcessor;
 import dev.xkmc.l2magic.content.engine.selector.*;
+import dev.xkmc.l2magic.content.engine.spell.SpellAction;
 import dev.xkmc.l2magic.init.L2Magic;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
@@ -20,6 +23,7 @@ public class EngineRegistry {
 	public static final EngineRegistryInstance<EngineType<?>> ENGINE = EngineRegistryInstance.of("configured_engine");
 	public static final EngineRegistryInstance<ModifierType<?>> MODIFIER = EngineRegistryInstance.of("modifier");
 	public static final EngineRegistryInstance<SelectorType<?>> SELECTOR = EngineRegistryInstance.of("selector");
+	public static final EngineRegistryInstance<ProcessorType<?>> PROCESSOR = EngineRegistryInstance.of("processor");
 
 	public static final RegistryEntry<ModifierType<ForwardOffsetModifier>> FORWARD = register("forward", () -> ForwardOffsetModifier.CODEC);
 	public static final RegistryEntry<ModifierType<RotationModifier>> ROTATE = register("rotate", () -> RotationModifier.CODEC);
@@ -35,6 +39,7 @@ public class EngineRegistry {
 	public static final RegistryEntry<EngineType<DelayLogic>> DELAY = register("delay", () -> DelayLogic.CODEC);
 	public static final RegistryEntry<EngineType<RandomVariableLogic>> RANDOM = register("random", () -> RandomVariableLogic.CODEC);
 	public static final RegistryEntry<EngineType<MoveEngine>> MOVE_ENGINE = register("move", () -> MoveEngine.CODEC);
+	public static final RegistryEntry<EngineType<ProcessorEngine>> PROCESS_ENGINE = register("processor", () -> ProcessorEngine.CODEC);
 
 	public static final RegistryEntry<EngineType<LoopIterator>> ITERATE = register("iterate", () -> LoopIterator.CODEC);
 	public static final RegistryEntry<EngineType<DelayedIterator>> ITERATE_DELAY = register("iterate_delayed", () -> DelayedIterator.CODEC);
@@ -42,7 +47,6 @@ public class EngineRegistry {
 	public static final RegistryEntry<EngineType<RingIterator>> ITERATE_ARC = register("iterate_arc", () -> RingIterator.CODEC);
 	public static final RegistryEntry<EngineType<RingRandomIterator>> RANDOM_FAN = register("random_pos_fan", () -> RingRandomIterator.CODEC);
 
-	public static final RegistryEntry<EngineType<DamageInstance>> DAMAGE = register("damage", () -> DamageInstance.CODEC);
 	public static final RegistryEntry<EngineType<SimpleParticleInstance>> SIMPLE_PARTICLE = register("particle", () -> SimpleParticleInstance.CODEC);
 	public static final RegistryEntry<EngineType<BlockParticleInstance>> BLOCK_PARTICLE = register("block_particle", () -> BlockParticleInstance.CODEC);
 	public static final RegistryEntry<EngineType<ItemParticleInstance>> ITEM_PARTICLE = register("item_particle", () -> ItemParticleInstance.CODEC);
@@ -57,6 +61,12 @@ public class EngineRegistry {
 	public static final RegistryEntry<SelectorType<ApproxCylinderSelector>> CYLINDER = register("cylinder", () -> ApproxCylinderSelector.CODEC);;
 	public static final RegistryEntry<SelectorType<ApproxBallSelector>> BALL = register("ball", () -> ApproxBallSelector.CODEC);
 
+	public static final RegistryEntry<ProcessorType<DamageProcessor>> DAMAGE = register("damage", () -> DamageProcessor.CODEC);
+	public static final RegistryEntry<ProcessorType<KnockBackProcessor>> KB = register("knockback", () -> KnockBackProcessor.CODEC);
+	public static final RegistryEntry<ProcessorType<PushProcessor>> PUSH_ENTITY = register("push", () -> PushProcessor.CODEC);
+
+
+
 	private static <T extends Record & ConfiguredEngine<T>> RegistryEntry<EngineType<T>>
 	register(String id, EngineType<T> codec) {
 		return L2Magic.REGISTRATE.simple(id, ENGINE.key(), () -> codec);
@@ -70,6 +80,11 @@ public class EngineRegistry {
 	private static <T extends Record & Modifier<T>> RegistryEntry<ModifierType<T>>
 	register(String id, ModifierType<T> codec) {
 		return L2Magic.REGISTRATE.simple(id, MODIFIER.key(), () -> codec);
+	}
+
+	private static <T extends Record & EntityProcessor<T>> RegistryEntry<ProcessorType<T>>
+	register(String id, ProcessorType<T> codec) {
+		return L2Magic.REGISTRATE.simple(id, PROCESSOR.key(), () -> codec);
 	}
 
 	public static void register() {

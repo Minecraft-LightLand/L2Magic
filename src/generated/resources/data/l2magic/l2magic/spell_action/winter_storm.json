@@ -5,12 +5,23 @@
       {
         "type": "l2magic:if",
         "action": {
-          "type": "l2magic:damage",
-          "damage": "4",
-          "damage_type": "minecraft:freeze",
-          "indirect": true,
-          "knockback": "1",
-          "positioned": true,
+          "type": "l2magic:processor",
+          "processors": [
+            {
+              "type": "l2magic:damage",
+              "damage": "4",
+              "damage_type": "minecraft:freeze",
+              "indirect": true,
+              "positioned": true
+            },
+            {
+              "type": "l2magic:push",
+              "angle": "75",
+              "from_center": "TO_CENTER",
+              "speed": "0.1",
+              "tilt": "0"
+            }
+          ],
           "selector": {
             "type": "l2magic:arc",
             "maxAngle": "-180+360/12*11",
@@ -20,7 +31,7 @@
             "step": "11"
           }
         },
-        "predicate": "TickUsing>=10&TickUsing%4==0"
+        "predicate": "TickUsing>=10"
       },
       {
         "type": "l2magic:iterate_delayed",
