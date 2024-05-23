@@ -2,7 +2,6 @@ package dev.xkmc.l2magic.content.engine.selector;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import dev.xkmc.fastprojectileapi.collision.EntityStorageCache;
 import dev.xkmc.l2magic.content.engine.context.EngineContext;
 import dev.xkmc.l2magic.content.engine.core.EntitySelector;
 import dev.xkmc.l2magic.content.engine.core.SelectorType;
@@ -21,7 +20,7 @@ public record BoxSelector(
 ) implements EntitySelector<BoxSelector> {
 
 	public static final Codec<BoxSelector> CODEC = RecordCodecBuilder.create(i -> i.group(
-			DoubleVariable.codec("r", BoxSelector::r),
+			DoubleVariable.codec("size", BoxSelector::r),
 			DoubleVariable.codec("y", BoxSelector::y)
 	).apply(i, BoxSelector::new));
 
@@ -32,7 +31,7 @@ public record BoxSelector(
 
 	public LinkedHashSet<LivingEntity> find(ServerLevel sl, EngineContext ctx, SelectionType type) {
 		Vec3 pos = ctx.loc().pos();
-		double r = r().eval(ctx);
+		double r = r().eval(ctx) / 2;
 		double y = y().eval(ctx);
 		var aabb = new AABB(pos.x - r, pos.y, pos.z - r, pos.x + r, pos.y + y, pos.z + r);
 		LinkedHashSet<LivingEntity> list = new LinkedHashSet<>();

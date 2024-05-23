@@ -13,6 +13,7 @@ import net.minecraft.world.entity.LivingEntity;
 import java.util.LinkedHashSet;
 import java.util.List;
 
+// TODO need further improvements
 public record CompoundEntitySelector(
 		CompoundEntitySelector.Type function,
 		List<EntitySelector<?>> selectors

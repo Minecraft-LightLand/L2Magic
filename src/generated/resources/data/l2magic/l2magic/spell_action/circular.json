@@ -1,0 +1,79 @@
+{
+  "action": {
+    "type": "l2magic:iterate_delayed",
+    "child": {
+      "type": "l2magic:move",
+      "child": {
+        "type": "l2magic:iterate_arc",
+        "child": {
+          "type": "l2magic:list",
+          "children": [
+            {
+              "type": "l2magic:processor",
+              "processors": [
+                {
+                  "type": "l2magic:damage",
+                  "damage": "6",
+                  "damage_type": "minecraft:indirect_magic",
+                  "indirect": true,
+                  "positioned": true
+                },
+                {
+                  "type": "l2magic:push",
+                  "angle": "0",
+                  "from_center": "UNIFORM",
+                  "speed": "0.3",
+                  "tilt": "10"
+                }
+              ],
+              "selector": {
+                "type": "l2magic:move",
+                "child": {
+                  "type": "l2magic:box",
+                  "size": "1",
+                  "y": "1"
+                },
+                "modifiers": [
+                  {
+                    "type": "l2magic:offset",
+                    "x": "0",
+                    "y": "-0.5",
+                    "z": "0"
+                  }
+                ]
+              },
+              "target": "ENEMY"
+            },
+            {
+              "type": "l2magic:particle",
+              "particle": "minecraft:end_rod",
+              "speed": "0"
+            }
+          ]
+        },
+        "maxAngle": "180+i*14",
+        "maxInclusive": false,
+        "minAngle": "-180+i*14",
+        "radius": "i*0.1+0.5",
+        "step": "3"
+      },
+      "modifiers": [
+        {
+          "type": "l2magic:move_to_caster"
+        },
+        {
+          "type": "l2magic:offset",
+          "x": "0",
+          "y": "1",
+          "z": "0"
+        }
+      ]
+    },
+    "delay": "1",
+    "index": "i",
+    "step": "60"
+  },
+  "cast_type": "INSTANT",
+  "icon": "minecraft:conduit",
+  "trigger_type": "SELF_POS"
+}

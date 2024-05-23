@@ -54,8 +54,9 @@ public record PushProcessor(
 			};
 			if (angle != 0 || tilt != 0) {
 				var ori = Orientation.getOrientation(p, ctx.loc().normal());
-				p = ori.rotateDegrees(angle, tilt).scale(kb);
+				p = ori.rotateDegrees(angle, tilt);
 			}
+			p = p.scale(kb);
 			e.push(p.x, p.y, p.z);
 		}
 	}

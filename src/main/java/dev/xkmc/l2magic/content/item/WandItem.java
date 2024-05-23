@@ -125,23 +125,6 @@ public class WandItem extends Item implements IGlowingTarget {
 		return null;
 	}
 
-	private Vec3 getCenter(LivingEntity le) {
-		return le.position().add(0, le.getBbHeight() / 2f, 0);
-	}
-
-	private Vec3 getForward(LivingEntity le) {
-		if (le instanceof Player player) {
-			return RayTraceUtil.getRayTerm(Vec3.ZERO, player.getXRot(), player.getYRot(), 1);
-		}
-		if (le instanceof Mob mob) {
-			var target = mob.getTarget();
-			if (target != null) {
-				return getCenter(le).subtract(mob.getEyePosition());
-			}
-		}
-		return le.getForward();
-	}
-
 	private boolean castSpell(ItemStack stack, Level level, LivingEntity user, SpellAction spell, int useTick) {
 		double power = 1;
 		Vec3 pos, dir;
@@ -152,7 +135,7 @@ public class WandItem extends Item implements IGlowingTarget {
 			}
 			case TARGET_POS -> {
 				var start = user.getEyePosition();
-				var forward = getForward(user);
+				var forward = SpellContext.getForward(user);
 				var end = start.add(forward.scale(getDistance(stack)));
 				AABB box = (new AABB(start, end)).inflate(1.0);
 				var bhit = level.clip(new ClipContext(start, end, ClipContext.Block.OUTLINE, ClipContext.Fluid.NONE, user));
@@ -165,16 +148,16 @@ public class WandItem extends Item implements IGlowingTarget {
 				dir = LocationContext.UP;
 			}
 			case HORIZONTAL_FACING -> {
-				dir = getForward(user).multiply(1, 0, 1).normalize();
+				dir = SpellContext.getForward(user).multiply(1, 0, 1).normalize();
 				pos = user.position();
 				if (dir.length() < 0.5) return false;
 			}
 			case FACING_BACK -> {
-				dir = getForward(user);
+				dir = SpellContext.getForward(user);
 				pos = user.getEyePosition().add(dir.scale(-1));
 			}
 			case FACING_FRONT -> {
-				dir = getForward(user);
+				dir = SpellContext.getForward(user);
 				pos = user.getEyePosition().add(dir);
 			}
 			case TARGET_ENTITY -> {

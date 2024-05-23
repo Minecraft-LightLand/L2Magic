@@ -9,10 +9,7 @@ import dev.xkmc.l2magic.content.engine.modifier.*;
 import dev.xkmc.l2magic.content.engine.particle.BlockParticleInstance;
 import dev.xkmc.l2magic.content.engine.particle.SimpleParticleInstance;
 import dev.xkmc.l2magic.content.engine.processor.*;
-import dev.xkmc.l2magic.content.engine.selector.ApproxCylinderSelector;
-import dev.xkmc.l2magic.content.engine.selector.ArcCubeSelector;
-import dev.xkmc.l2magic.content.engine.selector.LinearCubeSelector;
-import dev.xkmc.l2magic.content.engine.selector.SelectionType;
+import dev.xkmc.l2magic.content.engine.selector.*;
 import dev.xkmc.l2magic.content.engine.spell.SpellAction;
 import dev.xkmc.l2magic.content.engine.spell.SpellCastType;
 import dev.xkmc.l2magic.content.engine.spell.SpellTriggerType;
@@ -44,6 +41,7 @@ public class LMDatapackRegistriesGen extends DatapackBuiltinEntriesProvider {
 	public static final ResourceKey<SpellAction> QUAKE = spell("earthquake");
 	public static final ResourceKey<SpellAction> ARROW = spell("magic_arrows");
 	public static final ResourceKey<SpellAction> ARROW_RING = spell("magic_arrow_ring");
+	public static final ResourceKey<SpellAction> CIRCULAR = spell("circular");
 
 	private static final RegistrySetBuilder BUILDER = new RegistrySetBuilder()
 			.add(EngineRegistry.SPELL, ctx -> {
@@ -77,6 +75,12 @@ public class LMDatapackRegistriesGen extends DatapackBuiltinEntriesProvider {
 						SpellCastType.INSTANT,
 						SpellTriggerType.FACING_FRONT
 				).verifyOnBuild(ctx, ARROW);
+				new SpellAction(
+						circular(new DataGenContext(ctx)),
+						Items.CONDUIT,
+						SpellCastType.INSTANT,
+						SpellTriggerType.SELF_POS
+				).verifyOnBuild(ctx, CIRCULAR);
 			});
 
 	private static ConfiguredEngine<?> winterStorm(DataGenContext ctx) {
@@ -161,7 +165,7 @@ public class LMDatapackRegistriesGen extends DatapackBuiltinEntriesProvider {
 										),
 										new PropertyProcessor(
 												PropertyProcessor.Type.IGNITE,
-												IntVariable.of("10")
+												IntVariable.of("100")
 										)
 								)),
 						new RingRandomIterator(
@@ -208,7 +212,7 @@ public class LMDatapackRegistriesGen extends DatapackBuiltinEntriesProvider {
 												RotationModifier.of("180/(3+i*2)*(j+(r0+r1)/2)-90"),
 												ForwardOffsetModifier.of("6*i+4"),
 														new RandomOffsetModifier(
-																RandomOffsetModifier.Type.BALL,
+																RandomOffsetModifier.Type.SPHERE,
 																DoubleVariable.of("0.1"),
 																DoubleVariable.ZERO,
 																DoubleVariable.of("0.1")
@@ -283,6 +287,48 @@ public class LMDatapackRegistriesGen extends DatapackBuiltinEntriesProvider {
 				));
 	}
 
+	private static ConfiguredEngine<?> circular(DataGenContext ctx) {
+		return new DelayedIterator(
+				IntVariable.of("60"),
+				IntVariable.of("1"),
+				new MoveEngine(List.of(
+						new ToCurrentCasterPosModifier(),
+						OffsetModifier.of("0", "1", "0")),
+						new RingIterator(
+								DoubleVariable.of("i*0.1+0.5"),
+								DoubleVariable.of("-180+i*14"),
+								DoubleVariable.of("180+i*14"),
+								IntVariable.of("3"),
+								false,
+								new ListLogic(List.of(
+										new ProcessorEngine(SelectionType.ENEMY,
+												new MoveSelector(
+														List.of(OffsetModifier.of("0", "-0.5", "0")),
+														new BoxSelector(
+																DoubleVariable.of("1"),
+																DoubleVariable.of("1"))
+												), List.of(
+												new DamageProcessor(
+														ctx.damage(DamageTypes.INDIRECT_MAGIC),
+														DoubleVariable.of("6"),
+														true, true),
+												new PushProcessor(
+														DoubleVariable.of("0.3"),
+														DoubleVariable.of("0"),
+														DoubleVariable.of("10"),
+														PushProcessor.Type.UNIFORM
+												)
+										)),
+										new SimpleParticleInstance(
+												ParticleTypes.END_ROD,
+												DoubleVariable.ZERO
+										)
+								)),
+								null
+						)
+				), "i"
+		);
+	}
 
 	private static ConfiguredEngine<?> star(double radius, double step) {
 		int linestep = (int) Math.round(1.9 * radius / step);

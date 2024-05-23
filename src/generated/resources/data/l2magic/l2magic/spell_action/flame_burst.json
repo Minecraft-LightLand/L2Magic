@@ -112,7 +112,7 @@
                 },
                 {
                   "type": "l2magic:property",
-                  "duration": "10",
+                  "duration": "100",
                   "property": "IGNITE"
                 }
               ],

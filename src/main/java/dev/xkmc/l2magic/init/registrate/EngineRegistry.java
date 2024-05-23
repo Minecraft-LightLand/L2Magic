@@ -31,6 +31,8 @@ public class EngineRegistry {
 	public static final RegistryEntry<ModifierType<SetNormalModifier>> NORMAL = register("set_normal", () -> SetNormalModifier.CODEC);
 	public static final RegistryEntry<ModifierType<Dir2NormalModifier>> DIR_2_NORMAL = register("direction_to_normal", () -> Dir2NormalModifier.CODEC);
 	public static final RegistryEntry<ModifierType<Normal2DirModifier>> NORMAL_2_DIR = register("normal_to_direction", () -> Normal2DirModifier.CODEC);
+	public static final RegistryEntry<ModifierType<ToCurrentCasterPosModifier>> TO_CASTER_POS = register("move_to_caster", () -> ToCurrentCasterPosModifier.CODEC);
+	public static final RegistryEntry<ModifierType<ToCurrentCasterDirModifier>> TO_CASTER_DIR = register("align_with_caster", () -> ToCurrentCasterDirModifier.CODEC);
 
 	public static final RegistryEntry<EngineType<PredicateLogic>> IF = register("if", () -> PredicateLogic.CODEC);
 	public static final RegistryEntry<EngineType<ListLogic>> LIST = register("list", () -> ListLogic.CODEC);

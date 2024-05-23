@@ -154,7 +154,7 @@
               },
               {
                 "type": "l2magic:random_offset",
-                "shape": "BALL",
+                "shape": "SPHERE",
                 "x": "0.1",
                 "y": "0",
                 "z": "0.1"

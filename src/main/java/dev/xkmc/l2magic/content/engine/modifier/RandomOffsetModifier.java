@@ -10,11 +10,12 @@ import dev.xkmc.l2magic.content.engine.variable.DoubleVariable;
 import dev.xkmc.l2magic.init.registrate.EngineRegistry;
 import net.minecraft.world.phys.Vec3;
 
+//TODO This modifier needs further improvements
 public record RandomOffsetModifier(Type shape, DoubleVariable x, DoubleVariable y, DoubleVariable z)
 		implements Modifier<RandomOffsetModifier> {
 
 	public enum Type {
-		RECT, BALL, GAUSSIAN
+		RECT, SPHERE, GAUSSIAN
 	}
 
 	public static Codec<RandomOffsetModifier> CODEC = RecordCodecBuilder.create(i -> i.group(
@@ -40,7 +41,7 @@ public record RandomOffsetModifier(Type shape, DoubleVariable x, DoubleVariable 
 					ctx.rand().nextDouble() * 2 - 1,
 					ctx.rand().nextDouble() * 2 - 1
 			);
-			case BALL -> new Vec3(
+			case SPHERE -> new Vec3(
 					ctx.rand().nextGaussian(),
 					ctx.rand().nextGaussian(),
 					ctx.rand().nextGaussian()
