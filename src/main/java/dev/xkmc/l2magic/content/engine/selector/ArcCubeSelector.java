@@ -40,7 +40,7 @@ public record ArcCubeSelector(
 		return EngineRegistry.ARC.get();
 	}
 
-	public LinkedHashSet<LivingEntity> find(ServerLevel sl, EngineContext ctx) {
+	public LinkedHashSet<LivingEntity> find(ServerLevel sl, EngineContext ctx, SelectionType type) {
 		Vec3 pos = ctx.loc().pos();
 		int step = step().eval(ctx);
 		double r = radius().eval(ctx);
@@ -53,7 +53,7 @@ public record ArcCubeSelector(
 			double a = a0 + (a1 - a0) / step * i;
 			Vec3 p = pos.add(ori.rotateDegrees(a).scale(r));
 			var aabb = AABB.ofSize(p, diam, diam, diam);
-			for (var e : EntityStorageCache.get(sl).foreach(aabb, ctx.user()::canHitEntity)) {
+			for (var e : type.select(sl, ctx, aabb)) {
 				if (e instanceof LivingEntity le) {
 					list.add(le);
 				}

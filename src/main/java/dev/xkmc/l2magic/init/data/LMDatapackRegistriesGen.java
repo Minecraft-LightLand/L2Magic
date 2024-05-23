@@ -1,5 +1,6 @@
 package dev.xkmc.l2magic.init.data;
 
+import dev.xkmc.l2complements.init.registrate.LCEffects;
 import dev.xkmc.l2magic.content.engine.context.DataGenContext;
 import dev.xkmc.l2magic.content.engine.core.ConfiguredEngine;
 import dev.xkmc.l2magic.content.engine.iterator.*;
@@ -7,12 +8,11 @@ import dev.xkmc.l2magic.content.engine.logic.*;
 import dev.xkmc.l2magic.content.engine.modifier.*;
 import dev.xkmc.l2magic.content.engine.particle.BlockParticleInstance;
 import dev.xkmc.l2magic.content.engine.particle.SimpleParticleInstance;
-import dev.xkmc.l2magic.content.engine.processor.DamageProcessor;
-import dev.xkmc.l2magic.content.engine.processor.KnockBackProcessor;
-import dev.xkmc.l2magic.content.engine.processor.PushProcessor;
+import dev.xkmc.l2magic.content.engine.processor.*;
 import dev.xkmc.l2magic.content.engine.selector.ApproxCylinderSelector;
 import dev.xkmc.l2magic.content.engine.selector.ArcCubeSelector;
 import dev.xkmc.l2magic.content.engine.selector.LinearCubeSelector;
+import dev.xkmc.l2magic.content.engine.selector.SelectionType;
 import dev.xkmc.l2magic.content.engine.spell.SpellAction;
 import dev.xkmc.l2magic.content.engine.spell.SpellCastType;
 import dev.xkmc.l2magic.content.engine.spell.SpellTriggerType;
@@ -83,7 +83,7 @@ public class LMDatapackRegistriesGen extends DatapackBuiltinEntriesProvider {
 		return new ListLogic(List.of(
 				new PredicateLogic(
 						BooleanVariable.of("TickUsing>=10"),
-						new ProcessorEngine(
+						new ProcessorEngine(SelectionType.ENEMY,
 								new ArcCubeSelector(
 										IntVariable.of("11"),
 										DoubleVariable.of("5.5"),
@@ -99,6 +99,12 @@ public class LMDatapackRegistriesGen extends DatapackBuiltinEntriesProvider {
 												DoubleVariable.of("75"),
 												DoubleVariable.ZERO,
 												PushProcessor.Type.TO_CENTER
+										),
+										new EffectProcessor(
+												LCEffects.ICE.get(),
+												IntVariable.of("100"),
+												IntVariable.of("0"),
+												false, false
 										)
 								)), null),
 				new DelayedIterator(
@@ -112,8 +118,7 @@ public class LMDatapackRegistriesGen extends DatapackBuiltinEntriesProvider {
 								IntVariable.of("5"),
 								new MoveEngine(List.of(
 										RotationModifier.of("75"),
-										OffsetModifier.of("0", "rand(0.5,2.5)", "0")
-								),
+										OffsetModifier.of("0", "rand(0.5,2.5)", "0")),
 										new SimpleParticleInstance(
 												ParticleTypes.SNOWFLAKE,
 												DoubleVariable.of("0.5")
@@ -138,7 +143,7 @@ public class LMDatapackRegistriesGen extends DatapackBuiltinEntriesProvider {
 						IntVariable.of("40"),
 						IntVariable.of("1"),
 						new ListLogic(List.of(
-								new ProcessorEngine(
+								new ProcessorEngine(SelectionType.ENEMY,
 										new ApproxCylinderSelector(
 												DoubleVariable.of("4"),
 												DoubleVariable.of("6")
@@ -153,6 +158,10 @@ public class LMDatapackRegistriesGen extends DatapackBuiltinEntriesProvider {
 												DoubleVariable.ZERO,
 												DoubleVariable.ZERO,
 												PushProcessor.Type.UNIFORM
+										),
+										new PropertyProcessor(
+												PropertyProcessor.Type.IGNITE,
+												IntVariable.of("10")
 										)
 								)),
 						new RingRandomIterator(
@@ -208,7 +217,7 @@ public class LMDatapackRegistriesGen extends DatapackBuiltinEntriesProvider {
 														new MoveEngine(
 																List.of(RotationModifier.of("rand(0,360)")),
 																star(2, 0.2)),
-														new ProcessorEngine(
+														new ProcessorEngine(SelectionType.ENEMY,
 																new ApproxCylinderSelector(
 																		DoubleVariable.of("4"),
 																		DoubleVariable.of("2")
@@ -320,7 +329,7 @@ public class LMDatapackRegistriesGen extends DatapackBuiltinEntriesProvider {
 		double step = 0.2;
 		double rad = 1;
 		return new ListLogic(List.of(
-				new ProcessorEngine(
+				new ProcessorEngine(SelectionType.ENEMY,
 						new LinearCubeSelector(
 								IntVariable.of(dis / rad + ""),
 								DoubleVariable.of(rad + "")

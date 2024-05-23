@@ -28,7 +28,8 @@
                 "type": "l2magic:line",
                 "size": "1.0",
                 "step": "24.0"
-              }
+              },
+              "target": "ENEMY"
             },
             {
               "type": "l2magic:iterate_linear",
@@ -90,7 +91,8 @@
                       "type": "l2magic:line",
                       "size": "1.0",
                       "step": "24.0"
-                    }
+                    },
+                    "target": "ENEMY"
                   },
                   {
                     "type": "l2magic:iterate_linear",

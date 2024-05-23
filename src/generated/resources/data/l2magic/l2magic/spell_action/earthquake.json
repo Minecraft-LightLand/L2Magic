@@ -113,7 +113,8 @@
                     "type": "l2magic:cylinder",
                     "r": "4",
                     "y": "2"
-                  }
+                  },
+                  "target": "ENEMY"
                 },
                 {
                   "type": "l2magic:random_pos_fan",

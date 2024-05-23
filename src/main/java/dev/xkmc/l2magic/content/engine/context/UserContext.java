@@ -7,10 +7,4 @@ import net.minecraft.world.level.Level;
 
 public record UserContext(Level level, LivingEntity user, Scheduler scheduler) {
 
-	public boolean canHitEntity(Entity entity) {
-		return entity instanceof LivingEntity le && le.isAlive() &&
-				!user.isPassengerOfSameVehicle(le) &&
-				!le.isAlliedTo(user) && !user.isAlliedTo(le);
-	}
-
 }

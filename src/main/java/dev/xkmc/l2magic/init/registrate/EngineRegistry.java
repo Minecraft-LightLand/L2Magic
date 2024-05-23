@@ -7,9 +7,7 @@ import dev.xkmc.l2magic.content.engine.iterator.*;
 import dev.xkmc.l2magic.content.engine.logic.*;
 import dev.xkmc.l2magic.content.engine.modifier.*;
 import dev.xkmc.l2magic.content.engine.particle.*;
-import dev.xkmc.l2magic.content.engine.processor.DamageProcessor;
-import dev.xkmc.l2magic.content.engine.processor.KnockBackProcessor;
-import dev.xkmc.l2magic.content.engine.processor.PushProcessor;
+import dev.xkmc.l2magic.content.engine.processor.*;
 import dev.xkmc.l2magic.content.engine.selector.*;
 import dev.xkmc.l2magic.content.engine.spell.SpellAction;
 import dev.xkmc.l2magic.init.L2Magic;
@@ -53,6 +51,7 @@ public class EngineRegistry {
 	public static final RegistryEntry<EngineType<DustParticleInstance>> DUST_PARTICLE = register("dust_particle", () -> DustParticleInstance.CODEC);
 	public static final RegistryEntry<EngineType<TransitionParticleInstance>> TRANSITION_PARTICLE = register("transition_particle", () -> TransitionParticleInstance.CODEC);
 
+	public static final RegistryEntry<SelectorType<SelfSelector>> SELF = register("self", () -> SelfSelector.CODEC);
 	public static final RegistryEntry<SelectorType<MoveSelector>> MOVE_SELECTOR = register("move", () -> MoveSelector.CODEC);
 	public static final RegistryEntry<SelectorType<BoxSelector>> BOX = register("box", () -> BoxSelector.CODEC);
 	public static final RegistryEntry<SelectorType<CompoundEntitySelector>> COMPOUND = register("compound", () -> CompoundEntitySelector.CODEC);
@@ -64,6 +63,8 @@ public class EngineRegistry {
 	public static final RegistryEntry<ProcessorType<DamageProcessor>> DAMAGE = register("damage", () -> DamageProcessor.CODEC);
 	public static final RegistryEntry<ProcessorType<KnockBackProcessor>> KB = register("knockback", () -> KnockBackProcessor.CODEC);
 	public static final RegistryEntry<ProcessorType<PushProcessor>> PUSH_ENTITY = register("push", () -> PushProcessor.CODEC);
+	public static final RegistryEntry<ProcessorType<EffectProcessor>> EFFECT = register("effect", () -> EffectProcessor.CODEC);
+	public static final RegistryEntry<ProcessorType<PropertyProcessor>> PROP = register("property", () -> PropertyProcessor.CODEC);
 
 
 

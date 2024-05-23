@@ -50,10 +50,10 @@ public record CompoundEntitySelector(
 	}
 
 	@Override
-	public LinkedHashSet<LivingEntity> find(ServerLevel sl, EngineContext ctx) {
+	public LinkedHashSet<LivingEntity> find(ServerLevel sl, EngineContext ctx, SelectionType type) {
 		LinkedHashSet<LivingEntity> ans = null;
 		for (var s : selectors) {
-			var l = s.find(sl, ctx);
+			var l = s.find(sl, ctx, type);
 			if (ans == null) ans = l;
 			else function.merge(ans, l);
 		}

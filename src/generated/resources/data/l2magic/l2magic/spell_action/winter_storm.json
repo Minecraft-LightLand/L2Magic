@@ -20,6 +20,14 @@
               "from_center": "TO_CENTER",
               "speed": "0.1",
               "tilt": "0"
+            },
+            {
+              "type": "l2magic:effect",
+              "ambient": false,
+              "amplifier": "0",
+              "duration": "100",
+              "effect": "l2complements:frozen",
+              "visible": false
             }
           ],
           "selector": {
@@ -29,7 +37,8 @@
             "radius": "5.5",
             "size": "2.5",
             "step": "11"
-          }
+          },
+          "target": "ENEMY"
         },
         "predicate": "TickUsing>=10"
       },

@@ -30,13 +30,13 @@ public record BoxSelector(
 		return EngineRegistry.BOX.get();
 	}
 
-	public LinkedHashSet<LivingEntity> find(ServerLevel sl, EngineContext ctx) {
+	public LinkedHashSet<LivingEntity> find(ServerLevel sl, EngineContext ctx, SelectionType type) {
 		Vec3 pos = ctx.loc().pos();
 		double r = r().eval(ctx);
 		double y = y().eval(ctx);
 		var aabb = new AABB(pos.x - r, pos.y, pos.z - r, pos.x + r, pos.y + y, pos.z + r);
 		LinkedHashSet<LivingEntity> list = new LinkedHashSet<>();
-		for (var e : EntityStorageCache.get(sl).foreach(aabb, ctx.user()::canHitEntity)) {
+		for (var e : type.select(sl, ctx, aabb)) {
 			if (e instanceof LivingEntity le) {
 					list.add(le);
 			}

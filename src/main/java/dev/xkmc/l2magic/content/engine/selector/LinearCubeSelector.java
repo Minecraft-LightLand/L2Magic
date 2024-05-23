@@ -31,7 +31,7 @@ public record LinearCubeSelector(
 		return EngineRegistry.LINEAR.get();
 	}
 
-	public LinkedHashSet<LivingEntity> find(ServerLevel sl, EngineContext ctx) {
+	public LinkedHashSet<LivingEntity> find(ServerLevel sl, EngineContext ctx, SelectionType type) {
 		Vec3 pos = ctx.loc().pos();
 		int step = step().eval(ctx);
 		double diam = size().eval(ctx);
@@ -39,7 +39,7 @@ public record LinearCubeSelector(
 		for (int i = 0; i <= step; i++) {
 			Vec3 p = pos.add(ctx.loc().dir().scale(i * diam));
 			var aabb = AABB.ofSize(p, diam, diam, diam);
-			for (var e : EntityStorageCache.get(sl).foreach(aabb, ctx.user()::canHitEntity)) {
+			for (var e : type.select(sl, ctx, aabb)) {
 				if (e instanceof LivingEntity le) {
 					list.add(le);
 				}

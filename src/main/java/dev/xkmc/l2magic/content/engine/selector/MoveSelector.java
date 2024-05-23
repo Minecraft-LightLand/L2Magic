@@ -27,11 +27,11 @@ public record MoveSelector(List<Modifier<?>> modifiers, EntitySelector<?> child)
 	}
 
 	@Override
-	public LinkedHashSet<LivingEntity> find(ServerLevel sl, EngineContext ctx) {
+	public LinkedHashSet<LivingEntity> find(ServerLevel sl, EngineContext ctx, SelectionType type) {
 		for (var e : modifiers) {
 			ctx = ctx.with(e.modify(ctx));
 		}
-		return child().find(sl, ctx);
+		return child().find(sl, ctx, type);
 	}
 
 }

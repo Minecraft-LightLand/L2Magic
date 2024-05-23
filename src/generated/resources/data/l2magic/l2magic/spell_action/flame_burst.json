@@ -109,13 +109,19 @@
                   "from_center": "UNIFORM",
                   "speed": "0.1",
                   "tilt": "0"
+                },
+                {
+                  "type": "l2magic:property",
+                  "duration": "10",
+                  "property": "IGNITE"
                 }
               ],
               "selector": {
                 "type": "l2magic:cylinder",
                 "r": "4",
                 "y": "6"
-              }
+              },
+              "target": "ENEMY"
             },
             {
               "type": "l2magic:random_pos_fan",

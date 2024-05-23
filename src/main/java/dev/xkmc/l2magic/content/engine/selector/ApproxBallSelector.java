@@ -2,7 +2,6 @@ package dev.xkmc.l2magic.content.engine.selector;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import dev.xkmc.fastprojectileapi.collision.EntityStorageCache;
 import dev.xkmc.l2magic.content.engine.context.EngineContext;
 import dev.xkmc.l2magic.content.engine.core.EntitySelector;
 import dev.xkmc.l2magic.content.engine.core.SelectorType;
@@ -29,13 +28,13 @@ public record ApproxBallSelector(
 		return EngineRegistry.BALL.get();
 	}
 
-	public LinkedHashSet<LivingEntity> find(ServerLevel sl, EngineContext ctx) {
+	public LinkedHashSet<LivingEntity> find(ServerLevel sl, EngineContext ctx, SelectionType type) {
 		Vec3 pos = ctx.loc().pos();
 		double r = r().eval(ctx);
 		var aabb = AABB.ofSize(pos, r * 2, r * 2, r * 2);
 		LinkedHashSet<LivingEntity> list = new LinkedHashSet<>();
 		var boxes = CollisionHelper.ball(pos, r);
-		for (var e : EntityStorageCache.get(sl).foreach(aabb, ctx.user()::canHitEntity)) {
+		for (var e : type.select(sl, ctx, aabb)) {
 			if (e instanceof LivingEntity le) {
 				var box = le.getBoundingBox();
 				if (CollisionHelper.intersects(box, boxes))
