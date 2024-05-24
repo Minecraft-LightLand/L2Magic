@@ -47,37 +47,37 @@ public class LMDatapackRegistriesGen extends DatapackBuiltinEntriesProvider {
 			.add(EngineRegistry.SPELL, ctx -> {
 				new SpellAction(
 						winterStorm(new DataGenContext(ctx)),
-						Items.SNOWBALL,
+						Items.SNOWBALL, 100,
 						SpellCastType.CONTINUOUS,
 						SpellTriggerType.SELF_POS
 				).verifyOnBuild(ctx, WINTER);
 				new SpellAction(
 						flameBurst(new DataGenContext(ctx)),
-						Items.FIRE_CHARGE,
+						Items.FIRE_CHARGE, 200,
 						SpellCastType.INSTANT,
 						SpellTriggerType.TARGET_POS
 				).verifyOnBuild(ctx, FLAME);
 				new SpellAction(
 						flameBurstCircle(new DataGenContext(ctx)),
-						Items.TNT,
+						Items.TNT, 300,
 						SpellCastType.CHARGE,
 						SpellTriggerType.HORIZONTAL_FACING
 				).verifyOnBuild(ctx, QUAKE);
 				new SpellAction(
 						arrowRing(new DataGenContext(ctx)),
-						Items.SPECTRAL_ARROW,
+						Items.SPECTRAL_ARROW, 400,
 						SpellCastType.INSTANT,
 						SpellTriggerType.FACING_FRONT
 				).verifyOnBuild(ctx, ARROW_RING);
 				new SpellAction(
 						arrows(new DataGenContext(ctx)),
-						Items.ARROW,
+						Items.ARROW, 500,
 						SpellCastType.INSTANT,
 						SpellTriggerType.FACING_FRONT
 				).verifyOnBuild(ctx, ARROW);
 				new SpellAction(
 						circular(new DataGenContext(ctx)),
-						Items.CONDUIT,
+						Items.CONDUIT, 600,
 						SpellCastType.INSTANT,
 						SpellTriggerType.SELF_POS
 				).verifyOnBuild(ctx, CIRCULAR);

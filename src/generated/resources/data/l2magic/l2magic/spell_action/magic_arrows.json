@@ -66,5 +66,6 @@
   },
   "cast_type": "INSTANT",
   "icon": "minecraft:arrow",
+  "order": 500,
   "trigger_type": "FACING_FRONT"
 }

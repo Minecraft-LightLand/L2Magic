@@ -19,7 +19,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.Set;
 
-public record SpellAction(ConfiguredEngine<?> action, Item icon,
+public record SpellAction(ConfiguredEngine<?> action, Item icon, int order,
 						  SpellCastType castType, SpellTriggerType triggerType) {
 
 	private static final Codec<SpellCastType> CAST_CODEC = EngineHelper.enumCodec(SpellCastType.class, SpellCastType.values());
@@ -28,9 +28,14 @@ public record SpellAction(ConfiguredEngine<?> action, Item icon,
 	public static final Codec<SpellAction> CODEC = RecordCodecBuilder.create(i -> i.group(
 			ConfiguredEngine.codec("action", SpellAction::action),
 			ForgeRegistries.ITEMS.getCodec().fieldOf("icon").forGetter(e -> e.icon),
+			Codec.INT.fieldOf("order").forGetter(e -> e.order),
 			CAST_CODEC.fieldOf("cast_type").forGetter(e -> e.castType),
 			TRIGGER_CODEC.fieldOf("trigger_type").forGetter(e -> e.triggerType)
 	).apply(i, SpellAction::new));
+
+	public static String lang(ResourceLocation rl) {
+		return "spell_action." + rl.getNamespace() + "." + rl.getPath();
+	}
 
 	public Set<String> params() {
 		return SpellContext.DEFAULT_PARAMS;

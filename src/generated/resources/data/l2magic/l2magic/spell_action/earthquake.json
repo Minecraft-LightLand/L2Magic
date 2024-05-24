@@ -175,5 +175,6 @@
   },
   "cast_type": "CHARGE",
   "icon": "minecraft:tnt",
+  "order": 300,
   "trigger_type": "HORIZONTAL_FACING"
 }

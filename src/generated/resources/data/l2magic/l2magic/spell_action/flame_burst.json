@@ -171,5 +171,6 @@
   },
   "cast_type": "INSTANT",
   "icon": "minecraft:fire_charge",
+  "order": 200,
   "trigger_type": "TARGET_POS"
 }

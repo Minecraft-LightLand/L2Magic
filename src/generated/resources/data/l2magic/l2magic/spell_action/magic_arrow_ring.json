@@ -140,5 +140,6 @@
   },
   "cast_type": "INSTANT",
   "icon": "minecraft:spectral_arrow",
+  "order": 400,
   "trigger_type": "FACING_FRONT"
 }

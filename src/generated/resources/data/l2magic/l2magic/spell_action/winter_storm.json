@@ -80,5 +80,6 @@
   },
   "cast_type": "CONTINUOUS",
   "icon": "minecraft:snowball",
+  "order": 100,
   "trigger_type": "SELF_POS"
 }

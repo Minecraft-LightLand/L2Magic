@@ -75,5 +75,6 @@
   },
   "cast_type": "INSTANT",
   "icon": "minecraft:conduit",
+  "order": 600,
   "trigger_type": "SELF_POS"
 }

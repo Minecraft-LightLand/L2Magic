@@ -1,4 +1,10 @@
 {
   "item.l2magic.creative_wand": "Creative Wand",
-  "itemGroup.l2magic.magic": "L2Magic"
+  "itemGroup.l2magic.magic": "L2Magic",
+  "spell_action.l2magic.circular": "Three Bodies",
+  "spell_action.l2magic.earthquake": "Lava Burst",
+  "spell_action.l2magic.flame_burst": "Hell Mark",
+  "spell_action.l2magic.magic_arrow_ring": "Sword of Seven",
+  "spell_action.l2magic.magic_arrows": "Angelic Judgement",
+  "spell_action.l2magic.winter_storm": "Winter Storm"
 }
