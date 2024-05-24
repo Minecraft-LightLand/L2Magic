@@ -56,11 +56,9 @@ public class CreativeSpellSelector extends IItemSelector {
 		var list = getSpells(player.level().registryAccess());
 		int index = list.indexOf(id);
 		if (index < 0) return 0;
-		if (index < 5) return index;
-		if (list.size() - index <= 5) {
-			return index + 10 - list.size();
-		}
-		return 4;
+		int n = Math.min(list.size(), 9);
+		int start = Math.max(0, Math.min(index - 4, list.size() - n));
+		return index - start;
 	}
 
 	private List<ItemStack> getListGeneric(Function<ResourceLocation, ItemStack> func) {
@@ -72,10 +70,11 @@ public class CreativeSpellSelector extends IItemSelector {
 		int index = id == null ? -1 : list.indexOf(id);
 		int n = 9;
 		if (index < 0) {
-			ans.add(cache);
+			ans.add(cache.copy());
 			n--;
 		}
-		int start = Math.min(Math.max(0, index - 4), list.size() - n - 1);
+		n = Math.min(list.size(), n);
+		int start = Math.max(0, Math.min(index - 4, list.size() - n));
 		for (int i = 0; i < n; i++) {
 			int ind = start + i;
 			ResourceLocation rl = list.get(ind);
