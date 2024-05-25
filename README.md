@@ -104,8 +104,9 @@ Moves the position and orientation of the selector using modifiers, then invoke 
 Selects with a single bounding box of shape `[-size/2, size/2]x[0, y]x[-size/2, size/2]`.
 - param `size` (float expression): width of the box
 - param `y` (float expression): height of the box
-
-Note that the position is used as the bottom center of the box, not the middle center.
+- param `center` (static bool, default false):
+  - If true, use `pos` as the center of the box
+  - If false, use `pos` as the center bottom of the box
 
 ### compound
 Merges results of multiple selectors

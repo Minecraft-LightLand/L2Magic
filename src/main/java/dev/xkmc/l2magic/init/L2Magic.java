@@ -8,7 +8,7 @@ import dev.xkmc.l2magic.content.engine.context.SpellUsePacket;
 import dev.xkmc.l2magic.content.engine.spell.SpellAction;
 import dev.xkmc.l2magic.content.item.CreativeSpellSelector;
 import dev.xkmc.l2magic.init.data.LMDatapackRegistriesGen;
-import dev.xkmc.l2magic.init.data.LangData;
+import dev.xkmc.l2magic.init.data.LMLangData;
 import dev.xkmc.l2magic.init.registrate.EngineRegistry;
 import dev.xkmc.l2magic.init.registrate.LMItems;
 import net.minecraft.data.PackOutput;
@@ -39,7 +39,7 @@ public class L2Magic {
 	public L2Magic() {
 		EngineRegistry.register();
 		LMItems.register();
-		REGISTRATE.addDataGenerator(ProviderType.LANG, LangData::genLang);
+		REGISTRATE.addDataGenerator(ProviderType.LANG, LMLangData::genLang);
 	}
 
 	@SubscribeEvent

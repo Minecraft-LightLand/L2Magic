@@ -58,7 +58,7 @@ public class LMDatapackRegistriesGen extends DatapackBuiltinEntriesProvider {
 						SpellTriggerType.TARGET_POS
 				).verifyOnBuild(ctx, FLAME);
 				new SpellAction(
-						flameBurstCircle(new DataGenContext(ctx)),
+						earthquake(new DataGenContext(ctx)),
 						Items.TNT, 300,
 						SpellCastType.CHARGE,
 						SpellTriggerType.HORIZONTAL_FACING
@@ -199,7 +199,28 @@ public class LMDatapackRegistriesGen extends DatapackBuiltinEntriesProvider {
 		));
 	}
 
-	private static ConfiguredEngine<?> flameBurstCircle(DataGenContext ctx) {
+	private static ConfiguredEngine<?> earthquake(DataGenContext ctx) {
+		return new PredicateLogic(BooleanVariable.of("Power==0"),
+				new RingRandomIterator(
+						DoubleVariable.of("0.5"),
+						DoubleVariable.of("1"),
+						DoubleVariable.of("-180"),
+						DoubleVariable.of("180"),
+						IntVariable.of("5*min(TickUsing/10,3)"),
+						new MoveEngine(List.of(
+								RotationModifier.of("135", "rand(-15*min(floor(TickUsing/10),3),0)"),
+								ForwardOffsetModifier.of("-4")),
+								new SimpleParticleInstance(
+										ParticleTypes.SMALL_FLAME,
+										DoubleVariable.of("0.3")
+								)
+						), null
+				),
+				earthquakeStart(ctx)
+		);
+	}
+
+	private static ConfiguredEngine<?> earthquakeStart(DataGenContext ctx) {
 		return new DelayedIterator(
 				IntVariable.of("min(TickUsing/10,3)"),
 				IntVariable.of("10"),
@@ -282,7 +303,7 @@ public class LMDatapackRegistriesGen extends DatapackBuiltinEntriesProvider {
 						DoubleVariable.of("30"),
 						IntVariable.of("7"),
 						true,
-						shoot(ctx),
+						shootMove(ctx),
 						null
 				));
 	}
@@ -302,11 +323,10 @@ public class LMDatapackRegistriesGen extends DatapackBuiltinEntriesProvider {
 								false,
 								new ListLogic(List.of(
 										new ProcessorEngine(SelectionType.ENEMY,
-												new MoveSelector(
-														List.of(OffsetModifier.of("0", "-0.5", "0")),
-														new BoxSelector(
-																DoubleVariable.of("1"),
-																DoubleVariable.of("1"))
+												new BoxSelector(
+														DoubleVariable.of("1"),
+														DoubleVariable.of("1"),
+														true
 												), List.of(
 												new DamageProcessor(
 														ctx.damage(DamageTypes.INDIRECT_MAGIC),
@@ -397,6 +417,36 @@ public class LMDatapackRegistriesGen extends DatapackBuiltinEntriesProvider {
 						),
 						null
 				)));
+	}
+
+	private static ConfiguredEngine<?> shootMove(DataGenContext ctx) {
+		int dis = 24;
+		double rad = 1;
+		return new DelayedIterator(IntVariable.of(dis + ""), IntVariable.of("1"),
+				new MoveEngine(
+						List.of(ForwardOffsetModifier.of(rad + "*i")),
+						new ListLogic(List.of(
+								new ProcessorEngine(SelectionType.ENEMY,
+										new BoxSelector(
+												DoubleVariable.of(rad + ""),
+												DoubleVariable.of(rad + ""),
+												true
+										), List.of(new DamageProcessor(
+												ctx.damage(DamageTypes.INDIRECT_MAGIC),
+												DoubleVariable.of("6"),
+												true, true),
+										new PushProcessor(
+												DoubleVariable.of("0.5"),
+												DoubleVariable.ZERO,
+												DoubleVariable.ZERO,
+												PushProcessor.Type.UNIFORM
+										)
+								)),
+								new SimpleParticleInstance(
+										ParticleTypes.END_ROD,
+										DoubleVariable.ZERO
+								)
+						))), "i");
 	}
 
 	private static ResourceKey<SpellAction> spell(String id) {

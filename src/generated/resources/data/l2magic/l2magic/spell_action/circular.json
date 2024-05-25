@@ -27,20 +27,10 @@
                 }
               ],
               "selector": {
-                "type": "l2magic:move",
-                "child": {
-                  "type": "l2magic:box",
-                  "size": "1",
-                  "y": "1"
-                },
-                "modifiers": [
-                  {
-                    "type": "l2magic:offset",
-                    "x": "0",
-                    "y": "-0.5",
-                    "z": "0"
-                  }
-                ]
+                "type": "l2magic:box",
+                "center": true,
+                "size": "1",
+                "y": "1"
               },
               "target": "ENEMY"
             },

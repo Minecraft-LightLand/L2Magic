@@ -31,8 +31,7 @@ public record PredicateLogic(
 	public void execute(EngineContext ctx) {
 		if (predicate.eval(ctx)) {
 			if (action != null) ctx.execute(action);
-		}
-		if (fallback != null) ctx.execute(fallback);
+		} else if (fallback != null) ctx.execute(fallback);
 	}
 
 }

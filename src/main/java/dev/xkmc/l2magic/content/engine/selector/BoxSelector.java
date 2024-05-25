@@ -13,16 +13,19 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.LinkedHashSet;
+import java.util.Optional;
 
 public record BoxSelector(
 		DoubleVariable r,
-		DoubleVariable y
+		DoubleVariable y,
+		boolean center
 ) implements EntitySelector<BoxSelector> {
 
 	public static final Codec<BoxSelector> CODEC = RecordCodecBuilder.create(i -> i.group(
 			DoubleVariable.codec("size", BoxSelector::r),
-			DoubleVariable.codec("y", BoxSelector::y)
-	).apply(i, BoxSelector::new));
+			DoubleVariable.codec("y", BoxSelector::y),
+			Codec.BOOL.optionalFieldOf("center").forGetter(e -> Optional.of(e.center))
+	).apply(i, (a, b, c) -> new BoxSelector(a, b, c.orElse(false))));
 
 	@Override
 	public SelectorType<BoxSelector> type() {
@@ -32,8 +35,12 @@ public record BoxSelector(
 	public LinkedHashSet<LivingEntity> find(ServerLevel sl, EngineContext ctx, SelectionType type) {
 		Vec3 pos = ctx.loc().pos();
 		double r = r().eval(ctx) / 2;
-		double y = y().eval(ctx);
-		var aabb = new AABB(pos.x - r, pos.y, pos.z - r, pos.x + r, pos.y + y, pos.z + r);
+		double y = y().eval(ctx) / 2;
+		double y0 = center ? pos.y : pos.y + y;
+		var aabb = new AABB(
+				pos.x - r, y0 - y, pos.z - r,
+				pos.x + r, y0 + y, pos.z + r
+		);
 		LinkedHashSet<LivingEntity> list = new LinkedHashSet<>();
 		for (var e : type.select(sl, ctx, aabb)) {
 			if (e instanceof LivingEntity le) {

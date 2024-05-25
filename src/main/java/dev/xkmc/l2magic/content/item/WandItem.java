@@ -1,35 +1,28 @@
 package dev.xkmc.l2magic.content.item;
 
+import dev.xkmc.l2library.util.raytrace.FastItem;
 import dev.xkmc.l2library.util.raytrace.IGlowingTarget;
 import dev.xkmc.l2library.util.raytrace.RayTraceUtil;
-import dev.xkmc.l2magic.content.engine.context.LocationContext;
 import dev.xkmc.l2magic.content.engine.context.SpellContext;
 import dev.xkmc.l2magic.content.engine.spell.SpellAction;
 import dev.xkmc.l2magic.content.engine.spell.SpellCastType;
 import dev.xkmc.l2magic.content.engine.spell.SpellTriggerType;
 import dev.xkmc.l2magic.init.registrate.EngineRegistry;
-import io.netty.util.internal.ThreadLocalRandom;
 import net.minecraft.nbt.Tag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemUtils;
-import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.AABB;
-import net.minecraft.world.phys.HitResult;
-import net.minecraft.world.phys.Vec3;
 
 import javax.annotation.Nullable;
 
-public class WandItem extends Item implements IGlowingTarget {
+public class WandItem extends Item implements IGlowingTarget, FastItem {
 
 	private static final String KEY = "l2magic:spell";
 
@@ -68,7 +61,7 @@ public class WandItem extends Item implements IGlowingTarget {
 		SpellAction spell = getSpell(level, stack);
 		if (spell != null) {
 			if (spell.castType() == SpellCastType.INSTANT) {
-				if (castSpell(stack, level, player, spell, 0)) {
+				if (castSpell(stack, level, player, spell, 0, false)) {
 					if (!level.isClientSide) {
 						player.getCooldowns().addCooldown(this, 10);
 					}
@@ -89,7 +82,10 @@ public class WandItem extends Item implements IGlowingTarget {
 		SpellAction spell = getSpell(level, stack);
 		if (spell != null) {
 			if (spell.castType() == SpellCastType.CONTINUOUS) {
-				castSpell(stack, level, user, spell, getUseDuration(stack) - remain);
+				castSpell(stack, level, user, spell, getUseDuration(stack) - remain, false);
+			}
+			if (spell.castType() == SpellCastType.CHARGE) {
+				castSpell(stack, level, user, spell, getUseDuration(stack) - remain, true);
 			}
 		}
 	}
@@ -99,7 +95,7 @@ public class WandItem extends Item implements IGlowingTarget {
 		SpellAction spell = getSpell(level, stack);
 		if (spell != null) {
 			if (spell.castType() == SpellCastType.CHARGE) {
-				castSpell(stack, level, user, spell, getUseDuration(stack) - remain);
+				castSpell(stack, level, user, spell, getUseDuration(stack) - remain, false);
 			}
 		}
 	}
@@ -114,67 +110,11 @@ public class WandItem extends Item implements IGlowingTarget {
 		}
 	}
 
-	@Nullable
-	private LivingEntity getTarget(LivingEntity le) {
-		if (le instanceof Player player) {
-			return RayTraceUtil.serverGetTarget(player);
-		}
-		if (le instanceof Mob mob) {
-			return mob.getTarget();
-		}
-		return null;
-	}
-
-	private boolean castSpell(ItemStack stack, Level level, LivingEntity user, SpellAction spell, int useTick) {
-		double power = 1;
-		Vec3 pos, dir;
-		switch (spell.triggerType()) {
-			case SELF_POS -> {
-				pos = user.position();
-				dir = LocationContext.UP;
-			}
-			case TARGET_POS -> {
-				var start = user.getEyePosition();
-				var forward = SpellContext.getForward(user);
-				var end = start.add(forward.scale(getDistance(stack)));
-				AABB box = (new AABB(start, end)).inflate(1.0);
-				var bhit = level.clip(new ClipContext(start, end, ClipContext.Block.OUTLINE, ClipContext.Fluid.NONE, user));
-				var ehit = ProjectileUtil.getEntityHitResult(level, user, start, end, box, e -> true);
-				if ((ehit == null || ehit.getType() == HitResult.Type.MISS) && bhit.getType() == HitResult.Type.MISS) {
-					return false;
-				}
-				pos = ehit != null && ehit.getLocation().distanceToSqr(start) < bhit.getLocation().distanceToSqr(start) ?
-						ehit.getLocation() : bhit.getLocation();
-				dir = LocationContext.UP;
-			}
-			case HORIZONTAL_FACING -> {
-				dir = SpellContext.getForward(user).multiply(1, 0, 1).normalize();
-				pos = user.position();
-				if (dir.length() < 0.5) return false;
-			}
-			case FACING_BACK -> {
-				dir = SpellContext.getForward(user);
-				pos = user.getEyePosition().add(dir.scale(-1));
-			}
-			case FACING_FRONT -> {
-				dir = SpellContext.getForward(user);
-				pos = user.getEyePosition().add(dir);
-			}
-			case TARGET_ENTITY -> {
-				var target = getTarget(user);
-				if (target != null) {
-					pos = target.position();
-					dir = LocationContext.UP;
-				}
-				else return false;
-			}
-			default -> {
-				return false;
-			}
-		}
+	private boolean castSpell(ItemStack stack, Level level, LivingEntity user, SpellAction spell, int useTick, boolean charging) {
+		SpellContext ctx = SpellContext.castSpell(user, spell, useTick, charging ? 0 : 1, getDistance(stack));
+		if (ctx == null) return false;
 		if (!level.isClientSide()) {
-			long seed = ThreadLocalRandom.current().nextLong();
-			spell.execute(new SpellContext(user, pos, dir, seed, useTick, power));
+			spell.execute(ctx);
 		}
 		return true;
 	}
@@ -188,4 +128,10 @@ public class WandItem extends Item implements IGlowingTarget {
 	public int getDistance(ItemStack itemStack) {
 		return 64;
 	}
+
+	@Override
+	public boolean isFast(ItemStack itemStack) {
+		return true;
+	}
+
 }
