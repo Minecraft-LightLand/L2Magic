@@ -54,11 +54,11 @@
         "index": "i",
         "step": "24"
       },
+      "count": "7",
       "maxAngle": "30",
       "maxInclusive": true,
       "minAngle": "-30",
-      "radius": "0.5",
-      "step": "7"
+      "radius": "0.5"
     },
     "modifiers": [
       {

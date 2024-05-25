@@ -41,11 +41,11 @@
             }
           ]
         },
+        "count": "3",
         "maxAngle": "180+i*14",
         "maxInclusive": false,
         "minAngle": "-180+i*14",
-        "radius": "i*0.1+0.5",
-        "step": "3"
+        "radius": "i*0.1+0.5"
       },
       "modifiers": [
         {

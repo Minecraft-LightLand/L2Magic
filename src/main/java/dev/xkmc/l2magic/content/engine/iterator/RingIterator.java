@@ -24,7 +24,7 @@ public record RingIterator(DoubleVariable radius,
 			DoubleVariable.codec("radius", RingIterator::radius),
 			DoubleVariable.optionalCodec("minAngle", RingIterator::minAngle),
 			DoubleVariable.optionalCodec("maxAngle", RingIterator::maxAngle),
-			IntVariable.codec("step", RingIterator::count),
+			IntVariable.codec("count", RingIterator::count),
 			Codec.BOOL.optionalFieldOf("maxInclusive").forGetter(e -> Optional.of(e.maxInclusive)),
 			ConfiguredEngine.codec("child", Iterator::child),
 			Codec.STRING.optionalFieldOf("index").forGetter(e -> Optional.ofNullable(e.index()))

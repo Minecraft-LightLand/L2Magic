@@ -4,32 +4,151 @@
 
 ## Direction and Normal
 
-# Data types
+# Block Types
 
-## ConfiguredEngine
+## Action Blocks (15)
+
 <details>
-<summary>All engine types</summary>
+<summary>All logic action block types</summary>
 
 ### if
+
+Executes either one of the 2 action blocks based on a condition
+
+- param `predicate` (bool expression): condition
+- param `action` (action block, default empty): action block to execute when predicate results in true
+- param `fallback` (action block, default empty): action block to execute when predicate results in false
+
 ### list
+
+Executes multiple action blocks at the same time, with the same context
+
+- param `children` (list of action blocks): action blocks to execute
+
 ### delay
+
+Delays execution of an action block
+
+- param `tick` (int expression): tick to delay
+- param `child` (action block): action block to be executed later
+
 ### move
+
+Move the position and orientation of execution context
+
+- param `modifiers` (list of modifier): a list of modifiers to move
+- param `child` (action block): subsequent action block using new position and orientation
+
 ### processor
 
+Selects entity using entity selectors, and process them using entity processors
+
+- param `selector` (entity selector): selector to determine a list of entities to process
+- param `processors` (list of entity processor): a list of processors to run over for the entities selected
+- param `target` (enum):
+  - `ENEMY`: all entities that are not allied with spell caster
+  - `ENEMY_NO_FAMILY` all entities that are not allied with spell caster, except the ones that are the same type and
+    don't hate spell caster
+  - `ALLY`: all entities that are allied with spell caster
+  - `ALLY_OR_FAMILY` all entities that are allied with spell caster, or the ones that are the same type and don't hate
+    spell caster
+
+Note:
+
+- Using `ENEMY_NO_FAMILY` can help to prevent friendly fire without needing to setup team system
+- Using `ALLY_OR_FAMILY` can help to give positive effects to other players without needing to setup team system
+
+</details>
+
+<hr>
+
+<details>
+<summary>All iterator action block types</summary>
+
+All iterators have an optional param called `index`. It for specifying the name of iterating index as variable.
+It starts from 0, and ends at `step-1`. You can use it to do calculation for subsequent blocks.
+
 ### iterate
+Execute an action block for multiple times
+- param `step` (int expression): step to iterate
+- param `child` (action block): action block to execute repeatedly
+- param `index` (optional string): variable name for index. If you don't need index as variable, just don't add this to the block to improve efficiency.
+
+Note that most iterators are actually simplification of an `iterate` block with another commonly used block. 
+
 ### iterate_delayed
+Execute an action block for multiple times, with delays between them.
+- param `step` (int expression): step to iterate
+- param `delay` (int expression): delay in ticks between steps
+- param `child` (action block): action block to execute repeatedly
+- param `index` (optional string): variable name for index. If you don't need index as variable, just don't add this to the block to improve efficiency.
+
+Note that first step (`index` = 0) will be executed immediately.
+
 ### iterate_linear
+Execute an action block for multuple times over a sequence of points on a straight line
+- param `step` (int expression): step to iterate
+- param `child` (action block): action block to execute repeatedly
+- param `index` (optional string): variable name for index. If you don't need index as variable, just don't add this to the block to improve efficiency.
+
+Other optional parameters:
+- param `aloneDir` (double expression, default 0): step size along `dir`
+- param `offset` (static vector, default (0,0,0)): alternative direction to move toward
+- param `aloneOffset` (double expression, default 0): step size along alternative direction
+- param `startFromOrigin` (static bool, default true): whether to start from `pos` or `pos+dir*alongDir+offset*alongOffset`.
+Note that in either case, `index` will start from 0.
+
 ### iterate_arc
+Execute an action block for multuple times over a sequence of points on an arc
+- param `count` (int expression): total number of times to iterate
+- param `child` (action block): action block to execute repeatedly
+- param `index` (optional string): variable name for index. If you don't need index as variable, just don't add this to the block to improve efficiency.
+- param `radius` (float expression): radius of the arc
+- param `minAngle` (float expression, default -180): starting angle in degree
+- param `maxAngle` (float expression, default 180): ending angle in degree
+- param `maxInclusive` (static bool, default false):
+  - If true, `index = 0` will be at `minAngle`, and `index = count - 1` will be at `maxAngle`
+  - If false, `index = 0` will be at `minAngle`, and `index = count - 1` will ba 1 step away from `maxAngle`
+
+If angle between `minAngle` and `maxAngle` is 360 degree, using `maxInclusive = false` yields uniform distribution over a circle.
+However, if the angle in between is smaller, it's recommended to set `maxInclusive` to true.
+
+Note that if you set `maxInclusive = true` while having `count = 1`, game will crash
+
 ### random_pos_fan
+Select several random points on a fan with specified angle range and radius range. The chance of selecting at any point is the same regardless of the distance to origin.
+
+Can also be used to select points on a ring (maxAngle-minAngle=360), on a pie (minRadius = 0), or on a circle (intersection of previous 2 special cases).
+
+- param `count` (int expression): total number of times to iterate
+- param `child` (action block): action block to execute repeatedly
+- param `index` (optional string): variable name for index. If you don't need index as variable, just don't add this to the block to improve efficiency.
+- param `minRadiuss` (float expression): minimum radius to select a point
+- param `maxRadiuss` (float expression): maximum radius to select a point
+- param `minAngle` (float expression, default -180): starting angle in degree
+- param `maxAngle` (float expression, default 180): ending angle in degree
+
+Extra variables: Normally iterators gives one variable defined by `index`, but this block gives 2 extra variables if you hve `index` defined:
+- `<index>_radius`: the actual radius selected
+- `<index>_angle`: the actual angle selected
+If you use `index="i"`, then `"i_radius"` and `"i_angle"` will also be added to variable list.
+
+</details>
+<hr>
+<details>
+<summary>All particle action block types</summary>
 
 ### particle
 ### block_particle
 ### item_particle
 ### dust_particle
 ### transition_particle
+
 </details>
 
-## Modifiers
+<hr>
+
+## Modifiers (10)
 
 <details>
 <summary>All modifier types</summary>
@@ -88,7 +207,9 @@ Set `dir` to current caster facing
 
 </details>
 
-## EntitySelectors
+<hr>
+
+## EntitySelectors (8)
 <details>
 <summary>All selector types</summary>
 
@@ -141,7 +262,9 @@ Approximated Ball selector with 7 boxes, from center of the ball
 
 </details>
 
-## EntityProcessors
+<hr>
+
+## EntityProcessors (5)
 <details>
 <summary>All processor types</summary>
 

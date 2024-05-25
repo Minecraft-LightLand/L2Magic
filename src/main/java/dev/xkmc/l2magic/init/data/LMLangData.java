@@ -7,7 +7,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 
 public enum LMLangData {
-	CMD_INVALID_SPELL("command.invalid_spell", "Invalid spell ID $s", 1),
+	CMD_INVALID_SPELL("command.invalid_spell", "Invalid spell ID %s", 1),
 	CMD_WRONG_TYPE("command.wrong_type", "Spell %s expects type %s", 2),
 	CMD_SUCCESS("command.success", "Spell %s is executed successfully", 1),
 	CMD_SUCCESS_COUNT("command.success_count", "Spell %s is executed by %s entities successfully", 2),
