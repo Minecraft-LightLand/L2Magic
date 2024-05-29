@@ -38,8 +38,10 @@ public class LMDatapackRegistriesGen extends DatapackBuiltinEntriesProvider {
 
 	public static final ResourceKey<SpellAction> WINTER = spell("winter_storm");
 	public static final ResourceKey<SpellAction> FLAME = spell("flame_burst");
+	public static final ResourceKey<SpellAction> RAINARROW = spell("rain_arrows");
 	public static final ResourceKey<SpellAction> QUAKE = spell("earthquake");
 	public static final ResourceKey<SpellAction> ARROW = spell("magic_arrows");
+
 	public static final ResourceKey<SpellAction> ARROW_RING = spell("magic_arrow_ring");
 	public static final ResourceKey<SpellAction> CIRCULAR = spell("circular");
 
@@ -57,6 +59,13 @@ public class LMDatapackRegistriesGen extends DatapackBuiltinEntriesProvider {
 						SpellCastType.INSTANT,
 						SpellTriggerType.TARGET_POS
 				).verifyOnBuild(ctx, FLAME);
+				new SpellAction(
+						rainarrows(new DataGenContext(ctx)),
+						//继承的图标和显示位置的优先级
+						Items.BOW,700,
+						SpellCastType.INSTANT,
+						SpellTriggerType.FACING_FRONT
+				).verifyOnBuild(ctx, RAINARROW);
 				new SpellAction(
 						earthquake(new DataGenContext(ctx)),
 						Items.TNT, 300,
@@ -307,6 +316,19 @@ public class LMDatapackRegistriesGen extends DatapackBuiltinEntriesProvider {
 						null
 				));
 	}
+	private static ConfiguredEngine<?> rainarrows(DataGenContext ctx) {
+		return new MoveEngine(List.of(OffsetModifier.of("0", "-0.1", "0")),
+				new RingIterator(
+						DoubleVariable.of("1"),
+						//角度区间（从两侧到中间分布）
+						DoubleVariable.of("0"),
+						DoubleVariable.of("0"),
+						IntVariable.of("2"),
+						true,
+						ahead(ctx),
+						null
+				));
+	}
 
 	private static ConfiguredEngine<?> circular(DataGenContext ctx) {
 		return new DelayedIterator(
@@ -390,27 +412,37 @@ public class LMDatapackRegistriesGen extends DatapackBuiltinEntriesProvider {
 		);
 	}
 
+	//这个应该是魔法箭的直线粒子
 	private static ConfiguredEngine<?> shoot(DataGenContext ctx) {
+		//距离
 		int dis = 24;
+		//步间距
 		double step = 0.2;
+		//半径
 		double rad = 1;
 		return new ListLogic(List.of(
 				new ProcessorEngine(SelectionType.ENEMY,
+						//有关伤害判定
 						new LinearCubeSelector(
 								IntVariable.of(dis / rad + ""),
 								DoubleVariable.of(rad + "")
 						), List.of(new DamageProcessor(
 						ctx.damage(DamageTypes.INDIRECT_MAGIC),
-						DoubleVariable.of("6"),
+						//伤害
+								DoubleVariable.of("6"),
 								true, true),
+						//击退
 						KnockBackProcessor.of("1")
 				)),
 				new LinearIterator(
+						//粒子间距
 						DoubleVariable.of(step + ""),
+						//调整位置
 						Vec3.ZERO,
 						DoubleVariable.ZERO,
 						IntVariable.of(dis / step + ""),
 						true,
+						//选择粒子和速度
 						new SimpleParticleInstance(
 								ParticleTypes.END_ROD,
 								DoubleVariable.ZERO
@@ -418,10 +450,44 @@ public class LMDatapackRegistriesGen extends DatapackBuiltinEntriesProvider {
 						null
 				)));
 	}
+	private static ConfiguredEngine<?> ahead(DataGenContext ctx) {
+		//距离
+		int dis = 32;
+		//半径
+		double rad = 1;
+		return new DelayedIterator(IntVariable.of(dis + ""), IntVariable.of("1"),
+				new MoveEngine(
+						List.of(ForwardOffsetModifier.of(rad + "*i")),
+						new ListLogic(List.of(
+								new ProcessorEngine(SelectionType.ENEMY,
+										new BoxSelector(
+												DoubleVariable.of(rad + ""),
+												DoubleVariable.of(rad + ""),
+												true
+										), List.of(new DamageProcessor(
+												ctx.damage(DamageTypes.INDIRECT_MAGIC),
+												DoubleVariable.of("3"),
+												true, true),
+										new PushProcessor(
+												DoubleVariable.of("0.2"),
+												DoubleVariable.ZERO,
+												DoubleVariable.ZERO,
+												PushProcessor.Type.UNIFORM
+										)
+								)),
+								new SimpleParticleInstance(
+										ParticleTypes.NAUTILUS,
+										DoubleVariable.ZERO
+								)
+						))), "i");
+	}
 
+	//改进过的渐进式直线,适用于悬停粒子
 	private static ConfiguredEngine<?> shootMove(DataGenContext ctx) {
+		//相比上例，取消了间隔
 		int dis = 24;
 		double rad = 1;
+		//新的步进用法
 		return new DelayedIterator(IntVariable.of(dis + ""), IntVariable.of("1"),
 				new MoveEngine(
 						List.of(ForwardOffsetModifier.of(rad + "*i")),

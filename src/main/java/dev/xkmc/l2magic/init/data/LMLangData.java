@@ -37,6 +37,7 @@ public enum LMLangData {
 		pvd.add(SpellAction.lang(LMDatapackRegistriesGen.ARROW_RING.location()), "Sword of Seven");
 		pvd.add(SpellAction.lang(LMDatapackRegistriesGen.ARROW.location()), "Angelic Judgement");
 		pvd.add(SpellAction.lang(LMDatapackRegistriesGen.CIRCULAR.location()), "Three Bodies");
+		pvd.add(SpellAction.lang(LMDatapackRegistriesGen.RAINARROW.location()), "Rain Arrow");
 	}
 
 	public static MutableComponent translate(String key, Object... objs) {
