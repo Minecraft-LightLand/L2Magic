@@ -9,7 +9,6 @@ import dev.xkmc.l2serial.serialization.codec.TagCodec;
 import dev.xkmc.l2serial.util.Wrappers;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -17,7 +16,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
 
@@ -25,15 +23,9 @@ import java.util.Objects;
 public class LMProjectile extends BaseProjectile {
 
 	@SerialClass.SerialField
-	private int life = 0;
-	@SerialClass.SerialField
-	private boolean bypassWall = false, bypassEntity = false;
+	private ProjectileData data;
 	@SerialClass.SerialField
 	private LocationContext locCtx;
-	@SerialClass.SerialField
-	private ResourceLocation configLoc;
-
-	private ProjectileConfig config;
 
 	protected LMProjectile(EntityType<? extends LMProjectile> pEntityType, Level pLevel) {
 		super(pEntityType, pLevel);
@@ -49,30 +41,32 @@ public class LMProjectile extends BaseProjectile {
 		this.setOwner(pShooter);
 	}
 
-	@Nullable
-	private ProjectileConfig getConfig() {
-		if (config == null) {
-			//TODO
-		}
-		return config;
-	}
-
-	public void setup(int life, boolean bypassWall, boolean bypassEntity, Vec3 initVec) {
-		this.life = life;
-		this.bypassWall = bypassWall;
-		this.bypassEntity = bypassEntity;
+	public void setup(ProjectileData data, Vec3 pos, Vec3 initVec) {
+		this.data = data;
+		setPos(pos);
 		setDeltaMovement(initVec);
 		updateRotation(ProjectileMovement.of(initVec).rot());
 	}
 
 	@Override
+	public void tick() {
+		super.tick();
+		data.tick(this);
+	}
+
+	@Override
+	protected ProjectileMovement updateVelocity(Vec3 vec, Vec3 pos) {
+		return data.move(this, vec, pos);
+	}
+
+	@Override
 	public boolean checkBlockHit() {
-		return !bypassWall;
+		return !data.params.bypassWall();
 	}
 
 	@Override
 	public int lifetime() {
-		return life;
+		return data.params.life();
 	}
 
 	public void addAdditionalSaveData(CompoundTag nbt) {
@@ -108,22 +102,20 @@ public class LMProjectile extends BaseProjectile {
 	}
 
 	@Override
-	public float damage(Entity target) {
-		return damage;
-	}
-
-	@Override
 	public boolean canHitEntity(Entity target) {
-		return super.canHitEntity(target) && shouldHurt(getOwner(), target);
+		return super.canHitEntity(target) && data.shouldHurt(this, target);
 	}
 
 	@Override
 	public void onHitEntity(EntityHitResult result) {
 		if (level().isClientSide) return;
-		hurtTarget(result);
-		if (!bypassEntity) {
+		data.hurtTarget(this, result);
+		if (!data.params.bypassEntity()) {
 			discard();
 		}
 	}
 
+	public LocationContext location() {
+		//TODO
+	}
 }

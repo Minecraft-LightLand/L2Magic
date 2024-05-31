@@ -2,6 +2,7 @@ package dev.xkmc.l2magic.content.engine.iterator;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import dev.xkmc.l2magic.content.engine.context.BuilderContext;
 import dev.xkmc.l2magic.content.engine.context.EngineContext;
 import dev.xkmc.l2magic.content.engine.core.ConfiguredEngine;
 import dev.xkmc.l2magic.content.engine.core.EngineType;
@@ -37,4 +38,8 @@ public record DelayedIterator(IntVariable step, IntVariable delay, ConfiguredEng
 		}
 	}
 
+	@Override
+	public boolean verify(BuilderContext ctx) {
+		return Iterator.super.verify(ctx) & ctx.requiresScheduler();
+	}
 }

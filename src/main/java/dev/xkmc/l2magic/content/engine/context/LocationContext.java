@@ -28,6 +28,7 @@ public record LocationContext(Vec3 pos, Vec3 dir, Vec3 normal) {
 	}
 
 	public LocationContext rotateDegree(double degree, double vertical) {
+
 		return new LocationContext(pos, getOrientation().rotateDegrees(degree, vertical), normal);
 	}
 

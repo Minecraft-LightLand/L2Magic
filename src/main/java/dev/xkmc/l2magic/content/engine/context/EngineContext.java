@@ -1,6 +1,8 @@
 package dev.xkmc.l2magic.content.engine.context;
 
+import dev.xkmc.l2library.init.events.GeneralEventHandler;
 import dev.xkmc.l2magic.content.engine.core.ConfiguredEngine;
+import dev.xkmc.l2magic.events.ClientEventHandler;
 import dev.xkmc.shadow.objecthunter.exp4j.Expression;
 import net.minecraft.util.RandomSource;
 
@@ -37,15 +39,29 @@ public record EngineContext(UserContext user, LocationContext loc, RandomSource 
 	}
 
 	public double eval(Expression exp) {
-		return exp.setVariables(parameters).setVariable("Time", user.scheduler().time).evaluate();
+		exp.setVariables(parameters);
+		if (user.scheduler() != null)
+			exp.setVariable("Time", user.scheduler().time);
+		return exp.evaluate();
 	}
 
 	public void schedule(int tick, Runnable o) {
-		user.scheduler().schedule(tick, o);
+		var sche = user.scheduler();
+		if (sche == null) throw new IllegalStateException("Scheduler is not present!");
+		sche.schedule(tick, o);
 	}
 
 	public RandomSource nextRand() {
 		return RandomSource.create(rand.nextLong());
 	}
 
+	public void registerScheduler() {
+		var sche = user.scheduler();
+		if (sche == null) return;
+		if (!sche.isFinished()) {
+			if (user().level().isClientSide())
+				ClientEventHandler.schedulePersistent(sche::tick);
+			else GeneralEventHandler.schedulePersistent(sche::tick);
+		}
+	}
 }

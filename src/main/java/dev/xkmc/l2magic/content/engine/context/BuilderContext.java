@@ -6,7 +6,15 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Set;
 
-public record BuilderContext(Logger logger, String path, Set<String> params) {
+public record BuilderContext(Logger logger, String path, Set<String> params, boolean hasScheduler) {
+
+	public static BuilderContext withScheduler(Logger logger, String path, Set<String> params) {
+		return new BuilderContext(logger, path, Sets.union(params, Set.of("Time")), true);
+	}
+
+	public static BuilderContext instant(Logger logger, String path, Set<String> params) {
+		return new BuilderContext(logger, path, params, false);
+	}
 
 	public void error(String str) {
 		logger.error(path + ": " + str);
@@ -18,12 +26,15 @@ public record BuilderContext(Logger logger, String path, Set<String> params) {
 	}
 
 	public BuilderContext of(String s) {
-		return new BuilderContext(logger, path + "/" + s, params);
+		return new BuilderContext(logger, path + "/" + s, params, hasScheduler);
 	}
 
 	public BuilderContext of(String s, @Nullable Set<String> params) {
 		if (params == null) return of(s);
-		return new BuilderContext(logger, path + "/" + s, Sets.union(params(), params));
+		return new BuilderContext(logger, path + "/" + s, Sets.union(params(), params), hasScheduler);
 	}
 
+	public boolean requiresScheduler() {
+		return true;//TODO
+	}
 }

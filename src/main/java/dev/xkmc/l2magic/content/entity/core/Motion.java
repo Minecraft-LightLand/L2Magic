@@ -1,6 +1,7 @@
 package dev.xkmc.l2magic.content.entity.core;
 
 import com.mojang.serialization.Codec;
+import dev.xkmc.fastprojectileapi.entity.ProjectileMovement;
 import dev.xkmc.l2magic.content.engine.context.EngineContext;
 import dev.xkmc.l2magic.content.engine.context.LocationContext;
 import dev.xkmc.l2magic.content.engine.core.Verifiable;
@@ -13,6 +14,6 @@ public interface Motion<T extends Record & Motion<T>> extends Verifiable {
 
 	MotionType<T> type();
 
-	LocationContext modify(EngineContext ctx);
+	ProjectileMovement move(EngineContext ctx);
 
 }

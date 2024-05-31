@@ -19,7 +19,7 @@ import java.util.Set;
 
 public record SpellContext(LivingEntity user, Vec3 origin, Vec3 facing, long seed, double tickUsing, double power) {
 
-	public static Set<String> DEFAULT_PARAMS = Set.of("TickUsing", "Power", "CastX", "CastY", "CastZ", "Time");
+	public static Set<String> DEFAULT_PARAMS = Set.of("TickUsing", "Power", "CastX", "CastY", "CastZ");
 
 	public static Vec3 getCenter(LivingEntity le) {
 		return le.position().add(0, le.getBbHeight() / 2f, 0);
