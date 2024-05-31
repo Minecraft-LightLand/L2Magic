@@ -1,6 +1,5 @@
-package dev.xkmc.l2magic.content.engine.helper;
 
-import net.minecraft.world.phys.Vec3;
+package test;
 
 public record Orientation(Vec3 forward, Vec3 normal, Vec3 side) {
 
@@ -21,17 +20,6 @@ public record Orientation(Vec3 forward, Vec3 normal, Vec3 side) {
 				.add(forward.scale(Math.cos(rad) * Math.cos(ver)))
 				.add(normal.scale(Math.sin(ver)));
 	}
-
-	public Orientation rotateHorizontal(double rad) {
-		Vec3 nf = forward.scale(Math.cos(rad)).add(side.scale(Math.sin(rad)));
-		return new Orientation(nf, normal, nf.cross(normal));
-	}
-
-	public Orientation rotateVertical(double rad) {
-		Vec3 nf = forward.scale(Math.cos(rad)).add(normal.scale(Math.sin(rad)));
-		return new Orientation(nf, side.cross(nf), side);
-	}
-
 
 	public Orientation asNormal() {
 		return new Orientation(normal, forward, side);

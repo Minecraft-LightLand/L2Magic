@@ -47,7 +47,11 @@ public record LocationContext(Vec3 pos, Vec3 dir, Vec3 normal) {
 		if (dir.distanceTo(normal) < 0.01) {
 			return Orientation.fromNormal(normal);
 		}
-		return Orientation.getOrientation(dir, normal);
+		if (dir.dot(normal) < 1e-9) {
+			return Orientation.getOrientation(dir, normal);
+		}
+		var nnor = dir.cross(normal.cross(dir));
+		return Orientation.getOrientation(dir, nnor);
 	}
 
 }
