@@ -43,13 +43,13 @@ public record RingIterator(DoubleVariable radius,
 		double maxAngle = maxAngle().eval(ctx);
 		double r = radius.eval(ctx);
 		int count = count().eval(ctx);
-		var ori = ctx.loc().getOrientation();
+		var ori = ctx.loc().ori();
 		int n = maxInclusive ? count - 1 : count;
 		for (int i = 0; i < count; i++) {
 			double th = (maxAngle - minAngle) / n * i + minAngle;
-			Vec3 dir = ori.rotateDegrees(th);
-			Vec3 off = dir.scale(r);
-			ctx.iterateOn(LocationContext.of(ctx.loc().pos().add(off), dir, ori.normal()), index, i, child);
+			var dir = ori.rotDegY(th);
+			Vec3 off = dir.forward().scale(r);
+			ctx.iterateOn(LocationContext.of(ctx.loc().pos().add(off), dir), index, i, child);
 		}
 	}
 

@@ -43,13 +43,9 @@ public record SpellAction(ConfiguredEngine<?> action, Item icon, int order,
 		var sche = new Scheduler();
 		try {
 			var source = new SingleThreadedRandomSource(ctx.seed());
-			var normal = triggerType == SpellTriggerType.FACING_FRONT ||
-					triggerType == SpellTriggerType.FACING_BACK ?
-					Orientation.fromForward(ctx.facing()).normal() :
-					LocationContext.UP;
 			EngineContext engine = new EngineContext(
 					new UserContext(ctx.user().level(), ctx.user(), sche),
-					new LocationContext(ctx.origin(), ctx.facing(), normal),
+					 LocationContext.of(ctx.origin(), ctx.facing()),
 					source, ctx.defaultArgs()
 			);
 			action().execute(engine);

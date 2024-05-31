@@ -117,5 +117,6 @@ public class LMProjectile extends BaseProjectile {
 
 	public LocationContext location() {
 		//TODO
+		return LocationContext.of(position(), getForward());
 	}
 }

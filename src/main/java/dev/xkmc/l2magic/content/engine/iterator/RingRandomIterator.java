@@ -60,19 +60,19 @@ public record RingRandomIterator(DoubleVariable minRadius, DoubleVariable maxRad
 		double minAngle = minAngle().eval(ctx);
 		double maxAngle = maxAngle().eval(ctx);
 		int count = count().eval(ctx);
-		var ori = ctx.loc().getOrientation();
+		var ori = ctx.loc().ori();
 		for (int i = 0; i < count; i++) {
 			double th = ctx.rand().nextDouble() * (maxAngle - minAngle) + minAngle;
 			double r = randomRadius(minRadius, maxRadius, ctx.rand());
-			Vec3 dir = ori.rotateDegrees(th);
-			Vec3 off = dir.scale(r);
+			var dir = ori.rotDegY(th);
+			Vec3 off = dir.forward().scale(r);
 			var param = new LinkedHashMap<>(ctx.parameters());
 			if (index != null && !index.isEmpty()) {
 				param.put(index, (double) i);
 				param.put(index + "_angle", th);
 				param.put(index + "_radius", r);
 			}
-			ctx.execute(LocationContext.of(ctx.loc().pos().add(off), dir, ori.normal()), param, child);
+			ctx.execute(LocationContext.of(ctx.loc().pos().add(off), dir), param, child);
 		}
 	}
 

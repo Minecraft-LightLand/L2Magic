@@ -53,7 +53,7 @@ public record PushProcessor(
 				case TO_BOTTOM -> e.position().subtract(ctx.loc().pos()).normalize();
 			};
 			if (angle != 0 || tilt != 0) {
-				var ori = Orientation.getOrientation(p, ctx.loc().normal());
+				var ori = Orientation.of(p, ctx.loc().normal());
 				p = ori.rotateDegrees(angle, tilt);
 			}
 			p = p.scale(kb);
