@@ -33,7 +33,7 @@ public record SpellContext(LivingEntity user, Vec3 origin, Orientation facing, l
 		if (le instanceof Mob mob) {
 			var target = mob.getTarget();
 			if (target != null) {
-				return getCenter(le).subtract(mob.getEyePosition());
+				return getCenter(target).subtract(mob.getEyePosition()).normalize();
 			}
 		}
 		return le.getForward();

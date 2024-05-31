@@ -35,6 +35,10 @@ public record BuilderContext(Logger logger, String path, Set<String> params, boo
 	}
 
 	public boolean requiresScheduler() {
-		return true;//TODO
+		if (!hasScheduler){
+			error("Scheduler is not present for this context. You should not use delay blocks.");
+			return false;
+		}
+		return true;
 	}
 }

@@ -16,7 +16,7 @@
             },
             {
               "type": "l2magic:push",
-              "angle": "75",
+              "angle": "0",
               "from_center": "TO_CENTER",
               "speed": "0.1",
               "tilt": "0"
@@ -31,12 +31,9 @@
             }
           ],
           "selector": {
-            "type": "l2magic:arc",
-            "maxAngle": "-180+360/12*11",
-            "minAngle": "-180",
-            "radius": "4.0",
-            "size": "2.0",
-            "step": "11"
+            "type": "l2magic:line",
+            "size": "1",
+            "step": "5"
           },
           "target": "ENEMY"
         },
@@ -45,33 +42,44 @@
       {
         "type": "l2magic:iterate_delayed",
         "child": {
-          "type": "l2magic:random_pos_fan",
+          "type": "l2magic:random",
           "child": {
             "type": "l2magic:move",
             "child": {
-              "type": "l2magic:particle",
-              "particle": "minecraft:snowflake",
-              "speed": "0.5"
+              "type": "l2magic:random_pos_fan",
+              "child": {
+                "type": "l2magic:move",
+                "child": {
+                  "type": "l2magic:particle",
+                  "particle": "minecraft:snowflake",
+                  "speed": "0.5"
+                },
+                "modifiers": [
+                  {
+                    "type": "l2magic:rotate",
+                    "degree": "75",
+                    "vertical": "75"
+                  }
+                ]
+              },
+              "count": "5",
+              "maxAngle": "180",
+              "maxRadius": "r0*2*0.2679492002394105",
+              "minAngle": "-180",
+              "minRadius": "r0*2*0.2679492002394105"
             },
             "modifiers": [
               {
-                "type": "l2magic:rotate",
-                "degree": "75",
-                "vertical": "0"
+                "type": "l2magic:forward",
+                "distance": "r0*2"
               },
               {
-                "type": "l2magic:offset",
-                "x": "0",
-                "y": "rand(0.5,2.5)",
-                "z": "0"
+                "type": "l2magic:direction_to_normal"
               }
             ]
           },
-          "count": "5",
-          "maxAngle": "180",
-          "maxRadius": "5.0",
-          "minAngle": "-180",
-          "minRadius": "3.0"
+          "count": 1,
+          "name": "r"
         },
         "delay": "2",
         "step": "10"
@@ -79,7 +87,7 @@
     ]
   },
   "cast_type": "CONTINUOUS",
-  "icon": "minecraft:snowball",
+  "icon": "minecraft:powder_snow_bucket",
   "order": 100,
-  "trigger_type": "SELF_POS"
+  "trigger_type": "FACING_FRONT"
 }
