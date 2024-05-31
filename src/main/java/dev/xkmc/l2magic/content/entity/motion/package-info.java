@@ -1,7 +1,7 @@
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 
-package dev.xkmc.l2magic.content.entity;
+package dev.xkmc.l2magic.content.entity.motion;
 
 import net.minecraft.MethodsReturnNonnullByDefault;
 

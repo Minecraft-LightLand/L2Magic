@@ -6,6 +6,7 @@ import dev.xkmc.l2library.base.L2Registrate;
 import dev.xkmc.l2library.serial.config.PacketHandlerWithConfig;
 import dev.xkmc.l2magic.content.engine.context.SpellUsePacket;
 import dev.xkmc.l2magic.content.engine.spell.SpellAction;
+import dev.xkmc.l2magic.content.entity.core.ProjectileConfig;
 import dev.xkmc.l2magic.content.item.CreativeSpellSelector;
 import dev.xkmc.l2magic.init.data.LMDatapackRegistriesGen;
 import dev.xkmc.l2magic.init.data.LMLangData;
@@ -52,6 +53,7 @@ public class L2Magic {
 	@SubscribeEvent
 	public static void onDatapackRegistry(DataPackRegistryEvent.NewRegistry event) {
 		event.dataPackRegistry(EngineRegistry.SPELL, SpellAction.CODEC, SpellAction.CODEC);
+		event.dataPackRegistry(EngineRegistry.PROJECTILE, ProjectileConfig.CODEC, ProjectileConfig.CODEC);
 	}
 
 	@SubscribeEvent(priority = EventPriority.HIGH)

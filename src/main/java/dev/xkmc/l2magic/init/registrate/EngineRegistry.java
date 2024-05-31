@@ -10,6 +10,8 @@ import dev.xkmc.l2magic.content.engine.particle.*;
 import dev.xkmc.l2magic.content.engine.processor.*;
 import dev.xkmc.l2magic.content.engine.selector.*;
 import dev.xkmc.l2magic.content.engine.spell.SpellAction;
+import dev.xkmc.l2magic.content.entity.core.MotionType;
+import dev.xkmc.l2magic.content.entity.core.ProjectileConfig;
 import dev.xkmc.l2magic.init.L2Magic;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
@@ -17,11 +19,13 @@ import net.minecraft.resources.ResourceKey;
 public class EngineRegistry {
 
 	public static final ResourceKey<Registry<SpellAction>> SPELL = ResourceKey.createRegistryKey(L2Magic.loc("spell_action"));
+	public static final ResourceKey<Registry<ProjectileConfig>> PROJECTILE = ResourceKey.createRegistryKey(L2Magic.loc("projectile"));
 
 	public static final EngineRegistryInstance<EngineType<?>> ENGINE = EngineRegistryInstance.of("configured_engine");
 	public static final EngineRegistryInstance<ModifierType<?>> MODIFIER = EngineRegistryInstance.of("modifier");
 	public static final EngineRegistryInstance<SelectorType<?>> SELECTOR = EngineRegistryInstance.of("selector");
 	public static final EngineRegistryInstance<ProcessorType<?>> PROCESSOR = EngineRegistryInstance.of("processor");
+	public static final EngineRegistryInstance<MotionType<?>> MOTION = EngineRegistryInstance.of("motion");
 
 	public static final RegistryEntry<ModifierType<ForwardOffsetModifier>> FORWARD = register("forward", () -> ForwardOffsetModifier.CODEC);
 	public static final RegistryEntry<ModifierType<RotationModifier>> ROTATE = register("rotate", () -> RotationModifier.CODEC);

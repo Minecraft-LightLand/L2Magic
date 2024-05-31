@@ -15,6 +15,8 @@ public class GeneralMagicEventListener {
 
 	@SubscribeEvent
 	public static void onReload(TagsUpdatedEvent event) {
+		event.getRegistryAccess().registryOrThrow(EngineRegistry.PROJECTILE)
+				.holders().forEach(e -> e.get().verify(e.key().location()));
 		event.getRegistryAccess().registryOrThrow(EngineRegistry.SPELL)
 				.holders().forEach(e -> e.get().verify(e.key().location()));
 	}
