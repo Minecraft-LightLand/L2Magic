@@ -29,7 +29,7 @@ public record SphereRandomIterator(DoubleVariable radius, IntVariable count,
 
 	@Override
 	public EngineType<SphereRandomIterator> type() {
-		return EngineRegistry.RANDOM_FAN.get();
+		return EngineRegistry.RANDOM_SPHERE.get();
 	}
 
 	@Override
