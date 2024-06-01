@@ -63,8 +63,8 @@ public class MasterSpark extends SpellDataGenEntry {
                                 ),
                                 null
                         ),
-                        new DelayLogic(
-                                IntVariable.of("60"),
+                        new PredicateLogic(
+                                BooleanVariable.of("TickUsing>50"),
                                 new ListLogic(
                                         List.of(
                                                 new ProcessorEngine(SelectionType.ENEMY,
@@ -91,12 +91,12 @@ public class MasterSpark extends SpellDataGenEntry {
                                                                 DoubleVariable.of("2"),
                                                                 DoubleVariable.of("-180"),
                                                                 DoubleVariable.of("180"),
-                                                                IntVariable.of("10"),
+                                                                IntVariable.of("50"),
                                                                 new RandomVariableLogic("r", 1,
                                                                         new MoveEngine(List.of(RotationModifier.of("0", "105-30*r0")),
                                                                                 new SimpleParticleInstance(
                                                                                         ParticleTypes.END_ROD,
-                                                                                        DoubleVariable.of("2")
+                                                                                        DoubleVariable.of("3")
                                                                                 )
                                                                         )
                                                                 ),
@@ -105,7 +105,8 @@ public class MasterSpark extends SpellDataGenEntry {
                                                 )
 
                                         )
-                                )
+                                ),
+                                null
                         )
                 )
         );
