@@ -22,10 +22,8 @@ import java.util.Objects;
 @SerialClass
 public class LMProjectile extends BaseProjectile {
 
-	@SerialClass.SerialField
+	@SerialClass.SerialField(toClient = true)
 	private ProjectileData data;
-	@SerialClass.SerialField
-	private LocationContext locCtx;
 
 	protected LMProjectile(EntityType<? extends LMProjectile> pEntityType, Level pLevel) {
 		super(pEntityType, pLevel);
@@ -56,7 +54,7 @@ public class LMProjectile extends BaseProjectile {
 
 	@Override
 	protected ProjectileMovement updateVelocity(Vec3 vec, Vec3 pos) {
-		return data.move(this, vec, pos);
+		return data.move(this, vec, pos.add(0, getBbHeight() / 2, 0));
 	}
 
 	@Override
@@ -115,8 +113,8 @@ public class LMProjectile extends BaseProjectile {
 		}
 	}
 
-	public LocationContext location() {
-		//TODO
-		return LocationContext.of(position(), getForward());
+	public LocationContext location() {//TODO z-rot handling
+		return LocationContext.of(new Vec3(getX(), getY(0.5), getZ()), getForward());
 	}
+
 }

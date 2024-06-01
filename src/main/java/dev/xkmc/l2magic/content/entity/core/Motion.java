@@ -6,6 +6,7 @@ import dev.xkmc.l2magic.content.engine.context.EngineContext;
 import dev.xkmc.l2magic.content.engine.context.LocationContext;
 import dev.xkmc.l2magic.content.engine.core.Verifiable;
 import dev.xkmc.l2magic.init.registrate.EngineRegistry;
+import net.minecraft.world.phys.Vec3;
 
 public interface Motion<T extends Record & Motion<T>> extends Verifiable {
 
@@ -14,6 +15,6 @@ public interface Motion<T extends Record & Motion<T>> extends Verifiable {
 
 	MotionType<T> type();
 
-	ProjectileMovement move(EngineContext ctx);
+	ProjectileMovement move(EngineContext ctx, Vec3 vec, Vec3 pos);
 
 }

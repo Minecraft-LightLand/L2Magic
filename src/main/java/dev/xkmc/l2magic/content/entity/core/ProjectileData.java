@@ -90,7 +90,7 @@ public class ProjectileData {
 			Motion<?> motion = config.motion();
 			EngineContext ctx = getContext(self, SALT_MOVE, false);
 			if (motion != null && ctx != null) {
-				return motion.move(ctx);
+				return motion.move(ctx, vec, pos);
 			}
 		}
 		return ProjectileMovement.of(vec);
