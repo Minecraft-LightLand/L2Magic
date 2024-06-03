@@ -20,7 +20,7 @@ public interface ParticleRenderer {
 	boolean specialRender(LMGenericParticle lmGenericParticle, VertexConsumer vc, Camera camera, float pTick);
 
 	enum RenderType {
-		NORMAL, LIT, TRANSLUCENT
+		NORMAL, LIT, TRANSLUCENT, BLOCK
 	}
 
 }

@@ -83,6 +83,7 @@ public class LMGenericParticle extends TextureSheetParticle {
 			case NORMAL -> ParticleRenderType.PARTICLE_SHEET_OPAQUE;
 			case LIT -> ParticleRenderType.PARTICLE_SHEET_LIT;
 			case TRANSLUCENT -> ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
+			case BLOCK -> ParticleRenderType.TERRAIN_SHEET;
 		};
 	}
 
