@@ -1,6 +1,9 @@
 package dev.xkmc.l2magic.init.data;
 
 import dev.xkmc.l2magic.init.data.spell.*;
+import dev.xkmc.l2magic.init.data.spell.fire.*;
+import dev.xkmc.l2magic.init.data.spell.ground.*;
+import dev.xkmc.l2magic.init.data.spell.ice.*;
 
 import java.util.List;
 
@@ -12,7 +15,8 @@ public class SpellDataGenRegistry {
 			new ArrowSpells(),
 			new MagnetCore(),
 			new MasterSpark(),
-			new IcyFlash()
+			new IcyFlash(),
+			new EarthSpike()
 	);
 
 }

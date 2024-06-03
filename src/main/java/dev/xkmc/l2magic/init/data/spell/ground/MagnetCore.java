@@ -1,4 +1,4 @@
-package dev.xkmc.l2magic.init.data.spell;
+package dev.xkmc.l2magic.init.data.spell.ground;
 
 import com.tterrag.registrate.providers.RegistrateLangProvider;
 import dev.xkmc.l2magic.content.engine.context.DataGenContext;
