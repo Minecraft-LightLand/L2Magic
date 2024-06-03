@@ -1,6 +1,7 @@
 package dev.xkmc.l2magic.content.engine.context;
 
 import dev.xkmc.l2library.util.raytrace.RayTraceUtil;
+import dev.xkmc.l2magic.content.engine.helper.Orientation;
 import dev.xkmc.l2magic.content.engine.spell.SpellAction;
 import io.netty.util.internal.ThreadLocalRandom;
 import net.minecraft.world.entity.LivingEntity;
@@ -17,9 +18,9 @@ import javax.annotation.Nullable;
 import java.util.Map;
 import java.util.Set;
 
-public record SpellContext(LivingEntity user, Vec3 origin, Vec3 facing, long seed, double tickUsing, double power) {
+public record SpellContext(LivingEntity user, Vec3 origin, Orientation facing, long seed, double tickUsing, double power) {
 
-	public static Set<String> DEFAULT_PARAMS = Set.of("TickUsing", "Power", "CastX", "CastY", "CastZ", "Time");
+	public static Set<String> DEFAULT_PARAMS = Set.of("TickUsing", "Power", "CastX", "CastY", "CastZ");
 
 	public static Vec3 getCenter(LivingEntity le) {
 		return le.position().add(0, le.getBbHeight() / 2f, 0);
@@ -32,7 +33,7 @@ public record SpellContext(LivingEntity user, Vec3 origin, Vec3 facing, long see
 		if (le instanceof Mob mob) {
 			var target = mob.getTarget();
 			if (target != null) {
-				return getCenter(le).subtract(mob.getEyePosition());
+				return getCenter(target).subtract(mob.getEyePosition()).normalize();
 			}
 		}
 		return le.getForward();
@@ -52,11 +53,12 @@ public record SpellContext(LivingEntity user, Vec3 origin, Vec3 facing, long see
 	@Nullable
 	public static SpellContext castSpell(LivingEntity user, SpellAction spell, int useTick, double power, int distance) {
 		Level level = user.level();
-		Vec3 pos, dir;
+		Vec3 pos;
+		Orientation ori;
 		switch (spell.triggerType()) {
 			case SELF_POS -> {
 				pos = user.position();
-				dir = LocationContext.UP;
+				ori = Orientation.regular();
 			}
 			case TARGET_POS -> {
 				var start = user.getEyePosition();
@@ -70,26 +72,29 @@ public record SpellContext(LivingEntity user, Vec3 origin, Vec3 facing, long see
 				}
 				pos = ehit != null && ehit.getLocation().distanceToSqr(start) < bhit.getLocation().distanceToSqr(start) ?
 						ehit.getLocation() : bhit.getLocation();
-				dir = LocationContext.UP;
+				ori = Orientation.regular();
 			}
 			case HORIZONTAL_FACING -> {
-				dir = SpellContext.getForward(user).multiply(1, 0, 1).normalize();
+				var dir = SpellContext.getForward(user).multiply(1, 0, 1).normalize();
 				pos = user.position();
 				if (dir.length() < 0.5) return null;
+				ori = Orientation.fromForward(dir);
 			}
 			case FACING_BACK -> {
-				dir = SpellContext.getForward(user);
+				var dir = SpellContext.getForward(user);
 				pos = user.getEyePosition().add(dir.scale(-1));
+				ori = Orientation.fromForward(dir);
 			}
 			case FACING_FRONT -> {
-				dir = SpellContext.getForward(user);
+				var dir = SpellContext.getForward(user);
 				pos = user.getEyePosition().add(dir);
+				ori = Orientation.fromForward(dir);
 			}
 			case TARGET_ENTITY -> {
 				var target = getTarget(user);
 				if (target != null) {
 					pos = target.position();
-					dir = LocationContext.UP;
+					ori = Orientation.regular();
 				} else return null;
 			}
 			default -> {
@@ -100,7 +105,7 @@ public record SpellContext(LivingEntity user, Vec3 origin, Vec3 facing, long see
 		if (!level.isClientSide()) {
 			seed = ThreadLocalRandom.current().nextLong();
 		}
-		return new SpellContext(user, pos, dir, seed, useTick, power);
+		return new SpellContext(user, pos, ori, seed, useTick, power);
 	}
 
 	public Map<String, Double> defaultArgs() {

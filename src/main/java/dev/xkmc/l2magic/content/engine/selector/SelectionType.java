@@ -14,6 +14,7 @@ import net.minecraft.world.phys.AABB;
 import java.util.function.BiPredicate;
 
 public enum SelectionType {
+	NONE((entity, user) -> false),
 	ENEMY((entity, user) -> entity instanceof LivingEntity le && le.isAlive() &&
 			!user.isPassengerOfSameVehicle(le) && !likesEachOther(user, le, false)),
 	ENEMY_NO_FAMILY((entity, user) -> entity instanceof LivingEntity le && le.isAlive() &&
@@ -45,6 +46,10 @@ public enum SelectionType {
 
 	SelectionType(BiPredicate<Entity, LivingEntity> check) {
 		this.check = check;
+	}
+
+	public boolean test(Entity target, LivingEntity user) {
+		return check.test(target, user);
 	}
 
 	public Iterable<Entity> select(ServerLevel sl, EngineContext ctx, AABB aabb) {

@@ -2,7 +2,6 @@ package dev.xkmc.l2magic.content.engine.selector;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import dev.xkmc.fastprojectileapi.collision.EntityStorageCache;
 import dev.xkmc.l2magic.content.engine.context.EngineContext;
 import dev.xkmc.l2magic.content.engine.core.EntitySelector;
 import dev.xkmc.l2magic.content.engine.core.SelectorType;
@@ -47,7 +46,7 @@ public record ArcCubeSelector(
 		double diam = size.eval(ctx);
 		double a0 = minAngle().eval(ctx);
 		double a1 = maxAngle().eval(ctx);
-		var ori = ctx.loc().getOrientation();
+		var ori = ctx.loc().ori();
 		LinkedHashSet<LivingEntity> list = new LinkedHashSet<>();
 		for (int i = 0; i <= step; i++) {
 			double a = a0 + (a1 - a0) / step * i;

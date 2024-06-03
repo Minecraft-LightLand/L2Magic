@@ -8,10 +8,6 @@ import dev.xkmc.l2magic.content.engine.core.ProcessorType;
 import dev.xkmc.l2magic.content.engine.helper.Orientation;
 import dev.xkmc.l2magic.content.engine.variable.DoubleVariable;
 import dev.xkmc.l2magic.init.registrate.EngineRegistry;
-import net.minecraft.core.Holder;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.RegistryFileCodec;
-import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.entity.LivingEntity;
 
 import java.util.Collection;
@@ -45,7 +41,7 @@ public record KnockBackProcessor(
 		for (var e : le) {
 			var p = e.position().subtract(ctx.loc().pos()).normalize();
 			if (angle != 0 || tilt != 0) {
-				var ori = Orientation.getOrientation(p, ctx.loc().normal());
+				var ori = Orientation.of(p, ctx.loc().normal());
 				p = ori.rotateDegrees(angle, tilt);
 			}
 			p = p.multiply(1, 0, 1).normalize();

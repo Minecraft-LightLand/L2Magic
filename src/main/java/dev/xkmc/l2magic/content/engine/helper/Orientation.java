@@ -4,6 +4,13 @@ import net.minecraft.world.phys.Vec3;
 
 public record Orientation(Vec3 forward, Vec3 normal, Vec3 side) {
 
+	public static Orientation regular() {
+		return Orientation.of(
+				new Vec3(1,0,0),
+				new Vec3(0,1,0)
+		);
+	}
+
 	public Vec3 rotateDegrees(double rad) {
 		return rotate(rad / 180 * Math.PI);
 	}
@@ -20,6 +27,14 @@ public record Orientation(Vec3 forward, Vec3 normal, Vec3 side) {
 		return side.scale(Math.sin(rad) * Math.cos(ver))
 				.add(forward.scale(Math.cos(rad) * Math.cos(ver)))
 				.add(normal.scale(Math.sin(ver)));
+	}
+
+	public Orientation rotDegY(double rad) {
+		return rotateHorizontal(rad / 180 * Math.PI);
+	}
+
+	public Orientation rotDegX(double rad) {
+		return rotateVertical(rad / 180 * Math.PI);
 	}
 
 	public Orientation rotateHorizontal(double rad) {
@@ -50,7 +65,7 @@ public record Orientation(Vec3 forward, Vec3 normal, Vec3 side) {
 		return fromForward(dir).asNormal();
 	}
 
-	public static Orientation getOrientation(Vec3 dir, Vec3 ax0) {
+	public static Orientation of(Vec3 dir, Vec3 ax0) {
 		Vec3 ax1 = dir.cross(ax0).normalize();
 		return new Orientation(dir, ax0, ax1);
 	}

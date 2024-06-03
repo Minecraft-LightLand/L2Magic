@@ -9,7 +9,13 @@ import dev.xkmc.l2magic.content.engine.modifier.*;
 import dev.xkmc.l2magic.content.engine.particle.*;
 import dev.xkmc.l2magic.content.engine.processor.*;
 import dev.xkmc.l2magic.content.engine.selector.*;
+import dev.xkmc.l2magic.content.engine.sound.SoundInstance;
 import dev.xkmc.l2magic.content.engine.spell.SpellAction;
+import dev.xkmc.l2magic.content.entity.core.Motion;
+import dev.xkmc.l2magic.content.entity.core.MotionType;
+import dev.xkmc.l2magic.content.entity.core.ProjectileConfig;
+import dev.xkmc.l2magic.content.entity.motion.MoveDeltaMotion;
+import dev.xkmc.l2magic.content.entity.motion.MovePosMotion;
 import dev.xkmc.l2magic.init.L2Magic;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
@@ -17,15 +23,18 @@ import net.minecraft.resources.ResourceKey;
 public class EngineRegistry {
 
 	public static final ResourceKey<Registry<SpellAction>> SPELL = ResourceKey.createRegistryKey(L2Magic.loc("spell_action"));
+	public static final ResourceKey<Registry<ProjectileConfig>> PROJECTILE = ResourceKey.createRegistryKey(L2Magic.loc("projectile"));
 
 	public static final EngineRegistryInstance<EngineType<?>> ENGINE = EngineRegistryInstance.of("configured_engine");
 	public static final EngineRegistryInstance<ModifierType<?>> MODIFIER = EngineRegistryInstance.of("modifier");
 	public static final EngineRegistryInstance<SelectorType<?>> SELECTOR = EngineRegistryInstance.of("selector");
 	public static final EngineRegistryInstance<ProcessorType<?>> PROCESSOR = EngineRegistryInstance.of("processor");
+	public static final EngineRegistryInstance<MotionType<?>> MOTION = EngineRegistryInstance.of("motion");
 
 	public static final RegistryEntry<ModifierType<ForwardOffsetModifier>> FORWARD = register("forward", () -> ForwardOffsetModifier.CODEC);
 	public static final RegistryEntry<ModifierType<RotationModifier>> ROTATE = register("rotate", () -> RotationModifier.CODEC);
 	public static final RegistryEntry<ModifierType<OffsetModifier>> OFFSET = register("offset", () -> OffsetModifier.CODEC);
+	public static final RegistryEntry<ModifierType<SetPosModifier>> POSITION = register("set_position", () -> SetPosModifier.CODEC);//TODO doc
 	public static final RegistryEntry<ModifierType<SetDirectionModifier>> DIRECTION = register("direction", () -> SetDirectionModifier.CODEC);
 	public static final RegistryEntry<ModifierType<RandomOffsetModifier>> RANDOM_OFFSET = register("random_offset", () -> RandomOffsetModifier.CODEC);
 	public static final RegistryEntry<ModifierType<SetNormalModifier>> NORMAL = register("set_normal", () -> SetNormalModifier.CODEC);
@@ -46,12 +55,15 @@ public class EngineRegistry {
 	public static final RegistryEntry<EngineType<LinearIterator>> ITERATE_LINEAR = register("iterate_linear", () -> LinearIterator.CODEC);
 	public static final RegistryEntry<EngineType<RingIterator>> ITERATE_ARC = register("iterate_arc", () -> RingIterator.CODEC);
 	public static final RegistryEntry<EngineType<RingRandomIterator>> RANDOM_FAN = register("random_pos_fan", () -> RingRandomIterator.CODEC);
+	public static final RegistryEntry<EngineType<SphereRandomIterator>> RANDOM_SPHERE = register("random_pos_sphere", () -> SphereRandomIterator.CODEC);//TODO doc
 
 	public static final RegistryEntry<EngineType<SimpleParticleInstance>> SIMPLE_PARTICLE = register("particle", () -> SimpleParticleInstance.CODEC);
 	public static final RegistryEntry<EngineType<BlockParticleInstance>> BLOCK_PARTICLE = register("block_particle", () -> BlockParticleInstance.CODEC);
 	public static final RegistryEntry<EngineType<ItemParticleInstance>> ITEM_PARTICLE = register("item_particle", () -> ItemParticleInstance.CODEC);
 	public static final RegistryEntry<EngineType<DustParticleInstance>> DUST_PARTICLE = register("dust_particle", () -> DustParticleInstance.CODEC);
 	public static final RegistryEntry<EngineType<TransitionParticleInstance>> TRANSITION_PARTICLE = register("transition_particle", () -> TransitionParticleInstance.CODEC);
+
+	public static final RegistryEntry<EngineType<SoundInstance>> SOUND = register("sound", () -> SoundInstance.CODEC);
 
 	public static final RegistryEntry<SelectorType<SelfSelector>> SELF = register("self", () -> SelfSelector.CODEC);
 	public static final RegistryEntry<SelectorType<MoveSelector>> MOVE_SELECTOR = register("move", () -> MoveSelector.CODEC);
@@ -67,6 +79,9 @@ public class EngineRegistry {
 	public static final RegistryEntry<ProcessorType<PushProcessor>> PUSH_ENTITY = register("push", () -> PushProcessor.CODEC);
 	public static final RegistryEntry<ProcessorType<EffectProcessor>> EFFECT = register("effect", () -> EffectProcessor.CODEC);
 	public static final RegistryEntry<ProcessorType<PropertyProcessor>> PROP = register("property", () -> PropertyProcessor.CODEC);
+
+	public static final RegistryEntry<MotionType<MovePosMotion>> MOVE_MOTION = register("move", () -> MovePosMotion.CODEC);//TODO doc
+	public static final RegistryEntry<MotionType<MoveDeltaMotion>> DELTA_MOTION = register("velocity", () -> MoveDeltaMotion.CODEC);//TODO doc
 
 
 
@@ -88,6 +103,11 @@ public class EngineRegistry {
 	private static <T extends Record & EntityProcessor<T>> RegistryEntry<ProcessorType<T>>
 	register(String id, ProcessorType<T> codec) {
 		return L2Magic.REGISTRATE.simple(id, PROCESSOR.key(), () -> codec);
+	}
+
+	private static <T extends Record & Motion<T>> RegistryEntry<MotionType<T>>
+	register(String id, MotionType<T> codec) {
+		return L2Magic.REGISTRATE.simple(id, MOTION.key(), () -> codec);
 	}
 
 	public static void register() {

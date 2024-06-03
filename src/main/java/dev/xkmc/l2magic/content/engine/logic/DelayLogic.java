@@ -2,6 +2,7 @@ package dev.xkmc.l2magic.content.engine.logic;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import dev.xkmc.l2magic.content.engine.context.BuilderContext;
 import dev.xkmc.l2magic.content.engine.context.EngineContext;
 import dev.xkmc.l2magic.content.engine.core.ConfiguredEngine;
 import dev.xkmc.l2magic.content.engine.core.EngineType;
@@ -26,4 +27,8 @@ public record DelayLogic(IntVariable tick, ConfiguredEngine<?> child)
 		ctx.schedule(tick.eval(ctx), () -> ctx.execute(child));
 	}
 
+	@Override
+	public boolean verify(BuilderContext ctx) {
+		return ConfiguredEngine.super.verify(ctx) & ctx.requiresScheduler();
+	}
 }

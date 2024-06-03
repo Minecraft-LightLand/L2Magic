@@ -2,13 +2,11 @@ package dev.xkmc.l2magic.content.engine.spell;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import dev.xkmc.l2library.init.events.GeneralEventHandler;
 import dev.xkmc.l2magic.content.engine.context.*;
 import dev.xkmc.l2magic.content.engine.core.ConfiguredEngine;
 import dev.xkmc.l2magic.content.engine.helper.EngineHelper;
 import dev.xkmc.l2magic.content.engine.helper.Orientation;
 import dev.xkmc.l2magic.content.engine.helper.Scheduler;
-import dev.xkmc.l2magic.events.ClientEventHandler;
 import dev.xkmc.l2magic.init.L2Magic;
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.resources.ResourceKey;
@@ -45,23 +43,16 @@ public record SpellAction(ConfiguredEngine<?> action, Item icon, int order,
 		var sche = new Scheduler();
 		try {
 			var source = new SingleThreadedRandomSource(ctx.seed());
-			var normal = triggerType == SpellTriggerType.FACING_FRONT ||
-					triggerType == SpellTriggerType.FACING_BACK ?
-					Orientation.fromForward(ctx.facing()).normal() :
-					LocationContext.UP;
-			action().execute(new EngineContext(
+			EngineContext engine = new EngineContext(
 					new UserContext(ctx.user().level(), ctx.user(), sche),
-					new LocationContext(ctx.origin(), ctx.facing(), normal),
+					 LocationContext.of(ctx.origin(), ctx.facing()),
 					source, ctx.defaultArgs()
-			));
+			);
+			action().execute(engine);
+			engine.registerScheduler();
 		} catch (Exception e) {
 			L2Magic.LOGGER.throwing(e);
 			return;
-		}
-		if (!sche.isFinished()) {
-			if (ctx.user().level().isClientSide())
-				ClientEventHandler.schedulePersistent(sche::tick);
-			else GeneralEventHandler.schedulePersistent(sche::tick);
 		}
 		if (!ctx.user().level().isClientSide()) {
 			L2Magic.HANDLER.toTrackingPlayers(new SpellUsePacket(this, ctx), ctx.user());
@@ -69,7 +60,7 @@ public record SpellAction(ConfiguredEngine<?> action, Item icon, int order,
 	}
 
 	public boolean verify(ResourceLocation id) {
-		return action().verify(new BuilderContext(L2Magic.LOGGER, id.toString(), params()));
+		return action().verify(BuilderContext.withScheduler(L2Magic.LOGGER, id.toString(), params()));
 	}
 
 	public void verifyOnBuild(BootstapContext<SpellAction> ctx, ResourceKey<SpellAction> id) {

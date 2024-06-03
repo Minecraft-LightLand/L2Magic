@@ -4,6 +4,24 @@
 
 ## Direction and Normal
 
+# Root Types and Parameters
+
+## Default Parameters
+With Scheduler:
+- Time
+
+## Spell Action
+Parameters:
+- TickUsing
+- Power
+- CastX
+- CastY
+- CastZ
+
+## Projectile 
+Parameters:
+
+
 # Block Types
 
 ## Action Blocks (15)
