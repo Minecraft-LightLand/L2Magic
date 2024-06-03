@@ -33,7 +33,7 @@ public class MasterSpark extends SpellDataGenEntry {
 	public void register(BootstapContext<SpellAction> ctx) {
 		new SpellAction(
 				masterSpark(new DataGenContext(ctx)),
-				Blocks.BEACON.asItem(), 3000,
+				Blocks.BEACON.asItem(), 2000,
 				SpellCastType.CONTINUOUS,
 				SpellTriggerType.FACING_FRONT
 		).verifyOnBuild(ctx, MASTER_SPARK);

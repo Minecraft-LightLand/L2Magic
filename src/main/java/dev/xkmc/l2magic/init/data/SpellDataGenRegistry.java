@@ -11,7 +11,8 @@ public class SpellDataGenRegistry {
 			new FlameSpells(),
 			new ArrowSpells(),
 			new MagnetCore(),
-			new MasterSpark()
+			new MasterSpark(),
+			new IcyFlash()
 	);
 
 }

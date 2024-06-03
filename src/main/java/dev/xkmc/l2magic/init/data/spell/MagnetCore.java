@@ -32,7 +32,7 @@ public class MagnetCore extends SpellDataGenEntry {
 	public void register(BootstapContext<SpellAction> ctx) {
 		new SpellAction(
 				magnetCore(new DataGenContext(ctx)),
-				Blocks.IRON_ORE.asItem(), 2000,
+				Blocks.IRON_ORE.asItem(), 3000,
 				SpellCastType.INSTANT,
 				SpellTriggerType.TARGET_POS
 		).verifyOnBuild(ctx, MAGNET_CORE);
