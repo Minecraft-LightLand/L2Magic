@@ -25,16 +25,16 @@ public class LMProjectile extends BaseProjectile {
 	@SerialClass.SerialField(toClient = true)
 	private ProjectileData data;
 
-	protected LMProjectile(EntityType<? extends LMProjectile> pEntityType, Level pLevel) {
+	public LMProjectile(EntityType<? extends LMProjectile> pEntityType, Level pLevel) {
 		super(pEntityType, pLevel);
 	}
 
-	protected LMProjectile(EntityType<? extends LMProjectile> pEntityType, double pX, double pY, double pZ, Level pLevel) {
+	public LMProjectile(EntityType<? extends LMProjectile> pEntityType, double pX, double pY, double pZ, Level pLevel) {
 		this(pEntityType, pLevel);
 		this.setPos(pX, pY, pZ);
 	}
 
-	protected LMProjectile(EntityType<? extends LMProjectile> pEntityType, LivingEntity pShooter, Level pLevel) {
+	public LMProjectile(EntityType<? extends LMProjectile> pEntityType, LivingEntity pShooter, Level pLevel) {
 		this(pEntityType, pShooter.getX(), pShooter.getEyeY() - (double) 0.1F, pShooter.getZ(), pLevel);
 		this.setOwner(pShooter);
 	}

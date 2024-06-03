@@ -8,12 +8,15 @@ import java.util.Set;
 
 public record BuilderContext(Logger logger, String path, Set<String> params, boolean hasScheduler) {
 
+	private static final Set<String> DEFAULT_PARAMS = Set.of("PosX", "PosY", "PosZ", "CasterX", "CasterY", "CasterZ");
+	private static final Set<String> SCHEDULER_PARAMS = Sets.union(Set.of("Time"), DEFAULT_PARAMS);
+
 	public static BuilderContext withScheduler(Logger logger, String path, Set<String> params) {
-		return new BuilderContext(logger, path, Sets.union(params, Set.of("Time")), true);
+		return new BuilderContext(logger, path, Sets.union(params, SCHEDULER_PARAMS), true);
 	}
 
 	public static BuilderContext instant(Logger logger, String path, Set<String> params) {
-		return new BuilderContext(logger, path, params, false);
+		return new BuilderContext(logger, path, Sets.union(params, DEFAULT_PARAMS), false);
 	}
 
 	public void error(String str) {

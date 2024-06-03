@@ -7,20 +7,31 @@
 # Root Types and Parameters
 
 ## Default Parameters
+For all cases:
+- PosX: current cursor position
+- PosY: current cursor position
+- PosZ: current cursor position
+- CasterX: current caster position
+- CasterY: current caster position
+- CasterZ: current caster position
+
 With Scheduler:
-- Time
+- Time: current scheduler time
 
 ## Spell Action
 Parameters:
-- TickUsing
-- Power
-- CastX
-- CastY
-- CastZ
+- TickUsing: ticks player is using this spell
+- Power: The power factor of this spell
+- CastX: Position where this spell is casted
+- CastY: Position where this spell is casted
+- CastZ: Position where this spell is casted
 
 ## Projectile 
 Parameters:
-
+- TickCount: Ticks this projectile has existed
+- ProjectileX: Position of this projectile (when root block is initiated)
+- ProjectileY: Position of this projectile (when root block is initiated)
+- ProjectileZ: Position of this projectile (when root block is initiated)
 
 # Block Types
 

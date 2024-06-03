@@ -16,6 +16,7 @@ import dev.xkmc.l2magic.content.entity.core.MotionType;
 import dev.xkmc.l2magic.content.entity.core.ProjectileConfig;
 import dev.xkmc.l2magic.content.entity.motion.MoveDeltaMotion;
 import dev.xkmc.l2magic.content.entity.motion.MovePosMotion;
+import dev.xkmc.l2magic.content.entity.motion.SimpleMotion;
 import dev.xkmc.l2magic.init.L2Magic;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
@@ -80,8 +81,9 @@ public class EngineRegistry {
 	public static final RegistryEntry<ProcessorType<EffectProcessor>> EFFECT = register("effect", () -> EffectProcessor.CODEC);
 	public static final RegistryEntry<ProcessorType<PropertyProcessor>> PROP = register("property", () -> PropertyProcessor.CODEC);
 
-	public static final RegistryEntry<MotionType<MovePosMotion>> MOVE_MOTION = register("move", () -> MovePosMotion.CODEC);//TODO doc
-	public static final RegistryEntry<MotionType<MoveDeltaMotion>> DELTA_MOTION = register("velocity", () -> MoveDeltaMotion.CODEC);//TODO doc
+	public static final RegistryEntry<MotionType<SimpleMotion>> SIMPLE_MOTION = register("simple", () -> SimpleMotion.CODEC); // doc
+	public static final RegistryEntry<MotionType<MovePosMotion>> MOVE_MOTION = register("control_position", () -> MovePosMotion.CODEC);//TODO doc
+	public static final RegistryEntry<MotionType<MoveDeltaMotion>> DELTA_MOTION = register("control_velocity", () -> MoveDeltaMotion.CODEC);//TODO doc
 
 
 
