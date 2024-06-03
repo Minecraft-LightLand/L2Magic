@@ -7,12 +7,14 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-public record VanillaParticleSprite(RenderType renderType, ResourceLocation particle) implements SpriteData {
+public interface VanillaParticleSprite extends SpriteData {
+
+	ResourceLocation particle();
 
 	@OnlyIn(Dist.CLIENT)
 	@Override
-	public SpriteSet spriteSet() {
-		return ((ParticleEngineAccessor) Minecraft.getInstance().particleEngine).getSpriteSets().get(particle);
+	default SpriteSet spriteSet() {
+		return ((ParticleEngineAccessor) Minecraft.getInstance().particleEngine).getSpriteSets().get(particle());
 	}
 
 }

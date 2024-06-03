@@ -1,9 +1,12 @@
 package dev.xkmc.l2magic.content.particle.core;
 
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.ParticleRenderType;
 import net.minecraft.client.particle.TextureSheetParticle;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.phys.Vec3;
 
 public class LMGenericParticle extends TextureSheetParticle {
@@ -22,6 +25,7 @@ public class LMGenericParticle extends TextureSheetParticle {
 		friction = 0;
 		lifetime = data.life();
 		hasPhysics = data.doCollision();
+		quadSize *= data.size();
 		this.data = data;
 		data.renderer().onParticleInit(this);
 	}
@@ -56,6 +60,21 @@ public class LMGenericParticle extends TextureSheetParticle {
 	@Override
 	public void setSprite(TextureAtlasSprite atlas) {
 		super.setSprite(atlas);
+	}
+
+	@Override
+	public void render(VertexConsumer vc, Camera camera, float pTick) {
+		if (data.renderer().specialRender(this, vc, camera, pTick))
+			return;
+		super.render(vc, camera, pTick);
+	}
+
+	public RandomSource random() {
+		return random;
+	}
+
+	public int age() {
+		return age;
 	}
 
 	@Override

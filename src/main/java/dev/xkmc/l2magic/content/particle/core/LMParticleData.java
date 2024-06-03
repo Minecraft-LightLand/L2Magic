@@ -11,6 +11,8 @@ public interface LMParticleData {
 
 	int life();
 
+	float size();
+
 	boolean doCollision();
 
 	@OnlyIn(Dist.CLIENT)
