@@ -1,6 +1,7 @@
 package dev.xkmc.l2magic.content.particle.core;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import dev.xkmc.l2magic.content.particle.render.SpriteGeom;
 import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.ParticleRenderType;
@@ -12,6 +13,8 @@ import net.minecraft.world.phys.Vec3;
 public class LMGenericParticle extends TextureSheetParticle {
 
 	private final LMParticleData data;
+
+	private SpriteGeom geom = SpriteGeom.INSTANCE;
 
 	public LMGenericParticle(ClientLevel level, double x, double y, double z, double vx, double vy, double vz, LMParticleData data) {
 		super(level, x, y, z, vx, vy, vz);
@@ -69,12 +72,40 @@ public class LMGenericParticle extends TextureSheetParticle {
 		super.render(vc, camera, pTick);
 	}
 
+	@Override
+	protected float getU0() {
+		return sprite.getU(geom.u0());
+	}
+
+	@Override
+	protected float getU1() {
+		return sprite.getU(geom.u1());
+	}
+
+	@Override
+	protected float getV0() {
+		return sprite.getV(geom.v0());
+	}
+
+	@Override
+	protected float getV1() {
+		return sprite.getV(geom.v1());
+	}
+
 	public RandomSource random() {
 		return random;
 	}
 
 	public int age() {
 		return age;
+	}
+
+	public ClientLevel level() {
+		return level;
+	}
+
+	public void setGeom(SpriteGeom geom) {
+		this.geom = geom;
 	}
 
 	@Override

@@ -195,7 +195,10 @@ public class FlameSpells extends SpellDataGenEntry {
 																				DoubleVariable.ZERO)),
 																		new BlockParticleInstance(
 																				Blocks.STONE,
-																				DoubleVariable.of("0.5+rand(0,0.4)")
+																				DoubleVariable.of("0.5+rand(0,0.4)"),
+																				DoubleVariable.of("0.5"),
+																				IntVariable.of("rand(20,40)"),
+																				true
 																		)
 																), null
 														)

@@ -5,19 +5,27 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import dev.xkmc.l2magic.content.engine.context.EngineContext;
 import dev.xkmc.l2magic.content.engine.core.EngineType;
 import dev.xkmc.l2magic.content.engine.variable.DoubleVariable;
+import dev.xkmc.l2magic.content.engine.variable.IntVariable;
+import dev.xkmc.l2magic.content.entity.motion.SimpleMotion;
+import dev.xkmc.l2magic.content.particle.core.ClientParticleData;
+import dev.xkmc.l2magic.content.particle.core.LMGenericParticleOption;
+import dev.xkmc.l2magic.content.particle.render.ItemSprite;
 import dev.xkmc.l2magic.init.registrate.EngineRegistry;
-import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleOptions;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.ForgeRegistries;
 
-public record ItemParticleInstance(Item item, DoubleVariable speed)
-		implements ParticleInstance<ItemParticleInstance> {
+public record ItemParticleInstance(
+		Item item, DoubleVariable speed,
+		DoubleVariable scale, IntVariable life, boolean breaking
+) implements ParticleInstance<ItemParticleInstance> {
 
 	public static final Codec<ItemParticleInstance> CODEC = RecordCodecBuilder.create(i -> i.group(
 			ForgeRegistries.ITEMS.getCodec().fieldOf("item").forGetter(e -> e.item),
-			DoubleVariable.codec("speed", ParticleInstance::speed)
+			DoubleVariable.codec("speed", ParticleInstance::speed),
+			DoubleVariable.codec("scale", e -> e.scale),
+			IntVariable.codec("life", e -> e.life),
+			Codec.BOOL.fieldOf("breaking").forGetter(e -> e.breaking)
 	).apply(i, ItemParticleInstance::new));
 
 	@Override
@@ -27,7 +35,11 @@ public record ItemParticleInstance(Item item, DoubleVariable speed)
 
 	@Override
 	public ParticleOptions particle(EngineContext ctx) {
-		return new ItemParticleOption(ParticleTypes.ITEM, item.getDefaultInstance());
+		return new LMGenericParticleOption(new ClientParticleData(
+				life.eval(ctx), breaking, (float) scale.eval(ctx), ctx,
+				breaking() ? SimpleMotion.BREAKING : SimpleMotion.ZERO,
+				new ItemSprite(item.getDefaultInstance(), breaking)
+		));
 	}
 
 }

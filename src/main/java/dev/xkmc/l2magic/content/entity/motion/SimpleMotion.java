@@ -25,6 +25,7 @@ public record SimpleMotion(
 
 	public static final SimpleMotion ZERO = new SimpleMotion(DoubleVariable.ZERO, DoubleVariable.ZERO);
 	public static final SimpleMotion DUST = new SimpleMotion(DoubleVariable.ofVerified("0.02"), DoubleVariable.ZERO);
+	public static final SimpleMotion BREAKING = new SimpleMotion(DoubleVariable.ofVerified("0.02"), DoubleVariable.ofVerified("0.04"));
 
 	@Override
 	public MotionType<SimpleMotion> type() {
