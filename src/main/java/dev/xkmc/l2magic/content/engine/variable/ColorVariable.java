@@ -93,7 +93,7 @@ public interface ColorVariable extends Variable {
 
 	record Static(int val, Vector3f color) implements ColorVariable {
 
-		static Static of(int val) {
+		public static Static of(int val) {
 			return new Static(val, Vec3.fromRGB24(val).toVector3f());
 		}
 

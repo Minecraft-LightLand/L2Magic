@@ -5,20 +5,12 @@ import dev.xkmc.l2magic.content.engine.context.DataGenContext;
 import dev.xkmc.l2magic.content.engine.core.ConfiguredEngine;
 import dev.xkmc.l2magic.content.engine.iterator.*;
 import dev.xkmc.l2magic.content.engine.logic.*;
-import dev.xkmc.l2magic.content.engine.modifier.Dir2NormalModifier;
-import dev.xkmc.l2magic.content.engine.modifier.OffsetModifier;
-import dev.xkmc.l2magic.content.engine.modifier.RotationModifier;
-import dev.xkmc.l2magic.content.engine.particle.SimpleParticleInstance;
-import dev.xkmc.l2magic.content.engine.processor.DamageProcessor;
-import dev.xkmc.l2magic.content.engine.processor.KnockBackProcessor;
-import dev.xkmc.l2magic.content.engine.selector.LinearCubeSelector;
-import dev.xkmc.l2magic.content.engine.selector.SelectionType;
-import dev.xkmc.l2magic.content.engine.spell.SpellAction;
-import dev.xkmc.l2magic.content.engine.spell.SpellCastType;
-import dev.xkmc.l2magic.content.engine.spell.SpellTriggerType;
-import dev.xkmc.l2magic.content.engine.variable.BooleanVariable;
-import dev.xkmc.l2magic.content.engine.variable.DoubleVariable;
-import dev.xkmc.l2magic.content.engine.variable.IntVariable;
+import dev.xkmc.l2magic.content.engine.modifier.*;
+import dev.xkmc.l2magic.content.engine.particle.*;
+import dev.xkmc.l2magic.content.engine.processor.*;
+import dev.xkmc.l2magic.content.engine.selector.*;
+import dev.xkmc.l2magic.content.engine.spell.*;
+import dev.xkmc.l2magic.content.engine.variable.*;
 import dev.xkmc.l2magic.init.data.SpellDataGenEntry;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.data.worldgen.BootstapContext;
@@ -55,9 +47,10 @@ public class MasterSpark extends SpellDataGenEntry {
                                 new SphereRandomIterator(
                                         DoubleVariable.of("3"),
                                         IntVariable.of("20"),
-                                        new SimpleParticleInstance(
-                                                ParticleTypes.END_ROD,
-                                                DoubleVariable.of("-.2")
+                                        new DustParticleInstance(
+                                                ColorVariable.Static.of(0xE88B00),
+                                                DoubleVariable.of("2"),
+                                                DoubleVariable.of("-2")
                                         ),
                                         null
                                 ),
