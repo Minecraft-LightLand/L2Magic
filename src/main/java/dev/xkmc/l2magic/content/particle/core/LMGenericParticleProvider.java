@@ -1,4 +1,4 @@
-package dev.xkmc.l2magic.content.particle;
+package dev.xkmc.l2magic.content.particle.core;
 
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.ParticleProvider;

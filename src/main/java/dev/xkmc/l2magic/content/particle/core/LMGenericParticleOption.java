@@ -1,4 +1,4 @@
-package dev.xkmc.l2magic.content.particle;
+package dev.xkmc.l2magic.content.particle.core;
 
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleType;

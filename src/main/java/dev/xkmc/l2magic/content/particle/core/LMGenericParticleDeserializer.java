@@ -1,4 +1,4 @@
-package dev.xkmc.l2magic.content.particle;
+package dev.xkmc.l2magic.content.particle.core;
 
 import com.mojang.brigadier.StringReader;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
