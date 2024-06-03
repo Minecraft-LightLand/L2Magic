@@ -3,7 +3,6 @@ package dev.xkmc.l2magic.content.engine.variable;
 import com.mojang.datafixers.util.Either;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import dev.xkmc.l2magic.content.engine.context.BuilderContext;
 import dev.xkmc.l2magic.content.engine.context.EngineContext;
 import net.minecraft.world.phys.Vec3;
 import org.joml.Vector3f;

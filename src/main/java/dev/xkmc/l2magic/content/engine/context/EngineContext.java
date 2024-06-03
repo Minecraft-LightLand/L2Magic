@@ -42,6 +42,12 @@ public record EngineContext(UserContext user, LocationContext loc, RandomSource 
 		exp.setVariables(parameters);
 		if (user.scheduler() != null)
 			exp.setVariable("Time", user.scheduler().time);
+		exp.setVariable("PosX", loc.pos().x);
+		exp.setVariable("PosY", loc.pos().y);
+		exp.setVariable("PosZ", loc.pos().z);
+		exp.setVariable("CasterX", user.user().getX());
+		exp.setVariable("CasterY", user.user().getY());
+		exp.setVariable("CasterZ", user.user().getZ());
 		return exp.evaluate();
 	}
 

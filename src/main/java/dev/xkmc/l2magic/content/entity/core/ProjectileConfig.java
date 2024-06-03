@@ -1,5 +1,6 @@
 package dev.xkmc.l2magic.content.entity.core;
 
+import com.google.common.collect.Sets;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import dev.xkmc.l2magic.content.engine.context.BuilderContext;
@@ -38,10 +39,12 @@ public record ProjectileConfig(
 	)));
 
 	public void verify(ResourceLocation id) {
-		var ctx =  BuilderContext.withScheduler(L2Magic.LOGGER, id.toString(), params);
-		if (motion != null) motion.verify(ctx.of("motion"));
-		if (tick != null) tick.verify(ctx.of("tick"));
-		if (hit != null) hit.verify(ctx.of("hit"));
+		var allParams = Sets.union(ProjectileData.DEFAULT_PARAMS, params);
+		var withSche = BuilderContext.withScheduler(L2Magic.LOGGER, id.toString(), allParams);
+		var noSche = BuilderContext.instant(L2Magic.LOGGER, id.toString(), allParams);
+		if (motion != null) motion.verify(noSche.of("motion"));
+		if (tick != null) tick.verify(withSche.of("tick"));
+		if (hit != null) hit.verify(noSche.of("hit"));
 	}
 
 }

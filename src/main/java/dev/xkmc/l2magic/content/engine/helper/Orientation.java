@@ -6,8 +6,8 @@ public record Orientation(Vec3 forward, Vec3 normal, Vec3 side) {
 
 	public static Orientation regular() {
 		return Orientation.of(
-				new Vec3(1,0,0),
-				new Vec3(0,1,0)
+				new Vec3(1, 0, 0),
+				new Vec3(0, 1, 0)
 		);
 	}
 

@@ -30,16 +30,14 @@ public enum SelectionType {
 		if (a.isAlliedTo(b) || b.isAlliedTo(a)) return true;
 		if (!checksFamily) return false;
 		if (hatesEachOther(a, b)) return false;
-		if (a.getType() == b.getType()) return true;
-		return false;
+		return a.getType() == b.getType();
 	}
 
 	private static boolean hatesEachOther(LivingEntity a, LivingEntity b) {
 		if (a.getLastHurtMob() == b || a.getLastHurtByMob() == b) return true;
 		if (b.getLastHurtMob() == a || b.getLastHurtByMob() == a) return true;
 		if (a instanceof Mob ma && ma.getTarget() == b) return true;
-		if (b instanceof Mob mb && mb.getTarget() == a) return true;
-		return false;
+		return b instanceof Mob mb && mb.getTarget() == a;
 	}
 
 	private final BiPredicate<Entity, LivingEntity> check;

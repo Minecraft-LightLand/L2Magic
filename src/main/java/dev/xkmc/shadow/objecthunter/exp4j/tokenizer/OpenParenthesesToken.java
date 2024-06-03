@@ -17,7 +17,7 @@ package dev.xkmc.shadow.objecthunter.exp4j.tokenizer;
 
 class OpenParenthesesToken extends Token {
 
-    OpenParenthesesToken() {
-        super(TOKEN_PARENTHESES_OPEN);
-    }
+	OpenParenthesesToken() {
+		super(TOKEN_PARENTHESES_OPEN);
+	}
 }

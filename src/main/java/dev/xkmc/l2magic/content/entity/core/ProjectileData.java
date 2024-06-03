@@ -17,12 +17,18 @@ import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 @SerialClass
 public class ProjectileData {
 
 	private static final int SALT_TICK = 0x342ab3c1, SALT_MOVE = 0xa6258bd1, SALT_HIT = 0xb286c235;
+
+	public static final Set<String> DEFAULT_PARAMS = Set.of("TickCount",
+			"ProjectileX", "ProjectileY", "ProjectileZ");
 
 	@SerialClass.SerialField(toClient = true)
 	public ProjectileParams params;
@@ -48,13 +54,22 @@ public class ProjectileData {
 		return config;
 	}
 
+	private Map<String, Double> allParams(LMProjectile self) {
+		var ans = new LinkedHashMap<>(params.params());
+		ans.put("TickCount", (double) self.tickCount);
+		ans.put("ProjectileX", self.getX());
+		ans.put("ProjectileY", self.getY() + self.getBbHeight() / 2);
+		ans.put("ProjectileZ", self.getZ());
+		return ans;
+	}
+
 	@Nullable
 	private EngineContext getContext(LMProjectile self, int salt, boolean addScheduler) {
 		if (!(self.getOwner() instanceof LivingEntity user)) return null;
 		var source = new SingleThreadedRandomSource(params.seed() ^ self.tickCount ^ salt);
 		Scheduler sche = addScheduler ? new Scheduler() : null;
 		return new EngineContext(new UserContext(user.level(), user, sche),
-				self.location(), source, params.params());
+				self.location(), source, allParams(self));
 	}
 
 	public boolean shouldHurt(LMProjectile self, Entity target) {

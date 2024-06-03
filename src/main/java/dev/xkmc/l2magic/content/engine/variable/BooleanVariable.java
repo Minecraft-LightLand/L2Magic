@@ -1,7 +1,6 @@
 package dev.xkmc.l2magic.content.engine.variable;
 
 import com.mojang.serialization.Codec;
-import dev.xkmc.l2magic.content.engine.context.BuilderContext;
 import dev.xkmc.l2magic.content.engine.context.EngineContext;
 
 public record BooleanVariable(String str, ExpressionHolder exp) implements NumericVariable {

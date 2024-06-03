@@ -44,7 +44,7 @@ public record BoxSelector(
 		LinkedHashSet<LivingEntity> list = new LinkedHashSet<>();
 		for (var e : type.select(sl, ctx, aabb)) {
 			if (e instanceof LivingEntity le) {
-					list.add(le);
+				list.add(le);
 			}
 		}
 		return list;

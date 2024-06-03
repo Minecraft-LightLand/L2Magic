@@ -1,5 +1,7 @@
 package dev.xkmc.l2magic.init;
 
+import dev.xkmc.l2magic.content.particle.core.LMGenericParticleProvider;
+import dev.xkmc.l2magic.init.registrate.LMItems;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RegisterClientReloadListenersEvent;
 import net.minecraftforge.client.event.RegisterItemDecorationsEvent;
@@ -13,7 +15,7 @@ public class L2MagicClient {
 
 	@SubscribeEvent
 	public static void onParticleRegistryEvent(RegisterParticleProvidersEvent event) {
-
+		event.registerSpecial(LMItems.GENERIC_PARTICLE.get(), new LMGenericParticleProvider());
 	}
 
 	@SubscribeEvent
