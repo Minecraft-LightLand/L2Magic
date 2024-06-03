@@ -9,6 +9,7 @@ import dev.xkmc.l2magic.content.engine.modifier.*;
 import dev.xkmc.l2magic.content.engine.particle.*;
 import dev.xkmc.l2magic.content.engine.processor.*;
 import dev.xkmc.l2magic.content.engine.selector.*;
+import dev.xkmc.l2magic.content.engine.sound.SoundInstance;
 import dev.xkmc.l2magic.content.engine.spell.SpellAction;
 import dev.xkmc.l2magic.content.entity.core.Motion;
 import dev.xkmc.l2magic.content.entity.core.MotionType;
@@ -62,6 +63,8 @@ public class EngineRegistry {
 	public static final RegistryEntry<EngineType<ItemParticleInstance>> ITEM_PARTICLE = register("item_particle", () -> ItemParticleInstance.CODEC);
 	public static final RegistryEntry<EngineType<DustParticleInstance>> DUST_PARTICLE = register("dust_particle", () -> DustParticleInstance.CODEC);
 	public static final RegistryEntry<EngineType<TransitionParticleInstance>> TRANSITION_PARTICLE = register("transition_particle", () -> TransitionParticleInstance.CODEC);
+
+	public static final RegistryEntry<EngineType<SoundInstance>> SOUND = register("sound", () -> SoundInstance.CODEC);
 
 	public static final RegistryEntry<SelectorType<SelfSelector>> SELF = register("self", () -> SelfSelector.CODEC);
 	public static final RegistryEntry<SelectorType<MoveSelector>> MOVE_SELECTOR = register("move", () -> MoveSelector.CODEC);
