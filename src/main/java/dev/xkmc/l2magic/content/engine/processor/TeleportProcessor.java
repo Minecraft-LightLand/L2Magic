@@ -19,9 +19,9 @@ public record TeleportProcessor(
 ) implements EntityProcessor<TeleportProcessor> {
 
     public static final Codec<TeleportProcessor> CODEC = RecordCodecBuilder.create(i -> i.group(
-            DoubleVariable.codec("posX", e -> e.x),
-            DoubleVariable.codec("posY", e -> e.y),
-            DoubleVariable.codec("posZ", e -> e.z)
+            DoubleVariable.codec("x", e -> e.x),
+            DoubleVariable.codec("y", e -> e.y),
+            DoubleVariable.codec("z", e -> e.z)
     ).apply(i, TeleportProcessor::new));
 
     @Override

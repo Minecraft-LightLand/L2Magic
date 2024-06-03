@@ -80,9 +80,9 @@ public class EngineRegistry {
 	public static final RegistryEntry<ProcessorType<PushProcessor>> PUSH_ENTITY = register("push", () -> PushProcessor.CODEC);
 	public static final RegistryEntry<ProcessorType<EffectProcessor>> EFFECT = register("effect", () -> EffectProcessor.CODEC);
 	public static final RegistryEntry<ProcessorType<PropertyProcessor>> PROP = register("property", () -> PropertyProcessor.CODEC);
-	public static final RegistryEntry<ProcessorType<TeleportProcessor>> TP = register("move", () -> TeleportProcessor.CODEC);
+	public static final RegistryEntry<ProcessorType<TeleportProcessor>> TP = register("teleport", () -> TeleportProcessor.CODEC); //TODO docs
 
-	public static final RegistryEntry<MotionType<SimpleMotion>> SIMPLE_MOTION = register("simple", () -> SimpleMotion.CODEC); // doc
+	public static final RegistryEntry<MotionType<SimpleMotion>> SIMPLE_MOTION = register("simple", () -> SimpleMotion.CODEC); // TODO doc
 	public static final RegistryEntry<MotionType<MovePosMotion>> MOVE_MOTION = register("control_position", () -> MovePosMotion.CODEC);//TODO doc
 	public static final RegistryEntry<MotionType<MoveDeltaMotion>> DELTA_MOTION = register("control_velocity", () -> MoveDeltaMotion.CODEC);//TODO doc
 

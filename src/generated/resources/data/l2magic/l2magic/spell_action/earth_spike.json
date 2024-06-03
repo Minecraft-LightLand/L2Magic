@@ -1,0 +1,159 @@
+{
+  "action": {
+    "type": "l2magic:list",
+    "children": [
+      {
+        "type": "l2magic:processor",
+        "processors": [
+          {
+            "type": "l2magic:damage",
+            "damage": "8",
+            "damage_type": "minecraft:indirect_magic",
+            "indirect": true,
+            "positioned": true
+          },
+          {
+            "type": "l2magic:knockback",
+            "angle": "0",
+            "knockback": "0.2",
+            "tilt": "0"
+          }
+        ],
+        "selector": {
+          "type": "l2magic:cylinder",
+          "r": "1.5",
+          "y": "3"
+        },
+        "target": "ENEMY"
+      },
+      {
+        "type": "l2magic:move",
+        "child": {
+          "type": "l2magic:list",
+          "children": [
+            {
+              "type": "l2magic:iterate_delayed",
+              "child": {
+                "type": "l2magic:move",
+                "child": {
+                  "type": "l2magic:iterate",
+                  "child": {
+                    "type": "l2magic:move",
+                    "child": {
+                      "type": "l2magic:iterate_arc",
+                      "child": {
+                        "type": "l2magic:dust_particle",
+                        "color": "e88b00",
+                        "life": "1",
+                        "scale": ".5",
+                        "speed": ".01"
+                      },
+                      "count": "2.1052631578947367*(20-cone_l)",
+                      "maxAngle": "360",
+                      "maxInclusive": false,
+                      "minAngle": "0",
+                      "radius": "0.02631578947368421*(20-cone_l)"
+                    },
+                    "modifiers": [
+                      {
+                        "type": "l2magic:direction",
+                        "x": "0",
+                        "y": "1",
+                        "z": "0"
+                      },
+                      {
+                        "type": "l2magic:forward",
+                        "distance": "0.10526315789473684*cone_l"
+                      },
+                      {
+                        "type": "l2magic:direction_to_normal"
+                      }
+                    ]
+                  },
+                  "index": "cone_l",
+                  "step": "20"
+                },
+                "modifiers": [
+                  {
+                    "type": "l2magic:forward",
+                    "distance": "0.2*t"
+                  }
+                ]
+              },
+              "delay": "1",
+              "index": "t",
+              "step": "10"
+            },
+            {
+              "type": "l2magic:delay",
+              "child": {
+                "type": "l2magic:move",
+                "child": {
+                  "type": "l2magic:iterate",
+                  "child": {
+                    "type": "l2magic:move",
+                    "child": {
+                      "type": "l2magic:iterate_arc",
+                      "child": {
+                        "type": "l2magic:dust_particle",
+                        "color": "e88b00",
+                        "life": "10",
+                        "scale": ".5",
+                        "speed": "0"
+                      },
+                      "count": "2.1052631578947367*(20-cone_l)",
+                      "maxAngle": "360",
+                      "maxInclusive": false,
+                      "minAngle": "0",
+                      "radius": "0.02631578947368421*(20-cone_l)"
+                    },
+                    "modifiers": [
+                      {
+                        "type": "l2magic:direction",
+                        "x": "0",
+                        "y": "1",
+                        "z": "0"
+                      },
+                      {
+                        "type": "l2magic:forward",
+                        "distance": "0.10526315789473684*cone_l"
+                      },
+                      {
+                        "type": "l2magic:direction_to_normal"
+                      }
+                    ]
+                  },
+                  "index": "cone_l",
+                  "step": "20"
+                },
+                "modifiers": [
+                  {
+                    "type": "l2magic:forward",
+                    "distance": "2"
+                  }
+                ]
+              },
+              "tick": "11"
+            }
+          ]
+        },
+        "modifiers": [
+          {
+            "type": "l2magic:direction",
+            "x": "0",
+            "y": "1",
+            "z": "0"
+          },
+          {
+            "type": "l2magic:forward",
+            "distance": "-2"
+          }
+        ]
+      }
+    ]
+  },
+  "cast_type": "INSTANT",
+  "icon": "minecraft:pointed_dripstone",
+  "order": 3200,
+  "trigger_type": "TARGET_POS"
+}

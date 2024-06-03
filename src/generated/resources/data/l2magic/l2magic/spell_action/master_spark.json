@@ -7,18 +7,20 @@
         "action": {
           "type": "l2magic:random_pos_sphere",
           "child": {
-            "type": "l2magic:particle",
-            "particle": "minecraft:end_rod",
+            "type": "l2magic:dust_particle",
+            "color": "ffffff",
+            "life": "10",
+            "scale": "1",
             "speed": "-.2"
           },
-          "count": "20",
+          "count": "10",
           "radius": "3"
         },
-        "predicate": "TickUsing<=40"
+        "predicate": "TickUsing<=25"
       },
       {
-        "type": "l2magic:delay",
-        "child": {
+        "type": "l2magic:if",
+        "action": {
           "type": "l2magic:list",
           "children": [
             {
@@ -40,8 +42,8 @@
               ],
               "selector": {
                 "type": "l2magic:line",
-                "size": "2",
-                "step": "8"
+                "size": "3",
+                "step": "6"
               },
               "target": "ENEMY"
             },
@@ -54,9 +56,11 @@
                   "child": {
                     "type": "l2magic:move",
                     "child": {
-                      "type": "l2magic:particle",
-                      "particle": "minecraft:end_rod",
-                      "speed": "2"
+                      "type": "l2magic:dust_particle",
+                      "color": "ffffff",
+                      "life": "10+10*r3",
+                      "scale": "4+4*r1",
+                      "speed": "2+2*r2"
                     },
                     "modifiers": [
                       {
@@ -66,12 +70,12 @@
                       }
                     ]
                   },
-                  "count": 1,
+                  "count": 4,
                   "name": "r"
                 },
-                "count": "10",
+                "count": "20",
                 "maxAngle": "180",
-                "maxRadius": "2",
+                "maxRadius": "3",
                 "minAngle": "-180",
                 "minRadius": "0"
               },
@@ -79,7 +83,7 @@
                 {
                   "type": "l2magic:offset",
                   "x": "0",
-                  "y": "-2",
+                  "y": "-3",
                   "z": "0"
                 },
                 {
@@ -89,12 +93,12 @@
             }
           ]
         },
-        "tick": "60"
+        "predicate": "TickUsing>50"
       }
     ]
   },
   "cast_type": "CONTINUOUS",
   "icon": "minecraft:beacon",
-  "order": 3000,
+  "order": 2000,
   "trigger_type": "FACING_FRONT"
 }
