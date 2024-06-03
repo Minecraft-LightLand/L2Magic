@@ -21,9 +21,9 @@ public interface ColorVariable extends Variable {
 			DoubleVariable.codec("b", HSB::b)
 	).apply(i, HSB::new));
 
-	Codec<Static> CODEC_STATC = Codec.STRING.xmap(e -> Static.of(Integer.parseInt(e, 16)), e -> Integer.toString(e.val, 16));
+	Codec<Static> CODEC_STATIC = Codec.STRING.xmap(e -> Static.of(Integer.parseInt(e, 16)), e -> Integer.toString(e.val, 16));
 
-	Codec<ColorVariable> CODEC = Codec.either(CODEC_STATC, Codec.either(CODEC_RGB, CODEC_HSB)
+	Codec<ColorVariable> CODEC = Codec.either(CODEC_STATIC, Codec.either(CODEC_RGB, CODEC_HSB)
 					.xmap(e -> e.map(x -> x, x -> x), e -> e instanceof RGB a ? Either.left(a) : Either.right((HSB) e)))
 			.xmap(e -> e.map(x -> x, x -> x), e -> e instanceof Static a ? Either.left(a) : Either.right((Record & ColorVariable) e));
 

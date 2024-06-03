@@ -12,6 +12,12 @@ public class ExpressionHolder {
 		return new ExpressionHolder(str);
 	}
 
+	public static ExpressionHolder ofVerified(String str) {
+		var ans = new ExpressionHolder(str);
+		ans.verify(BuilderContext.STATIC);
+		return ans;
+	}
+
 	private final String str;
 
 	private Expression exp;

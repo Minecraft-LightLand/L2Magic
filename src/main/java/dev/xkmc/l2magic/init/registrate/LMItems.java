@@ -26,7 +26,7 @@ public class LMItems {
 			.register();
 
 	public static final EntityEntry<LMProjectile> GENERIC_PROJECTILE = L2Magic.REGISTRATE
-			.<LMProjectile>entity(LMProjectile::new, MobCategory.MISC)
+			.<LMProjectile>entity("generic_projectile", LMProjectile::new, MobCategory.MISC)
 			.properties(p -> p.setShouldReceiveVelocityUpdates(false).updateInterval(100)
 					.sized(0.01f, 0.01f).clientTrackingRange(4))
 			.renderer(() -> LMProjectileRenderer::new)

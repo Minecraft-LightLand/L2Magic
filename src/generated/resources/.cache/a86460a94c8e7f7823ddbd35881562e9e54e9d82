@@ -1,8 +1,10 @@
-// 1.20.1	2024-05-31T16:17:25.461108	L2Magic Spell Data
+// 1.20.1	2024-06-03T02:15:08.439966	L2Magic Spell Data
 36ef9f9b96663a7532afc93d4eac0fd98f8d9f12 data/l2magic/l2magic/spell_action/circular.json
 a67f2b728167cececac32190d5ac58f652915d62 data/l2magic/l2magic/spell_action/earthquake.json
 29320ec774bd2ba1f2ae207d4e7ca8136828e9fc data/l2magic/l2magic/spell_action/flame_burst.json
 dad975d90802e9ceb4b2717e40614f0edd52299b data/l2magic/l2magic/spell_action/magic_arrow_ring.json
 99325a02cf69cb59ff623c6c12f2af38bb31f98e data/l2magic/l2magic/spell_action/magic_arrows.json
+60598781bc75bea3edf892405de38690dc72e975 data/l2magic/l2magic/spell_action/magnet_core.json
+bea61d553c80d25e5f2b2c502d8b456425f5ef97 data/l2magic/l2magic/spell_action/master_spark.json
 5ae4473ba05c30a1d037cd4ad394b3e394362a6f data/l2magic/l2magic/spell_action/tornado.json
 03b8f689f11cd94f4c127dad18c2170e271ec247 data/l2magic/l2magic/spell_action/winter_storm.json

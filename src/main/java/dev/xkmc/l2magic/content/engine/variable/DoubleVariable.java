@@ -11,7 +11,7 @@ public record DoubleVariable(String str, ExpressionHolder exp) implements Numeri
 
 	public static final Codec<DoubleVariable> CODEC = Codec.STRING.xmap(DoubleVariable::of, DoubleVariable::str);
 
-	public static final DoubleVariable ZERO = of("0");
+	public static final DoubleVariable ZERO = ofVerified("0");
 
 	public static <T> RecordCodecBuilder<T, DoubleVariable> codec(String str, Function<T, DoubleVariable> func) {
 		return CODEC.fieldOf(str).forGetter(func);
@@ -23,6 +23,10 @@ public record DoubleVariable(String str, ExpressionHolder exp) implements Numeri
 
 	public static DoubleVariable of(String str) {
 		return new DoubleVariable(str, ExpressionHolder.of(str));
+	}
+
+	public static DoubleVariable ofVerified(String str) {
+		return new DoubleVariable(str, ExpressionHolder.ofVerified(str));
 	}
 
 	public double eval(EngineContext ctx) {

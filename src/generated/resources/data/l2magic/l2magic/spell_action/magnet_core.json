@@ -1,0 +1,124 @@
+{
+  "action": {
+    "type": "l2magic:list",
+    "children": [
+      {
+        "type": "l2magic:iterate_delayed",
+        "child": {
+          "type": "l2magic:random_pos_sphere",
+          "child": {
+            "type": "l2magic:dust_particle",
+            "color": "e88b00",
+            "life": "10",
+            "scale": "2+0.04*r",
+            "speed": "0.1"
+          },
+          "count": "20",
+          "radius": "0.2+0.01*r"
+        },
+        "delay": "2",
+        "index": "r",
+        "step": "55"
+      },
+      {
+        "type": "l2magic:iterate",
+        "child": {
+          "type": "l2magic:delay",
+          "child": {
+            "type": "l2magic:random_pos_sphere",
+            "child": {
+              "type": "l2magic:particle",
+              "particle": "minecraft:squid_ink",
+              "speed": "-.5"
+            },
+            "count": "200",
+            "radius": "8"
+          },
+          "tick": "10+30*t-2*t*t"
+        },
+        "index": "t",
+        "step": "5"
+      },
+      {
+        "type": "l2magic:delay",
+        "child": {
+          "type": "l2magic:list",
+          "children": [
+            {
+              "type": "l2magic:random_pos_sphere",
+              "child": {
+                "type": "l2magic:particle",
+                "particle": "minecraft:squid_ink",
+                "speed": "3"
+              },
+              "count": "200",
+              "radius": ".01"
+            },
+            {
+              "type": "l2magic:processor",
+              "processors": [
+                {
+                  "type": "l2magic:damage",
+                  "damage": "20",
+                  "damage_type": "minecraft:indirect_magic",
+                  "indirect": true,
+                  "positioned": false
+                },
+                {
+                  "type": "l2magic:push",
+                  "angle": "0",
+                  "from_center": "TO_CENTER",
+                  "speed": ".5",
+                  "tilt": "0"
+                }
+              ],
+              "selector": {
+                "type": "l2magic:box",
+                "center": true,
+                "size": "8",
+                "y": "8"
+              },
+              "target": "ENEMY"
+            }
+          ]
+        },
+        "tick": "115"
+      },
+      {
+        "type": "l2magic:iterate_delayed",
+        "child": {
+          "type": "l2magic:processor",
+          "processors": [
+            {
+              "type": "l2magic:damage",
+              "damage": ".1",
+              "damage_type": "minecraft:indirect_magic",
+              "indirect": true,
+              "positioned": false
+            },
+            {
+              "type": "l2magic:push",
+              "angle": "0",
+              "from_center": "TO_CENTER",
+              "speed": "-.05",
+              "tilt": "0"
+            }
+          ],
+          "selector": {
+            "type": "l2magic:box",
+            "center": true,
+            "size": "8",
+            "y": "8"
+          },
+          "target": "ENEMY"
+        },
+        "delay": "1",
+        "step": "115"
+      }
+    ]
+  },
+  "cast_type": "INSTANT",
+  "icon": "minecraft:iron_ore",
+  "order": 2000,
+  "trigger_type": "TARGET_POS"
+}

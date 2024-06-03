@@ -1,0 +1,100 @@
+{
+  "action": {
+    "type": "l2magic:list",
+    "children": [
+      {
+        "type": "l2magic:if",
+        "action": {
+          "type": "l2magic:random_pos_sphere",
+          "child": {
+            "type": "l2magic:particle",
+            "particle": "minecraft:end_rod",
+            "speed": "-.2"
+          },
+          "count": "20",
+          "radius": "3"
+        },
+        "predicate": "TickUsing<=40"
+      },
+      {
+        "type": "l2magic:delay",
+        "child": {
+          "type": "l2magic:list",
+          "children": [
+            {
+              "type": "l2magic:processor",
+              "processors": [
+                {
+                  "type": "l2magic:damage",
+                  "damage": "10",
+                  "damage_type": "minecraft:indirect_magic",
+                  "indirect": true,
+                  "positioned": true
+                },
+                {
+                  "type": "l2magic:knockback",
+                  "angle": "0",
+                  "knockback": "1",
+                  "tilt": "0"
+                }
+              ],
+              "selector": {
+                "type": "l2magic:line",
+                "size": "2",
+                "step": "8"
+              },
+              "target": "ENEMY"
+            },
+            {
+              "type": "l2magic:move",
+              "child": {
+                "type": "l2magic:random_pos_fan",
+                "child": {
+                  "type": "l2magic:random",
+                  "child": {
+                    "type": "l2magic:move",
+                    "child": {
+                      "type": "l2magic:particle",
+                      "particle": "minecraft:end_rod",
+                      "speed": "2"
+                    },
+                    "modifiers": [
+                      {
+                        "type": "l2magic:rotate",
+                        "degree": "0",
+                        "vertical": "105-30*r0"
+                      }
+                    ]
+                  },
+                  "count": 1,
+                  "name": "r"
+                },
+                "count": "10",
+                "maxAngle": "180",
+                "maxRadius": "2",
+                "minAngle": "-180",
+                "minRadius": "0"
+              },
+              "modifiers": [
+                {
+                  "type": "l2magic:offset",
+                  "x": "0",
+                  "y": "-2",
+                  "z": "0"
+                },
+                {
+                  "type": "l2magic:direction_to_normal"
+                }
+              ]
+            }
+          ]
+        },
+        "tick": "60"
+      }
+    ]
+  },
+  "cast_type": "CONTINUOUS",
+  "icon": "minecraft:beacon",
+  "order": 3000,
+  "trigger_type": "FACING_FRONT"
+}

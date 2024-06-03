@@ -1,4 +1,5 @@
 {
+  "entity.l2magic.generic_projectile": "Generic Projectile",
   "item.l2magic.creative_wand": "Creative Wand",
   "itemGroup.l2magic.magic": "L2Magic",
   "spell_action.l2magic.circular": "Three Bodies",
@@ -6,6 +7,8 @@
   "spell_action.l2magic.flame_burst": "Hell Mark",
   "spell_action.l2magic.magic_arrow_ring": "Sword of Seven",
   "spell_action.l2magic.magic_arrows": "Angelic Judgement",
+  "spell_action.l2magic.magnet_core": "Magnet Core",
+  "spell_action.l2magic.master_spark": "Master Spark",
   "spell_action.l2magic.tornado": "Tornado",
   "spell_action.l2magic.winter_storm": "Winter Storm"
 }

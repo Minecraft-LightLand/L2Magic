@@ -1,4 +1,5 @@
 {
+  "entity.l2magic.generic_projectile": "ǝןıʇɔǝظoɹԀ ɔıɹǝuǝ⅁",
   "item.l2magic.creative_wand": "puɐM ǝʌıʇɐǝɹƆ",
   "itemGroup.l2magic.magic": "ɔıbɐWᄅꞀ",
   "spell_action.l2magic.circular": "sǝıpoᗺ ǝǝɹɥ⟘",
@@ -6,6 +7,8 @@
   "spell_action.l2magic.flame_burst": "ʞɹɐW ןןǝH",
   "spell_action.l2magic.magic_arrow_ring": "uǝʌǝS ɟo pɹoʍS",
   "spell_action.l2magic.magic_arrows": "ʇuǝɯǝbpnſ ɔıןǝbuⱯ",
+  "spell_action.l2magic.magnet_core": "ǝɹoƆ ʇǝubɐW",
+  "spell_action.l2magic.master_spark": "ʞɹɐdS ɹǝʇsɐW",
   "spell_action.l2magic.tornado": "opɐuɹo⟘",
   "spell_action.l2magic.winter_storm": "ɯɹoʇS ɹǝʇuıM"
 }
