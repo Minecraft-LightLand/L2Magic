@@ -1,10 +1,14 @@
 package dev.xkmc.l2magic.init.registrate;
 
+import com.tterrag.registrate.util.entry.EntityEntry;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import com.tterrag.registrate.util.entry.RegistryEntry;
 import dev.xkmc.l2itemselector.init.data.L2ISTagGen;
+import dev.xkmc.l2magic.content.entity.core.LMProjectile;
+import dev.xkmc.l2magic.content.entity.renderer.LMProjectileRenderer;
 import dev.xkmc.l2magic.content.item.CreativeWandItem;
 import dev.xkmc.l2magic.init.L2Magic;
+import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.item.CreativeModeTab;
 
 public class LMItems {
@@ -17,6 +21,13 @@ public class LMItems {
 			.item("creative_wand", p -> new CreativeWandItem(p.stacksTo(1)))
 			.model((ctx, pvd) -> pvd.handheld(ctx))
 			.tag(L2ISTagGen.SELECTABLE)
+			.register();
+
+	public static final EntityEntry<LMProjectile> GENERIC_PROJECTILE = L2Magic.REGISTRATE
+			.<LMProjectile>entity(LMProjectile::new, MobCategory.MISC)
+			.properties(p -> p.setShouldReceiveVelocityUpdates(false).updateInterval(100)
+					.sized(0.01f, 0.01f).clientTrackingRange(4))
+			.renderer(() -> LMProjectileRenderer::new)
 			.register();
 
 	public static void register() {
