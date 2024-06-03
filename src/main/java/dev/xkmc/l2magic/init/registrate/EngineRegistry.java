@@ -17,6 +17,8 @@ import dev.xkmc.l2magic.content.entity.core.ProjectileConfig;
 import dev.xkmc.l2magic.content.entity.motion.MoveDeltaMotion;
 import dev.xkmc.l2magic.content.entity.motion.MovePosMotion;
 import dev.xkmc.l2magic.content.entity.motion.SimpleMotion;
+import dev.xkmc.l2magic.content.particle.engine.CustomParticleInstance;
+import dev.xkmc.l2magic.content.particle.engine.ParticleRenderType;
 import dev.xkmc.l2magic.init.L2Magic;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
@@ -31,6 +33,7 @@ public class EngineRegistry {
 	public static final EngineRegistryInstance<SelectorType<?>> SELECTOR = EngineRegistryInstance.of("selector");
 	public static final EngineRegistryInstance<ProcessorType<?>> PROCESSOR = EngineRegistryInstance.of("processor");
 	public static final EngineRegistryInstance<MotionType<?>> MOTION = EngineRegistryInstance.of("motion");
+	public static final EngineRegistryInstance<ParticleRenderType<?>> PARTICLE = EngineRegistryInstance.of("particle_renderer");
 
 	public static final RegistryEntry<ModifierType<ForwardOffsetModifier>> FORWARD = register("forward", () -> ForwardOffsetModifier.CODEC);
 	public static final RegistryEntry<ModifierType<RotationModifier>> ROTATE = register("rotate", () -> RotationModifier.CODEC);
@@ -63,6 +66,7 @@ public class EngineRegistry {
 	public static final RegistryEntry<EngineType<ItemParticleInstance>> ITEM_PARTICLE = register("item_particle", () -> ItemParticleInstance.CODEC);
 	public static final RegistryEntry<EngineType<DustParticleInstance>> DUST_PARTICLE = register("dust_particle", () -> DustParticleInstance.CODEC);
 	public static final RegistryEntry<EngineType<TransitionParticleInstance>> TRANSITION_PARTICLE = register("transition_particle", () -> TransitionParticleInstance.CODEC);
+	public static final RegistryEntry<EngineType<CustomParticleInstance>> CUSTOM_PARTICLE = register("custom_particle", () -> CustomParticleInstance.CODEC);
 
 	public static final RegistryEntry<EngineType<SoundInstance>> SOUND = register("sound", () -> SoundInstance.CODEC);
 
