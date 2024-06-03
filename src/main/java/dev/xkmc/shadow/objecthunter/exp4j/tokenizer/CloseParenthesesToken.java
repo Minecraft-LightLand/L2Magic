@@ -20,10 +20,10 @@ package dev.xkmc.shadow.objecthunter.exp4j.tokenizer;
  */
 class CloseParenthesesToken extends Token {
 
-    /**
-     * Create a new instance
-     */
-    CloseParenthesesToken() {
-        super(Token.TOKEN_PARENTHESES_CLOSE);
-    }
+	/**
+	 * Create a new instance
+	 */
+	CloseParenthesesToken() {
+		super(Token.TOKEN_PARENTHESES_CLOSE);
+	}
 }

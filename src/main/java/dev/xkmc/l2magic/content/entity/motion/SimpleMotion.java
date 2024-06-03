@@ -23,6 +23,8 @@ public record SimpleMotion(
 			g.orElse(DoubleVariable.ZERO)
 	)));
 
+	public static final SimpleMotion ZERO = new SimpleMotion(DoubleVariable.ZERO, DoubleVariable.ZERO);
+
 	@Override
 	public MotionType<SimpleMotion> type() {
 		return EngineRegistry.SIMPLE_MOTION.get();

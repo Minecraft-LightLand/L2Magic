@@ -13,7 +13,6 @@ import net.minecraft.world.phys.Vec3;
 
 import javax.annotation.Nullable;
 import java.util.Optional;
-import java.util.Set;
 
 public record SphereRandomIterator(DoubleVariable radius, IntVariable count,
 								   ConfiguredEngine<?> child, @Nullable String index)

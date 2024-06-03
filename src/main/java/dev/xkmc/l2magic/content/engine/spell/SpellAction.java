@@ -5,7 +5,6 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import dev.xkmc.l2magic.content.engine.context.*;
 import dev.xkmc.l2magic.content.engine.core.ConfiguredEngine;
 import dev.xkmc.l2magic.content.engine.helper.EngineHelper;
-import dev.xkmc.l2magic.content.engine.helper.Orientation;
 import dev.xkmc.l2magic.content.engine.helper.Scheduler;
 import dev.xkmc.l2magic.init.L2Magic;
 import net.minecraft.data.worldgen.BootstapContext;
@@ -45,7 +44,7 @@ public record SpellAction(ConfiguredEngine<?> action, Item icon, int order,
 			var source = new SingleThreadedRandomSource(ctx.seed());
 			EngineContext engine = new EngineContext(
 					new UserContext(ctx.user().level(), ctx.user(), sche),
-					 LocationContext.of(ctx.origin(), ctx.facing()),
+					LocationContext.of(ctx.origin(), ctx.facing()),
 					source, ctx.defaultArgs()
 			);
 			action().execute(engine);

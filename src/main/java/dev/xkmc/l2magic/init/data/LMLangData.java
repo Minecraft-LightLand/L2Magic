@@ -10,8 +10,7 @@ public enum LMLangData {
 	CMD_WRONG_TYPE("command.wrong_type", "Spell %s expects type %s", 2),
 	CMD_SUCCESS("command.success", "Spell %s is executed successfully", 1),
 	CMD_SUCCESS_COUNT("command.success_count", "Spell %s is executed by %s entities successfully", 2),
-	CMD_FAIL("command.fail", "Spell %s failed to execute", 1)
-	;
+	CMD_FAIL("command.fail", "Spell %s failed to execute", 1);
 
 	final String id, def;
 	final int count;

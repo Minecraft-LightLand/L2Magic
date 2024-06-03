@@ -1,7 +1,5 @@
 package dev.xkmc.l2magic.content.particle.core;
 
-import com.mojang.blaze3d.vertex.VertexConsumer;
-import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.ParticleRenderType;
 import net.minecraft.client.particle.TextureSheetParticle;
@@ -33,11 +31,11 @@ public class LMGenericParticle extends TextureSheetParticle {
 		xo = x;
 		yo = y;
 		zo = z;
+		Vec3 speed = data.move(age, new Vec3(xd, yd, zd), new Vec3(x, y, z));
 		if (age++ >= lifetime) {
 			remove();
 			return;
 		}
-		Vec3 speed = data.move(new Vec3(xd, yd, zd), new Vec3(x, y, z));
 		xd = speed.x;
 		yd = speed.y;
 		zd = speed.z;
@@ -62,7 +60,7 @@ public class LMGenericParticle extends TextureSheetParticle {
 
 	@Override
 	public ParticleRenderType getRenderType() {
-		return switch (data.renderType()) {
+		return switch (data.renderer().renderType()) {
 			case NORMAL -> ParticleRenderType.PARTICLE_SHEET_OPAQUE;
 			case LIT -> ParticleRenderType.PARTICLE_SHEET_LIT;
 			case TRANSLUCENT -> ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;

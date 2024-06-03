@@ -72,7 +72,7 @@ public class EngineRegistry {
 	public static final RegistryEntry<SelectorType<CompoundEntitySelector>> COMPOUND = register("compound", () -> CompoundEntitySelector.CODEC);
 	public static final RegistryEntry<SelectorType<LinearCubeSelector>> LINEAR = register("line", () -> LinearCubeSelector.CODEC);
 	public static final RegistryEntry<SelectorType<ArcCubeSelector>> ARC = register("arc", () -> ArcCubeSelector.CODEC);
-	public static final RegistryEntry<SelectorType<ApproxCylinderSelector>> CYLINDER = register("cylinder", () -> ApproxCylinderSelector.CODEC);;
+	public static final RegistryEntry<SelectorType<ApproxCylinderSelector>> CYLINDER = register("cylinder", () -> ApproxCylinderSelector.CODEC);
 	public static final RegistryEntry<SelectorType<ApproxBallSelector>> BALL = register("ball", () -> ApproxBallSelector.CODEC);
 
 	public static final RegistryEntry<ProcessorType<DamageProcessor>> DAMAGE = register("damage", () -> DamageProcessor.CODEC);
@@ -84,7 +84,6 @@ public class EngineRegistry {
 	public static final RegistryEntry<MotionType<SimpleMotion>> SIMPLE_MOTION = register("simple", () -> SimpleMotion.CODEC); // doc
 	public static final RegistryEntry<MotionType<MovePosMotion>> MOVE_MOTION = register("control_position", () -> MovePosMotion.CODEC);//TODO doc
 	public static final RegistryEntry<MotionType<MoveDeltaMotion>> DELTA_MOTION = register("control_velocity", () -> MoveDeltaMotion.CODEC);//TODO doc
-
 
 
 	private static <T extends Record & ConfiguredEngine<T>> RegistryEntry<EngineType<T>>

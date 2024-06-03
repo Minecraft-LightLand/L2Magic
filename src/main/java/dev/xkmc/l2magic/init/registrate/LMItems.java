@@ -9,7 +9,6 @@ import dev.xkmc.l2magic.content.entity.renderer.LMProjectileRenderer;
 import dev.xkmc.l2magic.content.item.CreativeWandItem;
 import dev.xkmc.l2magic.content.particle.core.LMGenericParticleType;
 import dev.xkmc.l2magic.init.L2Magic;
-import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.item.CreativeModeTab;

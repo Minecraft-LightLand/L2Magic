@@ -8,4 +8,9 @@ public interface ParticleRenderer {
 
 	void onPostTick(LMGenericParticle e);
 
+	RenderType renderType();
+
+	enum RenderType {
+		NORMAL, LIT, TRANSLUCENT
+	}
 }

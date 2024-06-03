@@ -5,11 +5,11 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.SpriteSet;
 import net.minecraft.resources.ResourceLocation;
 
-public record VanillaParticleSprite(ResourceLocation type) implements SpriteData {
+public record VanillaParticleSprite(RenderType renderType, ResourceLocation particle) implements SpriteData {
 
 	@Override
 	public SpriteSet spriteSet() {
-		return ((ParticleEngineAccessor) Minecraft.getInstance().particleEngine).getSpriteSets().get(type);
+		return ((ParticleEngineAccessor) Minecraft.getInstance().particleEngine).getSpriteSets().get(particle);
 	}
 
 }

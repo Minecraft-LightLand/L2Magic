@@ -3,7 +3,8 @@ package dev.xkmc.l2magic.init.data.spell;
 import com.tterrag.registrate.providers.RegistrateLangProvider;
 import dev.xkmc.l2magic.content.engine.context.DataGenContext;
 import dev.xkmc.l2magic.content.engine.core.ConfiguredEngine;
-import dev.xkmc.l2magic.content.engine.iterator.*;
+import dev.xkmc.l2magic.content.engine.iterator.RingRandomIterator;
+import dev.xkmc.l2magic.content.engine.iterator.SphereRandomIterator;
 import dev.xkmc.l2magic.content.engine.logic.*;
 import dev.xkmc.l2magic.content.engine.modifier.Dir2NormalModifier;
 import dev.xkmc.l2magic.content.engine.modifier.OffsetModifier;
@@ -30,85 +31,85 @@ import java.util.List;
 
 public class MasterSpark extends SpellDataGenEntry {
 
-    public static final ResourceKey<SpellAction> MASTER_SPARK = spell("master_spark");
+	public static final ResourceKey<SpellAction> MASTER_SPARK = spell("master_spark");
 
-    @Override
-    public void genLang(RegistrateLangProvider pvd) {
-        pvd.add(SpellAction.lang(MASTER_SPARK.location()), "Master Spark");
-    }
+	@Override
+	public void genLang(RegistrateLangProvider pvd) {
+		pvd.add(SpellAction.lang(MASTER_SPARK.location()), "Master Spark");
+	}
 
-    @Override
-    public void register(BootstapContext<SpellAction> ctx) {
-        new SpellAction(
-                masterSpark(new DataGenContext(ctx)),
-                Blocks.BEACON.asItem(), 3000,
-                SpellCastType.CONTINUOUS,
-                SpellTriggerType.FACING_FRONT
-        ).verifyOnBuild(ctx, MASTER_SPARK);
-    }
+	@Override
+	public void register(BootstapContext<SpellAction> ctx) {
+		new SpellAction(
+				masterSpark(new DataGenContext(ctx)),
+				Blocks.BEACON.asItem(), 3000,
+				SpellCastType.CONTINUOUS,
+				SpellTriggerType.FACING_FRONT
+		).verifyOnBuild(ctx, MASTER_SPARK);
+	}
 
-    private static ConfiguredEngine<?> masterSpark(DataGenContext ctx) {
-        return new ListLogic(
-                List.of(
-                        new PredicateLogic(
-                                BooleanVariable.of("TickUsing<=40"),
-                                new SphereRandomIterator(
-                                        DoubleVariable.of("3"),
-                                        IntVariable.of("20"),
-                                        new SimpleParticleInstance(
-                                                ParticleTypes.END_ROD,
-                                                DoubleVariable.of("-.2")
-                                        ),
-                                        null
-                                ),
-                                null
-                        ),
-                        new DelayLogic(
-                                IntVariable.of("60"),
-                                new ListLogic(
-                                        List.of(
-                                                new ProcessorEngine(SelectionType.ENEMY,
-                                                        new LinearCubeSelector(
-                                                                IntVariable.of("8"), // dist=16, r=2
-                                                                DoubleVariable.of("2")
-                                                        ),
-                                                        List.of(
-                                                                new DamageProcessor(
-                                                                        ctx.damage(DamageTypes.INDIRECT_MAGIC),
-                                                                        DoubleVariable.of("10"),
-                                                                        true, true
-                                                                ),
-                                                                KnockBackProcessor.of("1")
-                                                        )
-                                                ),
-                                                new MoveEngine(
-                                                        List.of(
-                                                                OffsetModifier.of("0", "-2", "0"),
-                                                                new Dir2NormalModifier()
-                                                        ),
-                                                        new RingRandomIterator(
-                                                                DoubleVariable.ZERO,
-                                                                DoubleVariable.of("2"),
-                                                                DoubleVariable.of("-180"),
-                                                                DoubleVariable.of("180"),
-                                                                IntVariable.of("10"),
-                                                                new RandomVariableLogic("r", 1,
-                                                                        new MoveEngine(List.of(RotationModifier.of("0", "105-30*r0")),
-                                                                                new SimpleParticleInstance(
-                                                                                        ParticleTypes.END_ROD,
-                                                                                        DoubleVariable.of("2")
-                                                                                )
-                                                                        )
-                                                                ),
-                                                                null
-                                                        )
-                                                )
+	private static ConfiguredEngine<?> masterSpark(DataGenContext ctx) {
+		return new ListLogic(
+				List.of(
+						new PredicateLogic(
+								BooleanVariable.of("TickUsing<=40"),
+								new SphereRandomIterator(
+										DoubleVariable.of("3"),
+										IntVariable.of("20"),
+										new SimpleParticleInstance(
+												ParticleTypes.END_ROD,
+												DoubleVariable.of("-.2")
+										),
+										null
+								),
+								null
+						),
+						new DelayLogic(
+								IntVariable.of("60"),
+								new ListLogic(
+										List.of(
+												new ProcessorEngine(SelectionType.ENEMY,
+														new LinearCubeSelector(
+																IntVariable.of("8"), // dist=16, r=2
+																DoubleVariable.of("2")
+														),
+														List.of(
+																new DamageProcessor(
+																		ctx.damage(DamageTypes.INDIRECT_MAGIC),
+																		DoubleVariable.of("10"),
+																		true, true
+																),
+																KnockBackProcessor.of("1")
+														)
+												),
+												new MoveEngine(
+														List.of(
+																OffsetModifier.of("0", "-2", "0"),
+																new Dir2NormalModifier()
+														),
+														new RingRandomIterator(
+																DoubleVariable.ZERO,
+																DoubleVariable.of("2"),
+																DoubleVariable.of("-180"),
+																DoubleVariable.of("180"),
+																IntVariable.of("10"),
+																new RandomVariableLogic("r", 1,
+																		new MoveEngine(List.of(RotationModifier.of("0", "105-30*r0")),
+																				new SimpleParticleInstance(
+																						ParticleTypes.END_ROD,
+																						DoubleVariable.of("2")
+																				)
+																		)
+																),
+																null
+														)
+												)
 
-                                        )
-                                )
-                        )
-                )
-        );
-    }
+										)
+								)
+						)
+				)
+		);
+	}
 
 }

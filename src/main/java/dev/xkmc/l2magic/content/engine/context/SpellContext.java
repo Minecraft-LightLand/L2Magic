@@ -18,7 +18,8 @@ import javax.annotation.Nullable;
 import java.util.Map;
 import java.util.Set;
 
-public record SpellContext(LivingEntity user, Vec3 origin, Orientation facing, long seed, double tickUsing, double power) {
+public record SpellContext(LivingEntity user, Vec3 origin, Orientation facing, long seed, double tickUsing,
+						   double power) {
 
 	public static Set<String> DEFAULT_PARAMS = Set.of("TickUsing", "Power", "CastX", "CastY", "CastZ");
 
