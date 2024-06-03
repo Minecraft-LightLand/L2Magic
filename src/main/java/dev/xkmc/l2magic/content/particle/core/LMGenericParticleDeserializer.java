@@ -10,12 +10,12 @@ public class LMGenericParticleDeserializer implements ParticleOptions.Deserializ
 
 	@Override
 	public LMGenericParticleOption fromCommand(ParticleType<LMGenericParticleOption> type, StringReader reader) throws CommandSyntaxException {
-		return null;//TODO
+		return new LMGenericParticleOption();
 	}
 
 	@Override
 	public LMGenericParticleOption fromNetwork(ParticleType<LMGenericParticleOption> type, FriendlyByteBuf buf) {
-		return null;//TODO
+		return new LMGenericParticleOption();
 	}
 
 }

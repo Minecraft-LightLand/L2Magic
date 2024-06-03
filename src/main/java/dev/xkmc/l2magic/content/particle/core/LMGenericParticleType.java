@@ -11,7 +11,7 @@ public class LMGenericParticleType extends ParticleType<LMGenericParticleOption>
 
 	@Override
 	public Codec<LMGenericParticleOption> codec() {
-		return null;//TODO
+		return LMGenericParticleOption.CODEC;
 	}
 
 }

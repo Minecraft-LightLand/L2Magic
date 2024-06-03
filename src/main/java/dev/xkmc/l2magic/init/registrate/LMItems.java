@@ -7,7 +7,10 @@ import dev.xkmc.l2itemselector.init.data.L2ISTagGen;
 import dev.xkmc.l2magic.content.entity.core.LMProjectile;
 import dev.xkmc.l2magic.content.entity.renderer.LMProjectileRenderer;
 import dev.xkmc.l2magic.content.item.CreativeWandItem;
+import dev.xkmc.l2magic.content.particle.core.LMGenericParticleType;
 import dev.xkmc.l2magic.init.L2Magic;
+import net.minecraft.core.particles.ParticleType;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.item.CreativeModeTab;
 
@@ -29,6 +32,9 @@ public class LMItems {
 					.sized(0.01f, 0.01f).clientTrackingRange(4))
 			.renderer(() -> LMProjectileRenderer::new)
 			.register();
+
+	public static final RegistryEntry<LMGenericParticleType> GENERIC_PARTICLE = L2Magic.REGISTRATE
+			.simple("generic_particle", Registries.PARTICLE_TYPE, LMGenericParticleType::new);
 
 	public static void register() {
 
