@@ -7,10 +7,7 @@ import dev.xkmc.l2magic.content.engine.core.ConfiguredEngine;
 import dev.xkmc.l2magic.content.engine.iterator.DelayedIterator;
 import dev.xkmc.l2magic.content.engine.iterator.RingRandomIterator;
 import dev.xkmc.l2magic.content.engine.logic.*;
-import dev.xkmc.l2magic.content.engine.modifier.Dir2NormalModifier;
-import dev.xkmc.l2magic.content.engine.modifier.ForwardOffsetModifier;
-import dev.xkmc.l2magic.content.engine.modifier.OffsetModifier;
-import dev.xkmc.l2magic.content.engine.modifier.RotationModifier;
+import dev.xkmc.l2magic.content.engine.modifier.*;
 import dev.xkmc.l2magic.content.engine.particle.SimpleParticleInstance;
 import dev.xkmc.l2magic.content.engine.processor.DamageProcessor;
 import dev.xkmc.l2magic.content.engine.processor.EffectProcessor;
@@ -24,6 +21,10 @@ import dev.xkmc.l2magic.content.engine.spell.SpellTriggerType;
 import dev.xkmc.l2magic.content.engine.variable.BooleanVariable;
 import dev.xkmc.l2magic.content.engine.variable.DoubleVariable;
 import dev.xkmc.l2magic.content.engine.variable.IntVariable;
+import dev.xkmc.l2magic.content.entity.motion.MovePosMotion;
+import dev.xkmc.l2magic.content.particle.engine.CustomParticleInstance;
+import dev.xkmc.l2magic.content.particle.engine.RenderTypePreset;
+import dev.xkmc.l2magic.content.particle.engine.SimpleParticleData;
 import dev.xkmc.l2magic.init.data.SpellDataGenEntry;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.data.worldgen.BootstapContext;
@@ -113,14 +114,20 @@ public class WinterStorm extends SpellDataGenEntry {
 
 
 	private static ConfiguredEngine<?> tornado(DataGenContext ctx) {
-		double rate = Math.tan(15 * Mth.DEG_TO_RAD);
+		double vsp = 0.5;
+		int life = 20;
+		double rate = Math.tan(10 * Mth.DEG_TO_RAD);
+		double w = vsp * 180 / Math.PI / 2;
+		double ir = 0.3;
+		String radius = ir + "+TickCount*" + vsp * rate;
+		String angle = w / (vsp * rate) + "*(log(" + radius + ")+log(" + ir + "))";
 		return new ListLogic(List.of(
 				new PredicateLogic(
 						BooleanVariable.of("TickUsing>=10"),
 						new ProcessorEngine(SelectionType.ENEMY,
 								new LinearCubeSelector(
-										IntVariable.of("5"),
-										DoubleVariable.of("1")
+										IntVariable.of("6"),
+										DoubleVariable.of("1.5")
 								),
 								List.of(
 										new DamageProcessor(ctx.damage(DamageTypes.FREEZE),
@@ -140,23 +147,35 @@ public class WinterStorm extends SpellDataGenEntry {
 								)), null),
 				new DelayedIterator(
 						IntVariable.of("10"),
-						IntVariable.of("2"),
+						IntVariable.of("1"),
 						new RandomVariableLogic("r", 1,
 								new MoveEngine(List.of(
-										ForwardOffsetModifier.of("r0*2"),
 										new Dir2NormalModifier()
 								), new RingRandomIterator(
-										DoubleVariable.of("r0*2*" + rate),
-										DoubleVariable.of("r0*2*" + rate),
+										DoubleVariable.of(ir + ""),
+										DoubleVariable.of(ir + ""),
 										DoubleVariable.of("-180"),
 										DoubleVariable.of("180"),
-										IntVariable.of("5"),
-										new MoveEngine(List.of(RotationModifier.of("75", "75")),
-												new SimpleParticleInstance(
-														ParticleTypes.SNOWFLAKE,
-														DoubleVariable.of("0.5")
+										IntVariable.of("3"),
+										new MoveEngine(List.of(
+												NormalOffsetModifier.of("rand(" + (-vsp) + "," + vsp + ")")
+										), new CustomParticleInstance(
+												DoubleVariable.of("0"),
+												DoubleVariable.of("0.7"),
+												IntVariable.of("" + life),
+												true,
+												new MovePosMotion(List.of(
+														ForwardOffsetModifier.of("-" + ir),
+														RotationModifier.of(angle),
+														ForwardOffsetModifier.of(radius),
+														new Normal2DirModifier(),
+														ForwardOffsetModifier.of("TickCount*" + vsp)
+												)),
+												new SimpleParticleData(
+														RenderTypePreset.NORMAL,
+														ParticleTypes.SNOWFLAKE
 												)
-										), null
+										)), null
 								))
 						), null
 				)

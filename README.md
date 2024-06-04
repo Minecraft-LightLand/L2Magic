@@ -33,6 +33,10 @@ Parameters:
 - ProjectileY: Position of this projectile (when root block is initiated)
 - ProjectileZ: Position of this projectile (when root block is initiated)
 
+## Custom Particle
+Parameters:
+- TickCount: Ticks this particle has existed
+
 # Block Types
 
 ## Action Blocks (15)

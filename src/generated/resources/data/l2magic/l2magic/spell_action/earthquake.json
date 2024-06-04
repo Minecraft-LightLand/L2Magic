@@ -154,7 +154,7 @@
                         "block": "minecraft:stone",
                         "breaking": true,
                         "life": "rand(20,40)",
-                        "scale": "0.2",
+                        "scale": "0.5",
                         "speed": "0.5+rand(0,0.4)"
                       },
                       "modifiers": [

@@ -23,10 +23,24 @@ public class DefaultFunctions {
 			}
 		};
 	}
+	private static Function of(String id, UniOp func) {
+		return new Function(id, 1) {
+			@Override
+			public double apply(double... args) {
+				return func.apply(args[0]);
+			}
+		};
+	}
 
 	private interface Func {
 
 		double apply(double a, double b);
+
+	}
+
+	private interface UniOp {
+
+		double apply(double a);
 
 	}
 

@@ -2,6 +2,7 @@ package dev.xkmc.l2magic.content.particle.engine;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import dev.xkmc.l2magic.content.engine.context.BuilderContext;
 import dev.xkmc.l2magic.content.engine.context.EngineContext;
 import dev.xkmc.l2magic.content.engine.core.EngineType;
 import dev.xkmc.l2magic.content.engine.particle.ParticleInstance;
@@ -15,6 +16,7 @@ import dev.xkmc.l2magic.init.registrate.EngineRegistry;
 import net.minecraft.core.particles.ParticleOptions;
 
 import java.util.Optional;
+import java.util.Set;
 
 public record CustomParticleInstance(
 		DoubleVariable speed, DoubleVariable scale, IntVariable life, boolean collide,
@@ -47,4 +49,13 @@ public record CustomParticleInstance(
 		));
 	}
 
+	@Override
+	public boolean verify(BuilderContext ctx) {
+		speed.verify(ctx.of("speed"));
+		scale.verify(ctx.of("scale"));
+		life.verify(ctx.of("life"));
+		motion.verify(ctx.of("motion", Set.of("TickCount")));
+		renderer.verify(ctx.of("renderer"));
+		return true;
+	}
 }

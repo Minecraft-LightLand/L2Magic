@@ -35,6 +35,7 @@ public class EngineRegistry {
 	public static final EngineRegistryInstance<ParticleRenderType<?>> PARTICLE = EngineRegistryInstance.of("particle_renderer");
 
 	public static final RegistryEntry<ModifierType<ForwardOffsetModifier>> FORWARD = register("forward", () -> ForwardOffsetModifier.CODEC);
+	public static final RegistryEntry<ModifierType<NormalOffsetModifier>> NORMAL_OFFSET = register("normal_offset", () -> NormalOffsetModifier.CODEC);//TODO doc
 	public static final RegistryEntry<ModifierType<RotationModifier>> ROTATE = register("rotate", () -> RotationModifier.CODEC);
 	public static final RegistryEntry<ModifierType<OffsetModifier>> OFFSET = register("offset", () -> OffsetModifier.CODEC);
 	public static final RegistryEntry<ModifierType<SetPosModifier>> POSITION = register("set_position", () -> SetPosModifier.CODEC);//TODO doc

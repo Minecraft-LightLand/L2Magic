@@ -10,10 +10,10 @@ public interface SetPosMotion<T extends Record & SetPosMotion<T>> extends Motion
 
 	@Override
 	default ProjectileMovement move(EngineContext ctx, Vec3 vec, Vec3 pos) {
-		ctx = ctx.with(ctx.loc().with(pos));
+		//ctx = ctx.with(ctx.loc().with(pos));
 		var old = ctx.loc();
 		ctx = ctx.with(move(ctx));
-		var diff = ctx.loc().pos().subtract(old.pos());
+		var diff = ctx.loc().pos().subtract(pos);
 		return new ProjectileMovement(diff, ProjectileMovement.of(ctx.loc().dir()).rot());
 	}
 

@@ -16,6 +16,12 @@ public record EngineContext(UserContext user, LocationContext loc, RandomSource 
 		return new EngineContext(user, modified, rand, parameters);
 	}
 
+	public EngineContext withParam(String key, double val) {
+		var ans = new LinkedHashMap<>(parameters);
+		ans.put(key, val);
+		return new EngineContext(user, loc, rand, ans);
+	}
+
 	public void iterateOn(LocationContext loc, @Nullable String index, int i, ConfiguredEngine<?> child) {
 		if (index == null || index.isEmpty()) {
 			execute(loc, child);
@@ -70,4 +76,5 @@ public record EngineContext(UserContext user, LocationContext loc, RandomSource 
 			else GeneralEventHandler.schedulePersistent(sche::tick);
 		}
 	}
+
 }

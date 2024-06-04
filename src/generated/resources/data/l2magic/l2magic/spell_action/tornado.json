@@ -32,8 +32,8 @@
           ],
           "selector": {
             "type": "l2magic:line",
-            "size": "1",
-            "step": "5"
+            "size": "1.5",
+            "step": "6"
           },
           "target": "ENEMY"
         },
@@ -50,29 +50,56 @@
               "child": {
                 "type": "l2magic:move",
                 "child": {
-                  "type": "l2magic:particle",
-                  "particle": "minecraft:snowflake",
-                  "speed": "0.5"
+                  "type": "l2magic:custom_particle",
+                  "collide": true,
+                  "life": "20",
+                  "motion": {
+                    "type": "l2magic:control_position",
+                    "modifiers": [
+                      {
+                        "type": "l2magic:forward",
+                        "distance": "-0.3"
+                      },
+                      {
+                        "type": "l2magic:rotate",
+                        "degree": "162.4702611704238*(log(0.3+TickCount*0.08816348773665984)+log(0.3))",
+                        "vertical": "0"
+                      },
+                      {
+                        "type": "l2magic:forward",
+                        "distance": "0.3+TickCount*0.08816348773665984"
+                      },
+                      {
+                        "type": "l2magic:normal_to_direction"
+                      },
+                      {
+                        "type": "l2magic:forward",
+                        "distance": "TickCount*0.5"
+                      }
+                    ]
+                  },
+                  "renderer": {
+                    "type": "l2magic:simple",
+                    "particle": "minecraft:snowflake",
+                    "renderType": "NORMAL"
+                  },
+                  "scale": "0.7",
+                  "speed": "0"
                 },
                 "modifiers": [
                   {
-                    "type": "l2magic:rotate",
-                    "degree": "75",
-                    "vertical": "75"
+                    "type": "l2magic:normal_offset",
+                    "distance": "rand(-0.5,0.5)"
                   }
                 ]
               },
-              "count": "5",
+              "count": "3",
               "maxAngle": "180",
-              "maxRadius": "r0*2*0.2679492002394105",
+              "maxRadius": "0.3",
               "minAngle": "-180",
-              "minRadius": "r0*2*0.2679492002394105"
+              "minRadius": "0.3"
             },
             "modifiers": [
-              {
-                "type": "l2magic:forward",
-                "distance": "r0*2"
-              },
               {
                 "type": "l2magic:direction_to_normal"
               }
@@ -81,7 +108,7 @@
           "count": 1,
           "name": "r"
         },
-        "delay": "2",
+        "delay": "1",
         "step": "10"
       }
     ]
