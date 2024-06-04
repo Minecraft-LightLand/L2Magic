@@ -10,6 +10,7 @@ import dev.xkmc.l2magic.content.engine.variable.IntVariable;
 import dev.xkmc.l2magic.content.entity.motion.SimpleMotion;
 import dev.xkmc.l2magic.content.particle.core.ClientParticleData;
 import dev.xkmc.l2magic.content.particle.core.LMGenericParticleOption;
+import dev.xkmc.l2magic.content.particle.engine.RenderTypePreset;
 import dev.xkmc.l2magic.content.particle.render.RandomColorParticle;
 import dev.xkmc.l2magic.content.particle.render.TransitionParticleSprite;
 import dev.xkmc.l2magic.init.registrate.EngineRegistry;
@@ -40,6 +41,7 @@ public record TransitionParticleInstance(
 		float scale = (float) scale().eval(ctx);
 		return new LMGenericParticleOption(new ClientParticleData(life, true, scale,
 				ctx, SimpleMotion.DUST, new TransitionParticleSprite(
+				RenderTypePreset.NORMAL,
 				randomizeColor(ctx.rand(), start.eval(ctx)),
 				randomizeColor(ctx.rand(), end.eval(ctx))
 		)));

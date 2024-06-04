@@ -1,11 +1,14 @@
 package dev.xkmc.l2magic.content.particle.render;
 
 import dev.xkmc.l2magic.content.particle.core.LMGenericParticle;
+import dev.xkmc.l2magic.content.particle.engine.RenderTypePreset;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.state.BlockState;
 
-public record BlockSprite(BlockState state, BlockPos pos, boolean breaking) implements ModelSpriteData {
+public record BlockSprite(
+		RenderTypePreset renderType, BlockState state, BlockPos pos, SpriteGeom geom
+) implements ModelSpriteData {
 
 	@Override
 	public void onParticleInit(LMGenericParticle e) {
@@ -17,7 +20,7 @@ public record BlockSprite(BlockState state, BlockPos pos, boolean breaking) impl
 				(i >> 8 & 255) / 255.0F,
 				(i & 255) / 255.0F
 		);
-		if (breaking) e.setGeom(SpriteGeom.breaking(e.random()));
+		e.setGeom(geom);
 	}
 
 }

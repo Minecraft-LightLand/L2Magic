@@ -1,6 +1,7 @@
 package dev.xkmc.l2magic.content.particle.engine;
 
 import com.mojang.serialization.Codec;
+import dev.xkmc.l2magic.content.engine.context.EngineContext;
 import dev.xkmc.l2magic.content.engine.core.Verifiable;
 import dev.xkmc.l2magic.content.particle.render.ParticleRenderer;
 import dev.xkmc.l2magic.init.registrate.EngineRegistry;
@@ -15,6 +16,6 @@ public interface ParticleRenderData<T extends Record & ParticleRenderData<T>> ex
 	ParticleRenderType<T> type();
 
 	@OnlyIn(Dist.CLIENT)
-	ParticleRenderer resolve();
+	ParticleRenderer resolve(EngineContext ctx);
 
 }

@@ -9,7 +9,9 @@ import dev.xkmc.l2magic.content.engine.variable.IntVariable;
 import dev.xkmc.l2magic.content.entity.motion.SimpleMotion;
 import dev.xkmc.l2magic.content.particle.core.ClientParticleData;
 import dev.xkmc.l2magic.content.particle.core.LMGenericParticleOption;
+import dev.xkmc.l2magic.content.particle.engine.RenderTypePreset;
 import dev.xkmc.l2magic.content.particle.render.ItemSprite;
+import dev.xkmc.l2magic.content.particle.render.SpriteGeom;
 import dev.xkmc.l2magic.init.registrate.EngineRegistry;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.world.item.Item;
@@ -38,7 +40,8 @@ public record ItemParticleInstance(
 		return new LMGenericParticleOption(new ClientParticleData(
 				life.eval(ctx), breaking, (float) scale.eval(ctx), ctx,
 				breaking() ? SimpleMotion.BREAKING : SimpleMotion.ZERO,
-				new ItemSprite(item.getDefaultInstance(), breaking)
+				new ItemSprite(RenderTypePreset.BLOCK, item.getDefaultInstance(),
+						breaking ? SpriteGeom.breaking(ctx.rand()) : SpriteGeom.INSTANCE)
 		));
 	}
 

@@ -17,8 +17,7 @@ import dev.xkmc.l2magic.content.entity.core.ProjectileConfig;
 import dev.xkmc.l2magic.content.entity.motion.MoveDeltaMotion;
 import dev.xkmc.l2magic.content.entity.motion.MovePosMotion;
 import dev.xkmc.l2magic.content.entity.motion.SimpleMotion;
-import dev.xkmc.l2magic.content.particle.engine.CustomParticleInstance;
-import dev.xkmc.l2magic.content.particle.engine.ParticleRenderType;
+import dev.xkmc.l2magic.content.particle.engine.*;
 import dev.xkmc.l2magic.init.L2Magic;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
@@ -90,6 +89,11 @@ public class EngineRegistry {
 	public static final RegistryEntry<MotionType<MovePosMotion>> MOVE_MOTION = register("control_position", () -> MovePosMotion.CODEC);//TODO doc
 	public static final RegistryEntry<MotionType<MoveDeltaMotion>> DELTA_MOTION = register("control_velocity", () -> MoveDeltaMotion.CODEC);//TODO doc
 
+	public static final RegistryEntry<ParticleRenderType<SimpleParticleData>> SIMPLE_RENDER = register("simple", () -> SimpleParticleData.CODEC);
+	public static final RegistryEntry<ParticleRenderType<DustParticleData>> COLOR_RENDER = register("color", () -> DustParticleData.CODEC);
+	public static final RegistryEntry<ParticleRenderType<TransitionParticleData>> TRANSITION_RENDER = register("transition", () -> TransitionParticleData.CODEC);
+	public static final RegistryEntry<ParticleRenderType<BlockParticleData>> BLOCK_RENDER = register("block", () -> BlockParticleData.CODEC);
+	public static final RegistryEntry<ParticleRenderType<ItemParticleData>> ITEM_RENDER = register("item", () -> ItemParticleData.CODEC);
 
 	private static <T extends Record & ConfiguredEngine<T>> RegistryEntry<EngineType<T>>
 	register(String id, EngineType<T> codec) {
@@ -114,6 +118,11 @@ public class EngineRegistry {
 	private static <T extends Record & Motion<T>> RegistryEntry<MotionType<T>>
 	register(String id, MotionType<T> codec) {
 		return L2Magic.REGISTRATE.simple(id, MOTION.key(), () -> codec);
+	}
+
+	private static <T extends Record & ParticleRenderData<T>> RegistryEntry<ParticleRenderType<T>>
+	register(String id, ParticleRenderType<T> codec) {
+		return L2Magic.REGISTRATE.simple(id, PARTICLE.key(), () -> codec);
 	}
 
 	public static void register() {

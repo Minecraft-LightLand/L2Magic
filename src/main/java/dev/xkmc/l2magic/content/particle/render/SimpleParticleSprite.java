@@ -1,7 +1,8 @@
 package dev.xkmc.l2magic.content.particle.render;
 
+import dev.xkmc.l2magic.content.particle.engine.RenderTypePreset;
 import net.minecraft.resources.ResourceLocation;
 
-public record SimpleParticleSprite(RenderType renderType, ResourceLocation particle) implements VanillaParticleSprite {
+public record SimpleParticleSprite(RenderTypePreset renderType, ResourceLocation particle) implements VanillaParticleSprite {
 
 }

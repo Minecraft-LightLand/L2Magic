@@ -10,6 +10,7 @@ import dev.xkmc.l2magic.content.engine.variable.IntVariable;
 import dev.xkmc.l2magic.content.entity.motion.SimpleMotion;
 import dev.xkmc.l2magic.content.particle.core.ClientParticleData;
 import dev.xkmc.l2magic.content.particle.core.LMGenericParticleOption;
+import dev.xkmc.l2magic.content.particle.engine.RenderTypePreset;
 import dev.xkmc.l2magic.content.particle.render.DustParticleSprite;
 import dev.xkmc.l2magic.content.particle.render.RandomColorParticle;
 import dev.xkmc.l2magic.init.registrate.EngineRegistry;
@@ -39,7 +40,8 @@ public record DustParticleInstance(
 		int life = life().eval(ctx);
 		float scale = (float) scale().eval(ctx);
 		return new LMGenericParticleOption(new ClientParticleData(life, true, scale,
-				ctx, SimpleMotion.DUST, new DustParticleSprite(randomizeColor(ctx.rand(), color.eval(ctx)))));
+				ctx, SimpleMotion.DUST, new DustParticleSprite(RenderTypePreset.NORMAL,
+				randomizeColor(ctx.rand(), color.eval(ctx)))));
 	}
 
 }

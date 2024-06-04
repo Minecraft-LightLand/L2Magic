@@ -8,24 +8,31 @@ import dev.xkmc.l2magic.content.engine.particle.ParticleInstance;
 import dev.xkmc.l2magic.content.engine.variable.DoubleVariable;
 import dev.xkmc.l2magic.content.engine.variable.IntVariable;
 import dev.xkmc.l2magic.content.entity.core.Motion;
+import dev.xkmc.l2magic.content.entity.motion.SimpleMotion;
 import dev.xkmc.l2magic.content.particle.core.ClientParticleData;
 import dev.xkmc.l2magic.content.particle.core.LMGenericParticleOption;
 import dev.xkmc.l2magic.init.registrate.EngineRegistry;
 import net.minecraft.core.particles.ParticleOptions;
 
+import java.util.Optional;
+
 public record CustomParticleInstance(
 		DoubleVariable speed, DoubleVariable scale, IntVariable life, boolean collide,
 		Motion<?> motion, ParticleRenderData<?> renderer
-		) implements ParticleInstance<CustomParticleInstance> {
+) implements ParticleInstance<CustomParticleInstance> {
 
 	public static final Codec<CustomParticleInstance> CODEC = RecordCodecBuilder.create(i -> i.group(
 			DoubleVariable.codec("speed", ParticleInstance::speed),
-			DoubleVariable.codec("scale", e -> e.scale),
-			IntVariable.codec("life", e -> e.life),
-			Codec.BOOL.fieldOf("collide").forGetter(e -> e.collide),
-			Motion.CODEC.fieldOf("motion").forGetter(e -> e.motion),
+			DoubleVariable.optionalCodec("scale", e -> e.scale),
+			IntVariable.optionalCodec("life", e -> e.life),
+			Codec.BOOL.optionalFieldOf("collide").forGetter(e -> Optional.of(e.collide)),
+			Motion.CODEC.optionalFieldOf("motion").forGetter(e -> Optional.of(e.motion)),
 			ParticleRenderData.CODEC.fieldOf("renderer").forGetter(e -> e.renderer)
-	).apply(i, CustomParticleInstance::new));
+	).apply(i, (a, b, c, d, e, f) -> new CustomParticleInstance(
+			a, b.orElse(DoubleVariable.of("1")),
+			c.orElse(IntVariable.of("40/rand(1,10)")),
+			d.orElse(true),
+			e.orElse(SimpleMotion.DUST), f)));
 
 	@Override
 	public EngineType<CustomParticleInstance> type() {
@@ -36,7 +43,7 @@ public record CustomParticleInstance(
 	public ParticleOptions particle(EngineContext ctx) {
 		return new LMGenericParticleOption(new ClientParticleData(
 				life.eval(ctx), collide, (float) scale.eval(ctx), ctx,
-				motion, renderer.resolve()
+				motion, renderer.resolve(ctx)
 		));
 	}
 
