@@ -7,7 +7,7 @@ import dev.xkmc.l2magic.content.engine.core.EngineType;
 import dev.xkmc.l2magic.content.engine.variable.ColorVariable;
 import dev.xkmc.l2magic.content.engine.variable.DoubleVariable;
 import dev.xkmc.l2magic.content.engine.variable.IntVariable;
-import dev.xkmc.l2magic.content.engine.motion.SimpleMotion;
+import dev.xkmc.l2magic.content.entity.motion.SimpleMotion;
 import dev.xkmc.l2magic.content.particle.core.ClientParticleData;
 import dev.xkmc.l2magic.content.particle.core.LMGenericParticleOption;
 import dev.xkmc.l2magic.content.particle.engine.RenderTypePreset;

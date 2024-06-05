@@ -3,6 +3,7 @@ package dev.xkmc.l2magic.content.entity.core;
 import dev.xkmc.fastprojectileapi.entity.BaseProjectile;
 import dev.xkmc.fastprojectileapi.entity.ProjectileMovement;
 import dev.xkmc.l2magic.content.engine.context.LocationContext;
+import dev.xkmc.l2magic.content.entity.renderer.ProjectileRenderer;
 import dev.xkmc.l2serial.serialization.SerialClass;
 import dev.xkmc.l2serial.serialization.codec.PacketCodec;
 import dev.xkmc.l2serial.serialization.codec.TagCodec;
@@ -16,6 +17,9 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
 
@@ -115,6 +119,12 @@ public class LMProjectile extends BaseProjectile {
 
 	public LocationContext location() {//TODO z-rot handling
 		return LocationContext.of(new Vec3(getX(), getY(0.5), getZ()), getForward());
+	}
+
+	@OnlyIn(Dist.CLIENT)
+	@Nullable
+	public ProjectileRenderer getRenderer() {
+		return null;//TODO
 	}
 
 }

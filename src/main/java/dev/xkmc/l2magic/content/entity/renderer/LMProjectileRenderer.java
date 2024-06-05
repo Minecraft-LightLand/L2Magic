@@ -16,13 +16,18 @@ public class LMProjectileRenderer<T extends LMProjectile> extends EntityRenderer
 
 	@Override
 	public void render(T e, float yaw, float pTick, PoseStack pose, MultiBufferSource buffer, int light) {
-		//TODO
-		super.render(e, yaw, pTick, pose, buffer, light);
+		var renderer = e.getRenderer();
+		if (renderer != null) {
+			renderer.render(e, pTick, pose, buffer, light);
+		}
 	}
 
 	@Override
 	public ResourceLocation getTextureLocation(T e) {
-		//TODO
+		var renderer = e.getRenderer();
+		if (renderer != null) {
+			return renderer.getTexture();
+		}
 		return TextureAtlas.LOCATION_BLOCKS;
 	}
 

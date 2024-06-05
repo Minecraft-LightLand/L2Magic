@@ -1,4 +1,4 @@
-package dev.xkmc.l2magic.content.engine.motion;
+package dev.xkmc.l2magic.content.entity.motion;
 
 import dev.xkmc.fastprojectileapi.entity.ProjectileMovement;
 import dev.xkmc.l2magic.content.engine.context.EngineContext;
