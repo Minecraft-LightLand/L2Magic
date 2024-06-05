@@ -8,6 +8,9 @@ import dev.xkmc.l2magic.content.engine.core.ConfiguredEngine;
 import dev.xkmc.l2magic.content.engine.core.EntityProcessor;
 import dev.xkmc.l2magic.content.engine.selector.SelectionType;
 import dev.xkmc.l2magic.init.L2Magic;
+import dev.xkmc.l2magic.init.registrate.EngineRegistry;
+import net.minecraft.core.Holder;
+import net.minecraft.resources.RegistryFileCodec;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.Nullable;
 
@@ -37,6 +40,9 @@ public record ProjectileConfig(
 			tick.orElse(null),
 			hit.orElse(null)
 	)));
+
+	public static final Codec<Holder<ProjectileConfig>> HOLDER =
+			RegistryFileCodec.create(EngineRegistry.PROJECTILE, CODEC, false);
 
 	public void verify(ResourceLocation id) {
 		var allParams = Sets.union(ProjectileData.DEFAULT_PARAMS, params);

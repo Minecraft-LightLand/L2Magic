@@ -6,6 +6,9 @@ import dev.xkmc.l2magic.content.engine.helper.EngineRegistryInstance;
 import dev.xkmc.l2magic.content.engine.iterator.*;
 import dev.xkmc.l2magic.content.engine.logic.*;
 import dev.xkmc.l2magic.content.engine.modifier.*;
+import dev.xkmc.l2magic.content.engine.motion.MoveDeltaMotion;
+import dev.xkmc.l2magic.content.engine.motion.MovePosMotion;
+import dev.xkmc.l2magic.content.engine.motion.SimpleMotion;
 import dev.xkmc.l2magic.content.engine.particle.*;
 import dev.xkmc.l2magic.content.engine.processor.*;
 import dev.xkmc.l2magic.content.engine.selector.*;
@@ -14,9 +17,9 @@ import dev.xkmc.l2magic.content.engine.spell.SpellAction;
 import dev.xkmc.l2magic.content.entity.core.Motion;
 import dev.xkmc.l2magic.content.entity.core.MotionType;
 import dev.xkmc.l2magic.content.entity.core.ProjectileConfig;
-import dev.xkmc.l2magic.content.engine.motion.MoveDeltaMotion;
-import dev.xkmc.l2magic.content.engine.motion.MovePosMotion;
-import dev.xkmc.l2magic.content.engine.motion.SimpleMotion;
+import dev.xkmc.l2magic.content.entity.engine.ArrowShoot;
+import dev.xkmc.l2magic.content.entity.engine.CustomProjectileShoot;
+import dev.xkmc.l2magic.content.entity.engine.TridentShoot;
 import dev.xkmc.l2magic.content.particle.engine.*;
 import dev.xkmc.l2magic.init.L2Magic;
 import net.minecraft.core.Registry;
@@ -61,14 +64,18 @@ public class EngineRegistry {
 	public static final RegistryEntry<EngineType<RingRandomIterator>> RANDOM_FAN = register("random_pos_fan", () -> RingRandomIterator.CODEC);
 	public static final RegistryEntry<EngineType<SphereRandomIterator>> RANDOM_SPHERE = register("random_pos_sphere", () -> SphereRandomIterator.CODEC);//TODO doc
 
-	public static final RegistryEntry<EngineType<SimpleParticleInstance>> SIMPLE_PARTICLE = register("particle", () -> SimpleParticleInstance.CODEC);
-	public static final RegistryEntry<EngineType<BlockParticleInstance>> BLOCK_PARTICLE = register("block_particle", () -> BlockParticleInstance.CODEC);
-	public static final RegistryEntry<EngineType<ItemParticleInstance>> ITEM_PARTICLE = register("item_particle", () -> ItemParticleInstance.CODEC);
-	public static final RegistryEntry<EngineType<DustParticleInstance>> DUST_PARTICLE = register("dust_particle", () -> DustParticleInstance.CODEC);
-	public static final RegistryEntry<EngineType<TransitionParticleInstance>> TRANSITION_PARTICLE = register("transition_particle", () -> TransitionParticleInstance.CODEC);
-	public static final RegistryEntry<EngineType<CustomParticleInstance>> CUSTOM_PARTICLE = register("custom_particle", () -> CustomParticleInstance.CODEC);
+	public static final RegistryEntry<EngineType<SimpleParticleInstance>> SIMPLE_PARTICLE = register("particle", () -> SimpleParticleInstance.CODEC);//TODO doc
+	public static final RegistryEntry<EngineType<BlockParticleInstance>> BLOCK_PARTICLE = register("block_particle", () -> BlockParticleInstance.CODEC);//TODO doc
+	public static final RegistryEntry<EngineType<ItemParticleInstance>> ITEM_PARTICLE = register("item_particle", () -> ItemParticleInstance.CODEC);//TODO doc
+	public static final RegistryEntry<EngineType<DustParticleInstance>> DUST_PARTICLE = register("dust_particle", () -> DustParticleInstance.CODEC);//TODO doc
+	public static final RegistryEntry<EngineType<TransitionParticleInstance>> TRANSITION_PARTICLE = register("transition_particle", () -> TransitionParticleInstance.CODEC);//TODO doc
+	public static final RegistryEntry<EngineType<CustomParticleInstance>> CUSTOM_PARTICLE = register("custom_particle", () -> CustomParticleInstance.CODEC);//TODO doc
 
-	public static final RegistryEntry<EngineType<SoundInstance>> SOUND = register("sound", () -> SoundInstance.CODEC);
+	public static final RegistryEntry<EngineType<SoundInstance>> SOUND = register("sound", () -> SoundInstance.CODEC);//TODO doc
+
+	public static final RegistryEntry<EngineType<ArrowShoot>> ARROW = register("arrow", () -> ArrowShoot.CODEC);//TODO doc
+	public static final RegistryEntry<EngineType<TridentShoot>> TRIDENT = register("trident", () -> TridentShoot.CODEC);//TODO doc
+	public static final RegistryEntry<EngineType<CustomProjectileShoot>> CUSTOM_SHOOT = register("custom_projectile", () -> CustomProjectileShoot.CODEC);//TODO doc
 
 	public static final RegistryEntry<SelectorType<SelfSelector>> SELF = register("self", () -> SelfSelector.CODEC);
 	public static final RegistryEntry<SelectorType<MoveSelector>> MOVE_SELECTOR = register("move", () -> MoveSelector.CODEC);
