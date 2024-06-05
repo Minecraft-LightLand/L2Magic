@@ -10,6 +10,7 @@ import dev.xkmc.l2serial.serialization.codec.TagCodec;
 import dev.xkmc.l2serial.util.Wrappers;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -124,7 +125,7 @@ public class LMProjectile extends BaseProjectile {
 	@OnlyIn(Dist.CLIENT)
 	@Nullable
 	public ProjectileRenderer getRenderer() {
-		return null;//TODO
+		return data.getRenderer(this);
 	}
 
 }

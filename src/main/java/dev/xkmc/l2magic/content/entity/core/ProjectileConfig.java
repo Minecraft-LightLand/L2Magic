@@ -7,6 +7,7 @@ import dev.xkmc.l2magic.content.engine.context.BuilderContext;
 import dev.xkmc.l2magic.content.engine.core.ConfiguredEngine;
 import dev.xkmc.l2magic.content.engine.core.EntityProcessor;
 import dev.xkmc.l2magic.content.engine.selector.SelectionType;
+import dev.xkmc.l2magic.content.entity.renderer.ProjectileRenderData;
 import dev.xkmc.l2magic.init.L2Magic;
 import dev.xkmc.l2magic.init.registrate.EngineRegistry;
 import net.minecraft.core.Holder;
@@ -24,7 +25,8 @@ public record ProjectileConfig(
 		SelectionType filter,
 		@Nullable Motion<?> motion,
 		@Nullable ConfiguredEngine<?> tick,
-		@Nullable EntityProcessor<?> hit
+		@Nullable EntityProcessor<?> hit,
+		@Nullable ProjectileRenderData<?> renderer
 ) {
 
 	public static final Codec<ProjectileConfig> CODEC = RecordCodecBuilder.create(i -> i.group(
@@ -32,13 +34,15 @@ public record ProjectileConfig(
 			SelectionType.CODEC.optionalFieldOf("filter").forGetter(e -> Optional.of(e.filter)),
 			Motion.CODEC.optionalFieldOf("motion").forGetter(e -> Optional.ofNullable(e.motion)),
 			ConfiguredEngine.optionalCodec("tick", e -> e.tick),
-			EntityProcessor.CODEC.optionalFieldOf("hit").forGetter(e -> Optional.ofNullable(e.hit))
-	).apply(i, (params, filter, motion, tick, hit) -> new ProjectileConfig(
+			EntityProcessor.CODEC.optionalFieldOf("hit").forGetter(e -> Optional.ofNullable(e.hit)),
+			ProjectileRenderData.CODEC.optionalFieldOf("renderer").forGetter(e -> Optional.ofNullable(e.renderer))
+	).apply(i, (params, filter, motion, tick, hit, render) -> new ProjectileConfig(
 			params.map(LinkedHashSet::new).orElse(new LinkedHashSet<>()),
 			filter.orElse(SelectionType.NONE),
 			motion.orElse(null),
 			tick.orElse(null),
-			hit.orElse(null)
+			hit.orElse(null),
+			render.orElse(null)
 	)));
 
 	public static final Codec<Holder<ProjectileConfig>> HOLDER =

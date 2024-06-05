@@ -10,7 +10,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 public interface ParticleRenderData<T extends Record & ParticleRenderData<T>> extends Verifiable {
 
-	Codec<ParticleRenderData<?>> CODEC = EngineRegistry.PARTICLE.codec()
+	Codec<ParticleRenderData<?>> CODEC = EngineRegistry.PARTICLE_RENDERER.codec()
 			.dispatch(ParticleRenderData::type, ParticleRenderType::codec);
 
 	ParticleRenderType<T> type();

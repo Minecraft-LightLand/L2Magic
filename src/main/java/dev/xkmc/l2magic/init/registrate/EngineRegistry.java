@@ -20,10 +20,13 @@ import dev.xkmc.l2magic.content.entity.core.ProjectileConfig;
 import dev.xkmc.l2magic.content.entity.engine.ArrowShoot;
 import dev.xkmc.l2magic.content.entity.engine.CustomProjectileShoot;
 import dev.xkmc.l2magic.content.entity.engine.TridentShoot;
+import dev.xkmc.l2magic.content.entity.renderer.ProjectileRenderData;
+import dev.xkmc.l2magic.content.entity.renderer.ProjectileRenderType;
 import dev.xkmc.l2magic.content.particle.engine.*;
 import dev.xkmc.l2magic.init.L2Magic;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.entity.projectile.Projectile;
 
 public class EngineRegistry {
 
@@ -35,7 +38,8 @@ public class EngineRegistry {
 	public static final EngineRegistryInstance<SelectorType<?>> SELECTOR = EngineRegistryInstance.of("selector");
 	public static final EngineRegistryInstance<ProcessorType<?>> PROCESSOR = EngineRegistryInstance.of("processor");
 	public static final EngineRegistryInstance<MotionType<?>> MOTION = EngineRegistryInstance.of("motion");
-	public static final EngineRegistryInstance<ParticleRenderType<?>> PARTICLE = EngineRegistryInstance.of("particle_renderer");
+	public static final EngineRegistryInstance<ParticleRenderType<?>> PARTICLE_RENDERER = EngineRegistryInstance.of("particle_renderer");
+	public static final EngineRegistryInstance<ProjectileRenderType<?>> PROJECTILE_RENDERER = EngineRegistryInstance.of("projectile_renderer");
 
 	public static final RegistryEntry<ModifierType<ForwardOffsetModifier>> FORWARD = register("forward", () -> ForwardOffsetModifier.CODEC);
 	public static final RegistryEntry<ModifierType<NormalOffsetModifier>> NORMAL_OFFSET = register("normal_offset", () -> NormalOffsetModifier.CODEC);//TODO doc
@@ -130,7 +134,12 @@ public class EngineRegistry {
 
 	private static <T extends Record & ParticleRenderData<T>> RegistryEntry<ParticleRenderType<T>>
 	register(String id, ParticleRenderType<T> codec) {
-		return L2Magic.REGISTRATE.simple(id, PARTICLE.key(), () -> codec);
+		return L2Magic.REGISTRATE.simple(id, PARTICLE_RENDERER.key(), () -> codec);
+	}
+
+	private static <T extends Record & ProjectileRenderData<T>> RegistryEntry<ProjectileRenderType<T>>
+	register(String id, ProjectileRenderType<T> codec) {
+		return L2Magic.REGISTRATE.simple(id, PROJECTILE_RENDERER.key(), () -> codec);
 	}
 
 	public static void register() {

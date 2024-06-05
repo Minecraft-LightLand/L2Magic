@@ -6,6 +6,7 @@ import dev.xkmc.l2magic.content.engine.context.UserContext;
 import dev.xkmc.l2magic.content.engine.core.ConfiguredEngine;
 import dev.xkmc.l2magic.content.engine.core.EntityProcessor;
 import dev.xkmc.l2magic.content.engine.helper.Scheduler;
+import dev.xkmc.l2magic.content.entity.renderer.ProjectileRenderer;
 import dev.xkmc.l2magic.init.registrate.EngineRegistry;
 import dev.xkmc.l2serial.serialization.SerialClass;
 import net.minecraft.core.Holder;
@@ -16,6 +17,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.levelgen.SingleThreadedRandomSource;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.LinkedHashMap;
@@ -26,7 +29,8 @@ import java.util.Set;
 @SerialClass
 public class ProjectileData {
 
-	private static final int SALT_TICK = 0x342ab3c1, SALT_MOVE = 0xa6258bd1, SALT_HIT = 0xb286c235;
+	private static final int SALT_TICK = 0x342ab3c1, SALT_MOVE = 0xa6258bd1,
+			SALT_HIT = 0xb286c235, SALT_RENDER = 0x1134ba51;
 
 	public static final Set<String> DEFAULT_PARAMS = Set.of("TickCount",
 			"ProjectileX", "ProjectileY", "ProjectileZ");
@@ -121,4 +125,16 @@ public class ProjectileData {
 		}
 		return ProjectileMovement.of(vec);
 	}
+
+	@OnlyIn(Dist.CLIENT)
+	@Nullable
+	public ProjectileRenderer getRenderer(LMProjectile self) {
+		if (getConfig(self.level()) == null) return null;
+		var renderer = config.renderer();
+		if (renderer == null) return null;
+		EngineContext ctx = getContext(self, SALT_RENDER, false);
+		if (ctx == null) return null;
+		return renderer.resolve(ctx);
+	}
+
 }
