@@ -1,4 +1,4 @@
-package dev.xkmc.l2magic.content.entity.motion;
+package dev.xkmc.l2magic.content.engine.motion;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;

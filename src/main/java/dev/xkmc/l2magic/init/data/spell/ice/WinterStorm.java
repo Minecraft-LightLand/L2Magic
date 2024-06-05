@@ -21,7 +21,7 @@ import dev.xkmc.l2magic.content.engine.spell.SpellTriggerType;
 import dev.xkmc.l2magic.content.engine.variable.BooleanVariable;
 import dev.xkmc.l2magic.content.engine.variable.DoubleVariable;
 import dev.xkmc.l2magic.content.engine.variable.IntVariable;
-import dev.xkmc.l2magic.content.entity.motion.MovePosMotion;
+import dev.xkmc.l2magic.content.engine.motion.MovePosMotion;
 import dev.xkmc.l2magic.content.particle.engine.CustomParticleInstance;
 import dev.xkmc.l2magic.content.particle.engine.RenderTypePreset;
 import dev.xkmc.l2magic.content.particle.engine.SimpleParticleData;

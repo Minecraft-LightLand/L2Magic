@@ -9,7 +9,7 @@ import dev.xkmc.l2magic.content.engine.particle.ParticleInstance;
 import dev.xkmc.l2magic.content.engine.variable.DoubleVariable;
 import dev.xkmc.l2magic.content.engine.variable.IntVariable;
 import dev.xkmc.l2magic.content.entity.core.Motion;
-import dev.xkmc.l2magic.content.entity.motion.SimpleMotion;
+import dev.xkmc.l2magic.content.engine.motion.SimpleMotion;
 import dev.xkmc.l2magic.content.particle.core.ClientParticleData;
 import dev.xkmc.l2magic.content.particle.core.LMGenericParticleOption;
 import dev.xkmc.l2magic.init.registrate.EngineRegistry;
