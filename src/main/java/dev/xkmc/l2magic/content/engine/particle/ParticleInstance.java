@@ -21,7 +21,7 @@ public interface ParticleInstance<T extends Record & ParticleInstance<T>> extend
 		if (opt == null) return;
 		var pos = ctx.loc().pos();
 		var vec = ctx.loc().dir().scale(speed().eval(ctx));
-		ctx.user().level().addParticle(opt, true, pos.x, pos.y, pos.z, vec.x, vec.y, vec.z);
+		ctx.user().level().addAlwaysVisibleParticle(opt, true, pos.x, pos.y, pos.z, vec.x, vec.y, vec.z);
 	}
 
 }

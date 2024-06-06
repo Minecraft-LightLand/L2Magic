@@ -40,7 +40,7 @@ public record BlockParticleInstance(
 	@Override
 	public ParticleOptions particle(EngineContext ctx) {
 		return new LMGenericParticleOption(new ClientParticleData(
-				life.eval(ctx), breaking, (float) scale.eval(ctx), ctx,
+				life.eval(ctx), breaking, (float) scale.eval(ctx) * ClientParticleData.randSize(ctx), ctx,
 				breaking() ? SimpleMotion.BREAKING : SimpleMotion.ZERO,
 				new BlockSprite(RenderTypePreset.BLOCK, block.defaultBlockState(),
 						BlockPos.containing(ctx.loc().pos()),

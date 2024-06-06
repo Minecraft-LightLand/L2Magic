@@ -6,9 +6,6 @@ import dev.xkmc.l2magic.content.engine.helper.EngineRegistryInstance;
 import dev.xkmc.l2magic.content.engine.iterator.*;
 import dev.xkmc.l2magic.content.engine.logic.*;
 import dev.xkmc.l2magic.content.engine.modifier.*;
-import dev.xkmc.l2magic.content.entity.motion.MoveDeltaMotion;
-import dev.xkmc.l2magic.content.entity.motion.MovePosMotion;
-import dev.xkmc.l2magic.content.entity.motion.SimpleMotion;
 import dev.xkmc.l2magic.content.engine.particle.*;
 import dev.xkmc.l2magic.content.engine.processor.*;
 import dev.xkmc.l2magic.content.engine.selector.*;
@@ -20,13 +17,15 @@ import dev.xkmc.l2magic.content.entity.core.ProjectileConfig;
 import dev.xkmc.l2magic.content.entity.engine.ArrowShoot;
 import dev.xkmc.l2magic.content.entity.engine.CustomProjectileShoot;
 import dev.xkmc.l2magic.content.entity.engine.TridentShoot;
+import dev.xkmc.l2magic.content.entity.motion.MoveDeltaMotion;
+import dev.xkmc.l2magic.content.entity.motion.MovePosMotion;
+import dev.xkmc.l2magic.content.entity.motion.SimpleMotion;
 import dev.xkmc.l2magic.content.entity.renderer.ProjectileRenderData;
 import dev.xkmc.l2magic.content.entity.renderer.ProjectileRenderType;
 import dev.xkmc.l2magic.content.particle.engine.*;
 import dev.xkmc.l2magic.init.L2Magic;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.entity.projectile.Projectile;
 
 public class EngineRegistry {
 
@@ -101,11 +100,13 @@ public class EngineRegistry {
 	public static final RegistryEntry<MotionType<MovePosMotion>> MOVE_MOTION = register("control_position", () -> MovePosMotion.CODEC);//TODO doc
 	public static final RegistryEntry<MotionType<MoveDeltaMotion>> DELTA_MOTION = register("control_velocity", () -> MoveDeltaMotion.CODEC);//TODO doc
 
-	public static final RegistryEntry<ParticleRenderType<SimpleParticleData>> SIMPLE_RENDER = register("simple", () -> SimpleParticleData.CODEC);
-	public static final RegistryEntry<ParticleRenderType<DustParticleData>> COLOR_RENDER = register("color", () -> DustParticleData.CODEC);
-	public static final RegistryEntry<ParticleRenderType<TransitionParticleData>> TRANSITION_RENDER = register("transition", () -> TransitionParticleData.CODEC);
-	public static final RegistryEntry<ParticleRenderType<BlockParticleData>> BLOCK_RENDER = register("block", () -> BlockParticleData.CODEC);
-	public static final RegistryEntry<ParticleRenderType<ItemParticleData>> ITEM_RENDER = register("item", () -> ItemParticleData.CODEC);
+	public static final RegistryEntry<ParticleRenderType<SimpleParticleData>> SIMPLE_RENDER = register("simple", () -> SimpleParticleData.CODEC);//TODO doc
+	public static final RegistryEntry<ParticleRenderType<DustParticleData>> COLOR_RENDER = register("color", () -> DustParticleData.CODEC);//TODO doc
+	public static final RegistryEntry<ParticleRenderType<TransitionParticleData>> TRANSITION_RENDER = register("transition", () -> TransitionParticleData.CODEC);//TODO doc
+	public static final RegistryEntry<ParticleRenderType<BlockParticleData>> BLOCK_RENDER = register("block", () -> BlockParticleData.CODEC);//TODO doc
+	public static final RegistryEntry<ParticleRenderType<ItemParticleData>> ITEM_RENDER = register("item", () -> ItemParticleData.CODEC);//TODO doc
+	public static final RegistryEntry<ParticleRenderType<StaticTextureParticleData>> STATIC_RENDER = register("static", () -> StaticTextureParticleData.CODEC);//TODO doc
+	public static final RegistryEntry<ParticleRenderType<OrientedParticleData>> ORIENTED_RENDER = register("oriented", () -> OrientedParticleData.CODEC);//TODO doc
 
 	private static <T extends Record & ConfiguredEngine<T>> RegistryEntry<EngineType<T>>
 	register(String id, EngineType<T> codec) {

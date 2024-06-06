@@ -38,7 +38,7 @@ public record ItemParticleInstance(
 	@Override
 	public ParticleOptions particle(EngineContext ctx) {
 		return new LMGenericParticleOption(new ClientParticleData(
-				life.eval(ctx), breaking, (float) scale.eval(ctx), ctx,
+				life.eval(ctx), breaking, (float) scale.eval(ctx) * ClientParticleData.randSize(ctx), ctx,
 				breaking() ? SimpleMotion.BREAKING : SimpleMotion.ZERO,
 				new ItemSprite(RenderTypePreset.BLOCK, item.getDefaultInstance(),
 						breaking ? SpriteGeom.breaking(ctx.rand()) : SpriteGeom.INSTANCE)

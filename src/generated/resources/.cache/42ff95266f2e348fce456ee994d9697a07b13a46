@@ -1,0 +1,5 @@
+// 1.20.1	2024-06-06T03:24:56.237819	Registrate Provider for l2magic [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider, Tags (enchantments), Tags (mob_effects), Tags (attributes), Patchouli Provider]
+2bd064bcb8525cfa0b19772b1e492d8c1cf96748 assets/l2magic/lang/en_ud.json
+c484191395ddb696266b3e7dcddfdac5a67004c6 assets/l2magic/lang/en_us.json
+6d78e1d9d1729995f5412d2682e005488f81a003 assets/l2magic/models/item/creative_wand.json
+11e5cf51b59a48612ad80cf766640f352013d80c data/l2itemselector/tags/items/selectable.json

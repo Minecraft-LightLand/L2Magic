@@ -31,7 +31,7 @@ public record CustomParticleInstance(
 			Motion.CODEC.optionalFieldOf("motion").forGetter(e -> Optional.of(e.motion)),
 			ParticleRenderData.CODEC.fieldOf("renderer").forGetter(e -> e.renderer)
 	).apply(i, (a, b, c, d, e, f) -> new CustomParticleInstance(
-			a, b.orElse(DoubleVariable.of("1")),
+			a, b.orElse(DoubleVariable.of("rand(0.1,0.2)")),
 			c.orElse(IntVariable.of("40/rand(1,10)")),
 			d.orElse(true),
 			e.orElse(SimpleMotion.DUST), f)));

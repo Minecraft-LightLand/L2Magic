@@ -12,12 +12,16 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.Nullable;
 
 public class LMGenericParticle extends TextureSheetParticle {
 
 	private final LMParticleData data;
 
 	private SpriteGeom geom = SpriteGeom.INSTANCE;
+
+	@Nullable
+	private LMOrientation orient;
 
 	public LMGenericParticle(ClientLevel level, double x, double y, double z, double vx, double vy, double vz, LMParticleData data) {
 		super(level, x, y, z, vx, vy, vz);
@@ -31,17 +35,25 @@ public class LMGenericParticle extends TextureSheetParticle {
 		friction = 0;
 		lifetime = data.life();
 		hasPhysics = data.doCollision();
-		quadSize *= data.size();
+		quadSize = data.size();
 		this.data = data;
+		if (data.renderer().needOrientation()) {
+			orient = new LMOrientation();
+			orient.preTick(x, y, z);
+		}
 		data.renderer().onParticleInit(this);
 	}
 
 	@Override
 	public void tick() {
+		if (orient != null) {
+			orient.preTick(x, y, z);
+		}
 		xo = x;
 		yo = y;
 		zo = z;
-		Vec3 speed = data.move(age, new Vec3(xd, yd, zd), new Vec3(x, y, z));
+		var mov = data.move(age, new Vec3(xd, yd, zd), new Vec3(x, y, z));
+		Vec3 speed = mov.vec();
 		if (age++ >= lifetime) {
 			remove();
 			return;
@@ -50,6 +62,9 @@ public class LMGenericParticle extends TextureSheetParticle {
 		yd = speed.y;
 		zd = speed.z;
 		move(xd, yd, zd);
+		if (orient != null) {
+			orient.postTick(mov, x, y, z);
+		}
 
 		if (speedUpWhenYMotionIsBlocked && y == yo) {
 			xd *= 1.1D;
@@ -69,6 +84,11 @@ public class LMGenericParticle extends TextureSheetParticle {
 	}
 
 	@Override
+	public boolean shouldCull() {
+		return false;//TODO optimize?
+	}
+
+	@Override
 	public void render(VertexConsumer vc, Camera camera, float pTick) {
 		if (data.renderer().specialRender(this, vc, camera, pTick))
 			return;
@@ -76,22 +96,22 @@ public class LMGenericParticle extends TextureSheetParticle {
 	}
 
 	@Override
-	protected float getU0() {
+	public float getU0() {
 		return sprite.getU(geom.u0());
 	}
 
 	@Override
-	protected float getU1() {
+	public float getU1() {
 		return sprite.getU(geom.u1());
 	}
 
 	@Override
-	protected float getV0() {
+	public float getV0() {
 		return sprite.getV(geom.v0());
 	}
 
 	@Override
-	protected float getV1() {
+	public float getV1() {
 		return sprite.getV(geom.v1());
 	}
 
@@ -105,6 +125,31 @@ public class LMGenericParticle extends TextureSheetParticle {
 
 	public ClientLevel level() {
 		return level;
+	}
+
+	public float rCol() {
+		return rCol;
+	}
+
+	public float gCol() {
+		return gCol;
+	}
+
+	public float bCol() {
+		return bCol;
+	}
+
+	public float alpha() {
+		return alpha;
+	}
+
+	@Override
+	public int getLightColor(float pTick) {
+		return super.getLightColor(pTick);
+	}
+
+	public LMOrientation getOrientation() {
+		return orient;
 	}
 
 	public void setGeom(SpriteGeom geom) {

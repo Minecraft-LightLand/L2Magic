@@ -1,0 +1,53 @@
+{
+  "action": {
+    "type": "l2magic:iterate_arc",
+    "child": {
+      "type": "l2magic:list",
+      "children": [
+        {
+          "type": "l2magic:custom_particle",
+          "collide": false,
+          "life": "30",
+          "motion": {
+            "type": "l2magic:control_position",
+            "modifiers": [
+              {
+                "type": "l2magic:set_position",
+                "x": "CasterX+2*cos(i*2*pi/3)+2*cos((i/3+0.5)*2*pi+TickCount*2*pi/30)",
+                "y": "CasterY+1",
+                "z": "CasterZ+2*sin(i*2*pi/3)+2*sin((i/3+0.5)*2*pi+TickCount*2*pi/30)"
+              },
+              {
+                "type": "l2magic:normal_to_direction"
+              }
+            ]
+          },
+          "renderer": {
+            "type": "l2magic:oriented",
+            "fixFacing": false,
+            "inner": {
+              "type": "l2magic:static",
+              "age": 10,
+              "particle": "minecraft:sonic_boom",
+              "renderType": "LIT",
+              "total": 15
+            },
+            "roll": "Age*6"
+          },
+          "scale": "1.5",
+          "speed": "0"
+        }
+      ]
+    },
+    "count": "3",
+    "index": "i",
+    "maxAngle": "180",
+    "maxInclusive": false,
+    "minAngle": "-180",
+    "radius": "0"
+  },
+  "cast_type": "INSTANT",
+  "icon": "minecraft:sculk_shrieker",
+  "order": 410,
+  "trigger_type": "SELF_POS"
+}

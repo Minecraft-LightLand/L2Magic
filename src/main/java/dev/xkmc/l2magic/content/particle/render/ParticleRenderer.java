@@ -20,4 +20,8 @@ public interface ParticleRenderer {
 	@OnlyIn(Dist.CLIENT)
 	boolean specialRender(LMGenericParticle lmGenericParticle, VertexConsumer vc, Camera camera, float pTick);
 
+	default boolean needOrientation(){
+		return false;
+	}
+
 }

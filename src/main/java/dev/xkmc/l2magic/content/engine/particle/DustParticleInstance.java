@@ -38,7 +38,7 @@ public record DustParticleInstance(
 	@Override
 	public ParticleOptions particle(EngineContext ctx) {
 		int life = life().eval(ctx);
-		float scale = (float) scale().eval(ctx);
+		float scale = (float) scale().eval(ctx) * ClientParticleData.randSize(ctx);
 		return new LMGenericParticleOption(new ClientParticleData(life, true, scale,
 				ctx, SimpleMotion.DUST, new DustParticleSprite(RenderTypePreset.NORMAL,
 				randomizeColor(ctx.rand(), color.eval(ctx)))));

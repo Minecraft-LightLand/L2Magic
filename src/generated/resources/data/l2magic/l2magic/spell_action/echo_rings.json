@@ -1,0 +1,51 @@
+{
+  "action": {
+    "type": "l2magic:list",
+    "children": [
+      {
+        "type": "l2magic:iterate_delayed",
+        "child": {
+          "type": "l2magic:move",
+          "child": {
+            "type": "l2magic:custom_particle",
+            "collide": false,
+            "life": "16",
+            "motion": {
+              "type": "l2magic:simple",
+              "friction": "0",
+              "gravity": "0"
+            },
+            "renderer": {
+              "type": "l2magic:oriented",
+              "fixFacing": true,
+              "inner": {
+                "type": "l2magic:simple",
+                "particle": "minecraft:sonic_boom",
+                "renderType": "LIT"
+              },
+              "roll": "0"
+            },
+            "scale": "3",
+            "speed": "0"
+          },
+          "modifiers": [
+            {
+              "type": "l2magic:normal_to_direction"
+            },
+            {
+              "type": "l2magic:forward",
+              "distance": "i*0.2"
+            }
+          ]
+        },
+        "delay": "1",
+        "index": "i",
+        "step": "10"
+      }
+    ]
+  },
+  "cast_type": "INSTANT",
+  "icon": "minecraft:echo_shard",
+  "order": 400,
+  "trigger_type": "TARGET_ENTITY"
+}

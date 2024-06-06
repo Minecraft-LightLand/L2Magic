@@ -51,14 +51,13 @@ public class CreativeSpellSelector extends IItemSelector {
 		} else if (test(off)) {
 			stack = off;
 		} else return 0;
+		var list = getSpells(player.level().registryAccess());
+		if (list.size() >= 9) return 4;
 		var id = WandItem.getSpellId(player.level(), stack);
 		if (id == null) return 0;
-		var list = getSpells(player.level().registryAccess());
 		int index = list.indexOf(id);
 		if (index < 0) return 0;
-		int n = Math.min(list.size(), 9);
-		int start = Math.max(0, Math.min(index - 4, list.size() - n));
-		return index - start;
+		return index;
 	}
 
 	private List<ItemStack> getListGeneric(Function<ResourceLocation, ItemStack> func) {
@@ -68,18 +67,26 @@ public class CreativeSpellSelector extends IItemSelector {
 		var ans = new ArrayList<ItemStack>();
 		var list = getSpells(level.registryAccess());
 		int index = id == null ? -1 : list.indexOf(id);
-		int n = 9;
+		if (list.size() < 9) {
+			if (index < 0)
+				ans.add(cache.copy());
+			for (var e : list)
+				ans.add(func.apply(e));
+			return ans;
+		}
 		if (index < 0) {
+			for (int i = 0; i < 4; i++)
+				ans.add(func.apply(list.get(list.size() - 4 + i)));
 			ans.add(cache.copy());
-			n--;
+			for (int i = 0; i < 4; i++)
+				ans.add(func.apply(list.get(i)));
+			return ans;
 		}
-		n = Math.min(list.size(), n);
-		int start = Math.max(0, Math.min(index - 4, list.size() - n));
-		for (int i = 0; i < n; i++) {
-			int ind = start + i;
-			ResourceLocation rl = list.get(ind);
-			ans.add(func.apply(rl));
-		}
+		for (int i = 0; i < 4; i++)
+			ans.add(func.apply(list.get((index - 4 + i + list.size()) % list.size())));
+		ans.add(func.apply(id));
+		for (int i = 0; i < 4; i++)
+			ans.add(func.apply(list.get((index + 1 + i) % list.size())));
 		return ans;
 	}
 

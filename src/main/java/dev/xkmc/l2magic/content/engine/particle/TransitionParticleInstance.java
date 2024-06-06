@@ -38,7 +38,7 @@ public record TransitionParticleInstance(
 	@Override
 	public ParticleOptions particle(EngineContext ctx) {
 		int life = life().eval(ctx);
-		float scale = (float) scale().eval(ctx);
+		float scale = (float) scale().eval(ctx) * ClientParticleData.randSize(ctx);
 		return new LMGenericParticleOption(new ClientParticleData(life, true, scale,
 				ctx, SimpleMotion.DUST, new TransitionParticleSprite(
 				RenderTypePreset.NORMAL,

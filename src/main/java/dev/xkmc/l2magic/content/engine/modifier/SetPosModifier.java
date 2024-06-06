@@ -31,7 +31,7 @@ public record SetPosModifier(DoubleVariable x, DoubleVariable y, DoubleVariable 
 	public LocationContext modify(EngineContext ctx) {
 		return ctx.loc().with(new Vec3(
 				x.eval(ctx), y.eval(ctx), z.eval(ctx)
-		).normalize());
+		));
 	}
 
 }

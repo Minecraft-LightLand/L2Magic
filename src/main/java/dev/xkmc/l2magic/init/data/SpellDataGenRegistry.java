@@ -16,7 +16,8 @@ public class SpellDataGenRegistry {
 			new MagnetCore(),
 			new MasterSpark(),
 			new IcyFlash(),
-			new EarthSpike()
+			new EarthSpike(),
+			new EchoSpells()
 	);
 
 }
