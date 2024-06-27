@@ -13,11 +13,12 @@ public class SpellDataGenRegistry {
 			new WinterStorm(),
 			new FlameSpells(),
 			new ArrowSpells(),
-			new MagnetCore(),
+			new MagnetCore(),  // id:3000
 			new MasterSpark(),
-			new IcyFlash(),
-			new EarthSpike(),
-			new EchoSpells()
+			new IcyFlash(),  // id:3100
+			new EarthSpike(),  // id:3200
+			new EchoSpells(),
+			new FlameCharge()  // id:3300
 	);
 
 }

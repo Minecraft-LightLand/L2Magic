@@ -10,6 +10,7 @@ import dev.xkmc.l2magic.content.engine.helper.Orientation;
 import dev.xkmc.l2magic.content.engine.variable.DoubleVariable;
 import dev.xkmc.l2magic.init.registrate.EngineRegistry;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -58,6 +59,9 @@ public record PushProcessor(
 			}
 			p = p.scale(kb);
 			e.push(p.x, p.y, p.z);
+			if (e instanceof Player player) {
+				player.hurtMarked = true;
+			}
 		}
 	}
 

@@ -18,11 +18,6 @@ public class UnrealHelper {
                 IntVariable.of(Integer.toString(layers)),
                 new MoveEngine(
                         List.of(
-                                new SetDirectionModifier(
-                                        DoubleVariable.ZERO,
-                                        DoubleVariable.of("1"),
-                                        DoubleVariable.ZERO
-                                ),
                                 new ForwardOffsetModifier(
                                         DoubleVariable.of(height/(layers-1) + "*cone_l")
                                 ),
