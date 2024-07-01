@@ -56,12 +56,6 @@
                     },
                     "modifiers": [
                       {
-                        "type": "l2magic:direction",
-                        "x": "0",
-                        "y": "1",
-                        "z": "0"
-                      },
-                      {
                         "type": "l2magic:forward",
                         "distance": "0.10526315789473684*cone_l"
                       },
@@ -108,12 +102,6 @@
                       "radius": "0.02631578947368421*(20-cone_l)"
                     },
                     "modifiers": [
-                      {
-                        "type": "l2magic:direction",
-                        "x": "0",
-                        "y": "1",
-                        "z": "0"
-                      },
                       {
                         "type": "l2magic:forward",
                         "distance": "0.10526315789473684*cone_l"

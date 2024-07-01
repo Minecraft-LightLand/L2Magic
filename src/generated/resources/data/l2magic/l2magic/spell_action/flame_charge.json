@@ -1,0 +1,142 @@
+{
+  "action": {
+    "type": "l2magic:if",
+    "action": {
+      "type": "l2magic:random_pos_sphere",
+      "child": {
+        "type": "l2magic:dust_particle",
+        "color": "ff0000",
+        "life": "10",
+        "scale": "1",
+        "speed": "-.2"
+      },
+      "count": "50",
+      "radius": "2"
+    },
+    "fallback": {
+      "type": "l2magic:iterate_delayed",
+      "child": {
+        "type": "l2magic:move",
+        "child": {
+          "type": "l2magic:list",
+          "children": [
+            {
+              "type": "l2magic:processor",
+              "processors": [
+                {
+                  "type": "l2magic:push",
+                  "angle": "0",
+                  "from_center": "UNIFORM",
+                  "speed": ".2",
+                  "tilt": "0"
+                }
+              ],
+              "selector": {
+                "type": "l2magic:self"
+              },
+              "target": "ALL"
+            },
+            {
+              "type": "l2magic:processor",
+              "processors": [
+                {
+                  "type": "l2magic:damage",
+                  "damage": "4",
+                  "damage_type": "minecraft:fireball",
+                  "indirect": true,
+                  "positioned": true
+                },
+                {
+                  "type": "l2magic:knockback",
+                  "angle": "0",
+                  "knockback": "0.2",
+                  "tilt": "0"
+                }
+              ],
+              "selector": {
+                "type": "l2magic:cylinder",
+                "r": "2",
+                "y": "2"
+              },
+              "target": "ENEMY"
+            },
+            {
+              "type": "l2magic:move",
+              "child": {
+                "type": "l2magic:iterate",
+                "child": {
+                  "type": "l2magic:move",
+                  "child": {
+                    "type": "l2magic:iterate_arc",
+                    "child": {
+                      "type": "l2magic:move",
+                      "child": {
+                        "type": "l2magic:dust_particle",
+                        "color": "ff0000",
+                        "life": "1",
+                        "scale": ".5",
+                        "speed": "1"
+                      },
+                      "modifiers": [
+                        {
+                          "type": "l2magic:align_with_caster"
+                        }
+                      ]
+                    },
+                    "count": "1.0344827586206897*(30-cone_l)",
+                    "maxAngle": "360",
+                    "maxInclusive": false,
+                    "minAngle": "0",
+                    "radius": "0.05172413793103448*(30-cone_l)"
+                  },
+                  "modifiers": [
+                    {
+                      "type": "l2magic:forward",
+                      "distance": "0.10344827586206896*cone_l"
+                    },
+                    {
+                      "type": "l2magic:direction_to_normal"
+                    }
+                  ]
+                },
+                "index": "cone_l",
+                "step": "30"
+              },
+              "modifiers": [
+                {
+                  "type": "l2magic:forward",
+                  "distance": "-1"
+                }
+              ]
+            }
+          ]
+        },
+        "modifiers": [
+          {
+            "type": "l2magic:move_to_caster"
+          },
+          {
+            "type": "l2magic:direction",
+            "x": "0",
+            "y": "1",
+            "z": "0"
+          },
+          {
+            "type": "l2magic:forward",
+            "distance": "1"
+          },
+          {
+            "type": "l2magic:align_with_caster"
+          }
+        ]
+      },
+      "delay": "1",
+      "step": "min(2*TickUsing,80)"
+    },
+    "predicate": "Power==0"
+  },
+  "cast_type": "CHARGE",
+  "icon": "minecraft:fire_charge",
+  "order": 3300,
+  "trigger_type": "FACING_FRONT"
+}

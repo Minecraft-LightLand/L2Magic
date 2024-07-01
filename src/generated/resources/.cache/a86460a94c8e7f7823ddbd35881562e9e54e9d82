@@ -1,14 +1,15 @@
-// 1.20.1	2024-06-06T03:36:32.585495	L2Magic Spell Data
+// 1.20.1	2024-06-27T16:15:11.3941192	L2Magic Spell Data
 36ef9f9b96663a7532afc93d4eac0fd98f8d9f12 data/l2magic/l2magic/spell_action/circular.json
-e231821bc3617cf60608b5532499195e5708011a data/l2magic/l2magic/spell_action/earth_spike.json
-b160072523d6d4b0f8a047cffaa5eac4466e7b8f data/l2magic/l2magic/spell_action/earth_spike_field.json
 4715c399c9a81b19b3d34200c99028cd37b30079 data/l2magic/l2magic/spell_action/earthquake.json
+88284310e21685477aa6cbf4ac60508e74bcd0d4 data/l2magic/l2magic/spell_action/earth_spike.json
+c413745b9be0eda42c3ac67a515de9e44aae7c7e data/l2magic/l2magic/spell_action/earth_spike_field.json
 629b6f60e17ced1f2ab7359e13fda70063c05935 data/l2magic/l2magic/spell_action/echo_blades.json
 eb467ee3e5b259e9673ae1546ca46a4ca19299aa data/l2magic/l2magic/spell_action/echo_rings.json
 29320ec774bd2ba1f2ae207d4e7ca8136828e9fc data/l2magic/l2magic/spell_action/flame_burst.json
+eb3094aa1d63f0c01e06f61e6a987b729f743b1d data/l2magic/l2magic/spell_action/flame_charge.json
 46bcae3debb1cb374da1cb707ba636ba952f3237 data/l2magic/l2magic/spell_action/icy_flash.json
-dad975d90802e9ceb4b2717e40614f0edd52299b data/l2magic/l2magic/spell_action/magic_arrow_ring.json
 99325a02cf69cb59ff623c6c12f2af38bb31f98e data/l2magic/l2magic/spell_action/magic_arrows.json
+dad975d90802e9ceb4b2717e40614f0edd52299b data/l2magic/l2magic/spell_action/magic_arrow_ring.json
 83441dfbe86a0a5dc521af232a393762b20c6bfc data/l2magic/l2magic/spell_action/magnet_core.json
 cc161b62219e1fe4a4da1cfeb6960ed6bf342c61 data/l2magic/l2magic/spell_action/master_spark.json
 acb5400d2b502fd3bbd6a618f3e780d133574922 data/l2magic/l2magic/spell_action/tornado.json
