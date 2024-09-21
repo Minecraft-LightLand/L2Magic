@@ -87,13 +87,13 @@
                 "ambient": false,
                 "amplifier": "0",
                 "duration": "100",
-                "effect": "l2complements:frost",
+                "effect": "minecraft:slowness",
                 "visible": false
               }
             ],
             "filter": {
               "type": "l2magic:effect",
-              "effect": "l2complements:frost"
+              "effect": "minecraft:slowness"
             }
           }
         ],

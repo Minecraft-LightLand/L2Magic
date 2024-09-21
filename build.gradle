@@ -159,7 +159,7 @@ dependencies {
     implementation "dev.xkmc:l2library:${l2library_ver}"
     implementation "dev.xkmc:l2damagetracker:${l2damagetracker_ver}"
     implementation "dev.xkmc:fast_projectile_api:${fast_projectile_api_ver}"
-    implementation "dev.xkmc:l2complements:${l2complements_ver}"
+    runtimeOnly "dev.xkmc:l2complements:${l2complements_ver}"
 
     implementation "mezz.jei:jei-${jei_minecraft_version}:${jei_version}"
     implementation "top.theillusivec4.curios:curios-neoforge:${curios_version}"

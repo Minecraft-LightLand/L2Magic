@@ -1,7 +1,6 @@
 package dev.xkmc.l2magic.init.data.spell.ice;
 
 import com.tterrag.registrate.providers.RegistrateLangProvider;
-import dev.xkmc.l2complements.init.registrate.LCEffects;
 import dev.xkmc.l2magic.content.engine.context.DataGenContext;
 import dev.xkmc.l2magic.content.engine.core.ConfiguredEngine;
 import dev.xkmc.l2magic.content.engine.filter.MobEffectFilter;
@@ -145,7 +144,7 @@ public class IcyShatter extends SpellDataGenEntry {
 														new DamageProcessor(ctx.damage(DamageTypes.FREEZE),
 																DoubleVariable.of("4"), true, true),
 														new EffectProcessor(
-																LCEffects.ICE,
+																MobEffects.MOVEMENT_SLOWDOWN,
 																IntVariable.of("40"),
 																IntVariable.of("0"),
 																false, false

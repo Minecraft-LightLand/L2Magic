@@ -1,6 +1,6 @@
-// 1.21.1	2024-09-12T19:40:42.941823	L2Magic Spell Data
+// 1.21.1	2024-09-13T15:27:10.589507	L2Magic Spell Data
 3c6b722e62eec15c1de3d1869c2064d8139ae53c data/l2magic/l2magic/projectile/circular_projectile.json
-5e61132816e047c8d02a8d6e525c32ac9afaf8db data/l2magic/l2magic/spell_action/absolute_zero.json
+5226df9c489cbc8de6f05bf87a6196c7e5741f49 data/l2magic/l2magic/spell_action/absolute_zero.json
 7885c06ce86414ec7fc0d8e91fe9ce28d8ec9f00 data/l2magic/l2magic/spell_action/blazing_hammer.json
 36ef9f9b96663a7532afc93d4eac0fd98f8d9f12 data/l2magic/l2magic/spell_action/circular.json
 8cbb8a02866972622f021a996a3e83d5d6283257 data/l2magic/l2magic/spell_action/circular_entity.json
@@ -17,7 +17,7 @@ f725da1079e4afe7b988a7dae88791be9e83dd5c data/l2magic/l2magic/spell_action/floor
 1376f0842e0e9edcd6f3d9b4f173ca5d182b91e9 data/l2magic/l2magic/spell_action/frost_nova.json
 87836403a74b4301312c74310acc28d562b68ec7 data/l2magic/l2magic/spell_action/glacial_domain.json
 11896d7c8c8954a9696d8b7cce030b6b7271cbed data/l2magic/l2magic/spell_action/icy_flash.json
-6d2fdca88381ab85c58d471973dd7b883b1c266f data/l2magic/l2magic/spell_action/icy_shatter.json
+a1b95d221aab7940c173a30481832bd1872e88c3 data/l2magic/l2magic/spell_action/icy_shatter.json
 dad975d90802e9ceb4b2717e40614f0edd52299b data/l2magic/l2magic/spell_action/magic_arrow_ring.json
 99325a02cf69cb59ff623c6c12f2af38bb31f98e data/l2magic/l2magic/spell_action/magic_arrows.json
 91ff7c065e06a05baacd2c04ebc89b084e7d2c97 data/l2magic/l2magic/spell_action/magma_shield.json

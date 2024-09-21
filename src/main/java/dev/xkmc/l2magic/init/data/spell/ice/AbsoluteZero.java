@@ -1,16 +1,11 @@
 package dev.xkmc.l2magic.init.data.spell.ice;
 
 import com.tterrag.registrate.providers.RegistrateLangProvider;
-import dev.xkmc.l2complements.init.registrate.LCEffects;
 import dev.xkmc.l2magic.content.engine.context.DataGenContext;
 import dev.xkmc.l2magic.content.engine.core.ConfiguredEngine;
 import dev.xkmc.l2magic.content.engine.filter.MobEffectFilter;
-import dev.xkmc.l2magic.content.engine.iterator.LoopIterator;
 import dev.xkmc.l2magic.content.engine.logic.ListLogic;
 import dev.xkmc.l2magic.content.engine.logic.ProcessorEngine;
-import dev.xkmc.l2magic.content.engine.modifier.RandomOffsetModifier;
-import dev.xkmc.l2magic.content.engine.modifier.SetDirectionModifier;
-import dev.xkmc.l2magic.content.engine.modifier.SetPosModifier;
 import dev.xkmc.l2magic.content.engine.particle.BlockParticleInstance;
 import dev.xkmc.l2magic.content.engine.particle.DustParticleInstance;
 import dev.xkmc.l2magic.content.engine.processor.DamageProcessor;
@@ -30,6 +25,7 @@ import dev.xkmc.l2magic.init.data.spell.UnrealHelper;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.damagesource.DamageTypes;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 
@@ -80,7 +76,7 @@ public class AbsoluteZero extends SpellDataGenEntry {
 						),
 						List.of(
 								new FilteredProcessor(
-										new MobEffectFilter(LCEffects.ICE),
+										new MobEffectFilter(MobEffects.MOVEMENT_SLOWDOWN),
 										List.of(
 												new DamageProcessor(ctx.damage(DamageTypes.FREEZE),
 														DoubleVariable.of("10"), true, true),
@@ -93,7 +89,7 @@ public class AbsoluteZero extends SpellDataGenEntry {
 												new DamageProcessor(ctx.damage(DamageTypes.FREEZE),
 														DoubleVariable.of("4"), true, true),
 												new EffectProcessor(
-														LCEffects.ICE,
+														MobEffects.MOVEMENT_SLOWDOWN,
 														IntVariable.of("100"),
 														IntVariable.of("0"),
 														false, false

@@ -114,7 +114,7 @@
                   "ambient": false,
                   "amplifier": "0",
                   "duration": "40",
-                  "effect": "l2complements:frost",
+                  "effect": "minecraft:slowness",
                   "visible": false
                 }
               ],
