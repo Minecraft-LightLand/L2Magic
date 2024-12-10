@@ -1,4 +1,4 @@
-// 1.21.1	2024-09-05T15:12:31.472294	Registrate Provider for l2magic [Registries, Data Maps, Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider, Tags (mob_effect), Tags (attribute), Tags (enchantment), Tags (damage_type)]
+// 1.21.1	2024-12-10T23:32:48.927536	Registrate Provider for l2magic [Registries, Data Maps, Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider, Tags (mob_effect), Tags (attribute), Tags (enchantment), Tags (damage_type)]
 c8565930f3387ccd07a4a10afb1fb2d4256ac141 assets/l2magic/lang/en_ud.json
 bbdb15143b77bfd40223ae014721c03c04ecd257 assets/l2magic/lang/en_us.json
 3bf98241232b611c89cfa73854f3f0ed2d089517 assets/l2magic/models/item/ai_config_wand.json
@@ -6,3 +6,4 @@ bbdb15143b77bfd40223ae014721c03c04ecd257 assets/l2magic/lang/en_us.json
 da3383fce9cd1f27b23c567a69f84acc239fea41 assets/l2magic/models/item/equipment_wand.json
 fec0f003094581e76c62e2c5db52fbd350b40710 assets/l2magic/models/item/target_select_wand.json
 11e5cf51b59a48612ad80cf766640f352013d80c data/l2itemselector/tags/item/selectable.json
+eed88f2391bd02137844115bae7f41993da66842 data/l2magic/tags/block/blacklist.json

@@ -39,6 +39,7 @@ public record RemoveBlock(
 		if (level.isClientSide()) return;
 		var pos = BlockPos.containing(ctx.loc().pos());
 		var state = level.getBlockState(pos);
+		if (!BlockUtils.allowModification(level, pos)) return;
 		if (state.isAir()) return;
 		switch (method) {
 			case DROP -> level.destroyBlock(pos, true, ctx.user().user(), 16);

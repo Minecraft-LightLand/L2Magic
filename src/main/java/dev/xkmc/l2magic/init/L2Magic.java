@@ -14,6 +14,7 @@ import dev.xkmc.l2magic.content.entity.core.ProjectileLandPacket;
 import dev.xkmc.l2magic.content.item.spell.CreativeSpellSelector;
 import dev.xkmc.l2magic.init.data.LMDatapackRegistriesGen;
 import dev.xkmc.l2magic.init.data.LMLangData;
+import dev.xkmc.l2magic.init.data.LMTagGen;
 import dev.xkmc.l2magic.init.registrate.EngineRegistry;
 import dev.xkmc.l2magic.init.registrate.LMItems;
 import dev.xkmc.l2serial.network.PacketHandler;
@@ -67,6 +68,7 @@ public class L2Magic {
 
 	@SubscribeEvent(priority = EventPriority.HIGH)
 	public static void gatherData(GatherDataEvent event) {
+		REGISTRATE.addDataGenerator(ProviderType.BLOCK_TAGS, LMTagGen::genBlockTag);
 		boolean run = event.includeServer();
 		var gen = event.getGenerator();
 		PackOutput output = gen.getPackOutput();
