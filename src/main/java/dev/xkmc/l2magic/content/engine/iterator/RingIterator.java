@@ -33,6 +33,17 @@ public record RingIterator(DoubleVariable radius,
 			c.orElse(DoubleVariable.of("-180")), d.orElse(DoubleVariable.of("180")),
 			e, m.orElse(false), f, g.orElse(null))));
 
+	public RingIterator(DoubleVariable radius,
+						DoubleVariable minAngle, DoubleVariable maxAngle,
+						IntVariable count, boolean maxInclusive,
+						ConfiguredEngine<?> child) {
+		this(radius, minAngle, maxAngle, count, maxInclusive, child, null);
+	}
+
+	public RingIterator(DoubleVariable radius, IntVariable count, boolean maxInclusive, ConfiguredEngine<?> child) {
+		this(radius, DoubleVariable.of("-180"), DoubleVariable.of("180"), count, maxInclusive, child, null);
+	}
+
 	@Override
 	public EngineType<RingIterator> type() {
 		return EngineRegistry.ITERATE_ARC.get();

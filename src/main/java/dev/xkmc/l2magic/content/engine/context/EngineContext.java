@@ -3,11 +3,14 @@ package dev.xkmc.l2magic.content.engine.context;
 import dev.xkmc.l2core.events.ClientScheduler;
 import dev.xkmc.l2core.events.SchedulerHandler;
 import dev.xkmc.l2magic.content.engine.core.ConfiguredEngine;
+import dev.xkmc.l2magic.content.engine.core.EntityProcessor;
 import dev.xkmc.l2magic.content.engine.core.IPredicate;
 import dev.xkmc.shadow.objecthunter.exp4j.Expression;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.LivingEntity;
 
 import javax.annotation.Nullable;
+import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -56,6 +59,10 @@ public record EngineContext(UserContext user, LocationContext loc, RandomSource 
 
 	public boolean test(IPredicate test) {
 		return test.test(new EngineContext(user, loc, nextRand(), parameters));
+	}
+
+	public void process(Collection<LivingEntity> entities, EntityProcessor<?> action) {
+		action.process(entities, new EngineContext(user, loc, nextRand(), parameters));
 	}
 
 	public double eval(Expression exp) {

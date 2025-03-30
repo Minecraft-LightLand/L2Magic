@@ -3,7 +3,7 @@ plugins {
     id 'eclipse'
     id 'idea'
     id 'maven-publish'
-    id 'net.neoforged.gradle.userdev' version '7.0.153'
+    id 'net.neoforged.gradle.userdev' version '7.0.165'
 }
 
 version = mod_version
@@ -144,6 +144,13 @@ repositories {
         name = "OctoStudios"
         url = uri("https://maven.octo-studios.com/releases")
     }
+    maven {
+        name = "Modrinth"
+        url = "https://api.modrinth.com/maven"
+        content {
+            includeGroup "maven.modrinth"
+        }
+    }
     mavenLocal();
 }
 
@@ -159,9 +166,14 @@ dependencies {
     implementation "dev.xkmc:l2library:${l2library_ver}"
     implementation "dev.xkmc:l2damagetracker:${l2damagetracker_ver}"
     implementation "dev.xkmc:fast_projectile_api:${fast_projectile_api_ver}"
-    runtimeOnly "dev.xkmc:l2complements:${l2complements_ver}"
+    runtimeOnly "dev.xkmc:l2complements:${l2complements_ver}-slim"
+    runtimeOnly "dev.xkmc:l2backpack:${l2backpack_ver}"
+    runtimeOnly "dev.xkmc:l2harvester:${l2harvester_ver}"
+    runtimeOnly "dev.xkmc:glimmeringtales:${glimmeringtales_ver}-slim"
 
     implementation "mezz.jei:jei-${jei_minecraft_version}:${jei_version}"
     implementation "top.theillusivec4.curios:curios-neoforge:${curios_version}"
     compileOnly "curse.maven:mouse-tweaks-60089:5437296"
+    implementation "maven.modrinth:sodium:mc1.21.1-0.6.1-neoforge"
+    implementation "maven.modrinth:iris:1.8.1+1.21.1-neoforge"
 }

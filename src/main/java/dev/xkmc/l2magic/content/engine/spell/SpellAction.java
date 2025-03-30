@@ -45,12 +45,12 @@ public record SpellAction(ConfiguredEngine<?> action, Item icon, int order,
 		return SpellContext.DEFAULT_PARAMS;
 	}
 
-	public void execute(SpellContext ctx) {
+	public void execute(Holder<SpellAction> holder, SpellContext ctx) {
 		var sche = new Scheduler();
 		try {
 			var source = new SingleThreadedRandomSource(ctx.seed());
 			EngineContext engine = new EngineContext(
-					new UserContext(ctx.user().level(), ctx.user(), sche),
+					new UserContext(ctx.user().level(), ctx.user(), holder, sche),
 					LocationContext.of(ctx.origin(), ctx.facing()),
 					source, ctx.defaultArgs()
 			);

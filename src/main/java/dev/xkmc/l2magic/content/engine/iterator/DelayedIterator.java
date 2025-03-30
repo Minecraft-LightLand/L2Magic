@@ -23,6 +23,10 @@ public record DelayedIterator(IntVariable step, IntVariable delay, ConfiguredEng
 			Codec.STRING.optionalFieldOf("index").forGetter(e -> Optional.ofNullable(e.index))
 	).apply(i, (d, e, f, g) -> new DelayedIterator(d, e, f, g.orElse(null))));
 
+	public DelayedIterator(IntVariable step, IntVariable delay, ConfiguredEngine<?> child) {
+		this(step, delay, child, null);
+	}
+
 	@Override
 	public EngineType<DelayedIterator> type() {
 		return EngineRegistry.ITERATE_DELAY.get();
@@ -32,7 +36,9 @@ public record DelayedIterator(IntVariable step, IntVariable delay, ConfiguredEng
 	public void execute(EngineContext ctx) {
 		int step = step().eval(ctx);
 		int delay = delay().eval(ctx);
-		recursion(ctx, 0, step, delay);
+		if (step > 0) {
+			recursion(ctx, 0, step, delay);
+		}
 	}
 
 	private void recursion(EngineContext ctx, int i, int step, int delay) {

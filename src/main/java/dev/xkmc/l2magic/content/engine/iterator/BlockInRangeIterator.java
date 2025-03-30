@@ -19,20 +19,29 @@ import java.util.Set;
 
 public record BlockInRangeIterator(
 		DoubleVariable range,
+		DoubleVariable height,
 		DoubleVariable delayPerBlock,
-		boolean plane,
 		ConfiguredEngine<?> child,
 		@Nullable String variable
 ) implements ConfiguredEngine<BlockInRangeIterator> {
 
 	public static final MapCodec<BlockInRangeIterator> CODEC = RecordCodecBuilder.mapCodec(i -> i.group(
 			DoubleVariable.codec("range", BlockInRangeIterator::range),
+			DoubleVariable.optionalCodec("height", BlockInRangeIterator::height),
 			DoubleVariable.optionalCodec("delayPerBlock", BlockInRangeIterator::delayPerBlock),
-			Codec.BOOL.optionalFieldOf("plane").forGetter(e -> Optional.of(e.plane)),
 			ConfiguredEngine.codec("child", BlockInRangeIterator::child),
 			Codec.STRING.optionalFieldOf("variable").forGetter(e -> Optional.ofNullable(e.variable))
-	).apply(i, (a, b, p, c, d) -> new BlockInRangeIterator(
-			a, b.orElse(DoubleVariable.ZERO), p.orElse(false), c, d.orElse(null))));
+	).apply(i, (a, h, b, c, d) -> new BlockInRangeIterator(
+			a, h.orElse(a), b.orElse(DoubleVariable.ZERO), c, d.orElse(null))));
+
+	public BlockInRangeIterator(
+			DoubleVariable range,
+			DoubleVariable delayPerBlock,
+			ConfiguredEngine<?> child,
+			@Nullable String variable
+	) {
+		this(range, range, delayPerBlock, child, variable);
+	}
 
 	@Override
 	public EngineType<BlockInRangeIterator> type() {
@@ -44,13 +53,12 @@ public record BlockInRangeIterator(
 		double rad = range.eval(ctx);
 		double rate = delayPerBlock.eval(ctx);
 		int step = (int) Math.ceil(rad);
+		int h = (int) Math.ceil(height.eval(ctx));
 		var p = ctx.loc().pos();
 		BlockPos pos = BlockPos.containing(p);
 		for (int x = -step; x <= step; x++) {
 			for (int z = -step; z <= step; z++) {
-				if (plane)
-					onBlock(ctx, x, 0, z, pos, p, rad, rate);
-				else for (int y = -step; y <= step; y++)
+				for (int y = -h; y <= h; y++)
 					onBlock(ctx, x, y, z, pos, p, rad, rate);
 			}
 		}

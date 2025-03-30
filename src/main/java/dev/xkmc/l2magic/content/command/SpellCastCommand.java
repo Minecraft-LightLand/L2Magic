@@ -96,7 +96,7 @@ public class SpellCastCommand extends MagicCommandEventHandlers {
 		int success = 0;
 		for (var e : list) {
 			if (e instanceof LivingEntity le) {
-				if (CommandSpellExecutor.execute(le, spell, time, power, 64)) {
+				if (CommandSpellExecutor.execute(le, holder, time, power, 64)) {
 					success++;
 				}
 			}

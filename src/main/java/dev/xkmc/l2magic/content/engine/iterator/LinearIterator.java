@@ -29,6 +29,15 @@ public record LinearIterator(DoubleVariable alongDir, Vec3 offset, DoubleVariabl
 	).apply(i, (a, b, c, d, e, f, g) -> new LinearIterator(a.orElse(DoubleVariable.ZERO), b.orElse(Vec3.ZERO),
 			c.orElse(DoubleVariable.ZERO), d, e.orElse(true), f, g.orElse(null))));
 
+	public LinearIterator(DoubleVariable alongDir, Vec3 offset, DoubleVariable alongOffset, IntVariable step,
+						  boolean startFromOrigin, ConfiguredEngine<?> child) {
+		this(alongDir, offset, alongOffset, step, startFromOrigin, child, null);
+	}
+
+	public LinearIterator(DoubleVariable alongDir, IntVariable step, boolean startFromOrigin, ConfiguredEngine<?> child) {
+		this(alongDir, Vec3.ZERO, DoubleVariable.ZERO, step, startFromOrigin, child, null);
+	}
+
 	@Override
 	public EngineType<LinearIterator> type() {
 		return EngineRegistry.ITERATE_LINEAR.get();

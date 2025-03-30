@@ -70,6 +70,7 @@ public class EngineRegistry {
 	public static final Val<EngineType<VariableLogic>> VAR = REG.reg("variable", () -> VariableLogic.CODEC);
 	public static final Val<EngineType<MoveEngine>> MOVE_ENGINE = REG.reg("move", () -> MoveEngine.CODEC);
 	public static final Val<EngineType<ProcessorEngine>> PROCESS_ENGINE = REG.reg("processor", () -> ProcessorEngine.CODEC);
+	public static final Val<EngineType<SyncedLogic>> SYNC = REG.reg("synced_logic", () -> SyncedLogic.CODEC);
 
 	public static final Val<EngineType<LoopIterator>> ITERATE = REG.reg("iterate", () -> LoopIterator.CODEC);
 	public static final Val<EngineType<DelayedIterator>> ITERATE_DELAY = REG.reg("iterate_delayed", () -> DelayedIterator.CODEC);
@@ -121,6 +122,7 @@ public class EngineRegistry {
 	public static final Val<FilterType<NotFilter>> NOT_FILTER = REG.reg("not", () -> NotFilter.CODEC);//TODO docs
 	public static final Val<FilterType<MobEffectFilter>> EFFECT_FILTER = REG.reg("effect", () -> MobEffectFilter.CODEC);//TODO docs
 
+	public static final Val<ProcessorType<DelayedProcessor>> DELAY_PROCESSOR = REG.reg("delay", () -> DelayedProcessor.CODEC);
 	public static final Val<ProcessorType<DamageProcessor>> DAMAGE = REG.reg("damage", () -> DamageProcessor.CODEC);
 	public static final Val<ProcessorType<KnockBackProcessor>> KB = REG.reg("knockback", () -> KnockBackProcessor.CODEC);
 	public static final Val<ProcessorType<PushProcessor>> PUSH_ENTITY = REG.reg("push", () -> PushProcessor.CODEC);

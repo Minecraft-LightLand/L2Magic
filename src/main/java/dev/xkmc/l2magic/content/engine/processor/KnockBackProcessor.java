@@ -28,6 +28,10 @@ public record KnockBackProcessor(
 		return new KnockBackProcessor(DoubleVariable.of(str), DoubleVariable.ZERO, DoubleVariable.ZERO);
 	}
 
+	public static KnockBackProcessor of(String kv, String angle, String tilt) {
+		return new KnockBackProcessor(DoubleVariable.of(kv), DoubleVariable.of(angle), DoubleVariable.of(tilt));
+	}
+
 	@Override
 	public ProcessorType<KnockBackProcessor> type() {
 		return EngineRegistry.KB.get();

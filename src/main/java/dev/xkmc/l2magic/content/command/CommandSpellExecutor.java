@@ -4,15 +4,16 @@ import dev.xkmc.l2core.events.SchedulerHandler;
 import dev.xkmc.l2magic.content.engine.context.SpellContext;
 import dev.xkmc.l2magic.content.engine.spell.SpellAction;
 import dev.xkmc.l2magic.content.engine.spell.SpellCastType;
+import net.minecraft.core.Holder;
 import net.minecraft.world.entity.LivingEntity;
 
 public class CommandSpellExecutor {
 
-	public static boolean execute(LivingEntity le, SpellAction spell, int time, double power, int distance) {
-		if (spell.castType() == SpellCastType.INSTANT) {
-			var val = SpellContext.castSpell(le, spell, time, power, distance);
+	public static boolean execute(LivingEntity le, Holder<SpellAction> spell, int time, double power, int distance) {
+		if (spell.value().castType() == SpellCastType.INSTANT) {
+			var val = SpellContext.castSpell(le, spell.value(), time, power, distance);
 			if (val == null) return false;
-			spell.execute(val);
+			spell.value().execute(spell, val);
 		} else {
 			SchedulerHandler.schedulePersistent(new CommandSpellExecutor(le, spell, time, power, distance)::tick);
 		}
@@ -20,14 +21,14 @@ public class CommandSpellExecutor {
 	}
 
 	private final LivingEntity le;
-	private final SpellAction spell;
+	private final Holder<SpellAction> spell;
 	private final int duration;
 	private final double power;
 	private final int distance;
 
 	private int time;
 
-	public CommandSpellExecutor(LivingEntity le, SpellAction spell, int time, double power, int distance) {
+	public CommandSpellExecutor(LivingEntity le, Holder<SpellAction> spell, int time, double power, int distance) {
 		this.le = le;
 		this.spell = spell;
 		this.duration = time;
@@ -36,10 +37,10 @@ public class CommandSpellExecutor {
 	}
 
 	public boolean tick() {
-		double p = spell.castType() == SpellCastType.CHARGE && time < duration ? 0 : power;
-		var val = SpellContext.castSpell(le, spell, time, p, distance);
+		double p = spell.value().castType() == SpellCastType.CHARGE && time < duration ? 0 : power;
+		var val = SpellContext.castSpell(le, spell.value(), time, p, distance);
 		if (val != null) {
-			spell.execute(val);
+			spell.value().execute(spell, val);
 		}
 		time++;
 		return time > duration;

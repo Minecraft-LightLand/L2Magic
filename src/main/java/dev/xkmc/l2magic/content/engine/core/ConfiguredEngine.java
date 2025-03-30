@@ -1,6 +1,7 @@
 package dev.xkmc.l2magic.content.engine.core;
 
 
+import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import dev.xkmc.l2core.util.DataGenOnly;
@@ -18,7 +19,6 @@ import dev.xkmc.l2magic.init.registrate.EngineRegistry;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.function.Function;
 
@@ -54,22 +54,63 @@ public interface ConfiguredEngine<T extends Record & ConfiguredEngine<T>>
 
 	@DataGenOnly
 	@SuppressWarnings("deprecation")
-	default ConfiguredEngine<?> withVariables(Map<String, DoubleVariable> vars) {
-		ConfiguredEngine<?> self = this;
-		for (var ent : vars.entrySet()) {
-			self = new VariableLogic(ent.getKey(), ent.getValue(), self);
+	default ConfiguredEngine<?> withVariables(String key, String val) {
+		return new VariableLogic(key, val, this);
+	}
+
+	@DataGenOnly
+	@SuppressWarnings("deprecation")
+	default ConfiguredEngine<?> withVariables(
+			String k1, String v1,
+			String k2, String v2
+	) {
+		return new VariableLogic(k1, v1, new VariableLogic(k2, v2, this));
+	}
+
+	@DataGenOnly
+	@SuppressWarnings("deprecation")
+	default ConfiguredEngine<?> withVariables(
+			String k1, String v1,
+			String k2, String v2,
+			String k3, String v3
+	) {
+		return new VariableLogic(k1, v1, new VariableLogic(k2, v2, new VariableLogic(k3, v3, this)));
+	}
+
+
+	@DataGenOnly
+	@SuppressWarnings("deprecation")
+	default ConfiguredEngine<?> withVariables(List<Pair<String, String>> entries) {
+		ConfiguredEngine<?> ans = this;
+		for (var e : entries.reversed()) {
+			ans = new VariableLogic(e.getFirst(), e.getSecond(), ans);
 		}
-		return self;
+		return ans;
 	}
 
 	default ConfiguredEngine<?> circular(
-			DoubleVariable radius,
-			DoubleVariable delayPerBlock,
+			String radius,
+			String delayPerBlock,
 			boolean plane,
 			@Nullable String variable,
 			IPredicate... predicates
 	) {
-		return new BlockInRangeIterator(radius, delayPerBlock, plane,
+		return new BlockInRangeIterator(DoubleVariable.of(radius),
+				plane ? DoubleVariable.ZERO : DoubleVariable.of(radius), DoubleVariable.of(delayPerBlock),
+				new PredicateLogic(new AndPredicate(List.of(predicates)),
+						this, null),
+				variable);
+	}
+
+	default ConfiguredEngine<?> circular(
+			String radius,
+			String height,
+			String delayPerBlock,
+			@Nullable String variable,
+			IPredicate... predicates
+	) {
+		return new BlockInRangeIterator(DoubleVariable.of(radius),
+				DoubleVariable.of(height), DoubleVariable.of(delayPerBlock),
 				new PredicateLogic(new AndPredicate(List.of(predicates)),
 						this, null),
 				variable);

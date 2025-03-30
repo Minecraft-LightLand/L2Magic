@@ -38,6 +38,10 @@ public record PropertyProcessor(
 				func.accept(e, dur);
 		}
 
+		public PropertyProcessor of(String duration) {
+			return new PropertyProcessor(this, IntVariable.of(duration));
+		}
+
 	}
 
 	private static final Codec<Type> TYPE_CODEC = EngineHelper.enumCodec(Type.class, Type.values());

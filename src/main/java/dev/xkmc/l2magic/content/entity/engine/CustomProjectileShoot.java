@@ -59,7 +59,7 @@ public record CustomProjectileShoot(
 				life.eval(ctx), bypassWall, bypassEntity,
 				ctx.rand().nextLong(), map
 		);
-		ProjectileData data = new ProjectileData(paramSet, config);
+		ProjectileData data = new ProjectileData(ctx.user().root(), paramSet, config);
 		ans.setup(data, ctx.loc().pos(), ctx.loc().dir().scale(speed.eval(ctx)));
 		ans.setOwner(ctx.user().user());
 		return ans;

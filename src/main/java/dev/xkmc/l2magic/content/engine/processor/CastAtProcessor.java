@@ -4,11 +4,14 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import dev.xkmc.l2magic.content.engine.context.EngineContext;
+import dev.xkmc.l2magic.content.engine.context.EngineContextData;
 import dev.xkmc.l2magic.content.engine.context.LocationContext;
 import dev.xkmc.l2magic.content.engine.context.SpellContext;
 import dev.xkmc.l2magic.content.engine.core.ConfiguredEngine;
 import dev.xkmc.l2magic.content.engine.core.EntityProcessor;
 import dev.xkmc.l2magic.content.engine.core.ProcessorType;
+import dev.xkmc.l2magic.content.engine.extension.SyncedAction;
+import dev.xkmc.l2magic.content.engine.extension.SyncedActionEntry;
 import dev.xkmc.l2magic.content.engine.helper.EngineHelper;
 import dev.xkmc.l2magic.init.registrate.EngineRegistry;
 import net.minecraft.world.entity.LivingEntity;
@@ -20,7 +23,7 @@ public record CastAtProcessor(
 		PosType pos,
 		DirType dir,
 		ConfiguredEngine<?> child
-) implements EntityProcessor<CastAtProcessor> {
+) implements EntityProcessor<CastAtProcessor>, SyncedAction<CastAtProcessor> {
 
 	public enum PosType {
 		ORIGINAL, BOTTOM, CENTER, EYE
@@ -60,13 +63,15 @@ public record CastAtProcessor(
 				case HORIZONTAL -> SpellContext.getForward(e).multiply(1, 0, 1).normalize();
 				case LOOKING -> SpellContext.getForward(e);
 			};
-			ctx.execute(LocationContext.of(p, d), child);
+			var data = EngineContextData.of(ctx, LocationContext.of(p, d));
+			SyncedActionEntry.run(ctx, data, this);
 		}
 	}
 
 	@Override
 	public boolean serverOnly() {
-		return false;
+		return true;
 	}
+
 
 }

@@ -5,6 +5,7 @@ import dev.xkmc.l2magic.content.engine.context.EngineContext;
 import dev.xkmc.l2magic.content.engine.context.UserContext;
 import dev.xkmc.l2magic.content.engine.core.ConfiguredEngine;
 import dev.xkmc.l2magic.content.engine.helper.Scheduler;
+import dev.xkmc.l2magic.content.engine.spell.SpellAction;
 import dev.xkmc.l2magic.content.entity.renderer.ProjectileRenderer;
 import dev.xkmc.l2magic.init.L2Magic;
 import dev.xkmc.l2magic.init.registrate.EngineRegistry;
@@ -37,6 +38,9 @@ public class ProjectileData {
 			"ProjectileX", "ProjectileY", "ProjectileZ");
 
 	@SerialField
+	public Holder<SpellAction> root;
+
+	@SerialField
 	public ProjectileParams params;
 
 	@SerialField
@@ -50,7 +54,8 @@ public class ProjectileData {
 	public ProjectileData() {
 	}
 
-	public ProjectileData(ProjectileParams params, Holder<ProjectileConfig> config) {
+	public ProjectileData(Holder<SpellAction> root, ProjectileParams params, Holder<ProjectileConfig> config) {
+		this.root = root;
 		this.params = params;
 		this.id = config.unwrapKey().orElseThrow().location();
 		this.config = config.value();
@@ -84,7 +89,7 @@ public class ProjectileData {
 		if (!(self.getOwner() instanceof LivingEntity user)) return null;
 		var source = new SingleThreadedRandomSource(params.seed() ^ self.tickCount ^ salt);
 		Scheduler sche = addScheduler ? new Scheduler() : null;
-		return new EngineContext(new UserContext(user.level(), user, sche),
+		return new EngineContext(new UserContext(user.level(), user, root, sche),
 				self.location(), source, allParams(self));
 	}
 
@@ -105,7 +110,7 @@ public class ProjectileData {
 	public void hurtTargetImpl(LMProjectile self, LivingEntity le) {
 		var hit = config.hit();
 		if (hit.isEmpty()) return;
-		EngineContext ctx = getContext(self, SALT_HIT, false);
+		EngineContext ctx = getContext(self, SALT_HIT, true);
 		if (ctx == null) return;
 		if (!self.level().isClientSide()) {
 			for (var e : hit) {
@@ -118,6 +123,7 @@ public class ProjectileData {
 		for (var e : hit) {
 			e.process(List.of(le), ctx);
 		}
+		ctx.registerScheduler();
 	}
 
 	public void tick(LMProjectile self) {

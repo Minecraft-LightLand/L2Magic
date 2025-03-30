@@ -117,7 +117,7 @@ public class WandItem extends Item implements IGlowingTarget, FastItem {
 		SpellContext ctx = SpellContext.castSpell(user, spell.value(), useTick, charging ? 0 : 1, getDistance(stack));
 		if (ctx == null) return false;
 		if (!level.isClientSide()) {
-			spell.value().execute(ctx);
+			spell.value().execute(spell, ctx);
 		}
 		return true;
 	}

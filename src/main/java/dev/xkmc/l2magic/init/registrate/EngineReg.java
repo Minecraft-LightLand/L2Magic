@@ -3,6 +3,7 @@ package dev.xkmc.l2magic.init.registrate;
 import dev.xkmc.l2core.init.reg.registrate.L2Registrate;
 import dev.xkmc.l2core.init.reg.simple.Val;
 import dev.xkmc.l2magic.content.engine.core.*;
+import dev.xkmc.l2magic.content.engine.extension.ExtensionTypeKey;
 import dev.xkmc.l2magic.content.entity.core.Motion;
 import dev.xkmc.l2magic.content.entity.core.MotionType;
 import dev.xkmc.l2magic.content.entity.renderer.ProjectileRenderData;
@@ -14,7 +15,9 @@ public record EngineReg(L2Registrate reg) {
 
 	public <T extends Record & ConfiguredEngine<T>> Val<EngineType<T>>
 	reg(String id, EngineType.Factory<T> codec) {
-		return new Val.Registrate<>(reg.simple(id, EngineRegistry.ENGINE.key(), () -> new EngineType<>(codec.codec())));
+		return new Val.Registrate<>(reg.simple(id, EngineRegistry.ENGINE.key(), () -> new EngineType<>(
+				new ExtensionTypeKey(EngineRegistry.ENGINE.key().location(), reg.loc(id)),
+				codec.codec())));
 	}
 
 	public <T extends Record & EntitySelector<T>> Val<SelectorType<T>>
@@ -39,7 +42,9 @@ public record EngineReg(L2Registrate reg) {
 
 	public <T extends Record & EntityProcessor<T>> Val<ProcessorType<T>>
 	reg(String id, ProcessorType.Factory<T> codec) {
-		return new Val.Registrate<>(reg.simple(id, EngineRegistry.PROCESSOR.key(), () -> new ProcessorType<>(codec.codec())));
+		return new Val.Registrate<>(reg.simple(id, EngineRegistry.PROCESSOR.key(), () -> new ProcessorType<>(
+				new ExtensionTypeKey(EngineRegistry.PROCESSOR.key().location(), reg.loc(id)),
+				codec.codec())));
 	}
 
 	public <T extends Record & Motion<T>> Val<MotionType<T>>

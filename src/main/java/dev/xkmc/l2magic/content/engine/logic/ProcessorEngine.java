@@ -35,7 +35,7 @@ public record ProcessorEngine(
 		if (ctx.user().level().isClientSide()) {
 			boolean server = true;
 			for (var e : processors)
-				server &= !e.serverOnly();
+				server &= e.serverOnly();
 			if (server) return;
 		}
 		var set = selector().find(ctx.user().level(), ctx, target);

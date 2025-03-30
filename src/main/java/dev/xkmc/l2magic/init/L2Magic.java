@@ -6,6 +6,7 @@ import dev.xkmc.l2core.init.reg.simple.Reg;
 import dev.xkmc.l2core.serial.config.PacketHandlerWithConfig;
 import dev.xkmc.l2itemselector.select.item.IItemSelector;
 import dev.xkmc.l2magic.content.engine.context.SpellUsePacket;
+import dev.xkmc.l2magic.content.engine.extension.SyncedActionPacket;
 import dev.xkmc.l2magic.content.engine.spell.SpellAction;
 import dev.xkmc.l2magic.content.entity.core.ProjectileConfig;
 import dev.xkmc.l2magic.content.entity.core.ProjectileExpirePacket;
@@ -41,7 +42,8 @@ public class L2Magic {
 			e -> e.create(SpellUsePacket.class, PacketHandler.NetDir.PLAY_TO_CLIENT),
 			e -> e.create(ProjectileHitPacket.class, PacketHandler.NetDir.PLAY_TO_CLIENT),
 			e -> e.create(ProjectileLandPacket.class, PacketHandler.NetDir.PLAY_TO_CLIENT),
-			e -> e.create(ProjectileExpirePacket.class, PacketHandler.NetDir.PLAY_TO_CLIENT)
+			e -> e.create(ProjectileExpirePacket.class, PacketHandler.NetDir.PLAY_TO_CLIENT),
+			e -> e.create(SyncedActionPacket.class, PacketHandler.NetDir.PLAY_TO_CLIENT)
 	);
 	public static final Logger LOGGER = LogManager.getLogger();
 	public static final Reg REG = new Reg(MODID);

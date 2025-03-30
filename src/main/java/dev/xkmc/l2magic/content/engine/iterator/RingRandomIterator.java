@@ -37,6 +37,17 @@ public record RingRandomIterator(DoubleVariable minRadius, DoubleVariable maxRad
 			c.orElse(DoubleVariable.of("-180")), d.orElse(DoubleVariable.of("180")),
 			e, f, g.orElse(null))));
 
+	public RingRandomIterator(DoubleVariable minRadius, DoubleVariable maxRadius,
+							  DoubleVariable minAngle, DoubleVariable maxAngle,
+							  IntVariable count,
+							  ConfiguredEngine<?> child) {
+		this(minRadius, maxRadius, minAngle, maxAngle, count, child, null);
+	}
+
+	public RingRandomIterator(DoubleVariable minRadius, DoubleVariable maxRadius, IntVariable count, ConfiguredEngine<?> child) {
+		this(minRadius, maxRadius, DoubleVariable.of("-180"), DoubleVariable.of("180"), count, child, null);
+	}
+
 	@Override
 	public EngineType<RingRandomIterator> type() {
 		return EngineRegistry.RANDOM_FAN.get();

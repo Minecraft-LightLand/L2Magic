@@ -1,5 +1,6 @@
 package dev.xkmc.l2magic.events;
 
+import dev.xkmc.l2magic.content.engine.extension.ExtensionTypeManager;
 import dev.xkmc.l2magic.content.item.utility.IMobClickItem;
 import dev.xkmc.l2magic.init.L2Magic;
 import dev.xkmc.l2magic.init.registrate.EngineRegistry;
@@ -18,6 +19,7 @@ public class GeneralMagicEventListener {
 				.holders().forEach(e -> e.value().verify(e.key().location()));
 		event.getRegistryAccess().registryOrThrow(EngineRegistry.SPELL)
 				.holders().forEach(e -> e.value().verify(e.key().location()));
+		ExtensionTypeManager.reload();
 	}
 
 	@SubscribeEvent

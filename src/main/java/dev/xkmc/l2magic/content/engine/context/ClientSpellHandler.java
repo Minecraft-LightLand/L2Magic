@@ -9,15 +9,14 @@ import net.minecraft.world.phys.Vec3;
 
 public class ClientSpellHandler {
 
-	public static void useSpell(int user, ResourceLocation spellId,
-								Vec3 origin, Orientation facing, long seed, double tickUsing, double power) {
+	public static void useSpell(int user, ResourceLocation spellId, Vec3 origin, Orientation facing, long seed, double tickUsing, double power) {
 		var level = Minecraft.getInstance().level;
 		if (level == null) return;
 		var e = level.getEntity(user);
 		if (!(e instanceof LivingEntity le)) return;
 		var spell = level.registryAccess().registryOrThrow(EngineRegistry.SPELL)
-				.get(spellId);
-		if (spell == null) return;
-		spell.execute(new SpellContext(le, origin, facing, seed, tickUsing, power));
+				.getHolder(spellId);
+		if (spell.isEmpty()) return;
+		spell.get().value().execute(spell.get(), new SpellContext(le, origin, facing, seed, tickUsing, power));
 	}
 }

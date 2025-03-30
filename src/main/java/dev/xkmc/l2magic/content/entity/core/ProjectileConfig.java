@@ -8,6 +8,7 @@ import dev.xkmc.l2magic.content.engine.context.BuilderContext;
 import dev.xkmc.l2magic.content.engine.core.ConfiguredEngine;
 import dev.xkmc.l2magic.content.engine.core.EntityProcessor;
 import dev.xkmc.l2magic.content.engine.selector.SelectionType;
+import dev.xkmc.l2magic.content.engine.spell.SpellAction;
 import dev.xkmc.l2magic.content.engine.variable.DoubleVariable;
 import dev.xkmc.l2magic.content.entity.renderer.ProjectileRenderData;
 import dev.xkmc.l2magic.init.L2Magic;
@@ -72,7 +73,7 @@ public record ProjectileConfig(
 		if (land != null) land.verify(withSche.of("land"));
 		if (expire != null) expire.verify(withSche.of("expire"));
 		for (int i = 0; i < hit.size(); i++)
-			hit.get(i).verify(noSche.of("hit_" + i));
+			hit.get(i).verify(withSche.of("hit_" + i));
 		if (size != null) size.verify(noSche.of("size"));
 		if (renderer != null) renderer.verify(noSche.of("renderer"));
 	}

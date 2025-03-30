@@ -12,7 +12,6 @@ import dev.xkmc.l2magic.content.engine.predicate.SurfaceBelowCondition;
 import dev.xkmc.l2magic.content.engine.spell.SpellAction;
 import dev.xkmc.l2magic.content.engine.spell.SpellCastType;
 import dev.xkmc.l2magic.content.engine.spell.SpellTriggerType;
-import dev.xkmc.l2magic.content.engine.variable.DoubleVariable;
 import dev.xkmc.l2magic.init.data.SpellDataGenEntry;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
@@ -53,26 +52,22 @@ public class BlockSpells extends SpellDataGenEntry {
 
 
 	private static ConfiguredEngine<?> floor(DataGenContext ctx) {
-		return new SetBlock(Blocks.STONE.defaultBlockState()).circular(
-				DoubleVariable.of("3"), DoubleVariable.ZERO, true, null,
+		return new SetBlock(Blocks.STONE.defaultBlockState()).circular("3", "0", true, null,
 				BlockTestCondition.Type.REPLACEABLE.get()).move(OffsetModifier.BELOW);
 	}
 
 	private static ConfiguredEngine<?> cobwebs(DataGenContext ctx) {
-		return new SetBlock(Blocks.COBWEB.defaultBlockState()).circular(
-				DoubleVariable.of("6"), DoubleVariable.of("2"), false, null,
+		return new SetBlock(Blocks.COBWEB.defaultBlockState()).circular("6", "2", false, null,
 				BlockTestCondition.Type.REPLACEABLE.get(), SurfaceBelowCondition.full());
 	}
 
 	private static ConfiguredEngine<?> melt(DataGenContext ctx) {
-		return new SetBlock(Blocks.MAGMA_BLOCK.defaultBlockState()).circular(
-				DoubleVariable.of("6"), DoubleVariable.of("2"), false, null,
+		return new SetBlock(Blocks.MAGMA_BLOCK.defaultBlockState()).circular("6", "2", false, null,
 				BlockTestCondition.Type.BLOCKS_MOTION.get().move(OffsetModifier.ABOVE), BlockMatchCondition.of(BlockTags.SCULK_REPLACEABLE));
 	}
 
 	private static ConfiguredEngine<?> swept(DataGenContext ctx) {
-		return RemoveBlock.Type.DROP.get().circular(
-				DoubleVariable.of("6"), DoubleVariable.of("2"), false, null,
+		return RemoveBlock.Type.DROP.get().circular("6", "2", false, null,
 				BlockTestCondition.Type.BLOCKS_MOTION.get().invert());
 	}
 

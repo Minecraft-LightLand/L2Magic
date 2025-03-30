@@ -16,7 +16,12 @@ public record RandomOffsetModifier(Type shape, DoubleVariable x, DoubleVariable 
 		implements Modifier<RandomOffsetModifier> {
 
 	public enum Type {
-		RECT, SPHERE, GAUSSIAN
+		RECT, SPHERE, GAUSSIAN;
+
+		public RandomOffsetModifier of(String x, String y, String z) {
+			return new RandomOffsetModifier(this, DoubleVariable.of(x), DoubleVariable.of(y), DoubleVariable.of(z));
+		}
+
 	}
 
 	public static MapCodec<RandomOffsetModifier> CODEC = RecordCodecBuilder.mapCodec(i -> i.group(

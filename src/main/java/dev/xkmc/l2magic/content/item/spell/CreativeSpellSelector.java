@@ -50,7 +50,7 @@ public class CreativeSpellSelector extends CircularSelector<ResourceKey<SpellAct
 
 	@Override
 	public List<ItemStack> getList(ItemStack stack) {
-		return getListGeneric(stack, rl -> WandItem.setSpell(LMItems.CREATIVE_WAND.asStack(), rl));
+		return getListGeneric(stack, rl -> WandItem.setSpell(stack.copy(), rl));
 	}
 
 	@Override

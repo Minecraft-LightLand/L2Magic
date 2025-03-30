@@ -24,7 +24,16 @@ public record PushProcessor(
 ) implements SimpleServerProcessor<PushProcessor> {
 
 	public enum Type {
-		UNIFORM, TO_CENTER, TO_BOTTOM, HORIZONTAL
+		UNIFORM, TO_CENTER, TO_BOTTOM, HORIZONTAL;
+
+		public PushProcessor of(String speed, String angle, String tilt) {
+			return new PushProcessor(DoubleVariable.of(speed), DoubleVariable.of(angle), DoubleVariable.of(tilt), this);
+		}
+
+		public PushProcessor of(String speed) {
+			return new PushProcessor(DoubleVariable.of(speed), DoubleVariable.ZERO, DoubleVariable.ZERO, this);
+		}
+
 	}
 
 	private static final Codec<Type> TYPE_CODEC = EngineHelper.enumCodec(Type.class, Type.values());
@@ -37,6 +46,11 @@ public record PushProcessor(
 	).apply(i, (a, b, c, d) -> new PushProcessor(a,
 			b.orElse(DoubleVariable.ZERO), c.orElse(DoubleVariable.ZERO),
 			d.orElse(Type.TO_CENTER))));
+
+	@Deprecated
+	public PushProcessor {
+
+	}
 
 	@Override
 	public ProcessorType<PushProcessor> type() {

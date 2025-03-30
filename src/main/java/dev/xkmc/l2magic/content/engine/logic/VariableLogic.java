@@ -26,6 +26,11 @@ public record VariableLogic(String name, DoubleVariable var, ConfiguredEngine<?>
 	public VariableLogic {
 	}
 
+	@Deprecated
+	public VariableLogic(String name, String var, ConfiguredEngine<?> child) {
+		this(name, DoubleVariable.of(var), child);
+	}
+
 	@Override
 	public EngineType<VariableLogic> type() {
 		return EngineRegistry.VAR.get();
