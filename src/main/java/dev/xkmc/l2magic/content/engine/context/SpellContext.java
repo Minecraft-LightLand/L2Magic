@@ -20,10 +20,11 @@ import javax.annotation.Nullable;
 import java.util.Map;
 import java.util.Set;
 
-public record SpellContext(LivingEntity user, Vec3 origin, Orientation facing, long seed, double tickUsing,
-						   double power) {
+public record SpellContext(
+		LivingEntity user, Vec3 origin, Orientation facing,
+		long seed, double tickUsing, double power, int delay) {
 
-	public static Set<String> DEFAULT_PARAMS = Set.of("TickUsing", "Power", "CastX", "CastY", "CastZ");
+	public static Set<String> DEFAULT_PARAMS = Set.of("TickUsing", "Power", "MobCastDelay", "CastX", "CastY", "CastZ");
 
 	public static Vec3 getCenter(LivingEntity le) {
 		return le.position().add(0, le.getBbHeight() / 2f, 0);
@@ -54,7 +55,7 @@ public record SpellContext(LivingEntity user, Vec3 origin, Orientation facing, l
 	}
 
 	@Nullable
-	public static SpellContext castSpell(LivingEntity user, SpellAction spell, int useTick, double power, int distance) {
+	public static SpellContext castSpell(LivingEntity user, SpellAction spell, int useTick, double power, int distance, int delay) {
 		Level level = user.level();
 		Vec3 pos;
 		Orientation ori;
@@ -114,14 +115,16 @@ public record SpellContext(LivingEntity user, Vec3 origin, Orientation facing, l
 		if (!level.isClientSide()) {
 			seed = ThreadLocalRandom.current().nextLong();
 		}
-		return new SpellContext(user, pos, ori, seed, useTick, power);
+		return new SpellContext(user, pos, ori, seed, useTick, power, delay);
 	}
 
 	public Map<String, Double> defaultArgs() {
 		return Map.of("TickUsing", tickUsing(),
 				"Power", power(),
+				"MobCastDelay", (double) delay,
 				"CastX", origin().x,
 				"CastY", origin().y,
 				"CastZ", origin().z);
 	}
+
 }

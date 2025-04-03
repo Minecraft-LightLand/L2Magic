@@ -25,6 +25,7 @@ With Scheduler:
 Parameters:
 - TickUsing: ticks player is using this spell
 - Power: The power factor of this spell
+- MobCastDelay: ticks to delay if it's casted by hostile mob
 - CastX: Position where this spell is casted
 - CastY: Position where this spell is casted
 - CastZ: Position where this spell is casted

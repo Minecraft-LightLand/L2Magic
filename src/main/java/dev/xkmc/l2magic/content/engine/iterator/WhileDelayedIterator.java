@@ -14,9 +14,9 @@ import dev.xkmc.l2magic.init.registrate.EngineRegistry;
 import javax.annotation.Nullable;
 import java.util.Optional;
 
-public record WhileDelayedIterator(IntVariable step, IntVariable delay, IPredicate condition, ConfiguredEngine<?> child,
-								   @Nullable String index)
-		implements Iterator<WhileDelayedIterator> {
+public record WhileDelayedIterator(
+		IntVariable step, IntVariable delay, IPredicate condition, ConfiguredEngine<?> child, @Nullable String index
+) implements Iterator<WhileDelayedIterator> {
 
 	public static MapCodec<WhileDelayedIterator> CODEC = RecordCodecBuilder.mapCodec(i -> i.group(
 			IntVariable.codec("step", WhileDelayedIterator::step),

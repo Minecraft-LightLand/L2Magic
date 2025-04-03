@@ -11,7 +11,7 @@ public class CommandSpellExecutor {
 
 	public static boolean execute(LivingEntity le, Holder<SpellAction> spell, int time, double power, int distance) {
 		if (spell.value().castType() == SpellCastType.INSTANT) {
-			var val = SpellContext.castSpell(le, spell.value(), time, power, distance);
+			var val = SpellContext.castSpell(le, spell.value(), time, power, distance, 0);
 			if (val == null) return false;
 			spell.value().execute(spell, val);
 		} else {
@@ -38,7 +38,7 @@ public class CommandSpellExecutor {
 
 	public boolean tick() {
 		double p = spell.value().castType() == SpellCastType.CHARGE && time < duration ? 0 : power;
-		var val = SpellContext.castSpell(le, spell.value(), time, p, distance);
+		var val = SpellContext.castSpell(le, spell.value(), time, p, distance, 0);
 		if (val != null) {
 			spell.value().execute(spell, val);
 		}

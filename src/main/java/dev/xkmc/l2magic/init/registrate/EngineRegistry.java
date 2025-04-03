@@ -116,6 +116,8 @@ public class EngineRegistry {
 	public static final Val<PredicateType<BlockMatchCondition>> BLOCK_MATCH = REG.reg("block", () -> BlockMatchCondition.CODEC);//TODO docs
 	public static final Val<PredicateType<SurfaceBelowCondition>> SURFACE_BELOW = REG.reg("surface_below", () -> SurfaceBelowCondition.CODEC);//TODO docs
 	public static final Val<PredicateType<BlockTestCondition>> BLOCK_TEST = REG.reg("block_test", () -> BlockTestCondition.CODEC);//TODO docs
+	public static final Val<PredicateType<DepthPredicate>> DEPTH = REG.reg("depth_test", () -> DepthPredicate.CODEC);//TODO docs
+	public static final Val<PredicateType<BlockInRangePredicate>> RANGE = REG.reg("ranged_test", () -> BlockInRangePredicate.CODEC);//TODO docs
 
 	public static final Val<FilterType<AndFilter>> AND_FILTER = REG.reg("and", () -> AndFilter.CODEC);//TODO docs
 	public static final Val<FilterType<OrFilter>> OR_FILTER = REG.reg("or", () -> OrFilter.CODEC);//TODO docs

@@ -26,15 +26,6 @@ public record EngineContext(UserContext user, LocationContext loc, RandomSource 
 		return new EngineContext(user, loc, rand, ans);
 	}
 
-	public boolean test(LocationContext loc, @Nullable String index, int i, IPredicate pred) {
-		if (index == null || index.isEmpty()) {
-			return pred.test(new EngineContext(user, loc, nextRand(), parameters));
-		}
-		var param = new LinkedHashMap<>(parameters);
-		param.put(index, (double) i);
-		return pred.test(new EngineContext(user, loc, nextRand(), param));
-	}
-
 	public void iterateOn(LocationContext loc, @Nullable String index, int i, ConfiguredEngine<?> child) {
 		if (index == null || index.isEmpty()) {
 			execute(loc, child);
@@ -54,12 +45,30 @@ public record EngineContext(UserContext user, LocationContext loc, RandomSource 
 	}
 
 	public void execute(LocationContext loc, Map<String, Double> parameters, ConfiguredEngine<?> child) {
-		child.execute(new EngineContext(user, loc, nextRand(), parameters));
+		var param = new LinkedHashMap<>(this.parameters);
+		param.putAll(parameters);
+		child.execute(new EngineContext(user, loc, nextRand(), param));
 	}
 
 	public boolean test(IPredicate test) {
 		return test.test(new EngineContext(user, loc, nextRand(), parameters));
 	}
+
+	public boolean test(LocationContext loc, @Nullable String index, int i, IPredicate pred) {
+		if (index == null || index.isEmpty()) {
+			return pred.test(new EngineContext(user, loc, nextRand(), parameters));
+		}
+		var param = new LinkedHashMap<>(parameters);
+		param.put(index, (double) i);
+		return pred.test(new EngineContext(user, loc, nextRand(), param));
+	}
+
+	public boolean test(LocationContext loc, Map<String, Double> parameters, IPredicate pred) {
+		var param = new LinkedHashMap<>(this.parameters);
+		param.putAll(parameters);
+		return pred.test(new EngineContext(user, loc, nextRand(), param));
+	}
+
 
 	public void process(Collection<LivingEntity> entities, EntityProcessor<?> action) {
 		action.process(entities, new EngineContext(user, loc, nextRand(), parameters));

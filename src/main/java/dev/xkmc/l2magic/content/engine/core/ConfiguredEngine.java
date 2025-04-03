@@ -8,11 +8,9 @@ import dev.xkmc.l2core.util.DataGenOnly;
 import dev.xkmc.l2magic.content.engine.context.EngineContext;
 import dev.xkmc.l2magic.content.engine.extension.IExtended;
 import dev.xkmc.l2magic.content.engine.iterator.BlockInRangeIterator;
-import dev.xkmc.l2magic.content.engine.logic.DelayLogic;
-import dev.xkmc.l2magic.content.engine.logic.MoveEngine;
-import dev.xkmc.l2magic.content.engine.logic.PredicateLogic;
-import dev.xkmc.l2magic.content.engine.logic.VariableLogic;
+import dev.xkmc.l2magic.content.engine.logic.*;
 import dev.xkmc.l2magic.content.engine.predicate.AndPredicate;
+import dev.xkmc.l2magic.content.engine.variable.BooleanVariable;
 import dev.xkmc.l2magic.content.engine.variable.DoubleVariable;
 import dev.xkmc.l2magic.content.engine.variable.IntVariable;
 import dev.xkmc.l2magic.init.registrate.EngineRegistry;
@@ -114,6 +112,13 @@ public interface ConfiguredEngine<T extends Record & ConfiguredEngine<T>>
 				new PredicateLogic(new AndPredicate(List.of(predicates)),
 						this, null),
 				variable);
+	}
+
+	default ConfiguredEngine<?> mobCastDelay(ConfiguredEngine<?> mobWarn) {
+		return new ListLogic(List.of(
+				new PredicateLogic(BooleanVariable.of("MobCastDelay>0"), mobWarn, null),
+				delay(IntVariable.of("MobCastDelay"))
+		));
 	}
 
 }
