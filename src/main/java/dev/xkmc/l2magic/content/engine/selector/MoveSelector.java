@@ -8,11 +8,8 @@ import dev.xkmc.l2magic.content.engine.core.EntitySelector;
 import dev.xkmc.l2magic.content.engine.core.Modifier;
 import dev.xkmc.l2magic.content.engine.core.SelectorType;
 import dev.xkmc.l2magic.init.registrate.EngineRegistry;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 
-import java.util.LinkedHashSet;
 import java.util.List;
 
 public record MoveSelector(List<Modifier<?>> modifiers, EntitySelector<?> child)

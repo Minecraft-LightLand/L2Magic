@@ -8,10 +8,8 @@ import dev.xkmc.l2magic.content.engine.core.IPredicate;
 import dev.xkmc.l2magic.content.engine.selector.SelectedEntities;
 import dev.xkmc.shadow.objecthunter.exp4j.Expression;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.entity.LivingEntity;
 
 import javax.annotation.Nullable;
-import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.Map;
 

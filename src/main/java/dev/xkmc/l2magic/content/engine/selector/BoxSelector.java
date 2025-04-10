@@ -8,14 +8,10 @@ import dev.xkmc.l2magic.content.engine.core.EntitySelector;
 import dev.xkmc.l2magic.content.engine.core.SelectorType;
 import dev.xkmc.l2magic.content.engine.variable.DoubleVariable;
 import dev.xkmc.l2magic.init.registrate.EngineRegistry;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.entity.PartEntity;
 
-import java.util.LinkedHashSet;
 import java.util.Optional;
 
 public record BoxSelector(

@@ -17,9 +17,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageType;
-import net.minecraft.world.entity.LivingEntity;
 
-import java.util.Collection;
 import java.util.Optional;
 
 public record DamageProcessor(

@@ -1,6 +1,5 @@
 package dev.xkmc.l2magic.content.particle.core;
 
-import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.network.RegistryFriendlyByteBuf;

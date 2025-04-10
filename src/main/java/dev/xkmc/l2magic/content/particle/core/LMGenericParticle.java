@@ -98,7 +98,7 @@ public class LMGenericParticle extends TextureSheetParticle {
 
 	@Override
 	public float getU0() {
-		return  sprite.getU(geom.u0());
+		return sprite.getU(geom.u0());
 	}
 
 	@Override

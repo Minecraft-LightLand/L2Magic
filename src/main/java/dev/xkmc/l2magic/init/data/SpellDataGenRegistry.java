@@ -25,7 +25,7 @@ public class SpellDataGenRegistry {
 			new EchoSpells(),
 			new FlameCharge(),  // id:3300
 			new MagmaShield(),  // id:3400
-			new FlamePillar(), 	// id:3500
+			new FlamePillar(),    // id:3500
 			new FrostNova(),  // id:3600
 			new IcyShatter(),  // id:3700
 			new AbsoluteZero(),  // id:3800

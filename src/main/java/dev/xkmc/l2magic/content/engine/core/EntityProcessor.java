@@ -4,14 +4,10 @@ import com.mojang.serialization.Codec;
 import dev.xkmc.l2core.util.DataGenOnly;
 import dev.xkmc.l2magic.content.engine.context.EngineContext;
 import dev.xkmc.l2magic.content.engine.extension.IExtended;
-import dev.xkmc.l2magic.content.engine.logic.DelayLogic;
 import dev.xkmc.l2magic.content.engine.processor.DelayedProcessor;
 import dev.xkmc.l2magic.content.engine.selector.SelectedEntities;
 import dev.xkmc.l2magic.content.engine.variable.IntVariable;
 import dev.xkmc.l2magic.init.registrate.EngineRegistry;
-import net.minecraft.world.entity.LivingEntity;
-
-import java.util.Collection;
 
 public interface EntityProcessor<T extends Record & EntityProcessor<T>>
 		extends Verifiable, IExtended<T> {

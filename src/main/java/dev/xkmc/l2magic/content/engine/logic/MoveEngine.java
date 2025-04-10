@@ -20,7 +20,8 @@ public record MoveEngine(List<Modifier<?>> modifiers, ConfiguredEngine<?> child)
 	).apply(i, MoveEngine::new));
 
 	@Deprecated
-	public MoveEngine {}
+	public MoveEngine {
+	}
 
 	@Override
 	public EngineType<MoveEngine> type() {

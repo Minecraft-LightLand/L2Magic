@@ -32,7 +32,7 @@ public record ArrowShoot(
 
 	@Override
 	public AbstractArrow arrow(EngineContext ctx) {
-		var ans = new Arrow(ctx.user().level(), ctx.user().user(), Items.ARROW.getDefaultInstance(),null);
+		var ans = new Arrow(ctx.user().level(), ctx.user().user(), Items.ARROW.getDefaultInstance(), null);
 		for (var e : effects) {
 			ans.addEffect(e.get(ctx));
 		}

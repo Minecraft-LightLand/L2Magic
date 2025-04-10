@@ -3,7 +3,6 @@ package dev.xkmc.l2magic.content.engine.block;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import dev.xkmc.l2magic.content.engine.context.EngineContext;
-import dev.xkmc.l2magic.content.engine.core.ConfiguredEngine;
 import dev.xkmc.l2magic.content.engine.core.EngineType;
 import dev.xkmc.l2magic.init.registrate.EngineRegistry;
 import net.minecraft.core.Direction;

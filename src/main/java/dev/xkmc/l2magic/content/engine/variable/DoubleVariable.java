@@ -2,7 +2,6 @@ package dev.xkmc.l2magic.content.engine.variable;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import dev.xkmc.l2core.util.DataGenOnly;
 import dev.xkmc.l2magic.content.engine.context.EngineContext;
 
 import java.util.Optional;

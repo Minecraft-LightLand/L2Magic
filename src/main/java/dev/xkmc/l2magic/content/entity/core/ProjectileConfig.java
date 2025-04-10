@@ -8,7 +8,6 @@ import dev.xkmc.l2magic.content.engine.context.BuilderContext;
 import dev.xkmc.l2magic.content.engine.core.ConfiguredEngine;
 import dev.xkmc.l2magic.content.engine.core.EntityProcessor;
 import dev.xkmc.l2magic.content.engine.selector.SelectionType;
-import dev.xkmc.l2magic.content.engine.spell.SpellAction;
 import dev.xkmc.l2magic.content.engine.variable.DoubleVariable;
 import dev.xkmc.l2magic.content.entity.renderer.ProjectileRenderData;
 import dev.xkmc.l2magic.init.L2Magic;

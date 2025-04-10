@@ -11,9 +11,7 @@ import dev.xkmc.l2magic.content.engine.variable.IntVariable;
 import dev.xkmc.l2magic.init.registrate.EngineRegistry;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
 
-import java.util.Collection;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 

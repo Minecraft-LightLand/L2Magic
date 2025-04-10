@@ -20,8 +20,6 @@ public class DefaultFunctions {
 		));
 	}
 
-	;
-
 	public static Function rand(DoubleSupplier r) {
 		return of("rand", (a, b) -> r.getAsDouble() * (b - a) + a);
 	}

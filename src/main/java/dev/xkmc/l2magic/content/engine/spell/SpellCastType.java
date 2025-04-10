@@ -14,7 +14,7 @@ public enum SpellCastType {
 		this.defDesc = defDesc;
 	}
 
-	public MutableComponent desc(){
+	public MutableComponent desc() {
 		return LMLangData.lang(this);
 	}
 

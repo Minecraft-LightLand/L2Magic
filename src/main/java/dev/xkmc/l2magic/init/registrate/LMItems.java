@@ -52,7 +52,7 @@ public class LMItems {
 				.item("creative_wand", p -> new CreativeWandItem(p.stacksTo(1)))
 				.model((ctx, pvd) -> pvd.handheld(ctx))
 				.tag(L2ISTagGen.SELECTABLE)
-				.tab(TAB.key(), (x,m)->x.get().fillTab(m))
+				.tab(TAB.key(), (x, m) -> x.get().fillTab(m))
 				.register();
 
 		WAND_TARGET = L2Magic.REGISTRATE.item(

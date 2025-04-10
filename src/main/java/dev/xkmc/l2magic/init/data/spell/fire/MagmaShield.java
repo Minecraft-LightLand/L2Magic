@@ -53,75 +53,75 @@ public class MagmaShield extends SpellDataGenEntry {
 		).verifyOnBuild(ctx, MAGMA_SHIELD);
 	}
 
-    private static ConfiguredEngine<?> magmaShield(DataGenContext ctx) {
-        return new ListLogic(List.of(
-                new DelayedIterator(  // Protection
-                        IntVariable.of("60"),
-                        IntVariable.of("10"),
-                        new ProcessorEngine(
-                                SelectionType.ALL,
-                                new SelfSelector(),
-                                List.of(new EffectProcessor(
-                                        MobEffects.DAMAGE_RESISTANCE,
-                                        IntVariable.of("39"),
-                                        IntVariable.of("0"),
-                                        false, false
-                                ))
-                        ),
-                        null
-                ),
-                new DelayedIterator(
-                        IntVariable.of("600"),
-                        IntVariable.of("1"),
-                        new MoveEngine(
-                                List.of(
-                                        new SetPosModifier(
-                                                DoubleVariable.of("CasterX"),
-                                                DoubleVariable.of("CasterY+0.95"),
-                                                DoubleVariable.of("CasterZ")
-                                        )
-                                ),
-                                new ListLogic(List.of(
-                                        new PredicateLogic(  // Damage
-                                                BooleanVariable.of("t%10==0"),
-                                                new ProcessorEngine(
-                                                        SelectionType.ENEMY,
-                                                        new ApproxCylinderSelector(
-                                                                DoubleVariable.of("2"),
-                                                                DoubleVariable.of("1")
-                                                        ),
-                                                        List.of(
-                                                                new DamageProcessor(ctx.damage(DamageTypes.HOT_FLOOR),
-                                                                        DoubleVariable.of("2"), true, true),
-                                                                new KnockBackProcessor(
-                                                                        DoubleVariable.of("0.1"),
-                                                                        DoubleVariable.ZERO,
-                                                                        DoubleVariable.ZERO
-                                                                ),
-                                                                new IgniteProcessor(
-                                                                        List.of(),
-                                                                        IntVariable.of("40")
-                                                                )
-                                                        )
-                                                ),
-                                                null
-                                        ),
-                                        new SphereRandomIterator(
-                                                DoubleVariable.of("1.5"),
-                                                IntVariable.of("50"),
-                                                new DustParticleInstance(
-                                                        ColorVariable.Static.of(0xFF7F00),
-                                                        DoubleVariable.of("1"),
-                                                        DoubleVariable.ZERO,
-                                                        IntVariable.of("3")
-                                                ),
-                                                null
-                                        )
-                                ))
-                        ),
-                        "t"
-                )
-        ));
-    }
+	private static ConfiguredEngine<?> magmaShield(DataGenContext ctx) {
+		return new ListLogic(List.of(
+				new DelayedIterator(  // Protection
+						IntVariable.of("60"),
+						IntVariable.of("10"),
+						new ProcessorEngine(
+								SelectionType.ALL,
+								new SelfSelector(),
+								List.of(new EffectProcessor(
+										MobEffects.DAMAGE_RESISTANCE,
+										IntVariable.of("39"),
+										IntVariable.of("0"),
+										false, false
+								))
+						),
+						null
+				),
+				new DelayedIterator(
+						IntVariable.of("600"),
+						IntVariable.of("1"),
+						new MoveEngine(
+								List.of(
+										new SetPosModifier(
+												DoubleVariable.of("CasterX"),
+												DoubleVariable.of("CasterY+0.95"),
+												DoubleVariable.of("CasterZ")
+										)
+								),
+								new ListLogic(List.of(
+										new PredicateLogic(  // Damage
+												BooleanVariable.of("t%10==0"),
+												new ProcessorEngine(
+														SelectionType.ENEMY,
+														new ApproxCylinderSelector(
+																DoubleVariable.of("2"),
+																DoubleVariable.of("1")
+														),
+														List.of(
+																new DamageProcessor(ctx.damage(DamageTypes.HOT_FLOOR),
+																		DoubleVariable.of("2"), true, true),
+																new KnockBackProcessor(
+																		DoubleVariable.of("0.1"),
+																		DoubleVariable.ZERO,
+																		DoubleVariable.ZERO
+																),
+																new IgniteProcessor(
+																		List.of(),
+																		IntVariable.of("40")
+																)
+														)
+												),
+												null
+										),
+										new SphereRandomIterator(
+												DoubleVariable.of("1.5"),
+												IntVariable.of("50"),
+												new DustParticleInstance(
+														ColorVariable.Static.of(0xFF7F00),
+														DoubleVariable.of("1"),
+														DoubleVariable.ZERO,
+														IntVariable.of("3")
+												),
+												null
+										)
+								))
+						),
+						"t"
+				)
+		));
+	}
 
 }

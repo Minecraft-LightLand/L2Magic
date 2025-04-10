@@ -5,11 +5,7 @@ import dev.xkmc.l2magic.content.engine.context.EngineContext;
 import dev.xkmc.l2magic.content.engine.selector.SelectedEntities;
 import dev.xkmc.l2magic.content.engine.selector.SelectionType;
 import dev.xkmc.l2magic.init.registrate.EngineRegistry;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
-
-import java.util.LinkedHashSet;
 
 public interface EntitySelector<T extends Record & EntitySelector<T>> extends Verifiable {
 

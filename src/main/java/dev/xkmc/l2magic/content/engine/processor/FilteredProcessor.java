@@ -11,7 +11,6 @@ import dev.xkmc.l2magic.content.engine.selector.SelectedEntities;
 import dev.xkmc.l2magic.init.registrate.EngineRegistry;
 import net.minecraft.world.entity.LivingEntity;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;

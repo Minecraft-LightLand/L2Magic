@@ -5,12 +5,7 @@ import dev.xkmc.l2magic.content.engine.context.EngineContext;
 import dev.xkmc.l2magic.content.engine.core.EntitySelector;
 import dev.xkmc.l2magic.content.engine.core.SelectorType;
 import dev.xkmc.l2magic.init.registrate.EngineRegistry;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
-
-import java.util.LinkedHashSet;
-import java.util.Set;
 
 public record SelfSelector() implements EntitySelector<SelfSelector> {
 

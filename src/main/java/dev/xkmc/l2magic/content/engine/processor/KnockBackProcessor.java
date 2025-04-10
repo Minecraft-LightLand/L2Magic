@@ -9,9 +9,6 @@ import dev.xkmc.l2magic.content.engine.selector.SelectedEntities;
 import dev.xkmc.l2magic.content.engine.variable.DoubleVariable;
 import dev.xkmc.l2magic.init.registrate.EngineRegistry;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.entity.LivingEntity;
-
-import java.util.Collection;
 
 public record KnockBackProcessor(
 		DoubleVariable knockback,

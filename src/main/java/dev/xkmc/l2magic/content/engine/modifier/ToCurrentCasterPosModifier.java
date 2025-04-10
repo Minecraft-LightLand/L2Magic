@@ -1,6 +1,5 @@
 package dev.xkmc.l2magic.content.engine.modifier;
 
-import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import dev.xkmc.l2magic.content.engine.context.EngineContext;
 import dev.xkmc.l2magic.content.engine.context.LocationContext;

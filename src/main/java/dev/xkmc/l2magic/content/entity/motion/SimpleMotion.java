@@ -1,6 +1,5 @@
 package dev.xkmc.l2magic.content.entity.motion;
 
-import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import dev.xkmc.fastprojectileapi.entity.ProjectileMovement;
