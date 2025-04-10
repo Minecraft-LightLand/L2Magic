@@ -6,6 +6,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import dev.xkmc.l2core.base.effects.EffectUtil;
 import dev.xkmc.l2magic.content.engine.context.EngineContext;
 import dev.xkmc.l2magic.content.engine.core.ProcessorType;
+import dev.xkmc.l2magic.content.engine.selector.SelectedEntities;
 import dev.xkmc.l2magic.content.engine.variable.IntVariable;
 import dev.xkmc.l2magic.init.registrate.EngineRegistry;
 import net.minecraft.core.Holder;
@@ -40,11 +41,11 @@ public record EffectProcessor(
 	}
 
 	@Override
-	public void process(Collection<LivingEntity> le, EngineContext ctx) {
+	public void process(SelectedEntities le, EngineContext ctx) {
 		if (!(ctx.user().level() instanceof ServerLevel)) return;
 		int dur = duration.eval(ctx);
 		int amp = amplifier.eval(ctx);
-		for (var e : le) {
+		for (var e : le.living()) {
 			EffectUtil.addEffect(e, new MobEffectInstance(eff, dur, amp, ambient, visible, true),
 					ctx.user().user());
 		}

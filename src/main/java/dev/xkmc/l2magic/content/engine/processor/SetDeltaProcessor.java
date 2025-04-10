@@ -5,6 +5,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import dev.xkmc.l2magic.content.engine.context.EngineContext;
 import dev.xkmc.l2magic.content.engine.core.EntityProcessor;
 import dev.xkmc.l2magic.content.engine.core.ProcessorType;
+import dev.xkmc.l2magic.content.engine.selector.SelectedEntities;
 import dev.xkmc.l2magic.content.engine.variable.DoubleVariable;
 import dev.xkmc.l2magic.init.registrate.EngineRegistry;
 import net.minecraft.server.level.ServerLevel;
@@ -35,12 +36,12 @@ public record SetDeltaProcessor(
 	}
 
 	@Override
-	public void process(Collection<LivingEntity> le, EngineContext ctx) {
+	public void process(SelectedEntities le, EngineContext ctx) {
 		if (!(ctx.user().level() instanceof ServerLevel)) return;
-		for (var e : le) {
-			e.setDeltaMovement(x.eval(ctx), y.eval(ctx), z.eval(ctx));
-			e.hasImpulse = true;
-			if (e instanceof Player player) {
+		for (var e : le.entries()) {
+			e.root().setDeltaMovement(x.eval(ctx), y.eval(ctx), z.eval(ctx));
+			e.root().hasImpulse = true;
+			if (e.root() instanceof Player player) {
 				player.hurtMarked = true;
 			}
 		}

@@ -7,6 +7,7 @@ import dev.xkmc.l2magic.content.engine.context.EngineContext;
 import dev.xkmc.l2magic.content.engine.core.EntityFilter;
 import dev.xkmc.l2magic.content.engine.core.EntityProcessor;
 import dev.xkmc.l2magic.content.engine.core.ProcessorType;
+import dev.xkmc.l2magic.content.engine.selector.SelectedEntities;
 import dev.xkmc.l2magic.init.registrate.EngineRegistry;
 import net.minecraft.world.entity.LivingEntity;
 
@@ -33,11 +34,11 @@ public record FilteredProcessor(
 	}
 
 	@Override
-	public void process(Collection<LivingEntity> le, EngineContext ctx) {
-		Map<Boolean, List<LivingEntity>> partitioned = le.stream()
+	public void process(SelectedEntities le, EngineContext ctx) {
+		Map<Boolean, List<LivingEntity>> partitioned = le.living().stream()
 				.collect(Collectors.partitioningBy(e -> filter.test(e, ctx)));
-		action().forEach(p -> p.process(partitioned.get(true), ctx));
-		fallback().forEach(p -> p.process(partitioned.get(false), ctx));
+		action().forEach(p -> p.process(new SelectedEntities(partitioned.get(true)), ctx));
+		fallback().forEach(p -> p.process(new SelectedEntities(partitioned.get(false)), ctx));
 	}
 
 	@Override

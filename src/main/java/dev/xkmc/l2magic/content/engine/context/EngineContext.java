@@ -5,6 +5,7 @@ import dev.xkmc.l2core.events.SchedulerHandler;
 import dev.xkmc.l2magic.content.engine.core.ConfiguredEngine;
 import dev.xkmc.l2magic.content.engine.core.EntityProcessor;
 import dev.xkmc.l2magic.content.engine.core.IPredicate;
+import dev.xkmc.l2magic.content.engine.selector.SelectedEntities;
 import dev.xkmc.shadow.objecthunter.exp4j.Expression;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.LivingEntity;
@@ -70,7 +71,7 @@ public record EngineContext(UserContext user, LocationContext loc, RandomSource 
 	}
 
 
-	public void process(Collection<LivingEntity> entities, EntityProcessor<?> action) {
+	public void process(SelectedEntities entities, EntityProcessor<?> action) {
 		action.process(entities, new EngineContext(user, loc, nextRand(), parameters));
 	}
 

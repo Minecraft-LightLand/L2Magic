@@ -13,6 +13,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.entity.PartEntity;
 
 import java.util.LinkedHashSet;
 
@@ -40,7 +41,7 @@ public record ArcCubeSelector(
 		return EngineRegistry.ARC.get();
 	}
 
-	public LinkedHashSet<LivingEntity> find(Level level, EngineContext ctx, SelectionType type) {
+	public SelectedEntities find(Level level, EngineContext ctx, SelectionType type) {
 		Vec3 pos = ctx.loc().pos();
 		int step = step().eval(ctx);
 		double r = radius().eval(ctx);
@@ -48,16 +49,12 @@ public record ArcCubeSelector(
 		double a0 = minAngle().eval(ctx);
 		double a1 = maxAngle().eval(ctx);
 		var ori = ctx.loc().ori();
-		LinkedHashSet<LivingEntity> list = new LinkedHashSet<>();
+		SelectedEntities list = new SelectedEntities();
 		for (int i = 0; i <= step; i++) {
 			double a = a0 + (a1 - a0) / step * i;
 			Vec3 p = pos.add(ori.rotateDegrees(a).scale(r));
 			var aabb = AABB.ofSize(p, diam, diam, diam);
-			for (var e : type.select(level, ctx, aabb)) {
-				if (e instanceof LivingEntity le) {
-					list.add(le);
-				}
-			}
+			type.collect(level, ctx, aabb, list);
 		}
 		return list;
 	}

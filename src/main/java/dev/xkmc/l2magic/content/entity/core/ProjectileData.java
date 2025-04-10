@@ -5,6 +5,7 @@ import dev.xkmc.l2magic.content.engine.context.EngineContext;
 import dev.xkmc.l2magic.content.engine.context.UserContext;
 import dev.xkmc.l2magic.content.engine.core.ConfiguredEngine;
 import dev.xkmc.l2magic.content.engine.helper.Scheduler;
+import dev.xkmc.l2magic.content.engine.selector.SelectedEntities;
 import dev.xkmc.l2magic.content.engine.spell.SpellAction;
 import dev.xkmc.l2magic.content.entity.renderer.ProjectileRenderer;
 import dev.xkmc.l2magic.init.L2Magic;
@@ -121,7 +122,7 @@ public class ProjectileData {
 			}
 		}
 		for (var e : hit) {
-			e.process(List.of(le), ctx);
+			e.process(new SelectedEntities(le), ctx);
 		}
 		ctx.registerScheduler();
 	}

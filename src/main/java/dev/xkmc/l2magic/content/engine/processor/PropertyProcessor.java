@@ -6,6 +6,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import dev.xkmc.l2magic.content.engine.context.EngineContext;
 import dev.xkmc.l2magic.content.engine.core.ProcessorType;
 import dev.xkmc.l2magic.content.engine.helper.EngineHelper;
+import dev.xkmc.l2magic.content.engine.selector.SelectedEntities;
 import dev.xkmc.l2magic.content.engine.variable.IntVariable;
 import dev.xkmc.l2magic.init.registrate.EngineRegistry;
 import net.minecraft.server.level.ServerLevel;
@@ -25,15 +26,15 @@ public record PropertyProcessor(
 		IGNITE(Entity::getRemainingFireTicks, Entity::setRemainingFireTicks),
 		FREEZE(Entity::getTicksFrozen, Entity::setTicksFrozen);
 
-		private final Function<LivingEntity, Integer> getter;
-		private final BiConsumer<LivingEntity, Integer> func;
+		private final Function<Entity, Integer> getter;
+		private final BiConsumer<Entity, Integer> func;
 
-		Type(Function<LivingEntity, Integer> getter, BiConsumer<LivingEntity, Integer> func) {
+		Type(Function<Entity, Integer> getter, BiConsumer<Entity, Integer> func) {
 			this.getter = getter;
 			this.func = func;
 		}
 
-		public void set(LivingEntity e, int dur) {
+		public void set(Entity e, int dur) {
 			if (getter.apply(e) < dur)
 				func.accept(e, dur);
 		}
@@ -57,11 +58,11 @@ public record PropertyProcessor(
 	}
 
 	@Override
-	public void process(Collection<LivingEntity> le, EngineContext ctx) {
+	public void process(SelectedEntities le, EngineContext ctx) {
 		if (!(ctx.user().level() instanceof ServerLevel)) return;
 		int dur = duration.eval(ctx);
-		for (var e : le) {
-			property.set(e, dur);
+		for (var e : le.entries()) {
+			property.set(e.root(), dur);
 		}
 	}
 

@@ -5,6 +5,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import dev.xkmc.l2magic.content.engine.context.EngineContext;
 import dev.xkmc.l2magic.content.engine.core.ProcessorType;
 import dev.xkmc.l2magic.content.engine.helper.Orientation;
+import dev.xkmc.l2magic.content.engine.selector.SelectedEntities;
 import dev.xkmc.l2magic.content.engine.variable.DoubleVariable;
 import dev.xkmc.l2magic.init.registrate.EngineRegistry;
 import net.minecraft.server.level.ServerLevel;
@@ -38,12 +39,12 @@ public record KnockBackProcessor(
 	}
 
 	@Override
-	public void process(Collection<LivingEntity> le, EngineContext ctx) {
+	public void process(SelectedEntities le, EngineContext ctx) {
 		if (!(ctx.user().level() instanceof ServerLevel)) return;
 		double kb = (float) knockback.eval(ctx) * 0.5;
 		double angle = angle().eval(ctx);
 		double tilt = tilt().eval(ctx);
-		for (var e : le) {
+		for (var e : le.living()) {
 			var p = e.position().subtract(ctx.loc().pos()).normalize();
 			if (angle != 0 || tilt != 0) {
 				var ori = Orientation.fromForward(p);

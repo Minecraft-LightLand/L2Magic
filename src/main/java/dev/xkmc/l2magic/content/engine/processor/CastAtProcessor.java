@@ -13,11 +13,9 @@ import dev.xkmc.l2magic.content.engine.core.ProcessorType;
 import dev.xkmc.l2magic.content.engine.extension.SyncedAction;
 import dev.xkmc.l2magic.content.engine.extension.SyncedActionEntry;
 import dev.xkmc.l2magic.content.engine.helper.EngineHelper;
+import dev.xkmc.l2magic.content.engine.selector.SelectedEntities;
 import dev.xkmc.l2magic.init.registrate.EngineRegistry;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.phys.Vec3;
-
-import java.util.Collection;
 
 public record CastAtProcessor(
 		PosType pos,
@@ -48,8 +46,8 @@ public record CastAtProcessor(
 	}
 
 	@Override
-	public void process(Collection<LivingEntity> le, EngineContext ctx) {
-		for (LivingEntity e : le) {
+	public void process(SelectedEntities le, EngineContext ctx) {
+		for (var e : le.living()) {
 			Vec3 p = switch (pos) {
 				case ORIGINAL -> ctx.loc().pos();
 				case BOTTOM -> e.position();

@@ -14,6 +14,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.entity.PartEntity;
 
 import java.util.LinkedHashSet;
 
@@ -32,20 +33,14 @@ public record ApproxCylinderSelector(
 		return EngineRegistry.CYLINDER.get();
 	}
 
-	public LinkedHashSet<LivingEntity> find(Level level, EngineContext ctx, SelectionType type) {
+	public SelectedEntities find(Level level, EngineContext ctx, SelectionType type) {
 		Vec3 pos = ctx.loc().pos();
 		double r = r().eval(ctx);
 		double y = y().eval(ctx);
 		var aabb = new AABB(pos.x - r, pos.y, pos.z - r, pos.x + r, pos.y + y, pos.z + r);
-		LinkedHashSet<LivingEntity> list = new LinkedHashSet<>();
+		SelectedEntities list = new SelectedEntities();
 		var boxes = CollisionHelper.cylinder(pos, r, y);
-		for (var e : type.select(level, ctx, aabb)) {
-			if (e instanceof LivingEntity le) {
-				var box = le.getBoundingBox();
-				if (CollisionHelper.intersects(box, boxes))
-					list.add(le);
-			}
-		}
+		type.collectIntersect(level, ctx, aabb, boxes, list);
 		return list;
 	}
 

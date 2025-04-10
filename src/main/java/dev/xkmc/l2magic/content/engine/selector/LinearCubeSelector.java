@@ -8,7 +8,6 @@ import dev.xkmc.l2magic.content.engine.core.SelectorType;
 import dev.xkmc.l2magic.content.engine.variable.DoubleVariable;
 import dev.xkmc.l2magic.content.engine.variable.IntVariable;
 import dev.xkmc.l2magic.init.registrate.EngineRegistry;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
@@ -31,19 +30,15 @@ public record LinearCubeSelector(
 		return EngineRegistry.LINEAR.get();
 	}
 
-	public LinkedHashSet<LivingEntity> find(Level level, EngineContext ctx, SelectionType type) {
+	public SelectedEntities find(Level level, EngineContext ctx, SelectionType type) {
 		Vec3 pos = ctx.loc().pos();
 		int step = step().eval(ctx);
 		double diam = size().eval(ctx);
-		LinkedHashSet<LivingEntity> list = new LinkedHashSet<>();
+		SelectedEntities list = new SelectedEntities();
 		for (int i = 0; i <= step; i++) {
 			Vec3 p = pos.add(ctx.loc().dir().scale(i * diam));
 			var aabb = AABB.ofSize(p, diam, diam, diam);
-			for (var e : type.select(level, ctx, aabb)) {
-				if (e instanceof LivingEntity le) {
-					list.add(le);
-				}
-			}
+			type.collect(level, ctx, aabb, list);
 		}
 		return list;
 	}

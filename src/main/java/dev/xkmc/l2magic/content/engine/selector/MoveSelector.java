@@ -29,7 +29,7 @@ public record MoveSelector(List<Modifier<?>> modifiers, EntitySelector<?> child)
 	}
 
 	@Override
-	public LinkedHashSet<LivingEntity> find(Level level, EngineContext ctx, SelectionType type) {
+	public SelectedEntities find(Level level, EngineContext ctx, SelectionType type) {
 		for (var e : modifiers) {
 			ctx = ctx.with(e.modify(ctx));
 		}

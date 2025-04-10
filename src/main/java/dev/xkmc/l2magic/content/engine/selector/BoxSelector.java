@@ -13,6 +13,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.entity.PartEntity;
 
 import java.util.LinkedHashSet;
 import java.util.Optional;
@@ -34,7 +35,7 @@ public record BoxSelector(
 		return EngineRegistry.BOX.get();
 	}
 
-	public LinkedHashSet<LivingEntity> find(Level level, EngineContext ctx, SelectionType type) {
+	public SelectedEntities find(Level level, EngineContext ctx, SelectionType type) {
 		Vec3 pos = ctx.loc().pos();
 		double r = r().eval(ctx) / 2;
 		double y = y().eval(ctx) / 2;
@@ -43,12 +44,8 @@ public record BoxSelector(
 				pos.x - r, y0 - y, pos.z - r,
 				pos.x + r, y0 + y, pos.z + r
 		);
-		LinkedHashSet<LivingEntity> list = new LinkedHashSet<>();
-		for (var e : type.select(level, ctx, aabb)) {
-			if (e instanceof LivingEntity le) {
-				list.add(le);
-			}
-		}
+		SelectedEntities list = new SelectedEntities();
+		type.collect(level, ctx, aabb, list);
 		return list;
 	}
 

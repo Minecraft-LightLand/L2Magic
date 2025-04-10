@@ -4,12 +4,10 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import dev.xkmc.l2magic.content.engine.context.EngineContext;
 import dev.xkmc.l2magic.content.engine.core.ProcessorType;
+import dev.xkmc.l2magic.content.engine.selector.SelectedEntities;
 import dev.xkmc.l2magic.content.engine.variable.DoubleVariable;
 import dev.xkmc.l2magic.init.registrate.EngineRegistry;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.entity.LivingEntity;
-
-import java.util.Collection;
 
 public record TeleportProcessor(
 		DoubleVariable x,
@@ -29,13 +27,13 @@ public record TeleportProcessor(
 	}
 
 	@Override
-	public void process(Collection<LivingEntity> le, EngineContext ctx) {
+	public void process(SelectedEntities le, EngineContext ctx) {
 		if (!(ctx.user().level() instanceof ServerLevel)) return;
 		double posX = x().eval(ctx);
 		double posY = y().eval(ctx);
 		double posZ = z().eval(ctx);
-		for (var e : le) {
-			e.teleportTo(posX, posY, posZ);
+		for (var e : le.entries()) {
+			e.root().teleportTo(posX, posY, posZ);
 		}
 	}
 }

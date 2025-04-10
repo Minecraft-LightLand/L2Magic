@@ -22,8 +22,8 @@ public record SelfSelector() implements EntitySelector<SelfSelector> {
 	}
 
 	@Override
-	public LinkedHashSet<LivingEntity> find(Level level, EngineContext ctx, SelectionType type) {
-		return new LinkedHashSet<>(Set.of(ctx.user().user()));
+	public SelectedEntities find(Level level, EngineContext ctx, SelectionType type) {
+		return new SelectedEntities(ctx.user().user());
 	}
 
 }

@@ -3,6 +3,7 @@ package dev.xkmc.l2magic.content.engine.selector;
 import com.mojang.serialization.Codec;
 import dev.xkmc.fastprojectileapi.collision.EntityStorageCache;
 import dev.xkmc.l2magic.content.engine.context.EngineContext;
+import dev.xkmc.l2magic.content.engine.helper.CollisionHelper;
 import dev.xkmc.l2magic.content.engine.helper.EngineHelper;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -11,6 +12,7 @@ import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
+import net.neoforged.neoforge.entity.PartEntity;
 
 import java.util.function.BiPredicate;
 
@@ -45,7 +47,7 @@ public enum SelectionType {
 			for (var wrapped : ma.targetSelector.getAvailableGoals()) {
 				var goal = wrapped.getGoal();
 				if (goal instanceof NearestAttackableTargetGoal<?> attack) {
-					if (attack.targetConditions.test(a, b)) {
+					if (attack.targetType.isInstance(b) && attack.targetConditions.test(a, b)) {
 						return true;
 					}
 				}
@@ -61,10 +63,26 @@ public enum SelectionType {
 	}
 
 	public boolean test(Entity target, LivingEntity user) {
+		if (target instanceof PartEntity<?> part) target = part.getParent();
 		return check.test(target, user);
 	}
 
 	public Iterable<Entity> select(Level level, EngineContext ctx, AABB aabb) {
-		return EntityStorageCache.get(level).foreach(aabb, x -> check.test(x, ctx.user().user()));
+		return EntityStorageCache.get(level).foreach(aabb, x -> test(x, ctx.user().user()));
 	}
+
+	public void collect(Level level, EngineContext ctx, AABB aabb, SelectedEntities list) {
+		for (var e : select(level, ctx, aabb)) {
+			list.add(e);
+		}
+	}
+
+	public void collectIntersect(Level level, EngineContext ctx, AABB aabb, AABB[] boxes, SelectedEntities list) {
+		for (var e : select(level, ctx, aabb)) {
+			var box = e.getBoundingBox();
+			if (CollisionHelper.intersects(box, boxes))
+				list.add(e);
+		}
+	}
+
 }

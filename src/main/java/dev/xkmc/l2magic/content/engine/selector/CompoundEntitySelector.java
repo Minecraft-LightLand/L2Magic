@@ -27,7 +27,7 @@ public record CompoundEntitySelector(
 		FIRST_ONLY,
 		;
 
-		public void merge(LinkedHashSet<LivingEntity> ans, LinkedHashSet<LivingEntity> l) {
+		public void merge(SelectedEntities ans, SelectedEntities l) {
 			if (this == UNION) {
 				ans.addAll(l);
 			}
@@ -53,13 +53,13 @@ public record CompoundEntitySelector(
 	}
 
 	@Override
-	public LinkedHashSet<LivingEntity> find(Level level, EngineContext ctx, SelectionType type) {
-		LinkedHashSet<LivingEntity> ans = null;
+	public SelectedEntities find(Level level, EngineContext ctx, SelectionType type) {
+		SelectedEntities ans = null;
 		for (var s : selectors) {
 			var l = s.find(level, ctx, type);
 			if (ans == null) ans = l;
 			else function.merge(ans, l);
 		}
-		return ans == null ? new LinkedHashSet<>() : ans;
+		return ans == null ? new SelectedEntities() : ans;
 	}
 }

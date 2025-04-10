@@ -169,7 +169,7 @@ dependencies {
     runtimeOnly "dev.xkmc:l2complements:${l2complements_ver}-slim"
     runtimeOnly "dev.xkmc:l2backpack:${l2backpack_ver}"
     runtimeOnly "dev.xkmc:l2harvester:${l2harvester_ver}"
-    runtimeOnly "dev.xkmc:glimmeringtales:${glimmeringtales_ver}-slim"
+    runtimeOnly "dev.xkmc:glimmeringtales:${glimmeringtales_ver}"
 
     implementation "mezz.jei:jei-${jei_minecraft_version}:${jei_version}"
     implementation "top.theillusivec4.curios:curios-neoforge:${curios_version}"

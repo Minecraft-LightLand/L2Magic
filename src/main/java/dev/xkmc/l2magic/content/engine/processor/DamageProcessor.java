@@ -7,6 +7,7 @@ import dev.xkmc.l2damagetracker.contents.attack.AttackEventHandler;
 import dev.xkmc.l2damagetracker.init.L2DamageTracker;
 import dev.xkmc.l2magic.content.engine.context.EngineContext;
 import dev.xkmc.l2magic.content.engine.core.ProcessorType;
+import dev.xkmc.l2magic.content.engine.selector.SelectedEntities;
 import dev.xkmc.l2magic.content.engine.variable.DoubleVariable;
 import dev.xkmc.l2magic.init.registrate.EngineRegistry;
 import net.minecraft.core.Holder;
@@ -44,7 +45,7 @@ public record DamageProcessor(
 	}
 
 	@Override
-	public void process(Collection<LivingEntity> le, EngineContext ctx) {
+	public void process(SelectedEntities le, EngineContext ctx) {
 		if (!(ctx.user().level() instanceof ServerLevel sl)) return;
 		var user = ctx.user().user();
 		DamageSource source = AttackEventHandler.createSource(sl, user, damageType.unwrapKey().orElseThrow(),
@@ -54,8 +55,8 @@ public record DamageProcessor(
 			var ins = user.getAttribute(L2DamageTracker.BOW_STRENGTH);
 			if (ins != null) dmg *= (float) ins.getValue();
 		}
-		for (var e : le) {
-			e.hurt(source, dmg);
+		for (var e : le.entries()) {
+			e.root().hurt(source, dmg);
 		}
 	}
 
