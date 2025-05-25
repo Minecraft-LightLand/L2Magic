@@ -21,6 +21,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.levelgen.SingleThreadedRandomSource;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.entity.PartEntity;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.LinkedHashMap;
@@ -96,32 +97,33 @@ public class ProjectileData {
 	public boolean shouldHurt(LMProjectile self, Entity target) {
 		if (getConfig(self.level()) == null) return false;
 		if (self.getOwner() instanceof LivingEntity le) {
-			return config.filter().test(target, le);
+			if (target instanceof LivingEntity || target instanceof PartEntity<?>)
+				return config.filter().test(target, le);
+			else return target.isPickable();
 		}
 		return false;
 	}
 
 	public void hurtTarget(LMProjectile self, EntityHitResult result) {
 		if (getConfig(self.level()) == null) return;
-		if (!(result.getEntity() instanceof LivingEntity le)) return;
-		hurtTargetImpl(self, le);
+		hurtTargetImpl(self, result.getEntity());
 	}
 
-	public void hurtTargetImpl(LMProjectile self, LivingEntity le) {
+	public void hurtTargetImpl(LMProjectile self, Entity e) {
 		var hit = config.hit();
 		if (hit.isEmpty()) return;
 		EngineContext ctx = getContext(self, SALT_HIT, true);
 		if (ctx == null) return;
 		if (!self.level().isClientSide()) {
-			for (var e : hit) {
-				if (!e.serverOnly()) {
-					L2Magic.HANDLER.toTrackingPlayers(new ProjectileHitPacket(self.getId(), le.getId()), self);
+			for (var pro : hit) {
+				if (!pro.serverOnly()) {
+					L2Magic.HANDLER.toTrackingPlayers(new ProjectileHitPacket(self.getId(), e.getId()), self);
 					break;
 				}
 			}
 		}
-		for (var e : hit) {
-			e.process(new SelectedEntities(le), ctx);
+		for (var pro : hit) {
+			pro.process(new SelectedEntities(e), ctx);
 		}
 		ctx.registerScheduler();
 	}

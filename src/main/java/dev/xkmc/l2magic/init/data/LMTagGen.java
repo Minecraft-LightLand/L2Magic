@@ -2,9 +2,11 @@ package dev.xkmc.l2magic.init.data;
 
 import com.tterrag.registrate.providers.RegistrateTagsProvider;
 import dev.xkmc.l2magic.init.L2Magic;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 
@@ -28,4 +30,5 @@ public class LMTagGen {
 						Blocks.LIGHT
 				).addOptional(ResourceLocation.fromNamespaceAndPath("powertool", "holographic_sign"));
 	}
+
 }

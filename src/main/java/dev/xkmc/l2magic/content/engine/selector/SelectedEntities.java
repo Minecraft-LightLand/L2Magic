@@ -21,11 +21,11 @@ public class SelectedEntities {
 
 	}
 
-	public SelectedEntities(LivingEntity e) {
+	public SelectedEntities(Entity e) {
 		add(e);
 	}
 
-	public SelectedEntities(Collection<LivingEntity> list) {
+	public SelectedEntities(Collection<? extends Entity> list) {
 		for (var e : list)
 			add(e);
 	}
@@ -49,6 +49,8 @@ public class SelectedEntities {
 			}
 		} else if (e instanceof LivingEntity le) {
 			map.put(e, new Entry(e, e, le));
+		} else if (e.isPickable()) {
+			map.put(e, new Entry(e, e, null));
 		}
 	}
 

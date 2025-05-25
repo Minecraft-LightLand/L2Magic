@@ -52,7 +52,6 @@ public class L2Magic {
 	public L2Magic() {
 		EngineRegistry.register();
 		LMItems.register();
-		REGISTRATE.addDataGenerator(ProviderType.LANG, LMLangData::genLang);
 	}
 
 	@SubscribeEvent
@@ -70,6 +69,7 @@ public class L2Magic {
 
 	@SubscribeEvent(priority = EventPriority.HIGH)
 	public static void gatherData(GatherDataEvent event) {
+		REGISTRATE.addDataGenerator(ProviderType.LANG, LMLangData::genLang);
 		REGISTRATE.addDataGenerator(ProviderType.BLOCK_TAGS, LMTagGen::genBlockTag);
 		boolean run = event.includeServer();
 		var gen = event.getGenerator();

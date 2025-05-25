@@ -135,6 +135,7 @@ public class EngineRegistry {
 	public static final Val<ProcessorType<IgniteProcessor>> IGNITE = REG.reg("ignite", () -> IgniteProcessor.CODEC); //TODO docs
 	public static final Val<ProcessorType<FilteredProcessor>> FILTERED = REG.reg("filtered", () -> FilteredProcessor.CODEC); //TODO docs
 	public static final Val<ProcessorType<CastAtProcessor>> CAST_AT = REG.reg("cast_at", () -> CastAtProcessor.CODEC); //TODO docs
+	public static final Val<ProcessorType<ProjectileHitEntityProcessor>> PROJECTILE_HIT = REG.reg("projectile_hit", () -> ProjectileHitEntityProcessor.CODEC);
 
 	public static final Val<MotionType<SimpleMotion>> SIMPLE_MOTION = REG.reg("simple", () -> SimpleMotion.CODEC); // TODO doc
 	public static final Val<MotionType<MovePosMotion>> MOVE_MOTION = REG.reg("control_position", () -> MovePosMotion.CODEC);//TODO doc

@@ -145,10 +145,9 @@ public class LMProjectile extends BaseProjectile {
 		}
 	}
 
-	public void onClientHitEntity(LivingEntity le) {
+	public void onClientHitEntity(Entity le) {
 		data.hurtTargetImpl(this, le);
 	}
-
 
 	public void onClientExpire() {
 		data.expire(this);
