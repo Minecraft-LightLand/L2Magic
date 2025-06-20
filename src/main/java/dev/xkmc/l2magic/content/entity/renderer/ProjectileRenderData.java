@@ -14,4 +14,8 @@ public interface ProjectileRenderData<T extends Record & ProjectileRenderData<T>
 
 	ProjectileRenderer resolve(EngineContext ctx);
 
+	default void buildRenderer() {
+
+	}
+
 }

@@ -10,7 +10,7 @@ import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.resources.ResourceLocation;
 import org.joml.Quaternionf;
 
-public class LMProjectileRenderer<T extends LMProjectile> extends EntityRenderer<T> implements ProjectileRenderer {
+public class LMProjectileRenderer<T extends LMProjectile> extends EntityRenderer<T> implements ProjectileRenderer<T> {
 
 	public LMProjectileRenderer(EntityRendererProvider.Context ctx) {
 		super(ctx);

@@ -62,7 +62,7 @@ public record SpellContext(
 		switch (spell.triggerType()) {
 			case SELF_POS -> {
 				pos = user.position();
-				ori = Orientation.regular();
+				ori = Orientation.regular().asNormal();
 			}
 			case TARGET_POS -> {
 				var start = user.getEyePosition();
@@ -76,7 +76,7 @@ public record SpellContext(
 				}
 				pos = ehit != null && ehit.getLocation().distanceToSqr(start) < bhit.getLocation().distanceToSqr(start) ?
 						ehit.getLocation() : bhit.getLocation();
-				ori = Orientation.regular();
+				ori = Orientation.regular().asNormal();
 			}
 			case AXIS_ALIGNED_FACING -> {
 				var facing = SpellContext.getForward(user);
@@ -104,7 +104,7 @@ public record SpellContext(
 				var target = getTarget(user);
 				if (target != null) {
 					pos = target.position();
-					ori = Orientation.regular();
+					ori = Orientation.regular().asNormal();
 				} else return null;
 			}
 			default -> {

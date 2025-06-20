@@ -11,6 +11,7 @@ import dev.xkmc.l2serial.serialization.marker.SerialField;
 import dev.xkmc.l2serial.util.Wrappers;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -75,6 +76,13 @@ public class LMProjectile extends BaseProjectile {
 		if (!level().isClientSide && tickCount >= lifetime()) {
 			data.expire(this);
 		}
+	}
+
+	@Override
+	public void recreateFromPacket(ClientboundAddEntityPacket packet) {
+		super.recreateFromPacket(packet);
+		Vec3 vec3 = new Vec3(packet.getXa(), packet.getYa(), packet.getZa());
+		this.setDeltaMovement(vec3);
 	}
 
 	@Override
